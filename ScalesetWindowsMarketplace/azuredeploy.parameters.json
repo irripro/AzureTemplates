@@ -1,0 +1,33 @@
+{
+  "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "instanceCount": {
+      "value": "1"
+    },
+    "SubnetId": {
+      "value": "/subscriptions/{Your_Subscription_ID}/resourceGroups/{YourResourceName}/providers/Microsoft.Network/virtualNetworks/{YourVirtualName}/subnets/{YourSubnetName}"
+    },
+	"vmSku": {
+      "value": "Standard_DS2_v2"
+    },
+	"natStartPort": {
+      "value": "50000"
+    },
+    "natEndPort": {
+      "value": "50119"
+    },
+	"natBackendPort": {
+      "value": "3389"
+    },
+	"namingInfix": {
+      "value": "testing"
+    },
+    "adminUsername": {
+      "value": "{username}"
+    },
+	"adminPassword": {
+      "value": "{Password}"
+    }
+  }
+}
