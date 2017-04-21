@@ -1,13 +1,6 @@
 #!/bin/bash
 
-echo 'This is great' > /tmp/testing.txt;
-cat /etc/hostname > /tmp/hostname.txt
-
 yum update -y
 
-service httpd stop
-systemctl disable httpd
-
-
-
-yum install epel-release -y
+echo 'This is great' > /tmp/testing.txt;
+cat /etc/hostname > /tmp/hostname.txt
