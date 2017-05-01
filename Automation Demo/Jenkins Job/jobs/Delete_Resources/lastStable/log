@@ -1,0 +1,7 @@
+Started by upstream project "[8mha:////4PTfmMtOQTI0974ryXrzHL3QYoOLk/F0m2I87gheFA2kAAAAsB+LCAAAAAAAAP9b85aBtbiIQTGjNKU4P08vOT+vOD8nVc83PyU1x6OyILUoJzMv2y+/JJUBAhiZGBgqihhk0NSjKDWzXb3RdlLBUSYGJk8GtpzUvPSSDB8G5tKinBIGIZ+sxLJE/ZzEvHT94JKizLx0a6BxUmjGOUNodHsLgAz5EgZN/az8JH2/9My8CseCAjDHqTQzJyU+PDUpHigSH5BZkAp0TKo+ACLgl9jeAAAA[0mNginxApp/Build_Web_App_Pipeline" build number [8mha:////4PE8XqmxFo76PnOgbhS/tuX7kHCfStCxVZEx4G+LeT8xAAAAsh+LCAAAAAAAAP9b85aBtbiIQTGjNKU4P08vOT+vOD8nVc83PyU1x6OyILUoJzMv2y+/JJUBAhiZGBgqihhk0NSjKDWzXb3RdlLBUSYGJk8GtpzUvPSSDB8G5tKinBIGIZ+sxLJE/ZzEvHT94JKizLx0a6BxUmjGOUNodHsLgAymEgZt/az8JH2/9My8CseCAjDHqTQzJyU+PDUpHigSH5BZkAp0TKq+iQEAoAMhROAAAAA=[0m40
+originally caused by:
+ Started by user [8mha:////4K2sy/1hx1tFKM18FoavVM6GVnT+YBN4ZTima+XPYSJzAAAAlx+LCAAAAAAAAP9b85aBtbiIQTGjNKU4P08vOT+vOD8nVc83PyU1x6OyILUoJzMv2y+/JJUBAhiZGBgqihhk0NSjKDWzXb3RdlLBUSYGJk8GtpzUvPSSDB8G5tKinBIGIZ+sxLJE/ZzEvHT94JKizLx0a6BxUmjGOUNodHsLgAzWEgZu/dLi1CL9xJTczDwAj6GcLcAAAAA=[0madmin
+Building in workspace /u01/var/lib/jenkins/workspace/NginxApp/Delete_Resources
+[Delete_Resources] $ /bin/sh -xe /tmp/hudson7944210721029010252.sh
++ /var/lib/jenkins/bin/az group delete --yes --name TeamCIMRocks
+Finished: SUCCESS
