@@ -21,7 +21,7 @@ def deploy():
     sudo("mkdir -p /var/www/%s/public_html" %env.host)
     sudo("chown -R %s:%s /var/www/%s/public_html" %(env.user,env.user,env.host))
     sudo("chmod -R 755 /var/www")
-    run("curl -O -u c3dcba54c4a26e8940c0547f51a72043892df028 x-oauth-basic https://raw.githubusercontent.com/alihhussain/ops/master/oss/TestWebPage/testweb.zip")
+    run("curl -O ttps://raw.githubusercontent.com/alihhussain/ops/master/oss/TestWebPage/testweb.zip")
     run("unzip /home/alihhussain/testweb.zip -d /var/www/%s/public_html/" %env.host)
     run("mv /var/www/%s/public_html/index.htm /var/www/%s/public_html/index.html" %(env.host,env.host))
     run("""sed -i "s#server_name#$(sudo cat /etc/hostname)#g" /var/www/%s/public_html/index.html""" %env.host)
