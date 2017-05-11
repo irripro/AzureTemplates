@@ -1,0 +1,36 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "recovery_vault_name": {
+            "value": "{recovery_vault_name}"
+        },
+        "recovery_vault_location": {
+            "value": "{recovery_vault_location}"
+        },
+        "apiVersion": {
+            "value": "2016-06-01"
+        },
+		"vnet_location": {
+            "value": "{vnet_location}"
+        },
+        "vnet_name": {
+            "value": "ASRVnet"
+        },
+        "vnet_addressPrefix": {
+            "value": "172.48.0.0/20"
+        },
+        "vnet_subnet1Name": {
+            "value": "backend"
+        },
+        "vnet_subnet1AddressPrefix": {
+            "value": "172.48.0.0/21"
+        },
+		"vnet_subnet2Name": {
+            "value": "frontend"
+        },
+        "vnet_subnet2AddressPrefix": {
+            "value": "172.48.8.0/21"
+        }
+    }
+}

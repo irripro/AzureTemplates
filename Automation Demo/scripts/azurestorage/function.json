@@ -1,0 +1,12 @@
+{
+  "bindings": [
+    {
+      "name": "myBlob",
+      "type": "blobTrigger",
+      "direction": "in",
+      "path": "osttest/{name}",
+      "connection": "function5b835eceb6db_STORAGE"
+    }
+  ],
+  "disabled": false
+}

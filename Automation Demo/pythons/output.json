@@ -1,0 +1,142 @@
+{
+  "id": "/subscriptions/e729c299-db43-40ce-991a-7e4572a69d50/resourceGroups/ESPN/providers/Microsoft.Resources/deployments/ExampleDeployment",
+  "name": "ExampleDeployment",
+  "properties": {
+    "correlationId": "f43f625a-455a-4140-bca6-3d32d60d762a",
+    "debugSetting": null,
+    "dependencies": [
+      {
+        "dependsOn": [
+          {
+            "id": "/subscriptions/e729c299-db43-40ce-991a-7e4572a69d50/resourceGroups/ESPN/providers/Microsoft.Network/networkSecurityGroups/networkSecurityGroup1",
+            "resourceGroup": "ESPN",
+            "resourceName": "networkSecurityGroup1",
+            "resourceType": "Microsoft.Network/networkSecurityGroups"
+          }
+        ],
+        "id": "/subscriptions/e729c299-db43-40ce-991a-7e4572a69d50/resourceGroups/ESPN/providers/Microsoft.Network/virtualNetworks/sshVNET",
+        "resourceGroup": "ESPN",
+        "resourceName": "sshVNET",
+        "resourceType": "Microsoft.Network/virtualNetworks"
+      },
+      {
+        "dependsOn": [
+          {
+            "id": "/subscriptions/e729c299-db43-40ce-991a-7e4572a69d50/resourceGroups/ESPN/providers/Microsoft.Network/publicIPAddresses/sshPublicIP",
+            "resourceGroup": "ESPN",
+            "resourceName": "sshPublicIP",
+            "resourceType": "Microsoft.Network/publicIPAddresses"
+          },
+          {
+            "id": "/subscriptions/e729c299-db43-40ce-991a-7e4572a69d50/resourceGroups/ESPN/providers/Microsoft.Network/virtualNetworks/sshVNET",
+            "resourceGroup": "ESPN",
+            "resourceName": "sshVNET",
+            "resourceType": "Microsoft.Network/virtualNetworks"
+          }
+        ],
+        "id": "/subscriptions/e729c299-db43-40ce-991a-7e4572a69d50/resourceGroups/ESPN/providers/Microsoft.Network/networkInterfaces/sshNIC",
+        "resourceGroup": "ESPN",
+        "resourceName": "sshNIC",
+        "resourceType": "Microsoft.Network/networkInterfaces"
+      },
+      {
+        "dependsOn": [
+          {
+            "id": "/subscriptions/e729c299-db43-40ce-991a-7e4572a69d50/resourceGroups/ESPN/providers/Microsoft.Network/networkInterfaces/sshNIC",
+            "resourceGroup": "ESPN",
+            "resourceName": "sshNIC",
+            "resourceType": "Microsoft.Network/networkInterfaces"
+          }
+        ],
+        "id": "/subscriptions/e729c299-db43-40ce-991a-7e4572a69d50/resourceGroups/ESPN/providers/Microsoft.Compute/virtualMachines/sshvm",
+        "resourceGroup": "ESPN",
+        "resourceName": "sshvm",
+        "resourceType": "Microsoft.Compute/virtualMachines"
+      }
+    ],
+    "mode": "Incremental",
+    "outputs": {
+      "sshCommand": {
+        "type": "String",
+        "value": "teamcim4gzblecgmtmt4.eastus.cloudapp.azure.com"
+      }
+    },
+    "parameters": {
+      "adminUserName": {
+        "type": "String",
+        "value": "alihhussain"
+      },
+      "sshKeyData": {
+        "type": "String",
+        "value": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCsvQoaddMbc5zdqMXnBrn53eatB1hzHwk0rlpg/SUn+B6yMJRq0fvntn1/LWkhsOv2QIOkSZhnZO5rUJuoSaBZuRkXf2wUsva2Z9iaKMozzcadUXCU0y/2ekCPY+8eUZOSvTgmn2K0xT12H+rrzGK6MBgnFgDZ2npROZa4eF4SkMxcMpFbOiOEY53/OiokbwEFUXD3omrhURqJzOOWdaCy4XPjWvjEzpNagTM/uy0habgSVVa3Uj/aF8QkgixJOlgME4jBMyM4uyd/lCsgKvrFquwVbOWZUcic+lZTDVfjIUyqTkq6+avzxtWnxMNrktW7gfOA1Des53Vs4N4QL+af jenkins@jenkins"
+      }
+    },
+    "parametersLink": null,
+    "providers": [
+      {
+        "id": null,
+        "namespace": "Microsoft.Network",
+        "registrationState": null,
+        "resourceTypes": [
+          {
+            "aliases": null,
+            "apiVersions": null,
+            "locations": [
+              "eastus"
+            ],
+            "properties": null,
+            "resourceType": "networkSecurityGroups"
+          },
+          {
+            "aliases": null,
+            "apiVersions": null,
+            "locations": [
+              "eastus"
+            ],
+            "properties": null,
+            "resourceType": "publicIPAddresses"
+          },
+          {
+            "aliases": null,
+            "apiVersions": null,
+            "locations": [
+              "eastus"
+            ],
+            "properties": null,
+            "resourceType": "virtualNetworks"
+          },
+          {
+            "aliases": null,
+            "apiVersions": null,
+            "locations": [
+              "eastus"
+            ],
+            "properties": null,
+            "resourceType": "networkInterfaces"
+          }
+        ]
+      },
+      {
+        "id": null,
+        "namespace": "Microsoft.Compute",
+        "registrationState": null,
+        "resourceTypes": [
+          {
+            "aliases": null,
+            "apiVersions": null,
+            "locations": [
+              "eastus"
+            ],
+            "properties": null,
+            "resourceType": "virtualMachines"
+          }
+        ]
+      }
+    ],
+    "provisioningState": "Succeeded",
+    "template": null,
+    "templateLink": null,
+    "timestamp": "2017-04-28T16:26:16.095428+00:00"
+  },
+  "resourceGroup": "ESPN"
+}

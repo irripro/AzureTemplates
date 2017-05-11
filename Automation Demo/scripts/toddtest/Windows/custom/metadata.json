@@ -1,0 +1,7 @@
+{
+  "itemDisplayName": "Deploy Scaleset into an existing VNet and Resourcegroup using a custom image",
+  "description": "This template allows you to create a scaleset into an existing VNET and Resourcegroup using a custom image.",
+  "summary": "This template allows you to create a scaleset into an existing VNET and Resourcegroup using a custom image.",
+  "githubUsername": "alihhussain",
+  "dateUpdated": "2017-18-04"
+}

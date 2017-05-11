@@ -1,0 +1,65 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "location": {
+            "value": "eastus"
+        },
+        "image": {
+            "value": "2016-Datacenter"
+        },
+        "vmssName": {
+            "value": "testing"
+        },
+        "username": {
+            "value": "alihhussain"
+        },
+        "password": {
+            "value": null
+        },
+        "sshPublicKey": {
+            "value": ""
+        },
+        "authenticationType": {
+            "value": "password"
+        },
+        "vmSku": {
+            "value": "Standard_DS1_v2"
+        },
+        "instanceCount": {
+            "value": "2"
+        },
+        "singlePlacementGroup": {
+            "value": "true"
+        },
+        "osDisk": {
+            "value": {
+                "createOption": "FromImage",
+                "caching": "ReadWrite"
+            }
+        },
+        "nicName": {
+            "value": "testingNic"
+        },
+        "ipConfigName": {
+            "value": "testingIpConfig"
+        },
+        "subnetId": {
+            "value": "/subscriptions/e729c299-db43-40ce-991a-7e4572a69d50/resourceGroups/internlinktest/providers/Microsoft.Network/virtualNetworks/testingVnet/subnets/default"
+        },
+        "loadBalancerBackendAddressPools": {
+            "value": [
+                {
+                    "id": "/subscriptions/e729c299-db43-40ce-991a-7e4572a69d50/resourceGroups/internlinktest/providers/Microsoft.Network/loadBalancers/testingLb/backendAddressPools/bepool"
+                }
+            ]
+        },
+        "loadBalancerInboundNatPools": {
+            "value": [
+                {
+                    "id": "/subscriptions/e729c299-db43-40ce-991a-7e4572a69d50/resourceGroups/internlinktest/providers/Microsoft.Network/loadBalancers/testingLb/inboundNatPools/natpool"
+                }
+            ]
+        }
+    }
+}
