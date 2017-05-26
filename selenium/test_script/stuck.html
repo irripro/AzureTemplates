@@ -1,0 +1,1303 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Class Enrollment: Ali Hussain, US Hybrid Cloud Course - Bellevue - Learn On Demand LMS</title>
+            <meta http-equiv="X-UA-Compatible" content="IE=9" />
+        <link href="/Content/Themes/mpnesp/css/Main.css?v=16" rel="stylesheet" type="text/css" />
+        <link href="/Content/Themes/mpnesp/css/Main-Print.css" rel="stylesheet" type="text/css" media="print" />
+        <script src="/Scripts/jquery-2.2.2.min.js" type="text/javascript"></script>
+        <script src="/Script/Localize?path=/Scripts/Enlight.js&v=5" type="text/javascript"></script>
+        <link href="/Site/CSS?v=1491318698" rel="stylesheet" type="text/css" />
+        
+    <link href="/Content/Themes/mpnesp/jquery-ui-1.10.3/jquery-ui.min.css" rel="stylesheet" type="text/css" /> <script src="/Scripts/jquery-ui-1.10.3.min.js" type="text/javascript"></script>
+    <script src="/Scripts/json2.js"></script>
+    <link href="/Css/Activities.css?v=2" rel="stylesheet" type="text/css" />
+    <script src="/Scripts/Collapsible.js" type="text/javascript"></script>
+    
+<script src="/Script/Localize?path=/Scripts/Activities/ScormModule.js&v=1" type="text/javascript"></script><script src="/Script/Localize?path=/Scripts/Activities/AiccModule.js&v=1" type="text/javascript"></script>    <script src="/Script/Localize?path=/Scripts/Activities/Lab.js&v=13" type="text/javascript"></script>            
+    </head>
+    <body>
+        
+
+        <div id="page">
+            <div id="headerWrapper">
+                <div id="header">
+                    <div id="siteLogo">
+                        <a href="/"></a>
+                    </div>
+                    <div id="logindisplay">
+                                <div class="legacyAccountMenu">
+            <span class="welcome">Welcome</span>
+<a class="name" href="/User/696760">Ali Hussain</a>            <a class="logoutLink" href="/User/Logout">Logout</a>
+        </div>
+        <div class="accountMenu">
+            <a href="#" class="name"><span class="inner">Ali</span></a>
+            <ul class="accountMenuItems" style="display:none;">
+ <li><a class="editProfile" href="/User/Edit/696760">Edit profile</a></li>                  <li><a class="viewProfile" href="/User/696760">View account</a></li>                 <li><a class="signOut" href="/User/Logout">Sign out</a></li>
+            </ul>
+        </div>
+        <style type="text/css">
+            .accountMenu {display:none;}
+        </style>
+        <script type="text/javascript">
+            $(function () {
+                $(".accountMenu .name").click(function (e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    var $menu = $(".accountMenu");
+                    $menu.toggleClass('open');
+                    $(document).one('click', function closeMenu(e) {
+                        if ($menu.has(e.target).length === 0) {
+                            $menu.removeClass('open');
+                        } else {
+                            $(document).one('click', closeMenu);
+                        }
+                    });
+                });
+            });
+        </script>
+
+                    </div>
+                    <div id="topnav">
+                        
+<style type="text/css">
+    /*li.withChildren {
+        position: relative;
+    }
+    li.withChildren ul {
+        display:none;
+        position:absolute;
+        top:100%;
+        left:0;
+        background: #fff;
+        margin:0;
+        padding:10px 0 0 0;
+        border-bottom: 5px solid #eee;
+    }
+    li.withChildren:hover ul {
+        display:block;
+    }
+    .withChildren li {
+        float:left;
+        clear:both;
+        white-space:nowrap;
+        margin:0;
+        padding: 2px 10px;
+    }*/
+</style>
+<ul id="topMenu">
+			<li><a href="/User/CurrentTraining/696760">My Training</a></li>
+			<li><a href="/User/Transcript/696760">Post Event Access</a></li>
+							<li><a href="https://mpnesp.learnondemand.net">MPN ESP</a></li>
+
+	<li><a href="/Home/Contact">Support</a></li>
+</ul>
+
+                    </div>
+                </div>
+            </div>
+            <div id="mainWrapper">
+                <div id="main">
+                    
+                    
+
+
+    <div class="pageTitle classEnrollment standard" style="background-image:url('/Images/Enrollments.png'); padding:0px 0 10px 72px;">
+            <a class="experiencelevel" href="http://www.learnondemandsystems.com/basic-vs-premium/" target="_blank" title="What&#39;s this?"></a>
+        <div class="small">Enrollment</div>
+        <div class="large">Ali Hussain</div>
+        <div class="" style="margin-top:3px;">US Hybrid Cloud Course - Bellevue</div>
+    </div>
+
+<div id="tempMessage" class="message" style="margin-bottom:15px; display:none;"></div>
+  
+
+
+
+    <div class="collapsible">
+        <div class="heading">Basic Information</div>
+        <div class="content">
+            <table cellpadding="3" cellspacing="0">
+                <tr>
+                    <td class="fieldName" valign="top">Student:</td>
+                    <td>
+                         <a href="/User/696760">Ali Hussain</a>
+<a id="showStudentDetails" class="collapseLinkSmall collapsed" style="font-size: 11px; margin-left: 10px;" href="#">Details</a>
+<img id="studentInfoLoading" src="/Images/ajax-loader-s.gif" alt="Loading" style="position:absolute; margin-left:5px; display:none;" />
+<div id="studentDetails" class="detailsBox" style="margin-top:8px; display:none;"></div>
+<script type="text/javascript">        
+    $(function() {                    
+        $("#showStudentDetails").click(function() {
+            var $this = $(this);
+            if (this.expanded) {
+                this.expanded = false;
+                $("#studentDetails").slideUp('fast');
+                $this.addClass("collapsed");
+            } else {
+                if (this.studentDetailsLoaded) {
+                    this.expanded = true;
+                    $("#studentDetails").slideDown('fast');
+                    $this.removeClass("collapsed");
+                } else {
+                    var heading = this;
+                    $("#studentInfoLoading").fadeIn('fast');
+                    $("#studentDetails").load("/User/BasicInformation/" + 696760, function() {
+                        $("#studentInfoLoading").fadeOut('fast');
+                        heading.studentDetailsLoaded = true;
+                        heading.expanded = true;
+                        $("#studentDetails").slideDown('fast');
+                        $this.removeClass("collapsed");                            
+                    });
+                }
+            }
+            return false;
+        });            
+    });
+</script>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="fieldName" valign="top">Event:</td>
+                    <td>
+                        <a href="/Class/212999">US Hybrid Cloud Course - Bellevue</a>
+<a id="showClassDetails" class="collapseLinkSmall collapsed" style="font-size: 11px; margin-left: 10px;" href="#">Details</a>
+<img id="classInfoLoading" src="/Images/ajax-loader-s.gif" alt="Loading" style="position:absolute; margin-left:5px; display:none;" />
+<div id="classDetails" class="detailsBox" style="margin-top:8px; display:none;"></div>
+<script type="text/javascript">        
+    $(function() {        
+        $("#showClassDetails").click(function() {
+            var $this = $(this);
+            if (this.expanded) {
+                this.expanded = false;
+                $("#classDetails").slideUp('fast');
+                $this.addClass("collapsed");
+            } else {
+                if (this.classDetailsLoaded) {
+                    this.expanded = true;
+                    $("#classDetails").slideDown('fast');
+                    $this.removeClass("collapsed");
+                } else {
+                    var heading = this;
+                    $("#classInfoLoading").fadeIn('fast');
+                    $("#classDetails").load("/Class/BasicInformation/" + 212999, function() {
+                        $("#classInfoLoading").fadeOut('fast');
+                        heading.classDetailsLoaded = true;
+                        heading.expanded = true;
+                        $("#classDetails").slideDown('fast');
+                        $this.removeClass("collapsed");                            
+                    });
+                }
+            }
+            return false;
+        });            
+    });
+</script>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="fieldName">Enrollment Status:</td>
+                    <td id="enrollmentstatus">
+                        Enrolled
+                    </td>
+                </tr>
+                <tr>
+                    <td class="fieldName">Completion Status:</td>
+                    <td>
+                        Unknown
+                    </td>
+                </tr>
+                <tr>
+                    <td class="fieldName">Classroom:</td>
+                    <td>
+<a href="/Classroom/3897">United States: Bellevue</a>                    </td>
+                </tr>
+                                                                <tr>
+                    <td class="fieldName">Is Retake:</td>
+                    <td>
+                        No
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="fieldName">Enable Labs:</td>
+                        <td>Yes</td>
+                    </tr>
+                                                            </table>
+            
+<style type="text/css">
+    #softwareScan{margin-top:15px; padding:15px 40px; background-repeat:no-repeat; background-position:15px 15px; background-image:url('/Images/ajax-loader-s.gif');}
+    #softwareCheckWrapper {margin-top:15px; min-height:70px; padding:0 12px 12px 12px;max-width:1000px;}
+    #softwareCheckWrapper h2 {margin:5px 0 0;padding:0;font-size:1.5em;}
+    div.softwareCheck, div.licenseAgreement {margin:12px 0 0 0; display: block; clear: both; }
+    div.softwareCheck div.title, div.licenseAgreement div.title {font-weight:bold; padding:3px 0 2px 19px; background-repeat:no-repeat; background-position: 0 7px;}
+    .ui-dialog-content {padding:0 !important;}
+    div.softwareCheckResult{margin-top:3px;  background-color:#fff; font-weight:bold; font-size:12px;  -moz-border-radius:20px; -webkit-border-radius:20px; border-radius:20px;  background-repeat:no-repeat; -webkit-box-shadow: rgba(0,0,0,0.15) 1px 1px 2px; -moz-box-shadow: rgba(0,0,0,0.15) 1px 1px 2px; box-shadow: rgba(0,0,0,0.15) 1px 1px 2px;}
+    div.softwareCheckResult.ok {border:solid 1px #01a336; color:#01a336; background-position:13px 12px; background-image:url('/images/check-t.png'); padding:8px 10px 8px 30px; display: inline-block;}
+    div.softwareCheckResult.alert {border:solid 1px #ce0000; color:#ce0000; background-position:12px 11px; background-image:url('/images/alert-t.png'); padding:8px 10px 8px 28px; display: inline-block;}
+
+    div.softwareCheck div.lineItem, div.licenseAgreement div.lineItem { width: 40%; float:left; }
+    div.softwareCheck div.actions, div.licenseAgreement div.actions { width: 30%; float:left; }
+    div.softwareCheck div.compliment, div.licenseAgreement div.compliment { width: 25%; float:right; padding:3px 0 2px 0; }
+    div.softwareCheck div.notice, div.licenseAgreement div.notice { display: block; clear: both; padding:5px 0 5px 19px; }
+</style>
+
+<div id="softwareScan" class="detailsBox3 deemphasize">
+    Scanning for required software...
+</div>
+<div id="softwareCheckWrapper" class="detailsBox3" style="display:none;">
+    <h2>Get Ready</h2>
+    <div class="attention">You must complete the following activities before you begin.</div>
+
+        <div id="overallCheck" class="softwareCheck">
+            <div class="lineItem title" style="padding:15px 0 0 19px;">Software Check</div>
+            <div class="actions">
+                <div id="softwareCheckResultOk" class="softwareCheckResult ok">OK</div>
+                <div id="softwareCheckResultAlert" class="softwareCheckResult alert">Alert</div>
+            </div>
+            <div class="compliment"></div>
+            <div class="notice"></div>
+        </div>
+                        <div id="hyperVCheck" class="softwareCheck">
+            <div class="lineItem title">1. Test and tour the virtual lab environment (Hyper-V)</div>
+            <div class="actions">
+                <div id="hyperVLaunch" style="display:none;">
+                        <div class="activity Lab accessible" activityid="12001" data-providerid="1" data-externalid="12001">
+                            <input type="button" value="Launch Test Lab" class="launch testLab button small wide" />
+                            <input type="button" class="cancel button small" style="display:none;" value="Delete" />
+                                <div class="deemphasize">
+                                    <a href="/Lab/HyperVSupport" target="_blank">Trouble with your test lab?</a>
+                                </div>
+                        </div>
+                </div>
+            </div>
+            <div class="compliment deemphasize">
+                        <label><input type="checkbox" id="hyperVConnectivityVerified" class="connectivityVerified" />I have successfully launched a test lab</label>
+            </div>
+            <div class="notice">
+                <div id="hyperVNotOptimal" style="display: none;">
+                    You do not appear to have the recommended software for running labs hosted in Hyper-V. To install the recommended software, please launch a test lab.
+                </div>
+                <div id="hyperVFail" style="display: none;">
+                    You do not appear to have the software required to launch Hyper-V based labs. To install the required software, please launch a test lab.
+                </div>
+                <div id="hypervPluginRequiresIe" style="display:none;">
+                    Sorry, a plugin is required that will only run in Internet Explorer.
+                </div>
+            </div>
+        </div>
+            <div id="vSphereCheck" class="softwareCheck">
+            <div class="lineItem title">2. Test and tour the virtual lab environment (vSphere)</div>
+            <div class="actions">
+                <div id="vSphereLaunch" style="display:none;">
+                        <div class="activity Lab accessible" activityid="13266" data-providerid="1" data-externalid="13266">
+                            <input type="button" value="Launch Test Lab" class="launch testLab button small wide" />
+                            <input type="button" class="cancel button small" style="display:none;" value="Delete" />
+                                <div class="deemphasize ">
+                                    <a href="/Lab/VSphereSupport" target="_blank">Trouble with your test lab?</a>
+                                </div>
+                        </div>
+                </div>
+            </div>
+            <div class="compliment deemphasize">
+                        <label><input type="checkbox" id="vSphereConnectivityVerified" class="connectivityVerified" />I have successfully launched a test lab</label>
+            </div>
+            <div class="notice deemphasize">
+                <div id="vSphereNotOptimal" style="display:none;">
+                    You do not appear to have the recommended software for running labs hosted in vSphere. To install the recommended software, please launch a test lab.
+                </div>
+                <div id="vSphereFail" style="display:none;">
+                    You do not appear to have the software required to launch labs run on the vSphere platform. To install the required software, please launch a test lab.
+                </div>
+            </div>
+        </div>
+    
+</div>
+    <div id="vSphereControl" style="height:0;overflow: hidden;"></div>    
+<div id="detectionScripts" style="display:none;">
+    <script src="/scripts/silverlight.js" type="text/javascript"></script>
+</div>
+<script src="/Script/Localize?path=/Scripts/SoftwareCheck.js&v=23" type="text/javascript"></script>
+<script type="text/javascript">
+    $(function () {
+        softwareCheck.elluminate = false;
+        softwareCheck.connect = false;
+        softwareCheck.virtualServer = false;
+        softwareCheck.hyperV = true;
+        softwareCheck.hyperVRequiresPlugin = false;
+        softwareCheck.vSphere = true;
+        softwareCheck.virtualMeetingHostId = null;
+        softwareCheck.classEnrollmentId = 1341709;
+        softwareCheck.recordingAgreement = false;
+        softwareCheck.canEditCoursewareNotes = false;
+        softwareCheck.userFullName = "Ali Hussain";
+        softwareCheck.initCoursewareNotes();
+        softwareCheck.checkSoftware();
+    });
+</script>
+            
+                    </div>
+    </div>
+
+
+    <a name="activities"></a>
+    <div class="collapsible ">
+        <div class="heading">Activities <span class="deemphasize" style="display:none;">(Total Expected Duration 9 hours, 42 minutes)</span></div>
+        <div class="content" >
+            <div style="margin:5px 0 25px 60px;">
+    <div class="progressBar">
+        <div id="progress" class="progress" style="width:0px;">
+            <div id="progressText" class="progressText">0%</div>
+        </div>
+    </div>
+    <div style="margin-top:5px">
+        <span id="numComplete">0</span> of 10 required activities complete
+    </div>
+</div>
+
+<div class="activities">
+    <h2 class="activitySectionName">Hybrid Cloud Infrastructure - Labs</h2>
+    <div class="activitySectionContent">
+    <div title="Privileged identity role based management using PowerShell Just Enough Administration (Optional Lab)" activityid="21094" activitytypeid="4" class="activity withAttention Lab  current  openInNewWindow required accessible retake"
+         
+         data-externalId="28294"
+         data-providerId="1"
+         >
+        <div class="attention"  >&nbsp;</div>
+        <div class="number">1</div>
+        <div class="content detailsBox3">
+            <div class="title">
+                <span class="name">
+                        <a href="/Lab/21094">Privileged identity role based management using PowerShell Just Enough Administration (Optional Lab)</a>
+                                            <span class="deemphasize" style="font-size:80%">(Expected Duration 1 hours, 0 minutes)</span>
+                </span>
+                                    <div class="subtitle">Hybrid Cloud Infrastructure, Lab 2</div>
+                            </div>
+            <div>
+                <table cellpadding="2" cellspacing="0" class="details" >
+                    <tr>
+                        <td class="fieldName">Required:</td>
+                        <td>Yes</td>
+                    </tr>
+                    <tr>
+                        <td class="fieldName">Status:</td>
+                        <td class="status">Not Started</td>
+                    </tr>
+                                                            <tr class="score" style="display:none;">
+                        <td class="fieldName">Score:</td>
+                        <td class="value"></td>
+                    </tr>
+                </table>
+                    <div style="margin-top:15px;" class="launchButtons">
+                        <input type="button" class="launch button" value="Launch" style="display:none;" />
+                        <input type="button" class="resume button" value="Resume" style="display:none;" />
+                        <input type="button" class="cancel button" value="Cancel" style="display:none;" />
+                    </div>
+            </div>
+        </div>
+        <div class="connector" style="">
+            <span class="arrowImage"></span>
+        </div>
+    </div>
+    <div title="Rolling compute and storage upgrades" activityid="21095" activitytypeid="4" class="activity withAttention Lab  none  openInNewWindow required accessible retake"
+         
+         data-externalId="28295"
+         data-providerId="1"
+         >
+        <div class="attention"  >&nbsp;</div>
+        <div class="number">2</div>
+        <div class="content detailsBox3">
+            <div class="title">
+                <span class="name">
+                        <a href="/Lab/21095">Rolling compute and storage upgrades</a>
+                                            <span class="deemphasize" style="font-size:80%">(Expected Duration 1 hours, 0 minutes)</span>
+                </span>
+                                    <div class="subtitle">Hybrid Cloud Infrastructure, Lab 3</div>
+                            </div>
+            <div>
+                <table cellpadding="2" cellspacing="0" class="details" >
+                    <tr>
+                        <td class="fieldName">Required:</td>
+                        <td>Yes</td>
+                    </tr>
+                    <tr>
+                        <td class="fieldName">Status:</td>
+                        <td class="status">Not Started</td>
+                    </tr>
+                                                            <tr class="score" style="display:none;">
+                        <td class="fieldName">Score:</td>
+                        <td class="value"></td>
+                    </tr>
+                </table>
+                    <div style="margin-top:15px;" class="launchButtons">
+                        <input type="button" class="launch button" value="Launch" style="display:none;" />
+                        <input type="button" class="resume button" value="Resume" style="display:none;" />
+                        <input type="button" class="cancel button" value="Cancel" style="display:none;" />
+                    </div>
+            </div>
+        </div>
+        <div class="connector" style="">
+            <span class="arrowImage"></span>
+        </div>
+    </div>
+    <div title="Discover new storage capabilities in Windows Server 2016" activityid="21096" activitytypeid="4" class="activity withAttention Lab  none  openInNewWindow required accessible retake"
+         
+         data-externalId="28296"
+         data-providerId="1"
+         >
+        <div class="attention"  >&nbsp;</div>
+        <div class="number">3</div>
+        <div class="content detailsBox3">
+            <div class="title">
+                <span class="name">
+                        <a href="/Lab/21096">Discover new storage capabilities in Windows Server 2016</a>
+                                            <span class="deemphasize" style="font-size:80%">(Expected Duration 1 hours, 0 minutes)</span>
+                </span>
+                                    <div class="subtitle">Hybrid Cloud Infrastructure, Lab 4</div>
+                            </div>
+            <div>
+                <table cellpadding="2" cellspacing="0" class="details" >
+                    <tr>
+                        <td class="fieldName">Required:</td>
+                        <td>Yes</td>
+                    </tr>
+                    <tr>
+                        <td class="fieldName">Status:</td>
+                        <td class="status">Not Started</td>
+                    </tr>
+                                                            <tr class="score" style="display:none;">
+                        <td class="fieldName">Score:</td>
+                        <td class="value"></td>
+                    </tr>
+                </table>
+                    <div style="margin-top:15px;" class="launchButtons">
+                        <input type="button" class="launch button" value="Launch" style="display:none;" />
+                        <input type="button" class="resume button" value="Resume" style="display:none;" />
+                        <input type="button" class="cancel button" value="Cancel" style="display:none;" />
+                    </div>
+            </div>
+        </div>
+        <div class="connector" style="">
+            <span class="arrowImage"></span>
+        </div>
+    </div>
+    <div title="SDN fabric (Network Controller, SLB, Gateways)" activityid="21097" activitytypeid="4" class="activity withAttention Lab  none  openInNewWindow required accessible retake"
+         
+         data-externalId="28297"
+         data-providerId="1"
+         >
+        <div class="attention"  >&nbsp;</div>
+        <div class="number">4</div>
+        <div class="content detailsBox3">
+            <div class="title">
+                <span class="name">
+                        <a href="/Lab/21097">SDN fabric (Network Controller, SLB, Gateways)</a>
+                                            <span class="deemphasize" style="font-size:80%">(Expected Duration 1 hours, 0 minutes)</span>
+                </span>
+                                    <div class="subtitle">Hybrid Cloud Infrastructure, Lab 5</div>
+                            </div>
+            <div>
+                <table cellpadding="2" cellspacing="0" class="details" >
+                    <tr>
+                        <td class="fieldName">Required:</td>
+                        <td>Yes</td>
+                    </tr>
+                    <tr>
+                        <td class="fieldName">Status:</td>
+                        <td class="status">Not Started</td>
+                    </tr>
+                                                            <tr class="score" style="display:none;">
+                        <td class="fieldName">Score:</td>
+                        <td class="value"></td>
+                    </tr>
+                </table>
+                    <div style="margin-top:15px;" class="launchButtons">
+                        <input type="button" class="launch button" value="Launch" style="display:none;" />
+                        <input type="button" class="resume button" value="Resume" style="display:none;" />
+                        <input type="button" class="cancel button" value="Cancel" style="display:none;" />
+                    </div>
+            </div>
+        </div>
+        <div class="connector" style="">
+            <span class="arrowImage"></span>
+        </div>
+    </div>
+    <div title="Solve the complexities of VM with Containers and Docker" activityid="21098" activitytypeid="4" class="activity withAttention Lab  none  openInNewWindow required accessible retake"
+         
+         data-externalId="28298"
+         data-providerId="1"
+         >
+        <div class="attention"  >&nbsp;</div>
+        <div class="number">5</div>
+        <div class="content detailsBox3">
+            <div class="title">
+                <span class="name">
+                        <a href="/Lab/21098">Solve the complexities of VM with Containers and Docker</a>
+                                            <span class="deemphasize" style="font-size:80%">(Expected Duration 1 hours, 0 minutes)</span>
+                </span>
+                                    <div class="subtitle">Hybrid Cloud Infrastructure, Lab 6</div>
+                            </div>
+            <div>
+                <table cellpadding="2" cellspacing="0" class="details" >
+                    <tr>
+                        <td class="fieldName">Required:</td>
+                        <td>Yes</td>
+                    </tr>
+                    <tr>
+                        <td class="fieldName">Status:</td>
+                        <td class="status">Not Started</td>
+                    </tr>
+                                                            <tr class="score" style="display:none;">
+                        <td class="fieldName">Score:</td>
+                        <td class="value"></td>
+                    </tr>
+                </table>
+                    <div style="margin-top:15px;" class="launchButtons">
+                        <input type="button" class="launch button" value="Launch" style="display:none;" />
+                        <input type="button" class="resume button" value="Resume" style="display:none;" />
+                        <input type="button" class="cancel button" value="Cancel" style="display:none;" />
+                    </div>
+            </div>
+        </div>
+        <div class="connector" style="">
+            <span class="arrowImage"></span>
+        </div>
+    </div>
+    <div title="Experience Nano Server (you&#39;ve heard of it)" activityid="21108" activitytypeid="4" class="activity withAttention Lab  none  openInNewWindow required accessible retake"
+         
+         data-externalId="28340"
+         data-providerId="1"
+         >
+        <div class="attention"  >&nbsp;</div>
+        <div class="number">6</div>
+        <div class="content detailsBox3">
+            <div class="title">
+                <span class="name">
+                        <a href="/Lab/21108">Experience Nano Server (you&#39;ve heard of it)</a>
+                                            <span class="deemphasize" style="font-size:80%">(Expected Duration 1 hours, 0 minutes)</span>
+                </span>
+                    <a class="showDetails collapseLinkSmall collapsed" href="#">Details</a>
+                                    <div class="subtitle">Hybrid Cloud Infrastructure, Lab 7</div>
+                                    <div class="details detailsBox2" style="display:none;">Experience the new Nano Server in this lab.  We set up a Nano Server for the first time along with showing you how to administer it remotely. We also show how to setup roles such as a File Server and Failover Cluster.</div>
+            </div>
+            <div>
+                <table cellpadding="2" cellspacing="0" class="details" >
+                    <tr>
+                        <td class="fieldName">Required:</td>
+                        <td>Yes</td>
+                    </tr>
+                    <tr>
+                        <td class="fieldName">Status:</td>
+                        <td class="status">Not Started</td>
+                    </tr>
+                                                            <tr class="score" style="display:none;">
+                        <td class="fieldName">Score:</td>
+                        <td class="value"></td>
+                    </tr>
+                </table>
+                    <div style="margin-top:15px;" class="launchButtons">
+                        <input type="button" class="launch button" value="Launch" style="display:none;" />
+                        <input type="button" class="resume button" value="Resume" style="display:none;" />
+                        <input type="button" class="cancel button" value="Cancel" style="display:none;" />
+                    </div>
+            </div>
+        </div>
+        <div class="connector" style="">
+            <span class="arrowImage"></span>
+        </div>
+    </div>
+    </div>
+    <h2 class="activitySectionName">Hybrid Cloud Infrastructure - Additional Content</h2>
+    <div class="activitySectionContent">
+    <div title="Downloadable Course Content " activityid="42774" activitytypeid="40" class="activity withAttention ExternalLink  complete  openInNewWindow accessible"
+         
+         
+         
+         data-url="hidden">
+        <div class="attention"  >&nbsp;</div>
+        <div class="number">1</div>
+        <div class="content detailsBox3">
+            <div class="title">
+                <span class="name">
+Downloadable Course Content                                     </span>
+                    <a class="showDetails collapseLinkSmall collapsed" href="#">Details</a>
+                                                    <div class="details detailsBox2" style="display:none;">This content is for both students and instructors</div>
+            </div>
+            <div>
+                <table cellpadding="2" cellspacing="0" class="details" >
+                    <tr>
+                        <td class="fieldName">Required:</td>
+                        <td>No</td>
+                    </tr>
+                    <tr>
+                        <td class="fieldName">Status:</td>
+                        <td class="status">Complete</td>
+                    </tr>
+                        <tr>
+                            <td class="fieldName">Started:</td>
+                            <td class="start">Monday, March 27, 2017 8:23 PM (UTC)</td>
+                        </tr>
+                                                            <tr class="score" style="display:none;">
+                        <td class="fieldName">Score:</td>
+                        <td class="value"></td>
+                    </tr>
+                </table>
+                    <div style="margin-top:15px;" class="launchButtons">
+                        <input type="button" class="launch button" value="Launch"  />
+                    </div>
+            </div>
+        </div>
+        <div class="connector" style="">
+            <span class="arrowImage"></span>
+        </div>
+    </div>
+    <div title="Video - 2.1.1 ShieldedVMs Field " activityid="42775" activitytypeid="40" class="activity withAttention ExternalLink  none  openInNewWindow accessible"
+         
+         
+         
+         data-url="hidden">
+        <div class="attention"  >&nbsp;</div>
+        <div class="number">2</div>
+        <div class="content detailsBox3">
+            <div class="title">
+                <span class="name">
+Video - 2.1.1 ShieldedVMs Field                                     </span>
+                                            </div>
+            <div>
+                <table cellpadding="2" cellspacing="0" class="details" >
+                    <tr>
+                        <td class="fieldName">Required:</td>
+                        <td>No</td>
+                    </tr>
+                    <tr>
+                        <td class="fieldName">Status:</td>
+                        <td class="status">Not Started</td>
+                    </tr>
+                                                            <tr class="score" style="display:none;">
+                        <td class="fieldName">Score:</td>
+                        <td class="value"></td>
+                    </tr>
+                </table>
+                    <div style="margin-top:15px;" class="launchButtons">
+                        <input type="button" class="launch button" value="Launch"  />
+                    </div>
+            </div>
+        </div>
+        <div class="connector" style="">
+            <span class="arrowImage"></span>
+        </div>
+    </div>
+    <div title="Video - 4.1.1 Space Direct Field" activityid="42776" activitytypeid="40" class="activity withAttention ExternalLink  none  openInNewWindow accessible"
+         
+         
+         
+         data-url="hidden">
+        <div class="attention"  >&nbsp;</div>
+        <div class="number">3</div>
+        <div class="content detailsBox3">
+            <div class="title">
+                <span class="name">
+Video - 4.1.1 Space Direct Field                                    </span>
+                                            </div>
+            <div>
+                <table cellpadding="2" cellspacing="0" class="details" >
+                    <tr>
+                        <td class="fieldName">Required:</td>
+                        <td>No</td>
+                    </tr>
+                    <tr>
+                        <td class="fieldName">Status:</td>
+                        <td class="status">Not Started</td>
+                    </tr>
+                                                            <tr class="score" style="display:none;">
+                        <td class="fieldName">Score:</td>
+                        <td class="value"></td>
+                    </tr>
+                </table>
+                    <div style="margin-top:15px;" class="launchButtons">
+                        <input type="button" class="launch button" value="Launch"  />
+                    </div>
+            </div>
+        </div>
+        <div class="connector" style="">
+            <span class="arrowImage"></span>
+        </div>
+    </div>
+    <div title="Video - 4.1.1 Storage Replica Field" activityid="42777" activitytypeid="40" class="activity withAttention ExternalLink  none  openInNewWindow accessible"
+         
+         
+         
+         data-url="hidden">
+        <div class="attention"  >&nbsp;</div>
+        <div class="number">4</div>
+        <div class="content detailsBox3">
+            <div class="title">
+                <span class="name">
+Video - 4.1.1 Storage Replica Field                                    </span>
+                                            </div>
+            <div>
+                <table cellpadding="2" cellspacing="0" class="details" >
+                    <tr>
+                        <td class="fieldName">Required:</td>
+                        <td>No</td>
+                    </tr>
+                    <tr>
+                        <td class="fieldName">Status:</td>
+                        <td class="status">Not Started</td>
+                    </tr>
+                                                            <tr class="score" style="display:none;">
+                        <td class="fieldName">Score:</td>
+                        <td class="value"></td>
+                    </tr>
+                </table>
+                    <div style="margin-top:15px;" class="launchButtons">
+                        <input type="button" class="launch button" value="Launch"  />
+                    </div>
+            </div>
+        </div>
+        <div class="connector" style="">
+            <span class="arrowImage"></span>
+        </div>
+    </div>
+    <div title="Video - 7.1.1 Nano  Server Field" activityid="42778" activitytypeid="40" class="activity withAttention ExternalLink  none  openInNewWindow accessible"
+         
+         
+         
+         data-url="hidden">
+        <div class="attention"  >&nbsp;</div>
+        <div class="number">5</div>
+        <div class="content detailsBox3">
+            <div class="title">
+                <span class="name">
+Video - 7.1.1 Nano  Server Field                                    </span>
+                                            </div>
+            <div>
+                <table cellpadding="2" cellspacing="0" class="details" >
+                    <tr>
+                        <td class="fieldName">Required:</td>
+                        <td>No</td>
+                    </tr>
+                    <tr>
+                        <td class="fieldName">Status:</td>
+                        <td class="status">Not Started</td>
+                    </tr>
+                                                            <tr class="score" style="display:none;">
+                        <td class="fieldName">Score:</td>
+                        <td class="value"></td>
+                    </tr>
+                </table>
+                    <div style="margin-top:15px;" class="launchButtons">
+                        <input type="button" class="launch button" value="Launch"  />
+                    </div>
+            </div>
+        </div>
+        <div class="connector" style="">
+            <span class="arrowImage"></span>
+        </div>
+    </div>
+    </div>
+    <h2 class="activitySectionName">Hybrid Cloud Management and Security - Labs</h2>
+    <div class="activitySectionContent">
+    <div title="Attendee Azure Promo Code Distribution Lab (This is for Attendee access only to receive an Azure Promo Code)" activityid="18285" activitytypeid="4" class="activity withAttention Lab  none  openInNewWindow required accessible retake"
+         
+         data-externalId="21494"
+         data-providerId="1"
+         >
+        <div class="attention"  >&nbsp;</div>
+        <div class="number">1</div>
+        <div class="content detailsBox3">
+            <div class="title">
+                <span class="name">
+                        <a href="/Lab/18285">Attendee Azure Promo Code Distribution Lab (This is for Attendee access only to receive an Azure Promo Code)</a>
+                                            <span class="deemphasize" style="font-size:80%">(Expected Duration 42 minutes, 0 seconds)</span>
+                </span>
+                                    <div class="subtitle">PPE Azure Code Distribution, PPE Azure Promo Code Distrubtion Lab </div>
+                            </div>
+            <div>
+                <table cellpadding="2" cellspacing="0" class="details" >
+                    <tr>
+                        <td class="fieldName">Required:</td>
+                        <td>Yes</td>
+                    </tr>
+                    <tr>
+                        <td class="fieldName">Status:</td>
+                        <td class="status">Cancelled</td>
+                    </tr>
+                        <tr>
+                            <td class="fieldName">Started:</td>
+                            <td class="start">Friday, May 12, 2017 7:02 AM (UTC)</td>
+                        </tr>
+                                            <tr>
+                            <td class="fieldName">Ended:</td>
+                            <td class="end">Friday, May 12, 2017 7:04 AM (UTC)</td>
+                        </tr>
+                                        <tr class="score" style="display:none;">
+                        <td class="fieldName">Score:</td>
+                        <td class="value"></td>
+                    </tr>
+                </table>
+                    <div style="margin-top:15px;" class="launchButtons">
+                        <input type="button" class="launch button" value="Launch" style="display:none;" />
+                        <input type="button" class="resume button" value="Resume" style="display:none;" />
+                        <input type="button" class="cancel button" value="Cancel" style="display:none;" />
+                    </div>
+            </div>
+        </div>
+        <div class="connector" style="">
+            <span class="arrowImage"></span>
+        </div>
+    </div>
+    <div title="Labs 1 -8: (These are done in Azure using the Attendee laptop)" activityid="42780" activitytypeid="40" class="activity withAttention ExternalLink  none  openInNewWindow accessible"
+         
+         
+         
+         data-url="hidden">
+        <div class="attention"  >&nbsp;</div>
+        <div class="number">2</div>
+        <div class="content detailsBox3">
+            <div class="title">
+                <span class="name">
+Labs 1 -8: (These are done in Azure using the Attendee laptop)                                    </span>
+                    <a class="showDetails collapseLinkSmall collapsed" href="#">Details</a>
+                                                    <div class="details detailsBox2" style="display:none;">Please note this is just a link to the Azure Portal. The attendees will need to use the Student Guide located in the Student Files and PowerPoint Presentations downloadable zip file. </div>
+            </div>
+            <div>
+                <table cellpadding="2" cellspacing="0" class="details" >
+                    <tr>
+                        <td class="fieldName">Required:</td>
+                        <td>No</td>
+                    </tr>
+                    <tr>
+                        <td class="fieldName">Status:</td>
+                        <td class="status">Not Started</td>
+                    </tr>
+                                                            <tr class="score" style="display:none;">
+                        <td class="fieldName">Score:</td>
+                        <td class="value"></td>
+                    </tr>
+                </table>
+                    <div style="margin-top:15px;" class="launchButtons">
+                        <input type="button" class="launch button" value="Launch"  />
+                    </div>
+            </div>
+        </div>
+        <div class="connector" style="">
+            <span class="arrowImage"></span>
+        </div>
+    </div>
+    <div title="Lab 9: Add and Protect VMware VMs via Data Protection Manager" activityid="20985" activitytypeid="4" class="activity withAttention Lab  none  openInNewWindow required accessible retake"
+         
+         data-externalId="28162"
+         data-providerId="1"
+         >
+        <div class="attention"  >&nbsp;</div>
+        <div class="number">3</div>
+        <div class="content detailsBox3">
+            <div class="title">
+                <span class="name">
+                        <a href="/Lab/20985">Lab 9: Add and Protect VMware VMs via Data Protection Manager</a>
+                                            <span class="deemphasize" style="font-size:80%">(Expected Duration 1 hours, 0 minutes)</span>
+                </span>
+                                    <div class="subtitle">Hybrid Cloud Management, Lab 09</div>
+                            </div>
+            <div>
+                <table cellpadding="2" cellspacing="0" class="details" >
+                    <tr>
+                        <td class="fieldName">Required:</td>
+                        <td>Yes</td>
+                    </tr>
+                    <tr>
+                        <td class="fieldName">Status:</td>
+                        <td class="status">Not Started</td>
+                    </tr>
+                                                            <tr class="score" style="display:none;">
+                        <td class="fieldName">Score:</td>
+                        <td class="value"></td>
+                    </tr>
+                </table>
+                    <div style="margin-top:15px;" class="launchButtons">
+                        <input type="button" class="launch button" value="Launch" style="display:none;" />
+                        <input type="button" class="resume button" value="Resume" style="display:none;" />
+                        <input type="button" class="cancel button" value="Cancel" style="display:none;" />
+                    </div>
+            </div>
+        </div>
+        <div class="connector" style="">
+            <span class="arrowImage"></span>
+        </div>
+    </div>
+    <div title="Lab 10: Azure Site Recovery – On-Premises VMware to Azure Scenario" activityid="20987" activitytypeid="4" class="activity withAttention Lab  none  openInNewWindow required accessible retake"
+         
+         data-externalId="28164"
+         data-providerId="1"
+         >
+        <div class="attention"  >&nbsp;</div>
+        <div class="number">4</div>
+        <div class="content detailsBox3">
+            <div class="title">
+                <span class="name">
+                        <a href="/Lab/20987">Lab 10: Azure Site Recovery – On-Premises VMware to Azure Scenario</a>
+                                            <span class="deemphasize" style="font-size:80%">(Expected Duration 1 hours, 0 minutes)</span>
+                </span>
+                                    <div class="subtitle">Hybrid Cloud Management, Lab 10</div>
+                            </div>
+            <div>
+                <table cellpadding="2" cellspacing="0" class="details" >
+                    <tr>
+                        <td class="fieldName">Required:</td>
+                        <td>Yes</td>
+                    </tr>
+                    <tr>
+                        <td class="fieldName">Status:</td>
+                        <td class="status">Not Started</td>
+                    </tr>
+                                                            <tr class="score" style="display:none;">
+                        <td class="fieldName">Score:</td>
+                        <td class="value"></td>
+                    </tr>
+                </table>
+                    <div style="margin-top:15px;" class="launchButtons">
+                        <input type="button" class="launch button" value="Launch" style="display:none;" />
+                        <input type="button" class="resume button" value="Resume" style="display:none;" />
+                        <input type="button" class="cancel button" value="Cancel" style="display:none;" />
+                    </div>
+            </div>
+        </div>
+        <div class="connector" style="">
+            <span class="arrowImage"></span>
+        </div>
+    </div>
+    <div title="Lab 11: Azure Site Recovery – On-Premises Hyper-V to Azure Scenario" activityid="20988" activitytypeid="4" class="activity withAttention Lab  none  openInNewWindow required accessible retake"
+         
+         data-externalId="28165"
+         data-providerId="1"
+         >
+        <div class="attention"  >&nbsp;</div>
+        <div class="number">5</div>
+        <div class="content detailsBox3">
+            <div class="title">
+                <span class="name">
+                        <a href="/Lab/20988">Lab 11: Azure Site Recovery – On-Premises Hyper-V to Azure Scenario</a>
+                                            <span class="deemphasize" style="font-size:80%">(Expected Duration 1 hours, 0 minutes)</span>
+                </span>
+                                    <div class="subtitle">Hybrid Cloud Management, Lab 11</div>
+                            </div>
+            <div>
+                <table cellpadding="2" cellspacing="0" class="details" >
+                    <tr>
+                        <td class="fieldName">Required:</td>
+                        <td>Yes</td>
+                    </tr>
+                    <tr>
+                        <td class="fieldName">Status:</td>
+                        <td class="status">Not Started</td>
+                    </tr>
+                                                            <tr class="score" style="display:none;">
+                        <td class="fieldName">Score:</td>
+                        <td class="value"></td>
+                    </tr>
+                </table>
+                    <div style="margin-top:15px;" class="launchButtons">
+                        <input type="button" class="launch button" value="Launch" style="display:none;" />
+                        <input type="button" class="resume button" value="Resume" style="display:none;" />
+                        <input type="button" class="cancel button" value="Cancel" style="display:none;" />
+                    </div>
+            </div>
+        </div>
+        <div class="connector" style="">
+            <span class="arrowImage"></span>
+        </div>
+    </div>
+    </div>
+    <h2 class="activitySectionName">Hybrid Cloud Management and Security - Additional Content</h2>
+    <div class="activitySectionContent">
+    <div title="Hybrid Cloud Management and Security - PowerPoint Presentations " activityid="42785" activitytypeid="40" class="activity withAttention ExternalLink  none  openInNewWindow accessible"
+         
+         
+         
+         data-url="hidden">
+        <div class="attention"  >&nbsp;</div>
+        <div class="number">1</div>
+        <div class="content detailsBox3">
+            <div class="title">
+                <span class="name">
+Hybrid Cloud Management and Security - PowerPoint Presentations                                     </span>
+                                            </div>
+            <div>
+                <table cellpadding="2" cellspacing="0" class="details" >
+                    <tr>
+                        <td class="fieldName">Required:</td>
+                        <td>No</td>
+                    </tr>
+                    <tr>
+                        <td class="fieldName">Status:</td>
+                        <td class="status">Not Started</td>
+                    </tr>
+                                                            <tr class="score" style="display:none;">
+                        <td class="fieldName">Score:</td>
+                        <td class="value"></td>
+                    </tr>
+                </table>
+                    <div style="margin-top:15px;" class="launchButtons">
+                        <input type="button" class="launch button" value="Launch"  />
+                    </div>
+            </div>
+        </div>
+        <div class="connector" style="">
+            <span class="arrowImage"></span>
+        </div>
+    </div>
+    <div title="Hybrid Cloud Management and Security - Student Files" activityid="42786" activitytypeid="40" class="activity withAttention ExternalLink  none  openInNewWindow accessible"
+         
+         
+         
+         data-url="hidden">
+        <div class="attention"  >&nbsp;</div>
+        <div class="number">2</div>
+        <div class="content detailsBox3">
+            <div class="title">
+                <span class="name">
+Hybrid Cloud Management and Security - Student Files                                    </span>
+                                            </div>
+            <div>
+                <table cellpadding="2" cellspacing="0" class="details" >
+                    <tr>
+                        <td class="fieldName">Required:</td>
+                        <td>No</td>
+                    </tr>
+                    <tr>
+                        <td class="fieldName">Status:</td>
+                        <td class="status">Not Started</td>
+                    </tr>
+                                                            <tr class="score" style="display:none;">
+                        <td class="fieldName">Score:</td>
+                        <td class="value"></td>
+                    </tr>
+                </table>
+                    <div style="margin-top:15px;" class="launchButtons">
+                        <input type="button" class="launch button" value="Launch"  />
+                    </div>
+            </div>
+        </div>
+        <div class="connector" style="display:none;">
+            <span class="arrowImage"></span>
+        </div>
+    </div>
+    </div>
+</div>
+
+<div id="loading" class="ajaxLoadingMessage">Loading...</div>
+<div id="labError" class="ajaxLoadingMessage"></div>
+
+
+<script type="text/javascript">
+
+    
+    var returnUrl = "/ClassEnrollment/1341709";
+    var numActivities = 10 + ".0";
+
+    function setupProgressBar() {
+        var numCompleteActivities = $(".activity.complete.required").length;
+        var percentage = numActivities === 0 ? 0 : Math.round((numCompleteActivities / numActivities) * 100);
+        $("#progress").css("width", percentage * 4 + "px");
+        $("#progressText").text(percentage + "%");
+        $("#numComplete").text(numCompleteActivities);
+    }
+
+    function setupActivities(container) {
+        var roadBlockFound = false;
+        var currentFound = false;
+        container.find(".activity").each(function() {
+            var $activity = $(this);
+            if (!roadBlockFound || $activity.is(".ignoreRoadblocks")) {
+                $activity.addClass("accessible");
+            } else {
+                $activity.removeClass("accessible");
+            }
+            if ($activity.is(".ScormModule")) {
+                setupScormModuleLaunchButtons($activity);
+            } else if ($activity.is(".AiccModule")) {
+                setupAiccModuleLaunchButtons($activity);
+            } else if ($activity.is(".Lab")) {
+                setupLabLaunchButtons($activity);
+            } else if ($activity.is(".Survey")) {
+                setupSurveyLaunchButtons($activity);
+            } else if ($activity.is(".Assessment")) {
+                setupAssessmentLaunchButtons($activity);
+            } else if ($activity.hasClass("ExternalLink") || $activity.hasClass("Video") || $activity.hasClass("Document") || $activity.hasClass("LTIResourceLink")) {
+                if ($activity.hasClass("accessible")) {
+                    $activity.find("input.launch").show();
+                } else {
+                    $activity.find("input.launch").hide();
+                }
+            }
+            if (!roadBlockFound && !currentFound && !$activity.is(".complete") && $activity.is(".required")) {
+                $activity.addClass("current").removeClass("none");
+                currentFound = true;
+            }
+            if (!$activity.is(".complete") && $activity.is(".enforceSequence")) {
+                roadBlockFound = true;
+            }
+        });
+    }
+
+        
+    $("#contentDialogVideo").bind("contextmenu", function () { return false; });
+    function showContentDialog(url) {
+        var isMp4 = url.toLowerCase().indexOf(".mp4") !== -1;
+        if (isMp4) {
+            $("#contentDialogIFrame").hide();
+            var $video = $("#contentDialogVideo");
+            $video.show();
+            if ($video.attr("src") !== url) {
+                $video.attr("src", url);
+            }
+            try {
+                $video[0].play();
+            } catch (e) {
+                //
+            }
+        } else {
+            $("#contentDialogVideo").hide();
+            $("#contentDialogIFrame").show().attr("src", url);
+        }
+        $("#contentDialog").show();
+    }
+
+    $(function() {
+        $("div.activity.ExternalLink input.launch, div.activity.Video input.launch, div.activity.Document input.launch").click(function() {
+            var $activity = $(this).closest(".activity");
+            var launchUrl = $activity.attr("data-url");
+            if (!launchUrl) {
+                return;
+            }
+            var activityId = $activity.attr("ActivityId");
+            var loggingUrl = "/Course/LaunchExternalLink/" + activityId;
+            if (window.assignmentId) {
+                loggingUrl += "?assignmentId=" + window.assignmentId;
+            } else if (window.enrollmentId) {
+                loggingUrl += "?enrollmentId=" + window.enrollmentId;
+            }
+            if (!$activity.hasClass("complete")) {
+                $activity.addClass("complete").removeClass("current").removeClass("none");
+                setupProgressBar();
+                setupActivities($activity.closest(".activities"));
+            }
+            $.simplePost(loggingUrl, {}, function(response) {
+                launchUrl = response.LaunchUrl;
+                if ($activity.hasClass("openInNewWindow")) {
+                    if (launchUrl.toLowerCase().indexOf(".mp4") >= 0) {
+                        launchUrl = "/Course/Video/15114?activityId=" + activityId;
+                    }
+                    window.open(launchUrl, '_blank', 'toolbar=0,location=0,menubar=0,resizable=1,status=0,titlebar=0,scrollbars=1');
+                } else {
+                    showContentDialog(launchUrl);
+                }
+            });
+        });
+
+        $("#closeContentDialogButton").click(function() {
+            var $video = $("#contentDialogVideo");
+            if ($video.attr("src")) {
+                try {
+                    $video[0].pause();
+                } catch (e) {
+                }
+            }
+            $("#contentDialog").hide();
+            $("#contentDialogIFrame")[0].src = "";
+        });
+
+    });
+    
+
+    
+
+    
+    var runningLabs = new Array();
+    var savedLabs = new Array();
+    var labProviderIds = new Array();
+        
+                    
+    labProviderIds.push(1);
+    
+    $(function() {
+        updateLabUi();
+    });
+    
+    
+
+    
+    var returnUrl = "/ClassEnrollment/1341709";
+    var remoteDocumentDomain = "null";
+    
+
+    $(function() {
+
+        $(".activity .showDetails").click(function() {
+            if (this.expanded) {
+                this.expanded = false;
+                $(this).parent().find(".details").slideUp('fast');
+                $(this).addClass("collapsed");
+            } else {
+                this.expanded = true;
+                $(this).parent().find(".details").slideDown('fast');
+                $(this).removeClass("collapsed");
+            }
+            return false;
+        });
+
+    });
+</script>
+
+        </div>
+    </div>
+
+
+
+
+
+    
+    <script type="text/javascript">
+    
+        var classId = 212999;
+        var enrollmentId = 1341709;
+    
+        var model = {
+            courseId: 15114,
+            courseName: "US Hybrid Cloud Infrastructure & OMS",
+            enrollmentId: 1341709
+        };
+
+        $(function() {            
+                    });
+    </script>
+
+                </div>
+            </div>
+            <div id="footerWrapper">
+                <div id="footer">
+                    <div id="footerLeft">This site is hosted for Microsoft by Learn on Demand Systems</div>
+<div id="footerRight">
+    <a id="footerMicrosoftLink" class="noselect" href="http://www.microsoft.com">Microsoft</a>
+    © 2016 Microsoft
+</div>
+<div id="footerLinks">
+    <a href="http://support.microsoft.com/gp/csa" target="_blank">Microsoft Services Agreement</a>
+    <a href="http://go.microsoft.com/fwlink/?LinkId=248681">Privacy Statement</a>
+    <a href="https://www.microsoft.com/en-us/servicesagreement/" target="_blank">Terms of Use</a>
+    <a href="http://www.microsoft.com/en-us/legal/intellectualproperty/trademarks/en-us.aspx" target="_blank">Trademarks</a>
+</div>
+                </div>
+            </div>
+        </div>
+        <script type="text/javascript">
+    $(function() {
+        var pulseExpires = new Date(new Date().valueOf() + (1440 * 60000));
+        scheduleSessionPulse("https://mpnesp.learnondemand.net/ClassEnrollment/1341709", 30 * 60000 , pulseExpires);
+    });
+</script>
+
+        
+
+    </body>
+</html>

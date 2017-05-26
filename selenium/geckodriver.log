@@ -1,0 +1,25 @@
+1494951228263	geckodriver	INFO	Listening on 127.0.0.1:1143
+1494951230362	mozprofile::profile	INFO	Using profile path C:\Users\alhussai\AppData\Local\Temp\rust_mozprofile.oA85va0l9CIC
+1494951230370	geckodriver::marionette	INFO	Starting browser C:\Program Files (x86)\Mozilla Firefox\firefox.exe with args []
+1494951230413	geckodriver::marionette	INFO	Connecting to Marionette on localhost:1149
+1494951234468	Marionette	INFO	Listening on port 1149
+[GPU 2328] WARNING: pipe error: 109: file c:/builds/moz2_slave/m-rel-w32-00000000000000000000/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+1494951234615	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: https://s0.2mdn.net/4331293/1463697065167/300x250/com/main.js, line 15: TypeError: window.getComputedStyle(...) is null
+JavaScript error: https://s.yimg.com/gs/apex/mediastore/7c4cbed8-b2e7-400a-a665-2f0c4d55d77e/bb657abc-9fd3-4114-9772-28ae268a6abf.html, line 153: ReferenceError: ctaDrop is not defined
+JavaScript error: https://s.yimg.com/gs/apex/mediastore/8b4871ac-16ce-4edc-9d31-71c204839605/308d24ce-6113-4311-b140-20f7f911a701.html, line 157: ReferenceError: ctaDrop is not defined
+JavaScript error: https://s.yimg.com/gs/apex/mediastore/95d185a6-fdea-4484-ac57-794a2808f969/62b63246-3a28-4f51-8740-b3b33e6409c6.html, line 153: ReferenceError: ctaDrop is not defined
+JavaScript error: https://s.yimg.com/gs/apex/mediastore/06262e8f-b9ca-46bc-8762-ce0d10ea09fd/c2746412-e5b8-4b13-b696-d2b5552edd18.html, line 161: ReferenceError: ctaDrop is not defined
+JavaScript error: https://s.yimg.com/gs/apex/mediastore/06262e8f-b9ca-46bc-8762-ce0d10ea09fd/c2746412-e5b8-4b13-b696-d2b5552edd18.html, line 161: ReferenceError: ctaDrop is not defined
+*************************
+A coding exception was thrown and uncaught in a Task.
+
+Full message: TypeError: NetworkError when attempting to fetch resource.
+Full stack: 
+*************************
+[Child 11076] WARNING: pipe error: 109: file c:/builds/moz2_slave/m-rel-w32-00000000000000000000/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[Child 11076] WARNING: pipe error: 109: file c:/builds/moz2_slave/m-rel-w32-00000000000000000000/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[GPU 2328] WARNING: pipe error: 109: file c:/builds/moz2_slave/m-rel-w32-00000000000000000000/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+
+###!!! [Child][MessageChannel::SendAndWait] Error: Channel error: cannot send/recv
+
