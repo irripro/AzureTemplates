@@ -18,7 +18,7 @@ def deploy():
         sudo("yum update -y")
     run("wget https://github.com/stedolan/jq/releases/download/jq-1.4/jq-linux-x86_64")
     run("chmod 755 jq-linux-x86_64")
-    sudo("sudo mv jq-linux-x86_64 /usr/bin/jq")
+    sudo("mv jq-linux-x86_64 /usr/bin/jq")
     sudo("yum -y install httpd")
     sudo("systemctl enable httpd.service")
     sudo("mkdir -p /var/www/%s/public_html" %env.host)
