@@ -1,15 +1,12 @@
 {
-  "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
-  "contentVersion": "1.0.0.0",
-  "parameters": {
-    "adminUserName": {
-      "value": "alihhussain"
-    },
-    "sshKeyData": {
-      "value": "{ssh_key_data}"
-    },
-    "Subnetyouwant": {
-      "value": "10.0.0.0/24"
-    }
-  }
+    "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "adminUsername": {
+            "value": "alihhussain"
+        },
+        "adminPassword": {
+            "value": "asrdemo@teamcim123"
+        }
+   }
 }
