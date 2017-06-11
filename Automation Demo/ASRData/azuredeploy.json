@@ -36,7 +36,7 @@
 		"vmName": "MyASRVM",
 		"virtualNetworkName": "sshVNET",
 		"publicIPAddressName": "ASRPublicIP",
-		"dnsNameForPublicIP": "[concat('teamcimASR', uniqueString(resourceGroup().id)]",
+		"dnsNameForPublicIP": "[concat('teamcimASR', uniqueString(resourceGroup().id))]",
 		"scriptFolder": ".",
 		"scriptFileName": "Copy-FileFromAzure.ps1",
 		"fileToBeCopied": "FileToBeCopied.txt",
