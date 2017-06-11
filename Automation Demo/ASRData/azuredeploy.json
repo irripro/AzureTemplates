@@ -36,7 +36,7 @@
 		"vmName": "MyASRVM",
 		"virtualNetworkName": "sshVNET",
 		"publicIPAddressName": "ASRPublicIP",
-		"dnsNameForPublicIP": "[concat('teamcimASR', uniqueString(resourceGroup().id))]",
+		"dnsNameForPublicIP": "[concat('teamcimasr', uniqueString(resourceGroup().id))]",
 		"scriptFolder": ".",
 		"scriptFileName": "Copy-FileFromAzure.ps1",
 		"fileToBeCopied": "FileToBeCopied.txt",
@@ -100,9 +100,34 @@
 							"priority": 125,
 							"direction": "Inbound"
 						}
+					}, {
+						"name": "ssh_rule",
+						"properties": {
+							"description": "Locks inbound down to ssh default port 22.",
+							"protocol": "Tcp",
+							"sourcePortRange": "*",
+							"destinationPortRange": "22",
+							"sourceAddressPrefix": "*",
+							"destinationAddressPrefix": "*",
+							"access": "Allow",
+							"priority": 123,
+							"direction": "Inbound"
+						}
+					}, {
+						"name": "nginx_rule",
+						"properties": {
+							"description": "Locks inbound down to nginx default port 80.",
+							"protocol": "Tcp",
+							"sourcePortRange": "*",
+							"destinationPortRange": "80",
+							"sourceAddressPrefix": "*",
+							"destinationAddressPrefix": "*",
+							"access": "Allow",
+							"priority": 124,
+							"direction": "Inbound"
+						}
 					}
 				]
-
 			}
 		}, {
 			"apiVersion": "2016-04-30-preview",
