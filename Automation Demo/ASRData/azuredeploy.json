@@ -40,6 +40,7 @@
         "scriptFolder": ".",
         "scriptFileName": "Copy-FileFromAzure.ps1",
         "fileToBeCopied": "FileToBeCopied.txt",
+        "networkSecurityGroupName": "NSGrdp",
         "scriptParameters": "[concat('-artifactsLocation ', parameters('_artifactsLocation'), ' -artifactsLocationSasToken \"', parameters('_artifactsLocationSasToken'), '\" -folderName ', variables('scriptFolder'), ' -fileToInstall ', variables('fileToBeCopied'))]"
     },
     "resources": [
@@ -78,6 +79,30 @@
                         }
                     }
                 ]
+            }
+        },
+        {
+            "apiVersion": "2016-09-01",
+            "type": "Microsoft.Network/networkSecurityGroups",
+            "name": "[variables('networkSecurityGroupName')]",
+            "location": "[variables('location')]",
+            "properties": {
+                "securityRules": [
+                    {
+                        "name": "rdp_rule",
+                        "properties": {
+                            "description": "Locks inbound down to RDP default port 3389.",
+                            "protocol": "Tcp",
+                            "sourcePortRange": "*",
+                            "destinationPortRange": "3389",
+                            "sourceAddressPrefix": "*",
+                            "destinationAddressPrefix": "*",
+                            "access": "Allow",
+                            "priority": 123,
+                            "direction": "Inbound"
+                        }
+                    }]
+                    
             }
         },
         {
