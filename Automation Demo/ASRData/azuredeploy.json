@@ -36,11 +36,11 @@
 		"vmName": "MyASRVM",
 		"virtualNetworkName": "sshVNET",
 		"publicIPAddressName": "ASRPublicIP",
-		"dnsNameForPublicIP": "[uniqueString(resourceGroup().id)]",
+		"dnsNameForPublicIP": "[concat('teamcimASR', uniqueString(resourceGroup().id)]",
 		"scriptFolder": ".",
 		"scriptFileName": "Copy-FileFromAzure.ps1",
 		"fileToBeCopied": "FileToBeCopied.txt",
-		"networkSecurityGroupName": "NSGrdp",
+		"networkSecurityGroupName": "networkSecurityGroup1",
 		"scriptParameters": "[concat('-artifactsLocation ', parameters('_artifactsLocation'), ' -artifactsLocationSasToken \"', parameters('_artifactsLocationSasToken'), '\" -folderName ', variables('scriptFolder'), ' -fileToInstall ', variables('fileToBeCopied'))]"
 	},
 	"resources": [{
@@ -97,7 +97,7 @@
 							"sourceAddressPrefix": "*",
 							"destinationAddressPrefix": "*",
 							"access": "Allow",
-							"priority": 123,
+							"priority": 125,
 							"direction": "Inbound"
 						}
 					}
