@@ -41,6 +41,7 @@
 		"scriptFileName": "Copy-FileFromAzure.ps1",
 		"fileToBeCopied": "FileToBeCopied.txt",
 		"networkSecurityGroupName": "networkSecurityGroup1",
+        "ASRname": "asrvault",
 		"scriptParameters": "[concat('-artifactsLocation ', parameters('_artifactsLocation'), ' -artifactsLocationSasToken \"', parameters('_artifactsLocationSasToken'), '\" -folderName ', variables('scriptFolder'), ' -fileToInstall ', variables('fileToBeCopied'))]"
 	},
 	"resources": [{
@@ -54,6 +55,16 @@
 					"domainNameLabel": "[variables('dnsNameForPublicIP')]"
 				}
 			}
+		}, {
+			"apiVersion": "2016-09-01",
+			"name": "[variables('ASRname')]",
+			"location": "[resourceGroup().location]",
+			"type": "Microsoft.RecoveryServices/vaults",
+			"sku": {
+				"name": "RS0",
+				"tier": "Standard"
+			},
+			"properties": {}
 		}, {
 			"apiVersion": "2016-09-01",
 			"type": "Microsoft.Network/networkInterfaces",
