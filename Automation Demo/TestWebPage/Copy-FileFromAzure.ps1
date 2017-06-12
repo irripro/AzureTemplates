@@ -8,5 +8,8 @@ param (
 
 $source = $artifactsLocation + "\$folderName\$fileToInstall" + $artifactsLocationSasToken
 $dest = "C:\WindowsAzure\$folderName"
+
+wget http://aka.ms/unifiedinstaller_eus -OutFile "$dest\recoveryvaultconfserver.exe"
+
 New-Item -Path $dest -ItemType directory
 Invoke-WebRequest $source -OutFile "$dest\$fileToInstall"
