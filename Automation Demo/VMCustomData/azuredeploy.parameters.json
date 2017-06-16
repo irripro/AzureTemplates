@@ -10,6 +10,9 @@
     },
     "Subnetyouwant": {
       "value": "10.0.0.0/24"
+    },
+    "ASR": {
+        "value": "[bool('{asr_answer}')]"
     }
   }
 }

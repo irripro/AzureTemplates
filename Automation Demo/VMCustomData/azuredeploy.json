@@ -20,6 +20,12 @@
       "metadata": {
         "description": "SSH rsa public key file as a string."
       }
+    },
+    "ASR": {
+        "type": "pool",
+        "metadata": {
+            "description": "Do you want to deploy ASR infrastructure?"
+        }
     }
   },
   "variables": {
