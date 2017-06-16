@@ -22,7 +22,7 @@
       }
     },
     "ASR": {
-        "type": "pool",
+        "type": "bool",
         "metadata": {
             "description": "Do you want to deploy ASR infrastructure?"
         }
