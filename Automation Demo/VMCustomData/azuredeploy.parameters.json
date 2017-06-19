@@ -13,6 +13,9 @@
     },
     "ASR": {
         "value": "{asr_answer}"
+    },
+    "adminPassword":{
+        "value": "asrdemo@teamcim123"
     }
   }
 }

@@ -40,7 +40,14 @@
 				"description": "The sasToken required to access _artifactsLocation.  When the template is deployed using the accompanying scripts, a sasToken will be automatically generated."
 			},
 			"defaultValue": ""
-		}
+		},
+        "adminPassword": {
+            "type": "string",
+            "metadata": {
+                "description": "The Password for the Windows ASR instance."
+            },
+            "defaultValue": "asrdemo@teamcim123"
+        }
 	},
 	"variables": {
 		"vmName1": "sshvm1",
@@ -84,7 +91,7 @@
 		"scriptFolder": ".",
 		"scriptFileName": "Copy-FileFromAzure.ps1",
 		"fileToBeCopied": "FileToBeCopied.txt",
-		"networkSecurityGroupNameASR": "networkSecurityGroup1",
+		"networkSecurityGroupNameASR": "networkSecurityGroup2",
 		"ASRname": "asrvault",
 		"scriptParameters": "[concat('-artifactsLocation ', parameters('_artifactsLocation'), ' -artifactsLocationSasToken \"', parameters('_artifactsLocationSasToken'), '\" -folderName ', variables('scriptFolder'), ' -fileToInstall ', variables('fileToBeCopied'))]"
 	},
