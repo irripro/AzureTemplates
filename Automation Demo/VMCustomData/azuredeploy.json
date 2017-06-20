@@ -91,11 +91,11 @@
 		"scriptFolder": ".",
 		"scriptFileName": "Copy-FileFromAzure.ps1",
 		"fileToBeCopied": "FileToBeCopied.txt",
-		"networkSecurityGroupNameASR": "networkSecurityGroup2",
 		"ASRname": "asrvault",
 		"scriptParameters": "[concat('-artifactsLocation ', parameters('_artifactsLocation'), ' -artifactsLocationSasToken \"', parameters('_artifactsLocationSasToken'), '\" -folderName ', variables('scriptFolder'), ' -fileToInstall ', variables('fileToBeCopied'))]"
 	},
 	"resources": [{
+            "condition": "[equals(parameters('ASR'),'false')]",
 			"apiVersion": "[variables('apiVersion')]",
 			"type": "Microsoft.Network/networkSecurityGroups",
 			"name": "[variables('networkSecurityGroupName')]",
@@ -450,7 +450,8 @@
 			"location": "[resourceGroup().location]",
 			"dependsOn": [
 				"[concat('Microsoft.Network/publicIPAddresses/', variables('publicIPAddressNameASR'))]",
-				"[concat('Microsoft.Network/networkSecurityGroups/', variables('networkSecurityGroupNameASR'))]"
+				"[concat('Microsoft.Network/networkSecurityGroups/', variables('networkSecurityGroupName'))]",
+                "[concat('Microsoft.Network/virtualNetworks/', variables('virtualNetworkName'))]"
 			],
 			"properties": {
 				"ipConfigurations": [{
@@ -467,14 +468,14 @@
 					}
 				],
 				"networkSecurityGroup": {
-					"id": "[resourceId('Microsoft.Network/networkSecurityGroups',variables('networkSecurityGroupNameASR'))]"
+					"id": "[resourceId('Microsoft.Network/networkSecurityGroups',variables('networkSecurityGroupName'))]"
 				}
 			}
 		}, {
 			"condition": "[equals(parameters('ASR'),'true')]",
 			"apiVersion": "2016-09-01",
 			"type": "Microsoft.Network/networkSecurityGroups",
-			"name": "[variables('networkSecurityGroupNameASR')]",
+			"name": "[variables('networkSecurityGroupName')]",
 			"location": "[resourceGroup().location]",
 			"properties": {
 				"securityRules": [{
