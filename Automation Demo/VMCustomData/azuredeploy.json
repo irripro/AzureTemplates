@@ -86,7 +86,7 @@
 		"subnetRef": "[resourceId('Microsoft.Network/virtualNetworks/subnets', variables('virtualNetworkName'), variables('subnetName'))]",
 		"vmNameASR": "MyASRVM",
 		"virtualNetworkName": "sshVNET",
-		"publicIPAddressNameASR": "ASRPublicIP",
+		"publicIPAddressNameASR": "ASRpublicIP",
 		"dnsNameForPublicIPASR": "[concat('teamcimasr', uniqueString(resourceGroup().id))]",
 		"scriptFolder": ".",
 		"scriptFileName": "Copy-FileFromAzure.ps1",
