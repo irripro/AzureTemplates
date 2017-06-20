@@ -82,7 +82,7 @@
 		"lbProbeID": "[concat(variables('lbID'),'/probes/tcpProbe')]",
 		"LBRules": "[concat(variables('lbID'),'/loadBalancingRules/LBRule')]",
 		"nicNameASR": "myASRVMNic",
-		"subnetName": "SubNet-1",
+		"subnetName": "Subnet-1",
 		"subnetRef": "[resourceId('Microsoft.Network/virtualNetworks/subnets', variables('virtualNetworkName'), variables('subnetName'))]",
 		"vmNameASR": "MyASRVM",
 		"virtualNetworkName": "sshVNET",
