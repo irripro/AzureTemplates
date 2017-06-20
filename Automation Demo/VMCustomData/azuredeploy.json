@@ -557,6 +557,7 @@
 				}
 			},
 			"resources": [{
+                    "condition": "[equals(parameters('ASR'),'true')]",
 					"type": "extensions",
 					"name": "CustomScriptExtension",
 					"apiVersion": "2015-06-15",
