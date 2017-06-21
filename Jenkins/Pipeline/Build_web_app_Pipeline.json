@@ -1,0 +1,34 @@
+node() {
+    stage('Provisioning Azure Resources') {
+        build job: 'Initial_Infrastructure_Build', parameters: [string(name: 'asranswer', value: "${asranswer}"), string(name: 'appId', value: "${appID}"), string(name: 'workingdir', value: "${env.BUILD_TAG}"), password(description: 'Put in the password for the principle account', name: 'passwd', value: "${passwd}"), string(name: 'tenant', value: "${tenant}"), string(name: 'region', value: "${region}"), string(name: 'ResourceName', value: "${ResourceName}")]
+    }
+    stage('Configuring the Resources Provisioned'){
+        build job: 'Configure_Provisioned_Infrastructure', parameters: [string(name: 'workingdir', value: "${env.BUILD_TAG}")]
+    }
+    stage('Azure Site Recovery'){
+        try{
+            timeout(time: 10, unit: 'MINUTES') {
+                input "Do you want to deploy ASR?"
+            }
+            build job: 'ASR_Infrastructure_Build', parameters: [string(name: 'appId', value: "${appID}"), string(name: 'workingdir', value: "${env.BUILD_TAG}"), password(description: 'Put in the password for the principle account', name: 'passwd', value: "${passwd}"), string(name: 'tenant', value: "${tenant}"), string(name: 'region', value: "${region}"), string(name: 'ResourceName', value: "${ResourceName}")]
+        }catch(err) {
+           echo "This was timedout automatically." 
+        }
+    }
+    stage('Waiting to Delete Resources'){
+        echo "The site configured is: "
+        sh "sudo cat /tmp/${env.BUILD_TAG}/Initial/elbfile.txt"
+        echo "\n"
+        try{
+            timeout(time: 120, unit: 'MINUTES') {
+                input "continue without waiting..."
+            }
+        }catch(err) {
+           echo "This was timedout automatically." 
+        }
+    }
+    stage('cleanup'){
+        build job: 'Delete_Resources', parameters: [string(name: 'ResourceName', value: "${ResourceName}"), string(name: 'workingdir', value: "${env.BUILD_TAG}")]
+    }
+
+}
