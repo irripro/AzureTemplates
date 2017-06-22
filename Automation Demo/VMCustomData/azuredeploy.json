@@ -27,108 +27,52 @@
 				"description": "Do you want to deploy ASR infrastructure?"
 			}
 		},
-		"_artifactsLocation": {
+		"adminPassword": {
 			"type": "string",
 			"metadata": {
-				"description": "The base URI where artifacts required by this template are located. When the template is deployed using the accompanying scripts, a private location in the subscription will be used and this value will be automatically generated."
+				"description": "The Password for the Windows ASR instance."
 			},
-			"defaultValue": "https://raw.githubusercontent.com/alihhussain/AzureTemplates/master/Automation%20Demo/TestWebPage"
+			"defaultValue": "asrdemo@teamcim123"
+		},
+		"_artifactsLocation": {
+			"type": "string",
+			"defaultValue": "https://raw.githubusercontent.com/alihhussain/AzureTemplates/master/Automation%20Demo/TestWebPage",
+			"metadata": {
+				"description": "The base URI where artifacts required by this template are located"
+			}
 		},
 		"_artifactsLocationSasToken": {
 			"type": "securestring",
+			"defaultValue": "",
 			"metadata": {
-				"description": "The sasToken required to access _artifactsLocation.  When the template is deployed using the accompanying scripts, a sasToken will be automatically generated."
-			},
-			"defaultValue": ""
+				"description": "The sasToken required to access _artifactsLocation.  When the template is deployed using the accompanying scripts, a sasToken will be automatically generated"
+			}
 		},
-        "adminPassword": {
-            "type": "string",
-            "metadata": {
-                "description": "The Password for the Windows ASR instance."
-            },
-            "defaultValue": "asrdemo@teamcim123"
-        }
 	},
 	"variables": {
 		"vmName1": "sshvm1",
 		"nicName1": "sshNIC1",
-		"vmName2": "sshvm2",
-		"nicName2": "sshNIC2",
-		"nicNameelb": "sshNICelb",
-		"publicIPAddressNameelb": "sshPublicelb",
-		"publicIPAddressTypeelb": "Static",
-		"publicIPAddresselbID": "[resourceId('Microsoft.Network/publicIPAddresses',variables('publicIPAddressNameelb'))]",
-		"dnsnameelb": "[concat(variables('uniqueDnsLabelPrefixelb'), '.', resourceGroup().location, '.cloudapp.azure.com')]",
-		"uniqueDnsLabelPrefixelb": "[concat('teamcimelb', uniquestring(resourceGroup().id))]",
-		"lbName": "teamcimELB",
-		"vmSize": "Standard_DS2_v2",
-		"location": "[resourceGroup().location]",
-		"CentOSVersion": "7.2",
-		"imagePublisher": "OpenLogic",
-		"imageOffer": "CentOS",
-		"addressPrefix": "10.0.0.0/16",
-		"subnet1Name": "Subnet-1",
-		"subnet1Prefix": "[parameters('Subnetyouwant')]",
-		"virtualNetworkName": "sshVNET",
-		"networkSecurityGroupName": "networkSecurityGroup1",
-		"sshKeyPath": "[concat('/home/',parameters('adminUserName'),'/.ssh/authorized_keys')]",
-		"vnetID": "[resourceId('Microsoft.Network/virtualNetworks', variables('virtualNetworkName'))]",
-		"subnet1Ref": "[concat(variables('vnetID'),'/subnets/',variables('subnet1Name'))]",
-		"apiVersion": "2015-06-15",
-		"availabilitySetName": "teamcimAS",
-		"lbID": "[resourceId('Microsoft.Network/loadBalancers',variables('lbName'))]",
-		"frontEndIPConfigID": "[concat(variables('lbID'),'/frontendIPConfigurations/LoadBalancerFrontEnd')]",
-		"lbPoolID": "[concat(variables('lbID'),'/backendAddressPools/BackendPool1')]",
-		"lbProbeID": "[concat(variables('lbID'),'/probes/tcpProbe')]",
-		"LBRules": "[concat(variables('lbID'),'/loadBalancingRules/LBRule')]",
-		"nicNameASR": "myASRVMNic",
-		"subnetName": "Subnet-1",
-		"subnetRef": "[resourceId('Microsoft.Network/virtualNetworks/subnets', variables('virtualNetworkName'), variables('subnetName'))]",
-		"vmNameASR": "MyASRVM",
-		"virtualNetworkName": "sshVNET",
-		"publicIPAddressNameASR": "ASRpublicIP",
-		"dnsNameForPublicIPASR": "[concat('teamcimasr', uniqueString(resourceGroup().id))]",
-		"scriptFolder": ".",
-		"scriptFileName": "Copy-FileFromAzure.ps1",
-		"fileToBeCopied": "FileToBeCopied.txt",
-		"networkSecurityGroupNameASR": "networkSecurityGroup2",
-		"ASRname": "asrvault",
-		"scriptParameters": "[concat('-artifactsLocation ', parameters('_artifactsLocation'), ' -artifactsLocationSasToken \"', parameters('_artifactsLocationSasToken'), '\" -folderName ', variables('scriptFolder'), ' -fileToInstall ', variables('fileToBeCopied'))]"
+		"nestedTemplates": {
+			"stepone": "[concat(parameters('_artifactsLocation'), '/Step1/azuredeploy.json', parameters('_artifactsLocationSasToken'))]",
+			"steptwo": "[concat(parameters('_artifactsLocation'), '/Step2/azuredeploy.json', parameters('_artifactsLocationSasToken'))]",
+			"stepthree": "[concat(parameters('_artifactsLocation'), '/Step3/azuredeploy.json', parameters('_artifactsLocationSasToken'))]"
+		}
 	},
 	"resources": [{
-			"apiVersion": "[variables('apiVersion')]",
-			"type": "Microsoft.Network/networkSecurityGroups",
-			"name": "[variables('networkSecurityGroupName')]",
-			"location": "[variables('location')]",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2016-02-01",
+			"name": "stepone",
 			"properties": {
-				"securityRules": [{
-						"name": "ssh_rule",
-						"properties": {
-							"description": "Locks inbound down to ssh default port 22.",
-							"protocol": "Tcp",
-							"sourcePortRange": "*",
-							"destinationPortRange": "22",
-							"sourceAddressPrefix": "*",
-							"destinationAddressPrefix": "*",
-							"access": "Allow",
-							"priority": 123,
-							"direction": "Inbound"
-						}
-					}, {
-						"name": "nginx_rule",
-						"properties": {
-							"description": "Locks inbound down to nginx default port 80.",
-							"protocol": "Tcp",
-							"sourcePortRange": "*",
-							"destinationPortRange": "80",
-							"sourceAddressPrefix": "*",
-							"destinationAddressPrefix": "*",
-							"access": "Allow",
-							"priority": 124,
-							"direction": "Inbound"
-						}
+				"mode": "Incremental",
+				"templateLink": {
+					"uri": "[variables('nestedTemplates').stepone]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"Subnetyouwant": {
+						"value": "[parameters('Subnetyouwant')]"
 					}
-				]
+				}
 			}
 		}, {
 			"apiVersion": "[variables('apiVersion')]",
@@ -155,430 +99,6 @@
 					}
 				]
 			}
-		}, {
-			"apiVersion": "[variables('apiVersion')]",
-			"type": "Microsoft.Network/networkInterfaces",
-			"name": "[variables('nicName1')]",
-			"location": "[variables('location')]",
-			"dependsOn": [
-				"[concat('Microsoft.Network/virtualNetworks/', variables('virtualNetworkName'))]",
-				"[concat('Microsoft.Network/loadBalancers/', variables('lbName'))]"
-			],
-			"properties": {
-				"ipConfigurations": [{
-						"name": "ipconfig1",
-						"properties": {
-							"privateIPAllocationMethod": "Dynamic",
-							"subnet": {
-								"id": "[variables('subnet1Ref')]"
-							},
-							"loadBalancerBackendAddressPools": [{
-									"id": "[concat(variables('lbID'), '/backendAddressPools/BackendPool1')]"
-								}
-							],
-							"loadBalancerInboundNatRules": [{
-									"id": "[concat(variables('lbID'),'/inboundNatRules/VM1')]"
-								}
-							]
-						}
-					}
-				]
-			}
-		}, {
-			"apiVersion": "2016-04-30-preview",
-			"type": "Microsoft.Compute/virtualMachines",
-			"name": "[variables('vmName1')]",
-			"location": "[variables('location')]",
-			"dependsOn": [
-				"[concat('Microsoft.Network/networkInterfaces/', variables('nicName1'))]",
-				"[concat('Microsoft.Compute/availabilitySets/', variables('availabilitySetName'))]"
-			],
-			"properties": {
-				"hardwareProfile": {
-					"vmSize": "[variables('vmSize')]"
-				},
-				"osProfile": {
-					"computerName": "[variables('vmName1')]",
-					"adminUsername": "[parameters('adminUserName')]",
-					"linuxConfiguration": {
-						"disablePasswordAuthentication": "true",
-						"ssh": {
-							"publicKeys": [{
-									"path": "[variables('sshKeyPath')]",
-									"keyData": "[parameters('sshKeyData')]"
-								}
-							]
-						}
-					}
-				},
-				"storageProfile": {
-					"imageReference": {
-						"publisher": "[variables('imagePublisher')]",
-						"offer": "[variables('imageOffer')]",
-						"sku": "[variables('CentOSVersion')]",
-						"version": "latest"
-					},
-					"osDisk": {
-						"createOption": "FromImage",
-						"managedDisk": {
-							"storageAccountType": "Premium_LRS"
-						}
-					}
-				},
-				"networkProfile": {
-					"networkInterfaces": [{
-							"id": "[resourceId('Microsoft.Network/networkInterfaces', variables('nicName1'))]"
-						}
-					]
-				},
-				"availabilitySet": {
-					"id": "[resourceId('Microsoft.Compute/availabilitySets',variables('availabilitySetName'))]"
-				}
-			}
-		}, {
-			"apiVersion": "2016-04-30-preview",
-			"type": "Microsoft.Compute/virtualMachines",
-			"name": "[variables('vmName2')]",
-			"location": "[variables('location')]",
-			"dependsOn": [
-				"[concat('Microsoft.Network/networkInterfaces/', variables('nicName2'))]",
-				"[concat('Microsoft.Compute/availabilitySets/', variables('availabilitySetName'))]"
-			],
-			"properties": {
-				"hardwareProfile": {
-					"vmSize": "[variables('vmSize')]"
-				},
-				"osProfile": {
-					"computerName": "[variables('vmName2')]",
-					"adminUsername": "[parameters('adminUserName')]",
-					"linuxConfiguration": {
-						"disablePasswordAuthentication": "true",
-						"ssh": {
-							"publicKeys": [{
-									"path": "[variables('sshKeyPath')]",
-									"keyData": "[parameters('sshKeyData')]"
-								}
-							]
-						}
-					}
-				},
-				"storageProfile": {
-					"imageReference": {
-						"publisher": "[variables('imagePublisher')]",
-						"offer": "[variables('imageOffer')]",
-						"sku": "[variables('CentOSVersion')]",
-						"version": "latest"
-					},
-					"osDisk": {
-						"createOption": "FromImage",
-						"managedDisk": {
-							"storageAccountType": "Premium_LRS"
-						}
-					}
-				},
-				"networkProfile": {
-					"networkInterfaces": [{
-							"id": "[resourceId('Microsoft.Network/networkInterfaces', variables('nicName2'))]"
-						}
-					]
-				},
-				"availabilitySet": {
-					"id": "[resourceId('Microsoft.Compute/availabilitySets',variables('availabilitySetName'))]"
-				}
-			}
-		}, {
-			"apiVersion": "[variables('apiVersion')]",
-			"type": "Microsoft.Network/networkInterfaces",
-			"name": "[variables('nicName2')]",
-			"location": "[variables('location')]",
-			"dependsOn": [
-				"[concat('Microsoft.Network/virtualNetworks/', variables('virtualNetworkName'))]",
-				"[concat('Microsoft.Network/loadBalancers/', variables('lbName'))]"
-			],
-			"properties": {
-				"ipConfigurations": [{
-						"name": "ipconfig2",
-						"properties": {
-							"privateIPAllocationMethod": "Dynamic",
-							"subnet": {
-								"id": "[variables('subnet1Ref')]"
-							},
-							"loadBalancerBackendAddressPools": [{
-									"id": "[concat(variables('lbID'), '/backendAddressPools/BackendPool1')]"
-								}
-							],
-							"loadBalancerInboundNatRules": [{
-									"id": "[concat(variables('lbID'),'/inboundNatRules/VM2')]"
-								}
-							]
-						}
-					}
-				]
-			}
-		}, {
-			"type": "Microsoft.Compute/availabilitySets",
-			"name": "[variables('availabilitySetName')]",
-			"apiVersion": "2016-04-30-preview",
-			"location": "[resourceGroup().location]",
-			"properties": {
-				"platformFaultDomainCount": "2",
-				"platformUpdateDomainCount": "2",
-				"managed": "true"
-			}
-		}, {
-			"apiVersion": "2015-05-01-preview",
-			"type": "Microsoft.Network/publicIPAddresses",
-			"name": "[variables('publicIPAddressNameelb')]",
-			"location": "[resourceGroup().location]",
-			"properties": {
-				"publicIPAllocationMethod": "[variables('publicIPAddressTypeelb')]",
-				"dnsSettings": {
-					"domainNameLabel": "[variables('uniqueDnsLabelPrefixelb')]"
-				}
-			}
-		}, {
-			"apiVersion": "2015-05-01-preview",
-			"name": "[variables('lbName')]",
-			"type": "Microsoft.Network/loadBalancers",
-			"location": "[resourceGroup().location]",
-			"dependsOn": [
-				"[concat('Microsoft.Network/publicIPAddresses/', variables('publicIPAddressNameelb'))]"
-			],
-			"properties": {
-				"frontendIPConfigurations": [{
-						"name": "LoadBalancerFrontEnd",
-						"loadBalancingRules": {
-							"id": "[variables('LBRules')]"
-						},
-						"properties": {
-							"publicIPAddress": {
-								"id": "[variables('publicIPAddresselbID')]"
-							}
-						}
-					}
-				],
-				"backendAddressPools": [{
-						"name": "BackendPool1",
-						"loadBalancingRules": {
-							"id": "[variables('LBRules')]"
-						}
-					}
-				],
-				"loadBalancingRules": [{
-						"name": "LBRule",
-						"properties": {
-							"frontendIPConfiguration": {
-								"id": "[variables('frontEndIPConfigID')]"
-							},
-							"backendAddressPool": {
-								"id": "[variables('lbPoolID')]"
-							},
-							"protocol": "tcp",
-							"frontendPort": 80,
-							"backendPort": 80,
-							"enableFloatingIP": false,
-							"idleTimeoutInMinutes": 5,
-							"probe": {
-								"id": "[variables('lbProbeID')]"
-							}
-						}
-					}
-				],
-				"inboundNatRules": [{
-						"name": "VM1",
-						"properties": {
-							"frontendIPConfiguration": {
-								"id": "[variables('frontEndIPConfigID')]"
-							},
-							"protocol": "tcp",
-							"frontendPort": 8022,
-							"backendPort": 22,
-							"enableFloatingIP": false
-						}
-					}, {
-						"name": "VM2",
-						"properties": {
-							"frontendIPConfiguration": {
-								"id": "[variables('frontEndIPConfigID')]"
-							},
-							"protocol": "tcp",
-							"frontendPort": 8023,
-							"backendPort": 22,
-							"enableFloatingIP": false
-						}
-					}
-				],
-				"probes": [{
-						"name": "tcpProbe",
-						"properties": {
-							"protocol": "tcp",
-							"port": 80,
-							"intervalInSeconds": 5,
-							"numberOfProbes": 2
-						}
-					}
-				]
-			}
-		}, {
-			"condition": "[equals(parameters('ASR'),'true')]",
-			"apiVersion": "2016-09-01",
-			"type": "Microsoft.Network/publicIPAddresses",
-			"name": "[variables('publicIPAddressNameASR')]",
-			"location": "[resourceGroup().location]",
-			"properties": {
-				"publicIPAllocationMethod": "Dynamic",
-				"dnsSettings": {
-					"domainNameLabel": "[variables('dnsNameForPublicIPASR')]"
-				}
-			}
-		}, {
-			"condition": "[equals(parameters('ASR'),'true')]",
-			"apiVersion": "2016-12-01",
-			"name": "[variables('ASRname')]",
-			"location": "[resourceGroup().location]",
-			"type": "Microsoft.RecoveryServices/vaults",
-			"sku": {
-				"name": "RS0",
-				"tier": "Standard"
-			},
-			"properties": {}
-		}, {
-			"condition": "[equals(parameters('ASR'),'true')]",
-			"apiVersion": "2016-09-01",
-			"type": "Microsoft.Network/networkInterfaces",
-			"name": "[variables('nicNameASR')]",
-			"location": "[resourceGroup().location]",
-			"dependsOn": [
-				"[concat('Microsoft.Network/publicIPAddresses/', variables('publicIPAddressNameASR'))]",
-				"[concat('Microsoft.Network/networkSecurityGroups/', variables('networkSecurityGroupNameASR'))]",
-                "[concat('Microsoft.Network/virtualNetworks/', variables('virtualNetworkName'))]"
-			],
-			"properties": {
-				"ipConfigurations": [{
-						"name": "ipconfigASR",
-						"properties": {
-							"privateIPAllocationMethod": "Dynamic",
-							"publicIPAddress": {
-								"id": "[resourceId('Microsoft.Network/publicIPAddresses',variables('publicIPAddressNameASR'))]"
-							},
-							"subnet": {
-								"id": "[variables('subnetRef')]"
-							}
-						}
-					}
-				],
-				"networkSecurityGroup": {
-					"id": "[resourceId('Microsoft.Network/networkSecurityGroups',variables('networkSecurityGroupNameASR'))]"
-				}
-			}
-		}, {
-			"condition": "[equals(parameters('ASR'),'true')]",
-			"apiVersion": "2016-09-01",
-			"type": "Microsoft.Network/networkSecurityGroups",
-			"name": "[variables('networkSecurityGroupNameASR')]",
-			"location": "[resourceGroup().location]",
-			"properties": {
-				"securityRules": [{
-						"name": "rdp_rule",
-						"properties": {
-							"description": "Locks inbound down to RDP default port 3389.",
-							"protocol": "Tcp",
-							"sourcePortRange": "*",
-							"destinationPortRange": "3389",
-							"sourceAddressPrefix": "*",
-							"destinationAddressPrefix": "*",
-							"access": "Allow",
-							"priority": 125,
-							"direction": "Inbound"
-						}
-					}, {
-						"name": "ssh_rule",
-						"properties": {
-							"description": "Locks inbound down to ssh default port 22.",
-							"protocol": "Tcp",
-							"sourcePortRange": "*",
-							"destinationPortRange": "22",
-							"sourceAddressPrefix": "*",
-							"destinationAddressPrefix": "*",
-							"access": "Allow",
-							"priority": 123,
-							"direction": "Inbound"
-						}
-					}, {
-						"name": "nginx_rule",
-						"properties": {
-							"description": "Locks inbound down to nginx default port 80.",
-							"protocol": "Tcp",
-							"sourcePortRange": "*",
-							"destinationPortRange": "80",
-							"sourceAddressPrefix": "*",
-							"destinationAddressPrefix": "*",
-							"access": "Allow",
-							"priority": 124,
-							"direction": "Inbound"
-						}
-					}
-				]
-			}
-		}, {
-			"condition": "[equals(parameters('ASR'),'true')]",
-			"apiVersion": "2016-04-30-preview",
-			"type": "Microsoft.Compute/virtualMachines",
-			"name": "[variables('vmNameASR')]",
-			"location": "[resourceGroup().location]",
-			"dependsOn": [
-				"[concat('Microsoft.Network/networkInterfaces/', variables('nicNameASR'))]"
-			],
-			"properties": {
-				"hardwareProfile": {
-					"vmSize": "Standard_DS11_v2"
-				},
-				"osProfile": {
-					"computerName": "[variables('vmNameASR')]",
-					"adminUsername": "[parameters('adminUsername')]",
-					"adminPassword": "[parameters('adminPassword')]"
-				},
-				"storageProfile": {
-					"imageReference": {
-						"publisher": "MicrosoftWindowsServer",
-						"offer": "WindowsServer",
-						"sku": "2012-R2-Datacenter",
-						"version": "latest"
-					},
-					"osDisk": {
-						"createOption": "FromImage"
-					}
-				},
-				"networkProfile": {
-					"networkInterfaces": [{
-							"id": "[resourceId('Microsoft.Network/networkInterfaces',variables('nicNameASR'))]"
-						}
-					]
-				}
-			},
-			"resources": [{
-                    "condition": "[equals(parameters('ASR'),'true')]",
-					"type": "extensions",
-					"name": "CustomScriptExtension",
-					"apiVersion": "2015-06-15",
-					"location": "[resourceGroup().location]",
-					"dependsOn": [
-						"[variables('vmNameASR')]"
-					],
-					"properties": {
-						"publisher": "Microsoft.Compute",
-						"type": "CustomScriptExtension",
-						"typeHandlerVersion": "1.8",
-						"autoUpgradeMinorVersion": true,
-						"settings": {
-							"fileUris": [
-								"[concat(parameters('_artifactsLocation'), '/', variables('ScriptFolder'), '/', variables('ScriptFileName'), parameters('_artifactsLocationSasToken'))]"
-							],
-							"commandToExecute": "[concat('powershell -ExecutionPolicy Unrestricted -File ', variables('scriptFolder'), '/', variables('scriptFileName'), ' ', variables('scriptParameters'))]"
-						}
-					}
-				}
-			]
 		}
 	],
 	"outputs": {
