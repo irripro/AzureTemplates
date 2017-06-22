@@ -30,32 +30,34 @@
 		}
 	},
 	"variables": {
-		"nicName": "myASRVMNic",
+		"nicNameASR": "myASRVMNic",
 		"subnetName": "Subnet-1",
 		"subnetRef": "[resourceId('Microsoft.Network/virtualNetworks/subnets', variables('virtualNetworkName'), variables('subnetName'))]",
-		"vmName": "MyASRVM",
+		"vmNameASR": "MyASRVM",
 		"virtualNetworkName": "sshVNET",
-		"publicIPAddressName": "ASRPublicIP",
-		"dnsNameForPublicIP": "[concat('teamcimasr', uniqueString(resourceGroup().id))]",
+		"publicIPAddressNameASR": "ASRPublicIP",
+		"dnsNameForPublicIPASR": "[concat('teamcimasr', uniqueString(resourceGroup().id))]",
 		"scriptFolder": ".",
 		"scriptFileName": "Copy-FileFromAzure.ps1",
 		"fileToBeCopied": "FileToBeCopied.txt",
-		"networkSecurityGroupName": "networkSecurityGroup1",
+		"networkSecurityGroupNameASR": "networkSecurityGroup1",
         "ASRname": "asrvault",
 		"scriptParameters": "[concat('-artifactsLocation ', parameters('_artifactsLocation'), ' -artifactsLocationSasToken \"', parameters('_artifactsLocationSasToken'), '\" -folderName ', variables('scriptFolder'), ' -fileToInstall ', variables('fileToBeCopied'))]"
 	},
 	"resources": [{
+            "condition": "[equals(parameters('ASR'),'true')]",
 			"apiVersion": "2016-09-01",
 			"type": "Microsoft.Network/publicIPAddresses",
-			"name": "[variables('publicIPAddressName')]",
+			"name": "[variables('publicIPAddressNameASR')]",
 			"location": "[resourceGroup().location]",
 			"properties": {
 				"publicIPAllocationMethod": "Dynamic",
 				"dnsSettings": {
-					"domainNameLabel": "[variables('dnsNameForPublicIP')]"
+					"domainNameLabel": "[variables('dnsNameForPublicIPASR')]"
 				}
 			}
 		}, {
+            "condition": "[equals(parameters('ASR'),'true')]",
 			"apiVersion": "2016-12-01",
 			"name": "[variables('ASRname')]",
 			"location": "[resourceGroup().location]",
@@ -66,13 +68,14 @@
 			},
 			"properties": {}
 		}, {
+            "condition": "[equals(parameters('ASR'),'true')]",
 			"apiVersion": "2016-09-01",
 			"type": "Microsoft.Network/networkInterfaces",
-			"name": "[variables('nicName')]",
+			"name": "[variables('nicNameASR')]",
 			"location": "[resourceGroup().location]",
 			"dependsOn": [
-				"[concat('Microsoft.Network/publicIPAddresses/', variables('publicIPAddressName'))]",
-				"[concat('Microsoft.Network/networkSecurityGroups/', variables('networkSecurityGroupName'))]"
+				"[concat('Microsoft.Network/publicIPAddresses/', variables('publicIPAddressNameASR'))]",
+				"[concat('Microsoft.Network/networkSecurityGroups/', variables('networkSecurityGroupNameASR'))]"
 			],
 			"properties": {
 				"ipConfigurations": [{
@@ -80,7 +83,7 @@
 						"properties": {
 							"privateIPAllocationMethod": "Dynamic",
 							"publicIPAddress": {
-								"id": "[resourceId('Microsoft.Network/publicIPAddresses',variables('publicIPAddressName'))]"
+								"id": "[resourceId('Microsoft.Network/publicIPAddresses',variables('publicIPAddressNameASR'))]"
 							},
 							"subnet": {
 								"id": "[variables('subnetRef')]"
@@ -89,13 +92,14 @@
 					}
 				],
 				"networkSecurityGroup": {
-					"id": "[resourceId('Microsoft.Network/networkSecurityGroups',variables('networkSecurityGroupName'))]"
+					"id": "[resourceId('Microsoft.Network/networkSecurityGroups',variables('networkSecurityGroupNameASR'))]"
 				}
 			}
 		}, {
+            "condition": "[equals(parameters('ASR'),'true')]",
 			"apiVersion": "2016-09-01",
 			"type": "Microsoft.Network/networkSecurityGroups",
-			"name": "[variables('networkSecurityGroupName')]",
+			"name": "[variables('networkSecurityGroupNameASR')]",
 			"location": "[resourceGroup().location]",
 			"properties": {
 				"securityRules": [{
@@ -141,19 +145,20 @@
 				]
 			}
 		}, {
+            "condition": "[equals(parameters('ASR'),'true')]",
 			"apiVersion": "2016-04-30-preview",
 			"type": "Microsoft.Compute/virtualMachines",
-			"name": "[variables('vmName')]",
+			"name": "[variables('vmNameASR')]",
 			"location": "[resourceGroup().location]",
 			"dependsOn": [
-				"[concat('Microsoft.Network/networkInterfaces/', variables('nicName'))]"
+				"[concat('Microsoft.Network/networkInterfaces/', variables('nicNameASR'))]"
 			],
 			"properties": {
 				"hardwareProfile": {
 					"vmSize": "Standard_DS11_v2"
 				},
 				"osProfile": {
-					"computerName": "[variables('vmName')]",
+					"computerName": "[variables('vmNameASR')]",
 					"adminUsername": "[parameters('adminUsername')]",
 					"adminPassword": "[parameters('adminPassword')]"
 				},
@@ -170,7 +175,7 @@
 				},
 				"networkProfile": {
 					"networkInterfaces": [{
-							"id": "[resourceId('Microsoft.Network/networkInterfaces',variables('nicName'))]"
+							"id": "[resourceId('Microsoft.Network/networkInterfaces',variables('nicNameASR'))]"
 						}
 					]
 				}
@@ -181,7 +186,7 @@
 					"apiVersion": "2015-06-15",
 					"location": "[resourceGroup().location]",
 					"dependsOn": [
-						"[variables('vmName')]"
+						"[variables('vmNameASR')]"
 					],
 					"properties": {
 						"publisher": "Microsoft.Compute",
@@ -202,7 +207,7 @@
 	"outputs": {
 		"vm-fqdn": {
 			"type": "string",
-			"value": "[reference(variables('publicIPAddressName'), '2016-03-30').dnsSettings.fqdn]"
+			"value": "[reference(variables('publicIPAddressNameASR'), '2016-03-30').dnsSettings.fqdn]"
 		}
 	}
 }
