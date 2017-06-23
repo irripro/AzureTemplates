@@ -1,0 +1,110 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2014-04-01-preview/deploymentTemplate.json",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"adminUserName": {
+			"type": "string",
+			"defaultValue": "azureuser",
+			"metadata": {
+				"description": "User name for the Virtual Machine."
+			}
+		},
+		"sshKeyData": {
+			"type": "string",
+			"metadata": {
+				"description": "SSH rsa public key file as a string."
+			}
+		},
+		"Subnetyouwant": {
+			"type": "string",
+			"metadata": {
+				"description": "SSH rsa public key file as a string."
+			}
+		},
+		"ASR": {
+			"type": "string",
+			"metadata": {
+				"description": "Do you want to deploy ASR infrastructure?"
+			}
+		},
+		"adminPassword": {
+			"type": "string",
+			"metadata": {
+				"description": "The Password for the Windows ASR instance."
+			},
+			"defaultValue": "asrdemo@teamcim123"
+		},
+		"_artifactsLocation": {
+			"type": "string",
+			"defaultValue": "https://raw.githubusercontent.com/alihhussain/AzureTemplates/master/Automation%20Demo/TestWebPage",
+			"metadata": {
+				"description": "The base URI where artifacts required by this template are located"
+			}
+		},
+		"_artifactsLocationSasToken": {
+			"type": "securestring",
+			"defaultValue": "",
+			"metadata": {
+				"description": "The sasToken required to access _artifactsLocation.  When the template is deployed using the accompanying scripts, a sasToken will be automatically generated"
+			}
+		},
+	},
+	"variables": {
+		"vmName1": "sshvm1",
+		"nicName1": "sshNIC1",
+		"nestedTemplates": {
+			"stepone": "[concat(parameters('_artifactsLocation'), '/Step1/azuredeploy.json', parameters('_artifactsLocationSasToken'))]",
+			"steptwo": "[concat(parameters('_artifactsLocation'), '/Step2/azuredeploy.json', parameters('_artifactsLocationSasToken'))]",
+			"stepthree": "[concat(parameters('_artifactsLocation'), '/Step3/azuredeploy.json', parameters('_artifactsLocationSasToken'))]"
+		}
+	},
+	"resources": [{
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2016-02-01",
+			"name": "stepone",
+			"properties": {
+				"mode": "Incremental",
+				"templateLink": {
+					"uri": "[variables('nestedTemplates').stepone]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"Subnetyouwant": {
+						"value": "[parameters('Subnetyouwant')]"
+					}
+				}
+			}
+		}, {
+			"apiVersion": "[variables('apiVersion')]",
+			"type": "Microsoft.Network/virtualNetworks",
+			"name": "[variables('virtualNetworkName')]",
+			"location": "[variables('location')]",
+			"dependsOn": [
+				"[concat('Microsoft.Network/networkSecurityGroups/', variables('networkSecurityGroupName'))]"
+			],
+			"properties": {
+				"addressSpace": {
+					"addressPrefixes": [
+						"[variables('addressPrefix')]"
+					]
+				},
+				"subnets": [{
+						"name": "[variables('subnet1Name')]",
+						"properties": {
+							"addressPrefix": "[variables('subnet1Prefix')]",
+							"networkSecurityGroup": {
+								"id": "[resourceId('Microsoft.Network/networkSecurityGroups', variables('networkSecurityGroupName'))]"
+							}
+						}
+					}
+				]
+			}
+		}
+	],
+	"outputs": {
+		"sshCommand": {
+			"type": "string",
+			"value": "[variables('dnsnameelb')]"
+		}
+	}
+}
