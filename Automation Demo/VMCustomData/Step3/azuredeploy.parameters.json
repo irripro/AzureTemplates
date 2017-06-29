@@ -3,17 +3,8 @@
   "contentVersion": "1.0.0.0",
   "parameters": {
     "adminUserName": {
-      "value": "alihhussain"
-    },
-    "sshKeyData": {
-      "value": "{ssh_key_data}"
-    },
-    "Subnetyouwant": {
-      "value": "10.0.0.0/24"
-    },
-    "ASR": {
-        "value": "{asr_answer}"
-    },
+      "value": "azureuser"
+    }
     "adminPassword":{
         "value": "asrdemo@teamcim123"
     }

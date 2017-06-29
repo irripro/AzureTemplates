@@ -75,36 +75,47 @@
 				}
 			}
 		}, {
-			"apiVersion": "[variables('apiVersion')]",
-			"type": "Microsoft.Network/virtualNetworks",
-			"name": "[variables('virtualNetworkName')]",
-			"location": "[variables('location')]",
-			"dependsOn": [
-				"[concat('Microsoft.Network/networkSecurityGroups/', variables('networkSecurityGroupName'))]"
-			],
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2016-02-01",
+			"name": "steptwo",
 			"properties": {
-				"addressSpace": {
-					"addressPrefixes": [
-						"[variables('addressPrefix')]"
-					]
+				"mode": "Incremental",
+				"templateLink": {
+					"uri": "[variables('nestedTemplates').two]",
+					"contentVersion": "1.0.0.0"
 				},
-				"subnets": [{
-						"name": "[variables('subnet1Name')]",
-						"properties": {
-							"addressPrefix": "[variables('subnet1Prefix')]",
-							"networkSecurityGroup": {
-								"id": "[resourceId('Microsoft.Network/networkSecurityGroups', variables('networkSecurityGroupName'))]"
-							}
-						}
-					}
-				]
+				"parameters": {
+					"sshKeyData": {
+						"value": "[parameters('sshKeyData')]"
+					},
+                    "adminUserName":{
+                        "value": "[parameters('adminUserName')]"
+                    }
+				}
+			}
+		},{
+            "condition": "[equals(parameters('ASR'),'true')]",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2016-02-01",
+			"name": "stepthree",
+			"properties": {
+				"mode": "Incremental",
+				"templateLink": {
+					"uri": "[variables('nestedTemplates').stepthree]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"adminUserName": {
+						"value": "[parameters('adminUserName')]"
+					},
+                    "adminPassword":{
+                        "value": "[parameters('adminPassword')]"
+                    }
+				}
 			}
 		}
+        
 	],
 	"outputs": {
-		"sshCommand": {
-			"type": "string",
-			"value": "[variables('dnsnameelb')]"
-		}
-	}
+    }
 }

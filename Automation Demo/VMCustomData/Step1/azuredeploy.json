@@ -11,7 +11,6 @@
 		}
 	},
 	"variables": {
-        "networkSecurityGroupName": "networkSecurityGroup1",
         "virtualNetworkName": "sshVNET",
         "addressPrefix": "10.0.0.0/16",
 		"subnet1Name": "Subnet-1",
@@ -21,47 +20,9 @@
 	},
 	"resources": [{
 			"apiVersion": "[variables('apiVersion')]",
-			"type": "Microsoft.Network/networkSecurityGroups",
-			"name": "[variables('networkSecurityGroupName')]",
-			"location": "[variables('location')]",
-			"properties": {
-				"securityRules": [{
-						"name": "ssh_rule",
-						"properties": {
-							"description": "Locks inbound down to ssh default port 22.",
-							"protocol": "Tcp",
-							"sourcePortRange": "*",
-							"destinationPortRange": "22",
-							"sourceAddressPrefix": "*",
-							"destinationAddressPrefix": "*",
-							"access": "Allow",
-							"priority": 123,
-							"direction": "Inbound"
-						}
-					}, {
-						"name": "http_rule",
-						"properties": {
-							"description": "Locks inbound down to nginx default port 80.",
-							"protocol": "Tcp",
-							"sourcePortRange": "*",
-							"destinationPortRange": "80",
-							"sourceAddressPrefix": "*",
-							"destinationAddressPrefix": "*",
-							"access": "Allow",
-							"priority": 124,
-							"direction": "Inbound"
-						}
-					}
-				]
-			}
-		}, {
-			"apiVersion": "[variables('apiVersion')]",
 			"type": "Microsoft.Network/virtualNetworks",
 			"name": "[variables('virtualNetworkName')]",
 			"location": "[variables('location')]",
-			"dependsOn": [
-				"[concat('Microsoft.Network/networkSecurityGroups/', variables('networkSecurityGroupName'))]"
-			],
 			"properties": {
 				"addressSpace": {
 					"addressPrefixes": [
@@ -71,10 +32,7 @@
 				"subnets": [{
 						"name": "[variables('subnet1Name')]",
 						"properties": {
-							"addressPrefix": "[variables('subnet1Prefix')]",
-							"networkSecurityGroup": {
-								"id": "[resourceId('Microsoft.Network/networkSecurityGroups', variables('networkSecurityGroupName'))]"
-							}
+							"addressPrefix": "[variables('subnet1Prefix')]"
 						}
 					}
 				]
