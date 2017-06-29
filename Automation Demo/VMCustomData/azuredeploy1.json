@@ -84,7 +84,7 @@
 			"properties": {
 				"mode": "Incremental",
 				"templateLink": {
-					"uri": "[variables('nestedTemplates').two]",
+					"uri": "[variables('nestedTemplates').steptwo]",
 					"contentVersion": "1.0.0.0"
 				},
 				"parameters": {
