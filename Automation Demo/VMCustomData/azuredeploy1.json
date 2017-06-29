@@ -78,6 +78,9 @@
 			"type": "Microsoft.Resources/deployments",
 			"apiVersion": "2016-02-01",
 			"name": "steptwo",
+            "dependsOn": [
+				"[concat('Microsoft.Resources/deployments/', 'stepone')]"
+			],
 			"properties": {
 				"mode": "Incremental",
 				"templateLink": {
@@ -98,6 +101,9 @@
 			"type": "Microsoft.Resources/deployments",
 			"apiVersion": "2016-02-01",
 			"name": "stepthree",
+            "dependsOn": [
+				"[concat('Microsoft.Resources/deployments/', 'stepone')]"
+			],
 			"properties": {
 				"mode": "Incremental",
 				"templateLink": {
