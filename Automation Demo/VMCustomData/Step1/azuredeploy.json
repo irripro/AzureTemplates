@@ -17,7 +17,8 @@
 		"subnet1Prefix": "[parameters('Subnetyouwant')]",
 		"vnetID": "[resourceId('Microsoft.Network/virtualNetworks', variables('virtualNetworkName'))]",
 		"subnet1Ref": "[concat(variables('vnetID'),'/subnets/',variables('subnet1Name'))]",
-        "apiVersion": "2015-06-15"
+        "apiVersion": "2015-06-15",
+		"location": "[resourceGroup().location]"
 	},
 	"resources": [{
 			"apiVersion": "[variables('apiVersion')]",
