@@ -51,8 +51,6 @@
 		},
 	},
 	"variables": {
-		"vmName1": "sshvm1",
-		"nicName1": "sshNIC1",
 		"nestedTemplates": {
 			"stepone": "[concat(parameters('_artifactsLocation'), '/Step1/azuredeploy.json', parameters('_artifactsLocationSasToken'))]",
 			"steptwo": "[concat(parameters('_artifactsLocation'), '/Step2/azuredeploy.json', parameters('_artifactsLocationSasToken'))]",
