@@ -25,7 +25,8 @@
 			"type": "string",
 			"metadata": {
 				"description": "Do you want to deploy ASR infrastructure?"
-			}
+			},
+            "defaultValue": "false"
 		},
 		"adminPassword": {
 			"type": "string",
