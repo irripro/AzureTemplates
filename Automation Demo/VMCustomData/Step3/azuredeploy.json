@@ -1,60 +1,61 @@
 {
-	"$schema": "http://schema.management.azure.com/schemas/2014-04-01-preview/deploymentTemplate.json",
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
 	"contentVersion": "1.0.0.0",
 	"parameters": {
-		"adminUserName": {
+		"adminUsername": {
 			"type": "string",
-			"defaultValue": "azureuser",
 			"metadata": {
-				"description": "User name for the Virtual Machine."
-			}
+				"description": "Username for the Virtual Machine."
+			},
+            "defaultValue": "azureuser"
 		},
 		"adminPassword": {
-			"type": "string",
-			"metadata": {
-				"description": "The Password for the Windows ASR instance."
-			},
-			"defaultValue": "asrdemo@teamcim123"
-		},
-		"_artifactsLocation": {
-			"type": "string",
-			"metadata": {
-				"description": "The base URI where artifacts required by this template are located. When the template is deployed using the accompanying scripts, a private location in the subscription will be used and this value will be automatically generated."
-			},
-			"defaultValue": "https://raw.githubusercontent.com/alihhussain/AzureTemplates/master/Automation%20Demo/TestWebPage"
-		},
-		"_artifactsLocationSasToken": {
 			"type": "securestring",
 			"metadata": {
-				"description": "The sasToken required to access _artifactsLocation.  When the template is deployed using the accompanying scripts, a sasToken will be automatically generated."
+				"description": "Password for the Virtual Machine."
 			},
-			"defaultValue": ""
+            "defaultValue": "asrdemo@teamcim123"
+		},
+		"windowsOSVersion": {
+			"type": "string",
+			"defaultValue": "2012-R2-Datacenter",
+			"allowedValues": [
+				"2008-R2-SP1",
+				"2012-Datacenter",
+				"2012-R2-Datacenter"
+			],
+			"metadata": {
+				"description": "The Windows version for the VM. This will pick a fully patched image of this given Windows version. Allowed values: 2008-R2-SP1, 2012-Datacenter, 2012-R2-Datacenter."
+			}
 		}
 	},
 	"variables": {
-		"nicNameASR": "myASRVMNic",
+		"imagePublisher": "MicrosoftWindowsServer",
+		"imageOffer": "WindowsServer",
+		"nicName": "myASRVMNic",
 		"subnetName": "Subnet-1",
-		"subnetRef": "[resourceId('Microsoft.Network/virtualNetworks/subnets', variables('virtualNetworkName'), variables('subnetName'))]",
-		"vmNameASR": "MyASRVM",
+		"publicIPAddressName": "ASRPublicIP",
+		"publicIPAddressType": "Dynamic",
+		"vmName": "MyASRVM",
+		"vmSize": "Standard_DS2_v2",
 		"virtualNetworkName": "sshVNET",
-		"publicIPAddressNameASR": "ASRpublicIP",
-		"dnsNameForPublicIPASR": "[concat('teamcimasr', uniqueString(resourceGroup().id))]",
-		"scriptFolder": ".",
-		"scriptFileName": "Copy-FileFromAzure.ps1",
-		"fileToBeCopied": "FileToBeCopied.txt",
-		"networkSecurityGroupNameASR": "networkSecurityGroup2",
-		"ASRname": "asrvault",
-		"scriptParameters": "[concat('-artifactsLocation ', parameters('_artifactsLocation'), ' -artifactsLocationSasToken \"', parameters('_artifactsLocationSasToken'), '\" -folderName ', variables('scriptFolder'), ' -fileToInstall ', variables('fileToBeCopied'))]"
+		"vnetID": "[resourceId('Microsoft.Network/virtualNetworks',variables('virtualNetworkName'))]",
+		"subnetRef": "[concat(variables('vnetID'),'/subnets/',variables('subnetName'))]",
+		"apiVersion": "2015-06-15",
+        "uniqueDnsLabelPrefixasr": "[concat('teamcimasr', uniquestring(resourceGroup().id))]",
+		"hostDNSNameScriptArgument": "[concat('*.',resourceGroup().location,'.cloudapp.azure.com')]",
+        "networkSecurityGroupNameASR": "networkSecurityGroupASR",
+        "ASRVault": "asrvault"
 	},
 	"resources": [{
-			"apiVersion": "2016-09-01",
+			"apiVersion": "[variables('apiVersion')]",
 			"type": "Microsoft.Network/publicIPAddresses",
-			"name": "[variables('publicIPAddressNameASR')]",
+			"name": "[variables('publicIPAddressName')]",
 			"location": "[resourceGroup().location]",
 			"properties": {
-				"publicIPAllocationMethod": "Dynamic",
+				"publicIPAllocationMethod": "[variables('publicIPAddressType')]",
 				"dnsSettings": {
-					"domainNameLabel": "[variables('dnsNameForPublicIPASR')]"
+					"domainNameLabel": "[variables('uniqueDnsLabelPrefixasr')]"
 				}
 			}
 		}, {
@@ -92,7 +93,7 @@
 					}, {
 						"name": "nginx_rule",
 						"properties": {
-							"description": "Locks inbound down to nginx default port 80.",
+							"description": "Locks inbound down to http default port 80.",
 							"protocol": "Tcp",
 							"sourcePortRange": "*",
 							"destinationPortRange": "80",
@@ -102,12 +103,24 @@
 							"priority": 124,
 							"direction": "Inbound"
 						}
-					}
+					}, {
+                        "name": "WinRM",
+						"properties": {
+							"description": "Locks inbound down to winrm default port 5986.",
+							"protocol": "Tcp",
+							"sourcePortRange": "*",
+							"destinationPortRange": "5986",
+							"sourceAddressPrefix": "*",
+							"destinationAddressPrefix": "*",
+							"access": "Allow",
+							"priority": 125,
+							"direction": "Inbound"
+                    }
 				]
 			}
 		}, {
 			"apiVersion": "2016-12-01",
-			"name": "[variables('ASRname')]",
+			"name": "[variables('ASRVault')]",
 			"location": "[resourceGroup().location]",
 			"type": "Microsoft.RecoveryServices/vaults",
 			"sku": {
@@ -116,21 +129,21 @@
 			},
 			"properties": {}
 		}, {
-			"apiVersion": "2016-09-01",
+			"apiVersion": "[variables('apiVersion')]",
 			"type": "Microsoft.Network/networkInterfaces",
-			"name": "[variables('nicNameASR')]",
+			"name": "[variables('nicName')]",
 			"location": "[resourceGroup().location]",
 			"dependsOn": [
-				"[concat('Microsoft.Network/publicIPAddresses/', variables('publicIPAddressNameASR'))]",
-				"[concat('Microsoft.Network/networkSecurityGroups/', variables('networkSecurityGroupNameASR'))]"
+				"[concat('Microsoft.Network/publicIPAddresses/', variables('publicIPAddressName'))]",
+                "[concat('Microsoft.Network/networkSecurityGroups/', variables('networkSecurityGroupNameASR'))]"
 			],
 			"properties": {
 				"ipConfigurations": [{
-						"name": "ipconfigASR",
+						"name": "ipconfig1",
 						"properties": {
 							"privateIPAllocationMethod": "Dynamic",
 							"publicIPAddress": {
-								"id": "[resourceId('Microsoft.Network/publicIPAddresses',variables('publicIPAddressNameASR'))]"
+								"id": "[resourceId('Microsoft.Network/publicIPAddresses',variables('publicIPAddressName'))]"
 							},
 							"subnet": {
 								"id": "[variables('subnetRef')]"
@@ -145,25 +158,25 @@
 		}, {
 			"apiVersion": "2016-04-30-preview",
 			"type": "Microsoft.Compute/virtualMachines",
-			"name": "[variables('vmNameASR')]",
+			"name": "[variables('vmName')]",
 			"location": "[resourceGroup().location]",
 			"dependsOn": [
-				"[concat('Microsoft.Network/networkInterfaces/', variables('nicNameASR'))]"
+				"[concat('Microsoft.Network/networkInterfaces/', variables('nicName'))]"
 			],
 			"properties": {
 				"hardwareProfile": {
-					"vmSize": "Standard_DS11_v2"
+					"vmSize": "[variables('vmSize')]"
 				},
 				"osProfile": {
-					"computerName": "[variables('vmNameASR')]",
+					"computername": "[variables('vmName')]",
 					"adminUsername": "[parameters('adminUsername')]",
 					"adminPassword": "[parameters('adminPassword')]"
 				},
 				"storageProfile": {
 					"imageReference": {
-						"publisher": "MicrosoftWindowsServer",
-						"offer": "WindowsServer",
-						"sku": "2012-R2-Datacenter",
+						"publisher": "[variables('imagePublisher')]",
+						"offer": "[variables('imageOffer')]",
+						"sku": "[parameters('windowsOSVersion')]",
 						"version": "latest"
 					},
 					"osDisk": {
@@ -172,29 +185,30 @@
 				},
 				"networkProfile": {
 					"networkInterfaces": [{
-							"id": "[resourceId('Microsoft.Network/networkInterfaces',variables('nicNameASR'))]"
+							"id": "[resourceId('Microsoft.Network/networkInterfaces',variables('nicName'))]"
 						}
 					]
 				}
 			},
 			"resources": [{
-					"type": "extensions",
-					"name": "CustomScriptExtension",
-					"apiVersion": "2015-06-15",
+					"type": "Microsoft.Compute/virtualMachines/extensions",
+					"name": "[concat(variables('vmName'),'/WinRMCustomScriptExtension')]",
+					"apiVersion": "[variables('apiVersion')]",
 					"location": "[resourceGroup().location]",
 					"dependsOn": [
-						"[variables('vmNameASR')]"
+						"[concat('Microsoft.Compute/virtualMachines/', variables('vmName'))]"
 					],
 					"properties": {
 						"publisher": "Microsoft.Compute",
 						"type": "CustomScriptExtension",
-						"typeHandlerVersion": "1.8",
-						"autoUpgradeMinorVersion": true,
+						"typeHandlerVersion": "1.4",
 						"settings": {
 							"fileUris": [
-								"[concat(parameters('_artifactsLocation'), '/', variables('ScriptFolder'), '/', variables('ScriptFileName'), parameters('_artifactsLocationSasToken'))]"
+								"https://raw.githubusercontent.com/alihhussain/AzureTemplates/master/Automation%20Demo/VMCustomData/Step3/ConfigureWinRM.ps1",
+								"https://raw.githubusercontent.com/alihhussain/AzureTemplates/master/Automation%20Demo/VMCustomData/Step3/makecert.exe",
+								"https://raw.githubusercontent.com/alihhussain/AzureTemplates/master/Automation%20Demo/VMCustomData/Step3/winrmconf.cmd"
 							],
-							"commandToExecute": "[concat('powershell -ExecutionPolicy Unrestricted -File ', variables('scriptFolder'), '/', variables('scriptFileName'), ' ', variables('scriptParameters'))]"
+							"commandToExecute": "[concat('powershell -ExecutionPolicy Unrestricted -file ConfigureWinRM.ps1 ',variables('hostDNSNameScriptArgument'))]"
 						}
 					}
 				}
