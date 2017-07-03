@@ -74,7 +74,7 @@
 							"sourceAddressPrefix": "*",
 							"destinationAddressPrefix": "*",
 							"access": "Allow",
-							"priority": 125,
+							"priority": 123,
 							"direction": "Inbound"
 						}
 					}, {
@@ -87,7 +87,7 @@
 							"sourceAddressPrefix": "*",
 							"destinationAddressPrefix": "*",
 							"access": "Allow",
-							"priority": 123,
+							"priority": 124,
 							"direction": "Inbound"
 						}
 					}, {
@@ -100,7 +100,7 @@
 							"sourceAddressPrefix": "*",
 							"destinationAddressPrefix": "*",
 							"access": "Allow",
-							"priority": 124,
+							"priority": 125,
 							"direction": "Inbound"
 						}
 					}, {
@@ -113,7 +113,7 @@
 							"sourceAddressPrefix": "*",
 							"destinationAddressPrefix": "*",
 							"access": "Allow",
-							"priority": 125,
+							"priority": 126,
 							"direction": "Inbound"
 						}
 					}
