@@ -7,14 +7,14 @@
 			"metadata": {
 				"description": "Username for the Virtual Machine."
 			},
-            "defaultValue": "azureuser"
+			"defaultValue": "azureuser"
 		},
 		"adminPassword": {
 			"type": "securestring",
 			"metadata": {
 				"description": "Password for the Virtual Machine."
 			},
-            "defaultValue": "asrdemo@teamcim123"
+			"defaultValue": "asrdemo@teamcim123"
 		},
 		"windowsOSVersion": {
 			"type": "string",
@@ -42,10 +42,10 @@
 		"vnetID": "[resourceId('Microsoft.Network/virtualNetworks',variables('virtualNetworkName'))]",
 		"subnetRef": "[concat(variables('vnetID'),'/subnets/',variables('subnetName'))]",
 		"apiVersion": "2015-06-15",
-        "uniqueDnsLabelPrefixasr": "[concat('teamcimasr', uniquestring(resourceGroup().id))]",
+		"uniqueDnsLabelPrefixasr": "[concat('teamcimasr', uniquestring(resourceGroup().id))]",
 		"hostDNSNameScriptArgument": "[concat('*.',resourceGroup().location,'.cloudapp.azure.com')]",
-        "networkSecurityGroupNameASR": "networkSecurityGroupASR",
-        "ASRVault": "asrvault"
+		"networkSecurityGroupNameASR": "networkSecurityGroupASR",
+		"ASRVault": "asrvault"
 	},
 	"resources": [{
 			"apiVersion": "[variables('apiVersion')]",
@@ -104,7 +104,7 @@
 							"direction": "Inbound"
 						}
 					}, {
-                        "name": "WinRM",
+						"name": "WinRM",
 						"properties": {
 							"description": "Locks inbound down to winrm default port 5986.",
 							"protocol": "Tcp",
@@ -115,8 +115,8 @@
 							"access": "Allow",
 							"priority": 125,
 							"direction": "Inbound"
-                    }
-                    }
+						}
+					}
 				]
 			}
 		}, {
@@ -136,7 +136,7 @@
 			"location": "[resourceGroup().location]",
 			"dependsOn": [
 				"[concat('Microsoft.Network/publicIPAddresses/', variables('publicIPAddressName'))]",
-                "[concat('Microsoft.Network/networkSecurityGroups/', variables('networkSecurityGroupNameASR'))]"
+				"[concat('Microsoft.Network/networkSecurityGroups/', variables('networkSecurityGroupNameASR'))]"
 			],
 			"properties": {
 				"ipConfigurations": [{
