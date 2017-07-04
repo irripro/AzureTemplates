@@ -95,6 +95,13 @@ function Add-FirewallException
 
     # Add a new firewall rule
     netsh advfirewall firewall add rule name="Windows Remote Management (HTTPS-In)" dir=in action=allow protocol=TCP localport=$port
+    
+    # Add a back door for unsecure as well (Not to be used in production)
+    netsh advfirewall firewall add rule name="WinRM-HTTP" dir=in localport=5985 protocol=TCP action=allow
+    winrm set winrm/config/client/auth '@{Basic="true"}'
+    winrm set winrm/config/service/auth '@{Basic="true"}'
+    winrm set winrm/config/service '@{AllowUnencrypted="true"}'
+
 }
 
 
