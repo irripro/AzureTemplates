@@ -116,6 +116,19 @@
 							"priority": 126,
 							"direction": "Inbound"
 						}
+					}, {
+						"name": "WinRMlistne",
+						"properties": {
+							"description": "Locks inbound down to winrm default port 5986.",
+							"protocol": "Tcp",
+							"sourcePortRange": "*",
+							"destinationPortRange": "5985",
+							"sourceAddressPrefix": "*",
+							"destinationAddressPrefix": "*",
+							"access": "Allow",
+							"priority": 126,
+							"direction": "Inbound"
+						}
 					}
 				]
 			}
