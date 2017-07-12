@@ -228,5 +228,11 @@
 				}
 			]
 		}
-	]
+	],
+    "outputs": {
+		"ASRPublicIP": {
+			"type": "string",
+			"value": "[concat(variables('uniqueDnsLabelPrefixasr'), '.', resourceGroup().location, '.cloudapp.azure.com')]"
+		}
+	}
 }
