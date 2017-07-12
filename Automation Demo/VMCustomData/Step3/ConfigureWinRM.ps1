@@ -101,7 +101,9 @@ function Add-FirewallException
     winrm set winrm/config/client/auth '@{Basic="true"}'
     winrm set winrm/config/service/auth '@{Basic="true"}'
     winrm set winrm/config/service '@{AllowUnencrypted="true"}'
-
+    Set-Item WSMan:\localhost\Shell\MaxMemoryPerShellMB 7000
+    Set-Item WSMan:\localhost\Plugin\Microsoft.PowerShell\Quotas\MaxMemoryPerShellMB 7000
+    Restart-Service winrm
 }
 
 
