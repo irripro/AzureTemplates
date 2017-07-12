@@ -5,4 +5,4 @@ s = winrm.Session('{asrpublicip}', auth=('alihhussain', 'asrdemo@teamcim123'))
 
 r = s.run_ps(ps_script)
 
-print("The standard error is: %s" %r.std_err)
+#print("The standard error is: %s" %r.std_err)
