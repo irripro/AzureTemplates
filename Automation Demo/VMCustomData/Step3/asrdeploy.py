@@ -9,6 +9,7 @@ r = s.run_ps(ps_script)
 ps_scripttwo = """Get-Module PowerShellGet -list | Select-Object Name,Version,Path
 Install-PackageProvider -Name NuGet -Force
 Install-Module AzureRM -Force
+Import-Module AzureRM
 """
 r = s.run_ps(ps_scripttwo)
 print("The standard error is: %s" %r.std_out)
