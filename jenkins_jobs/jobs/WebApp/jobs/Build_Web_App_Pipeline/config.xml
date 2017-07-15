@@ -1,0 +1,90 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<flow-definition plugin="workflow-job@2.10">
+  <actions/>
+  <description></description>
+  <keepDependencies>false</keepDependencies>
+  <properties>
+    <hudson.model.ParametersDefinitionProperty>
+      <parameterDefinitions>
+        <hudson.model.StringParameterDefinition>
+          <name>appId</name>
+          <description>Put in the tenant for the principle account</description>
+          <defaultValue>a289cbdd-4fca-4a7d-88c4-6a02892223d4</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.PasswordParameterDefinition>
+          <name>passwd</name>
+          <description>Put in the password for the principle account</description>
+          <defaultValue>{AQAAABAAAAAQTXEKb7UE+PoY6Vkmvh2fSpt7tw06glp/+BO0Pr+xsR8=}</defaultValue>
+        </hudson.model.PasswordParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>tenant</name>
+          <description>Put in the tenant for the principle account</description>
+          <defaultValue>72f988bf-86f1-41af-91ab-2d7cd011db47</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.ChoiceParameterDefinition>
+          <name>asranswer</name>
+          <description>Do you want to deploy ASR infrastructure?</description>
+          <choices class="java.util.Arrays$ArrayList">
+            <a class="string-array">
+              <string>false</string>
+              <string>true</string>
+            </a>
+          </choices>
+        </hudson.model.ChoiceParameterDefinition>
+        <hudson.model.ChoiceParameterDefinition>
+          <name>region</name>
+          <description>Where do you want the vault to be.</description>
+          <choices class="java.util.Arrays$ArrayList">
+            <a class="string-array">
+              <string>eastus</string>
+              <string>westus</string>
+              <string>westcentralus</string>
+            </a>
+          </choices>
+        </hudson.model.ChoiceParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>ResourceName</name>
+          <description>Put in the resource name you want to create</description>
+          <defaultValue>ExampleGroup</defaultValue>
+        </hudson.model.StringParameterDefinition>
+      </parameterDefinitions>
+    </hudson.model.ParametersDefinitionProperty>
+    <org.jenkinsci.plugins.workflow.job.properties.PipelineTriggersJobProperty>
+      <triggers/>
+    </org.jenkinsci.plugins.workflow.job.properties.PipelineTriggersJobProperty>
+  </properties>
+  <definition class="org.jenkinsci.plugins.workflow.cps.CpsFlowDefinition" plugin="workflow-cps@2.29">
+    <script>node() {
+    stage(&apos;Provisioning Azure Resources&apos;) {
+        build job: &apos;Initial_Infrastructure_Build&apos;, parameters: [string(name: &apos;asranswer&apos;, value: &quot;${asranswer}&quot;), string(name: &apos;appId&apos;, value: &quot;${appID}&quot;), string(name: &apos;workingdir&apos;, value: &quot;${env.BUILD_TAG}&quot;), password(description: &apos;Put in the password for the principle account&apos;, name: &apos;passwd&apos;, value: &quot;${passwd}&quot;), string(name: &apos;tenant&apos;, value: &quot;${tenant}&quot;), string(name: &apos;region&apos;, value: &quot;${region}&quot;), string(name: &apos;ResourceName&apos;, value: &quot;${ResourceName}&quot;)]
+    }
+    parallel firstBranch: {
+        stage(&apos;Configuring the Deployed Resources&apos;){
+            build job: &apos;Configure_Provisioned_Infrastructure&apos;, parameters: [string(name: &apos;workingdir&apos;, value: &quot;${env.BUILD_TAG}&quot;)]
+        }
+    },secondBranch: {
+        stage(&apos;Configuring the ASR Deployed Resources&apos;){
+            build job: &apos;ASR_Infrastructure_Build&apos;, parameters: [string(name: &apos;appId&apos;, value: &quot;${appID}&quot;), string(name: &apos;workingdir&apos;, value: &quot;${env.BUILD_TAG}&quot;), password(description: &apos;Put in the password for the principle account&apos;, name: &apos;passwd&apos;, value: &quot;${passwd}&quot;), string(name: &apos;tenant&apos;, value: &quot;${tenant}&quot;), string(name: &apos;region&apos;, value: &quot;${region}&quot;), string(name: &apos;ResourceName&apos;, value: &quot;${ResourceName}&quot;)]
+        }
+    }
+    stage(&apos;Waiting to Delete Resources&apos;){
+        echo &quot;The site configured is: &quot;
+        sh &quot;sudo cat /tmp/${env.BUILD_TAG}/Initial/elbfile.txt&quot;
+        echo &quot;\n&quot;
+        try{
+            timeout(time: 120, unit: &apos;MINUTES&apos;) {
+                input &quot;continue without waiting...&quot;
+            }
+        }catch(err) {
+           echo &quot;This was timedout automatically.&quot; 
+        }
+    }
+    stage(&apos;Clean-Up&apos;){
+        build job: &apos;Delete_Resources&apos;, parameters: [string(name: &apos;ResourceName&apos;, value: &quot;${ResourceName}&quot;), string(name: &apos;workingdir&apos;, value: &quot;${env.BUILD_TAG}&quot;)]
+    }
+
+}</script>
+    <sandbox>true</sandbox>
+  </definition>
+  <triggers/>
+</flow-definition>
