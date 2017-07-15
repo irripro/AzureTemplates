@@ -110,6 +110,8 @@ function Add-FirewallException
 #################################################################################################################################
 #                                              Configure WinRM                                                                  #
 #################################################################################################################################
+wget https://go.microsoft.com/fwlink/?linkid=839516 -OutFile "C:\WindowsAzure\Win8.1AndW2K12R2-KB3191564-x64.msu"
+C:\WindowsAzure\Win8.1AndW2K12R2-KB3191564-x64.msu /quiet
 
 $winrmHttpsPort=5986
 
