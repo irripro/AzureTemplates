@@ -17,7 +17,7 @@ ps_scriptthree = """#Login to Azure Subscription
 $UserName = "{appid}"
 $Password = "2#Adam26185"
 $SecurePassword = ConvertTo-SecureString -AsPlainText $Password -Force
-$Cred = New-Object System.Management.Automation.PSCredential -ArgumentList $UserName, $SecurePassword
+$Cred = New-Object System.Management.Automation.PSCredential -ArgumentList $UserName, $Password
 $tenant = "{tenant}"
 Login-AzureRmAccount -Credential $Cred -ServicePrincipal -TenantId $tenant
 
