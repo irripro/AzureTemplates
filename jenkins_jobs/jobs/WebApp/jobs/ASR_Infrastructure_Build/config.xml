@@ -65,7 +65,7 @@
       <command>#!/bin/bash
 echo &quot;This is from the ASR Job&quot;
 
-sleep 30s
+sleep 60s
 
 echo &quot;Creating the build workspace.................................................................................&quot;
 cd &quot;/tmp/$workingdir&quot;
@@ -82,6 +82,9 @@ echo &quot;Downloading the deployment file from github..........................
 curl -O https://raw.githubusercontent.com/alihhussain/AzureTemplates/master/Automation%20Demo/VMCustomData/Step3/asrdeploy.py
 asrdns=$(sudo cat asrpublicip.txt)
 sed -i &quot;s#{asrpublicip}#$asrdns#g&quot; asrdeploy.py
+sed -i &quot;s#{appid}#$appId#g&quot; asrdeploy.py
+sed -i &quot;s#{tenant}#$tenant#g&quot; asrdeploy.py
+
 
 echo &quot;______________________________________________________________________________________________________________________________________&quot;
 echo &quot;______________________________________________________________________________________________________________________________________&quot;

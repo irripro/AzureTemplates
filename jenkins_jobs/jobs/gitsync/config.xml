@@ -22,7 +22,11 @@
   <disabled>false</disabled>
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
   <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
-  <triggers/>
+  <triggers>
+    <hudson.triggers.TimerTrigger>
+      <spec>H H * * *</spec>
+    </hudson.triggers.TimerTrigger>
+  </triggers>
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.Shell>
@@ -30,7 +34,7 @@
 git pull
 cp -R /var/lib/jenkins/jobs/ /u01/AzureTemplates/jenkins_jobs
 sudo chown jenkins:jenkins /u01/AzureTemplates/ -R
-git add *; git commit -a -m &quot;ASR Stuff&quot;; git push origin master
+git add *; git commit -a -m &quot;Jenkins Update&quot;; git push origin master
 </command>
     </hudson.tasks.Shell>
   </builders>
