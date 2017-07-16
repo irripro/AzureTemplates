@@ -1,7 +1,6 @@
 import winrm
-
+#C:\WindowsAzure\MicrosoftAzureSiteRecoveryUnifiedSetup.exe /q /x:C:\WindowsAzure\Extracted
 ps_script = """wget http://aka.ms/unifiedinstaller_eus -OutFile "C:\WindowsAzure\MicrosoftAzureSiteRecoveryUnifiedSetup.exe" 
-C:\WindowsAzure\MicrosoftAzureSiteRecoveryUnifiedSetup.exe /q /x:C:\WindowsAzure\Extracted
 """
 s = winrm.Session('{asrpublicip}', auth=('alihhussain', 'asrdemo@teamcim123'))
 r = s.run_ps(ps_script)
@@ -28,3 +27,6 @@ $Vault01 = Get-AzureRmRecoveryServicesVault -Name "asrvault"
 $CredsPath = "C:\WindowsAzure\"
 $Credsfilename = Get-AzureRmRecoveryServicesVaultSettingsFile -Backup -Vault $Vault01 -Path $CredsPath
 """
+
+r = s.run_ps(ps_scriptthree)
+print("The standard error is: %s" %r.std_out)
