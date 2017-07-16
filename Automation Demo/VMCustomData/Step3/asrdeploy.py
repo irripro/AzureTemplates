@@ -17,7 +17,7 @@ print("The standard error is: %s" %r.std_out)
 ps_scriptthree = """
 #Login to Azure Subscription
 $UserName = "{appid}"
-$Password = "{passwd}"
+$Password = "2#Adam26185"
 $SecurePassword = ConvertTo-SecureString -AsPlainText $Password -Force
 $Cred = New-Object System.Management.Automation.PSCredential -ArgumentList $UserName, $SecurePassword
 $tenant = "{tenant}"
