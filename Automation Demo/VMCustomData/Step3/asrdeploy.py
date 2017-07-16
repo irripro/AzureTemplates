@@ -11,7 +11,7 @@ Install-Module AzureRM -Force
 Import-Module AzureRM
 """
 r = s.run_ps(ps_scripttwo)
-print("The standard error is: %s" %r.std_out)
+print("The standard output is: %s" %r.std_out)
 
 ps_scriptthree = """
 #Login to Azure Subscription
@@ -29,4 +29,4 @@ $Credsfilename = Get-AzureRmRecoveryServicesVaultSettingsFile -Backup -Vault $Va
 """
 
 r = s.run_ps(ps_scriptthree)
-print("The standard error is: %s" %r.std_out)
+print("The standard output is: %s" %r.std_out)
