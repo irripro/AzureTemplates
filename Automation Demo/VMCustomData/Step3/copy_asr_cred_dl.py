@@ -56,15 +56,15 @@ command_id = conn.run_command(shell_id, "powershell -encodedcommand %s" %
                             (encoded_script))
 stdout, stderr, return_code = conn.get_command_output(shell_id, command_id)
 conn.cleanup_command(shell_id, command_id)
-print "STDOUT: %s" % (stdout)
-print "STDERR: %s" % (stderr)
+print("STDOUT: %s" % (stdout))
+print("STDERR: %s" % (stderr))
 
 # print the file
 command_id = conn.run_command(shell_id, "type test.txt")
 stdout, stderr, return_code = conn.get_command_output(shell_id, command_id)
 conn.cleanup_command(shell_id, command_id)
-print "STDOUT: %s" % (stdout)
-print "STDERR: %s" % (stderr)
+print("STDOUT: %s" % (stdout))
+print("STDERR: %s" % (stderr))
 
 # delete the file
 #command_id = conn.run_command(shell_id, "del test.txt")
