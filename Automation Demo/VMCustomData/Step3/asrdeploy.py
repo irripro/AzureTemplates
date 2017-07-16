@@ -13,8 +13,7 @@ Import-Module AzureRM
 r = s.run_ps(ps_scripttwo)
 print("The standard output is: %s" %r.std_out)
 
-ps_scriptthree = """#Login to Azure Subscription
-$UserName = "{appid}"
+ps_scriptthree = """$UserName = "{appid}"
 $Password = "2#Adam26185"
 $SecurePassword = ConvertTo-SecureString -AsPlainText $Password -Force
 $Cred = New-Object System.Management.Automation.PSCredential -ArgumentList $UserName, $Password
