@@ -82,9 +82,8 @@ echo &quot;Downloading the deployment file from github..........................
 curl -O https://raw.githubusercontent.com/alihhussain/AzureTemplates/master/Automation%20Demo/VMCustomData/Step3/asrdeploy.py
 asrdns=$(sudo cat asrpublicip.txt)
 sed -i &quot;s#{asrpublicip}#$asrdns#g&quot; asrdeploy.py
-sed -i &quot;s#{appid}#$appId#g&quot; asrdeploy.py
+#sed -i &quot;s#{appid}#$appId#g&quot; asrdeploy.py
 sed -i &quot;s#{tenant}#$tenant#g&quot; asrdeploy.py
-
 
 echo &quot;______________________________________________________________________________________________________________________________________&quot;
 echo &quot;______________________________________________________________________________________________________________________________________&quot;
@@ -92,6 +91,13 @@ echo &quot;_____________________________________________________________________
 echo &quot;Deploying to ASR Windows Instance.....&quot;
 
 python asrdeploy.py
+
+#echo &quot;______________________________________________________________________________________________________________________________________&quot;
+#echo &quot;______________________________________________________________________________________________________________________________________&quot;
+
+#curl -O https://raw.githubusercontent.com/alihhussain/AzureTemplates/master/Automation%20Demo/VMCustomData/Step3/copy_asr_cred_dl.py
+#sed -i &quot;s#{asrpublicip}#$asrdns#g&quot; copy_asr_cred_dl.py
+#python copy_asr_cred_dl.py
 
 echo &quot;The Azure Resources for ASR are deployed.&quot;
 </command>
