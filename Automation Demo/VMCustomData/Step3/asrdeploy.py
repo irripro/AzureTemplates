@@ -13,12 +13,14 @@ def setupnewpowershell():
     Install-Module AzureRM -Force
     Import-Module AzureRM
     """
+    s = winrm.Session('{asrpublicip}', auth=('alihhussain', 'asrdemo@teamcim123'))
     r = s.run_ps(ps_scripttwo)
     print("The standard output is: %s" %r.std_out)
 
 def get_asr_cred():
     ps_scriptthree = """
     """
+    s = winrm.Session('{asrpublicip}', auth=('alihhussain', 'asrdemo@teamcim123'))
     r = s.run_ps(ps_scriptthree)
     print("The standard output is: %s" %r.std_out)
     print("The standard error is: %s" %r.std_err)
