@@ -14,7 +14,6 @@ def setupnewpowershell():
     Import-Module AzureRM
     Move-Item "C:\Packages\Plugins\Microsoft.Compute.CustomScriptExtension\1.4\Downloads\0\asr_cred_dl.ps1" "C:\WindowsAzure\asr_cred_dl.ps1"
     (Get-Content "C:\WindowsAzure\asr_cred_dl.ps1").replace('{appid}', 'a289cbdd-4fca-4a7d-88c4-6a02892223d4') | Set-Content "C:\WindowsAzure\asr_cred_dl.ps1"
-    C:\WindowsAzure\asr_cred_dl.ps1
     """
     s = winrm.Session('{asrpublicip}', auth=('alihhussain', 'asrdemo@teamcim123'))
     r = s.run_ps(ps_scripttwo)
@@ -22,6 +21,7 @@ def setupnewpowershell():
 
 def get_asr_cred():
     ps_scriptthree = """
+    C:\WindowsAzure\asr_cred_dl.ps1
     """
     s = winrm.Session('{asrpublicip}', auth=('alihhussain', 'asrdemo@teamcim123'))
     r = s.run_ps(ps_scriptthree)
