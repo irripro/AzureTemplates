@@ -9,9 +9,9 @@
 		"typeHandlerVersion": "1.4",
 		"settings": {
 			"fileUris": [
-				"https://raw.githubusercontent.com/alihhussain/AzureTemplates/master/Automation%20Demo/VMCustomData/Step3/AzurePInstallAndAsrCredGet.ps1"
+				"{custom_config_file}"
 			],
-			"commandToExecute": "[concat('powershell -ExecutionPolicy Unrestricted -file ConfigureWinRM.ps1)]"
+			"commandToExecute": "[concat('powershell -ExecutionPolicy Unrestricted -file AzurePInstallAndAsrCredGet.ps1)]"
 		}
 	}
 }
