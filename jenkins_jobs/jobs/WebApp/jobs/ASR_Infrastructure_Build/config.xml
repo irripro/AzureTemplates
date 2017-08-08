@@ -79,21 +79,36 @@ echo &quot;_____________________________________________________________________
 echo &quot;______________________________________________________________________________________________________________________________________&quot;
 echo &quot;Downloading the deployment file from github.................................................................................&quot;
 
-curl -O https://raw.githubusercontent.com/alihhussain/AzureTemplates/master/Automation%20Demo/VMCustomData/Step3/asrdeploy.py
-asrdns=$(sudo cat asrpublicip.txt)
-sed -i &quot;s#{asrpublicip}#$asrdns#g&quot; asrdeploy.py
+#curl -O https://raw.githubusercontent.com/alihhussain/AzureTemplates/master/Automation%20Demo/VMCustomData/Step3/asrdeploy.py
+#asrdns=$(sudo cat asrpublicip.txt)
+#sed -i &quot;s#{asrpublicip}#$asrdns#g&quot; asrdeploy.py
 #sed -i &quot;s#{appid}#$appId#g&quot; asrdeploy.py
-sed -i &quot;s#{tenant}#$tenant#g&quot; asrdeploy.py
+#sed -i &quot;s#{tenant}#$tenant#g&quot; asrdeploy.py
+
+curl -O https://raw.githubusercontent.com/alihhussain/AzureTemplates/master/Automation%20Demo/VMCustomData/Step3/AzurePInstallAndAsrCredGet.ps1
+sed -i &quot;s#{appid}#$appId#g&quot; AzurePInstallAndAsrCredGet.ps1
+sed -i &quot;s#{tenant}#$tenant#g&quot; AzurePInstallAndAsrCredGet.ps1
+
+#Creating the location for custom configuration file
+mkdir &quot;/var/lib/jenkins/userContent/buildparameters/$workingdir&quot;
+mv &quot;/tmp/$workingdir/ASR/AzurePInstallAndAsrCredGet.ps1&quot; &quot;/var/lib/jenkins/userContent/buildparameters/$workingdir&quot;
+
+configfilelocation=&quot;http://cim-jenkins.eastus.cloudapp.azure.com:8080/userContent/buildparameters/$workingdir/AzurePInstallAndAsrCredGet.ps1&quot;
+curl -O https://raw.githubusercontent.com/alihhussain/AzureTemplates/master/Automation%20Demo/VMCustomData/Step3/customextension2.json
+sed -i &quot;s#{custom_config_file}#$configfilelocation#g&quot; customextension2.json
 
 echo &quot;______________________________________________________________________________________________________________________________________&quot;
 echo &quot;______________________________________________________________________________________________________________________________________&quot;
 
 echo &quot;Deploying to ASR Windows Instance.....&quot;
+cat &quot;/var/lib/jenkins/userContent/buildparameters/$workingdir/AzurePInstallAndAsrCredGet.ps1&quot;
 
-python asrdeploy.py
+az vm extension set --resource-group $ResourceName --vm-name MyASRVM --name customScript --publisher Microsoft.Azure.Extensions --settings ./customextension2.json
 
-#echo &quot;______________________________________________________________________________________________________________________________________&quot;
-#echo &quot;______________________________________________________________________________________________________________________________________&quot;
+#python asrdeploy.py
+
+echo &quot;______________________________________________________________________________________________________________________________________&quot;
+echo &quot;______________________________________________________________________________________________________________________________________&quot;
 
 #curl -O https://raw.githubusercontent.com/alihhussain/AzureTemplates/master/Automation%20Demo/VMCustomData/Step3/copy_asr_cred_dl.py
 #sed -i &quot;s#{asrpublicip}#$asrdns#g&quot; copy_asr_cred_dl.py
