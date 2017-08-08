@@ -30,6 +30,7 @@
     <hudson.tasks.Shell>
       <command>sudo cd /root/
 rm -fR &quot;/tmp/$workingdir&quot;
+rm -fR &quot;/var/lib/jenkins/userContent/buildparameters/$workingdir&quot;
 
 sudo /root/bin/az group delete --yes --name $ResourceName</command>
     </hudson.tasks.Shell>
