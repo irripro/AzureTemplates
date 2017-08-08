@@ -15,4 +15,4 @@ Login-AzureRmAccount -Credential $Cred -ServicePrincipal -TenantId $tenant
 #Get the vault creds
 $Vault01 = Get-AzureRmRecoveryServicesVault -Name "asrvault"
 $CredsPath = "C:\WindowsAzure\"
-$Credsfilename = Get-AzureRmRecoveryServicesVaultSettingsFile -Backup -Vault $Vault01 -Path $CredsPath
+$Credsfilename = Get-AzureRmRecoveryServicesVaultSettingsFile -SiteRecovery -Vault $Vault01 -Path $CredsPath
