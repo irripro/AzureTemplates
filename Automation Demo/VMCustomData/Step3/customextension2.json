@@ -1,17 +1,4 @@
 {
-	"type": "Microsoft.Compute/virtualMachines/extensions",
-	"name": "setupazureandgetcreds",
-	"apiVersion": "2015-06-15",
-	"location": "eastus",
-	"properties": {
-		"publisher": "Microsoft.Compute",
-		"type": "CustomScriptExtension",
-		"typeHandlerVersion": "1.4",
-		"settings": {
-			"fileUris": [
-				"{custom_config_file}"
-			],
-			"commandToExecute": "[concat('powershell -ExecutionPolicy Unrestricted -file AzurePInstallAndAsrCredGet.ps1)]"
-		}
-	}
+    "fileUris": "{custom_config_file}",
+    "commandToExecute": "powershell -ExecutionPolicy Unrestricted -file AzurePInstallAndAsrCredGet.ps1"
 }
