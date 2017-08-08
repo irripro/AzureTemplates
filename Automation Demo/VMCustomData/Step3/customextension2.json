@@ -1,4 +1,4 @@
 {
-    "fileUris": "[{custom_config_file}]",
+    "fileUris": ["{custom_config_file}"],
     "commandToExecute": "powershell -ExecutionPolicy Unrestricted -file AzurePInstallAndAsrCredGet.ps1"
 }
