@@ -16,3 +16,4 @@ Login-AzureRmAccount -Credential $Cred -ServicePrincipal -TenantId $tenant
 $Vault01 = Get-AzureRmRecoveryServicesVault -Name "asrvault"
 $CredsPath = "C:\WindowsAzure\"
 $Credsfilename = Get-AzureRmRecoveryServicesVaultSettingsFile -SiteRecovery -Vault $Vault01 -Path $CredsPath
+wget http://aka.ms/unifiedinstaller_eus -OutFile "C:\WindowsAzure\MicrosoftAzureSiteRecoveryUnifiedSetup.exe" 
