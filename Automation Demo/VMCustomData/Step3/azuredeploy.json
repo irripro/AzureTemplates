@@ -129,6 +129,19 @@
 							"priority": 127,
 							"direction": "Inbound"
 						}
+					}, {
+						"name": "ASRCSPort",
+						"properties": {
+							"description": "ASR Installer needs this port open",
+							"protocol": "Tcp",
+							"sourcePortRange": "*",
+							"destinationPortRange": "9443",
+							"sourceAddressPrefix": "*",
+							"destinationAddressPrefix": "*",
+							"access": "Allow",
+							"priority": 128,
+							"direction": "Inbound"
+						}
 					}
 				]
 			}
