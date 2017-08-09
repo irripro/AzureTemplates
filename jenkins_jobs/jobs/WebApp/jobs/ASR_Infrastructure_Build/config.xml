@@ -65,7 +65,7 @@
       <command>#!/bin/bash
 echo &quot;This is from the ASR Job&quot;
 
-sleep 60s
+sleep 10s
 
 echo &quot;Creating the build workspace.................................................................................&quot;
 cd &quot;/tmp/$workingdir&quot;
@@ -103,7 +103,8 @@ echo &quot;_____________________________________________________________________
 echo &quot;Deploying to ASR Windows Instance.....&quot;
 cat &quot;/var/lib/jenkins/userContent/buildparameters/$workingdir/AzurePInstallAndAsrCredGet.ps1&quot;
 
-az vm extension set --resource-group $ResourceName --vm-name MyASRVM --name customScript --publisher Microsoft.Azure.Extensions --settings ./customextension2.json
+#az vm extension set --resource-group $ResourceName --vm-name MyASRVM --name customScript --publisher Microsoft.Azure.Extensions --settings ./customextension2.json
+sudo /root/bin/az vm extension set -n CustomScriptExtension --publisher Microsoft.Compute --version 1.4 --vm-name MyASRVM --resource-group $ResourceName --settings ./customextension2.json
 
 #python asrdeploy.py
 
