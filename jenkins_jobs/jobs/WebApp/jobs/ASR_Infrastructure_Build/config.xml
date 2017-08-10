@@ -72,6 +72,7 @@ cd &quot;/tmp/$workingdir&quot;
 mkdir &quot;./ASR&quot;
 cd &quot;./ASR&quot;
 cp &quot;/tmp/$workingdir/Initial/asrpublicip.txt&quot; &quot;./asrpublicip.txt&quot;
+cp &quot;/tmp/$workingdir/Initial/asrpublic.ip&quot; &quot;./asrpublic.ip&quot;
 pwd
 
 
@@ -85,9 +86,12 @@ echo &quot;Downloading the deployment file from github..........................
 #sed -i &quot;s#{appid}#$appId#g&quot; asrdeploy.py
 #sed -i &quot;s#{tenant}#$tenant#g&quot; asrdeploy.py
 
+asrpublicip=$(sudo cat /tmp/$workingdir/Initial/asrpublic.ip)
 curl -O https://raw.githubusercontent.com/alihhussain/AzureTemplates/master/Automation%20Demo/VMCustomData/Step3/AzurePInstallAndAsrCredGet.ps1
 sed -i &quot;s#{appid}#$appId#g&quot; AzurePInstallAndAsrCredGet.ps1
 sed -i &quot;s#{tenant}#$tenant#g&quot; AzurePInstallAndAsrCredGet.ps1
+sed -i &quot;s#{public_ip}#$asrpublicip#g&quot; AzurePInstallAndAsrCredGet.ps1
+
 
 #Creating the location for custom configuration file
 mkdir &quot;/var/lib/jenkins/userContent/buildparameters/$workingdir&quot;

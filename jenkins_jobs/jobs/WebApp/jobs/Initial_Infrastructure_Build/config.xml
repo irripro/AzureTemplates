@@ -131,6 +131,11 @@ cat elbfile.txt
 /root/bin/az group deployment show -g $ResourceName -n stepthree | jq .properties.outputs.asrPublicIP.value | awk -F &apos;&quot;&apos; &apos;{print $2}&apos; &gt; asrpublicip.txt
 cat asrpublicip.txt
 
+/root/bin/az group deployment show -g $ResourceName -n stepthree | jq .properties.dependencies[0].dependsOn[0].resourceName | awk -F &apos;&quot;&apos; &apos;{print $2}&apos; &gt; asrpublic.ip
+asrpublicipname=$(sudo cat /tmp/$workingdir/Initial/asrpublic.ip)
+az network public-ip show -g $ResourceName -n $asrpublicipname | jq .ipAddress | awk -F &apos;&quot;&apos; &apos;{print $2}&apos; &gt; asrpublic.ip
+cat asrpublic.ip
+
 echo &quot;______________________________________________________________________________________________________________________________________&quot;
 echo &quot;______________________________________________________________________________________________________________________________________&quot;
 echo &quot;The Azure Resources are deployed.&quot;
