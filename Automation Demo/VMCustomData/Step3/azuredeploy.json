@@ -37,7 +37,7 @@
 		"publicIPAddressName": "ASRPublicIP",
 		"publicIPAddressType": "Dynamic",
 		"vmName": "MyASRVM",
-		"vmSize": "Standard_DS2_v2",
+		"vmSize": "Standard_DS3_v2",
 		"virtualNetworkName": "sshVNET",
 		"vnetID": "[resourceId('Microsoft.Network/virtualNetworks',variables('virtualNetworkName'))]",
 		"subnetRef": "[concat(variables('vnetID'),'/subnets/',variables('subnetName'))]",
