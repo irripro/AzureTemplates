@@ -20,7 +20,6 @@ pushd "C:\ASR\"
 $Vault01 = Get-AzureRmRecoveryServicesVault -Name "asrvault"
 $CredsPath = "C:\ASR\asrcredfolder\"
 $Credsfilename = Get-AzureRmRecoveryServicesVaultSettingsFile -SiteRecovery -Vault $Vault01 -Path $CredsPath
-$asrcredfilename = Get-ChildItem "C:\ASR\asrcredfolder\" -name
 
 wget http://aka.ms/unifiedinstaller_eus -OutFile "C:\ASR\MicrosoftAzureSiteRecoveryUnifiedSetup.exe" 
 wget https://raw.githubusercontent.com/alihhussain/AzureTemplates/master/Automation%20Demo/VMCustomData/Step3/sql.cred -OutFile "C:\ASR\sql.cred" 
@@ -28,5 +27,5 @@ C:\ASR\MicrosoftAzureSiteRecoveryUnifiedSetup.exe /x:. /q
 mkdir "C:\ASR\Installation"
 cd "C:\ASR\Installation"
 New-Item -ItemType file "C:\ASR\Installation\passphrase.txt"
-
+$asrcredfilename = Get-ChildItem "C:\ASR\asrcredfolder\" -name
 C:\ASR\UNIFIEDSETUP.EXE /AcceptThirdpartyEULA /servermode "CS" /InstallLocation "C:\ASR\Installation" /MySQLCredsFilePath "C:\ASR\sql.cred" /VaultCredsFilePath "C:\ASR\asrcredfolder\$asrcredfilename" /EnvType "NonVMware" /SkipSpaceCheck /PSIP "{public_ip}" /CSIP "{public_ip}" /PassphraseFilePath "C:\ASR\Installation\passphrase.txt"
