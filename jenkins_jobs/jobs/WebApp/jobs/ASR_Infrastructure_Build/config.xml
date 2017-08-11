@@ -75,23 +75,15 @@ cp &quot;/tmp/$workingdir/Initial/asrpublicip.txt&quot; &quot;./asrpublicip.txt&
 cp &quot;/tmp/$workingdir/Initial/asrpublic.ip&quot; &quot;./asrpublic.ip&quot;
 pwd
 
-
 echo &quot;______________________________________________________________________________________________________________________________________&quot;
 echo &quot;______________________________________________________________________________________________________________________________________&quot;
 echo &quot;Downloading the deployment file from github.................................................................................&quot;
-
-#curl -O https://raw.githubusercontent.com/alihhussain/AzureTemplates/master/Automation%20Demo/VMCustomData/Step3/asrdeploy.py
-#asrdns=$(sudo cat asrpublicip.txt)
-#sed -i &quot;s#{asrpublicip}#$asrdns#g&quot; asrdeploy.py
-#sed -i &quot;s#{appid}#$appId#g&quot; asrdeploy.py
-#sed -i &quot;s#{tenant}#$tenant#g&quot; asrdeploy.py
 
 asrpublicip=$(sudo cat /tmp/$workingdir/Initial/asrpublic.ip)
 curl -O https://raw.githubusercontent.com/alihhussain/AzureTemplates/master/Automation%20Demo/VMCustomData/Step3/AzurePInstallAndAsrCredGet.ps1
 sed -i &quot;s#{appid}#$appId#g&quot; AzurePInstallAndAsrCredGet.ps1
 sed -i &quot;s#{tenant}#$tenant#g&quot; AzurePInstallAndAsrCredGet.ps1
 sed -i &quot;s#{public_ip}#$asrpublicip#g&quot; AzurePInstallAndAsrCredGet.ps1
-
 
 #Creating the location for custom configuration file
 mkdir &quot;/var/lib/jenkins/userContent/buildparameters/$workingdir&quot;
@@ -101,23 +93,25 @@ configfilelocation=&quot;http://cim-jenkins.eastus.cloudapp.azure.com:8080/userC
 curl -O https://raw.githubusercontent.com/alihhussain/AzureTemplates/master/Automation%20Demo/VMCustomData/Step3/customextension2.json
 sed -i &quot;s#{custom_config_file}#$configfilelocation#g&quot; customextension2.json
 
-echo &quot;______________________________________________________________________________________________________________________________________&quot;
-echo &quot;______________________________________________________________________________________________________________________________________&quot;
-
-echo &quot;Deploying to ASR Windows Instance.....&quot;
-cat &quot;/var/lib/jenkins/userContent/buildparameters/$workingdir/AzurePInstallAndAsrCredGet.ps1&quot;
-
-#az vm extension set --resource-group $ResourceName --vm-name MyASRVM --name customScript --publisher Microsoft.Azure.Extensions --settings ./customextension2.json
 sudo /root/bin/az vm extension set -n CustomScriptExtension --publisher Microsoft.Compute --version 1.4 --vm-name MyASRVM --resource-group $ResourceName --settings ./customextension2.json
 
-#python asrdeploy.py
-
 echo &quot;______________________________________________________________________________________________________________________________________&quot;
 echo &quot;______________________________________________________________________________________________________________________________________&quot;
 
-#curl -O https://raw.githubusercontent.com/alihhussain/AzureTemplates/master/Automation%20Demo/VMCustomData/Step3/copy_asr_cred_dl.py
-#sed -i &quot;s#{asrpublicip}#$asrdns#g&quot; copy_asr_cred_dl.py
-#python copy_asr_cred_dl.py
+#Installing the ASR installer after downloading the files earlier
+curl -O https://raw.githubusercontent.com/alihhussain/AzureTemplates/master/Automation%20Demo/VMCustomData/Step3/AzurePInstallAndAsrCredGet1.ps1
+sed -i &quot;s#{public_ip}#$asrpublicip#g&quot; AzurePInstallAndAsrCredGet1.ps1
+mv &quot;/tmp/$workingdir/ASR/AzurePInstallAndAsrCredGet1.ps1&quot; &quot;/var/lib/jenkins/userContent/buildparameters/$workingdir&quot;
+
+configfilelocation=&quot;http://cim-jenkins.eastus.cloudapp.azure.com:8080/userContent/buildparameters/$workingdir/AzurePInstallAndAsrCredGet1.ps1&quot;
+curl -O https://raw.githubusercontent.com/alihhussain/AzureTemplates/master/Automation%20Demo/VMCustomData/Step3/customextension3.json
+sed -i &quot;s#{custom_config_file}#$configfilelocation#g&quot; customextension3.json
+
+sleep 30s
+sudo /root/bin/az vm extension set -n CustomScriptExtension --publisher Microsoft.Compute --version 1.4 --vm-name MyASRVM --resource-group $ResourceName --settings ./customextension3.json
+
+echo &quot;______________________________________________________________________________________________________________________________________&quot;
+echo &quot;______________________________________________________________________________________________________________________________________&quot;
 
 echo &quot;The Azure Resources for ASR are deployed.&quot;
 </command>
