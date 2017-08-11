@@ -26,7 +26,4 @@ wget https://raw.githubusercontent.com/alihhussain/AzureTemplates/master/Automat
 C:\ASR\MicrosoftAzureSiteRecoveryUnifiedSetup.exe /x:. /q
 mkdir "C:\ASR\Installation"
 cd "C:\ASR\Installation"
-wget https://raw.githubusercontent.com/alihhussain/AzureTemplates/master/Automation%20Demo/VMCustomData/Step3/passphrase.txt -OutFile "C:\ASR\Installation\passphrase.txt" 
-
-$asrcredfilename = Get-ChildItem "C:\ASR\asrcredfolder\" -name
-#C:\ASR\UNIFIEDSETUP.EXE /AcceptThirdpartyEULA /servermode "CS" /InstallLocation "C:\ASR\Installation" /MySQLCredsFilePath "C:\ASR\sql.cred" /VaultCredsFilePath "C:\ASR\asrcredfolder\$asrcredfilename" /EnvType "NonVMware" /SkipSpaceCheck /PSIP "{public_ip}" /CSIP "{public_ip}" /PassphraseFilePath "C:\ASR\Installation\passphrase.txt"
+wget https://raw.githubusercontent.com/alihhussain/AzureTemplates/master/Automation%20Demo/VMCustomData/Step3/passphrase.txt -OutFile "C:\ASR\Installation\passphrase.txt"
