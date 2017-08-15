@@ -64,13 +64,13 @@
         }
     },secondBranch: {
         stage(&apos;Configuring the ASR Deployed Resources&apos;){
-            build job: &apos;ASR_Infrastructure_Build&apos;, parameters: [string(name: &apos;appId&apos;, value: &quot;${appID}&quot;), string(name: &apos;workingdir&apos;, value: &quot;${env.BUILD_TAG}&quot;), password(description: &apos;Put in the password for the principle account&apos;, name: &apos;passwd&apos;, value: &quot;${passwd}&quot;), string(name: &apos;tenant&apos;, value: &quot;${tenant}&quot;), string(name: &apos;region&apos;, value: &quot;${region}&quot;), string(name: &apos;ResourceName&apos;, value: &quot;${ResourceName}&quot;)]
-        }
+            if (&quot;${asranswer}&quot; == &quot;true&quot;) {
+                    build job: &apos;ASR_Infrastructure_Build&apos;, parameters: [string(name: &apos;appId&apos;, value: &quot;${appID}&quot;), string(name: &apos;workingdir&apos;, value: &quot;${env.BUILD_TAG}&quot;), password(description: &apos;Put in the password for the principle account&apos;, name: &apos;passwd&apos;, value: &quot;${passwd}&quot;), string(name: &apos;tenant&apos;, value: &quot;${tenant}&quot;), string(name: &apos;region&apos;, value: &quot;${region}&quot;), string(name: &apos;ResourceName&apos;, value: &quot;${ResourceName}&quot;)]
+                }
+            echo &quot;The ASR Deployment was skipped&quot;
+            }
     }
     stage(&apos;Waiting to Delete Resources&apos;){
-        echo &quot;The site configured is: &quot;
-        sh &quot;sudo cat /tmp/${env.BUILD_TAG}/Initial/elbfile.txt&quot;
-        echo &quot;\n&quot;
         try{
             timeout(time: 120, unit: &apos;MINUTES&apos;) {
                 input &quot;continue without waiting...&quot;
