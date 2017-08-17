@@ -10,5 +10,5 @@ az group create -l $dblocation -n $dbresourcegroup
 
 #Create the CosmosDB
 az cosmosdb create -n $dbname -g $dbresourcegroup --kind $dbkind
-az cosmosdb show -n $dbname -g IoT | jq .documentEndpoint | awk -F '"' '{print $2}' > /tmp/iotdb_endpoint.txt
-az cosmosdb list-keys -n $dbname -g $dbresourcegroup | jq .primaryMasterKey | awk -F '"' '{print $2}' > /tmp/iotdbkey.txt
+az cosmosdb show -n $dbname -g $dbresourcegroup | jq .documentEndpoint | awk -F '"' '{print $2}' > iotdb_endpoint.txt
+az cosmosdb list-keys -n $dbname -g $dbresourcegroup | jq .primaryMasterKey | awk -F '"' '{print $2}' > iotdbkey.txt
