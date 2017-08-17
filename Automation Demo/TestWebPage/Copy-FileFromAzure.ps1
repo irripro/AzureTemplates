@@ -1,15 +1,32 @@
-<# Custom Script for Windows to install a file from Azure Storage using the staging folder created by the deployment script #>
-param (
-    [string]$artifactsLocation,
-    [string]$artifactsLocationSasToken,
-    [string]$folderName,
-    [string]$fileToInstall
-)
+﻿#Login to Azure Subscription (CSP)
+$UserName = "e9bd41cb-da37-4ed1-a978-5871d04e742b"
+$Password = "2#Adam26185"
+$SecurePassword = ConvertTo-SecureString -AsPlainText $Password -Force
+$Cred = New-Object System.Management.Automation.PSCredential -ArgumentList $UserName, $SecurePassword
+$tenant = "772a2751-8bb4-4823-957f-4e6bd5d70f45"
+Login-AzureRmAccount -Credential $Cred -ServicePrincipal -TenantId $tenant
+Get-AzureRmResourceProvider -ListAvailable > C:\Users\alhussai\Documents\Microsoft\AvailableList\CSPList.txt
+ 
+#Login to Azure Subscription (EA)
+$UserName = "a289cbdd-4fca-4a7d-88c4-6a02892223d4"
+$Password = "2#Adam26185"
+$SecurePassword = ConvertTo-SecureString -AsPlainText $Password -Force
+$Cred = New-Object System.Management.Automation.PSCredential -ArgumentList $UserName, $SecurePassword
+$tenant = "72f988bf-86f1-41af-91ab-2d7cd011db47"
+Login-AzureRmAccount -Credential $Cred -ServicePrincipal -TenantId $tenant
+#Get-AzureRmResourceProvider -ListAvailable > C:\Users\alhussai\Documents\Microsoft\AvailableList\EAList.txt
 
-$source = $artifactsLocation + "\$folderName\$fileToInstall" + $artifactsLocationSasToken
-$dest = "C:\WindowsAzure\$folderName"
+$vault = Get-AzureRmRecoveryServicesVault -Name asrvault -ResourceGroupName ExampleGroup
+$VaultSet = Set-AzureRmSiteRecoveryVaultSettings -ARSVault $Vault
+Get-AzureRmSiteRecoveryPolicy -Name testing
+Get-AzureRmSiteRecoveryFabric
 
-wget http://aka.ms/unifiedinstaller_eus -OutFile "$dest\MicrosoftAzureSiteRecoveryUnifiedSetup.exe"
+$ResourceGroup = "Group"
+$StorageAccountName = "asrstorageexample"
+$StorageAccountGeo  = "eastus"
 
-New-Item -Path $dest -ItemType directory
-Invoke-WebRequest $source -OutFile "$dest\$fileToInstall"
+$asrstorageobject = New-AzureRmStorageAccount -Location $StorageAccountGeo -Name $StorageAccountName -ResourceGroupName $ResourceGroup -SkuName "Standard_LRS"
+Write-Host ($asrstorageobject | Format-List | Out-String)
+Write-Host ($asrstorageobject.Sku | Format-List | Out-String)
+
+$ProfileResult = New-AzureSiteRecoveryProtectionProfileObject -RecoveryAzureStorageAccount $StorageAccountName -RecoveryAzureSubscription "e729c299-db43-40ce-991a-7e4572a69d50" -ReplicationFrequencyInSeconds 300 -ReplicationProvider HyperVReplica -AllowReplicaDeletion -Force -RecoveryPoints 2
