@@ -15,6 +15,6 @@ az cosmosdb create -n $dbaccountname -g $dbresourcegroup --kind $dbkind
 az cosmosdb show -n $dbaccountname -g $dbresourcegroup | jq .writeLocations[0].documentEndpoint | awk -F '"' '{print $2}' > iotdb_endpoint.txt
 az cosmosdb list-keys -n $dbaccountname -g $dbresourcegroup | jq .primaryMasterKey | awk -F '"' '{print $2}' > iotdbkey.txt
 
-az cosmosdb database create --db-name iotdbaccount --key $(cat iotdbkey.txt) --name $dbname -g iotdbrg11 --url-connection https://iotdb-eastus.documents.azure.com:443/
+az cosmosdb database create --db-name $dbname --key $(cat iotdbkey.txt) --name $dbname -g $dbresourcegroup --url-connection https://iotdb-eastus.documents.azure.com:443/
 
 az cosmosdb collection create --collection-name $dbcollection --db-name $dbname --key $(cat iotdbkey.txt) --name $dbname -g $dbresourcegroup --url-connection $(cat iotdb_endpoint.txt)
