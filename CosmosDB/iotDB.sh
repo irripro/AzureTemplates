@@ -4,7 +4,7 @@ location="eastus"
 resourcegroup="iotdbrg"
 dbname="iotdb"
 dbkind="MongoDB"
-dbaccountname="iotdbaccount"
+dbaccountname="iotdbaccount$(shuf -i1-1000 -n1)"
 dbcollection="iotdbcollection"
 
 samplejsonobject="{'joystick': {}, 'environmental': {'pressure': {'unit': 'mbar', 'value': 1012.033935546875}, 'temperature': {'unit': 'C', 'value': 32.19939422607422}, 'humidity': {'unit': '%RH', 'value': 41.28971862792969}}, 'inertial': {'orientation': {'yaw': 130.16238225817773, 'pitch': 0.5666904434304971, 'roll': 2.1385155805448903, 'unit': 'degrees', 'compass': 130.1553061821976}, 'accelerometer': {'y': 0.0369044728577137, 'x': -0.007158233784139156, 'z': 1.02303946018219, 'unit': 'g'}}, 'host': 'iot7643', 'name': 'sense-hat'}"
@@ -32,7 +32,7 @@ echo "The URL is: $pythonurl"
 curl -O https://raw.githubusercontent.com/alihhussain/AzureTemplates/master/CosmosDB/python.py
 
 #Modify the python script
-sed -i "s#pythonmongodburl#$(cat pythonurl.txt)#g" python.py
+sed -i "s#pythonmongodburl#$(cat pythonurl.txt)" python.py
 sed -i "s#jsonobject#$samplejsonobject#g" python.py
 
 cat python.py
