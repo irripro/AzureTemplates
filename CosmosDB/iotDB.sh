@@ -1,18 +1,20 @@
 #!/bin/bash
 #Define the Variables
 dblocation="eastus"
-dbresourcegroup="iotdbrg1"
+dbresourcegroup="iotdbrg11"
 dbname="iotdb"
 dbkind="MongoDB"
+dbaccountname="iotdbaccount"
+dbcollection="iotdbcollection"
 
 #Craete the Resource Group
 az group create -l $dblocation -n $dbresourcegroup
 
-#Create the CosmosDB
-az cosmosdb create -n $dbname -g $dbresourcegroup --kind $dbkind
-az cosmosdb show -n $dbname -g $dbresourcegroup | jq .documentEndpoint | awk -F '"' '{print $2}' > iotdb_endpoint.txt
-az cosmosdb list-keys -n $dbname -g $dbresourcegroup | jq .primaryMasterKey | awk -F '"' '{print $2}' > iotdbkey.txt
+#Create the CosmosDB Account
+az cosmosdb create -n $dbaccountname -g $dbresourcegroup --kind $dbkind
+az cosmosdb show -n $dbaccountname -g $dbresourcegroup | jq .writeLocations[0].documentEndpoint | awk -F '"' '{print $2}' > iotdb_endpoint.txt
+az cosmosdb list-keys -n $dbaccountname -g $dbresourcegroup | jq .primaryMasterKey | awk -F '"' '{print $2}' > iotdbkey.txt
 
-az cosmosdb collection create --collection-name mongodbcollection --db-name $dbname
+az cosmosdb database create --db-name iotdbaccount --key $(cat iotdbkey.txt) --name $dbname -g iotdbrg11 --url-connection https://iotdb-eastus.documents.azure.com:443/
 
-az cosmosdb collection list --db-name $dbname --key $(cat iotdbkey.txt) -g $dbresourcegroup --url-connection $(cat iotdb_endpoint.txt) --name $dbname
+az cosmosdb collection create --collection-name $dbcollection --db-name $dbname --key $(cat iotdbkey.txt) --name $dbname -g $dbresourcegroup --url-connection $(cat iotdb_endpoint.txt)
