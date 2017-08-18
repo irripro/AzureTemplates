@@ -4,7 +4,7 @@ dblocation="eastus"
 dbresourcegroup="iotdbresourceg"
 dbname="iotdb"
 dbkind="MongoDB"
-dbaccountname="iotdbaccount"
+dbaccountname="iotdbaccount25"
 dbcollection="iotdbcollection"
 
 #Craete the Resource Group
