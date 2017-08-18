@@ -36,6 +36,3 @@ sed -i "s#{pythonmongodburl}#$pythonurl#g" python.py
 sed -i "s#jsonobject#$samplejsonobject#g" python.py
 
 cat python.py
-
-
-
