@@ -3,7 +3,7 @@ import os
 
 #Define the connection
 url = "{pythonmongodburl}"
-client = pymongo.MongoClient(uri)
+client = pymongo.MongoClient(url)
 
 db = client.iotdb.iotdbcollection
 student_record = "jsonobject"
