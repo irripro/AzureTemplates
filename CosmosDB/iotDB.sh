@@ -1,7 +1,7 @@
 #!/bin/bash
 #Define the Variables
 dblocation="eastus"
-dbresourcegroup="iotdbrg"
+dbresourcegroup="iotdbrgsecond"
 dbname="iotdb"
 dbkind="MongoDB"
 dbaccountname="iotdbaccount25"
