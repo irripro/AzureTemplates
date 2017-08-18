@@ -32,7 +32,7 @@ echo "The URL is: $pythonurl"
 curl -O https://raw.githubusercontent.com/alihhussain/AzureTemplates/master/CosmosDB/python.py
 
 #Modify the python script
-sed -i "s#{pythonmongodburl}#$pythonurl#g" python.py
+sed -i "s#{pythonmongodburl}#$(cat pythonurl.txt)#g" python.py
 sed -i "s#jsonobject#$samplejsonobject#g" python.py
 
 cat python.py
