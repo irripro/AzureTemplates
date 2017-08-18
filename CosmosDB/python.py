@@ -15,6 +15,3 @@ results = db.find()
 #Loop through the results 
 for record in results:
     print(record)
-
-# close the connection to MongoDB
-connection.close()
