@@ -2,7 +2,7 @@ import pymongo
 import os
 
 #Define the connection
-url = "{pythonmongodburl}"
+url = "pythonmongodburl"
 client = pymongo.MongoClient(url)
 
 db = client.iotdb.iotdbcollection
