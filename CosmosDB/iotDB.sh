@@ -6,6 +6,11 @@ dbname="iotdb"
 dbkind="MongoDB"
 dbaccountname="iotdbaccount25"
 dbcollection="iotdbcollection"
+pythonurl="mongodb://$dbaccountname:$(cat iotdbkey.txt)@$dbaccountname.documents.azure.com:10255/?ssl=true&replicaSet=globaldb"
+echo $pythonurl > pythonurl.txt
+
+echo "The URL is: $pythonurl"
+
 
 #Craete the Resource Group
 az group create -l $dblocation -n $dbresourcegroup
@@ -18,3 +23,6 @@ az cosmosdb list-keys -n $dbaccountname -g $dbresourcegroup | jq .primaryMasterK
 az cosmosdb database create --db-name $dbname --key $(cat iotdbkey.txt) --name $dbname -g $dbresourcegroup --url-connection $(cat iotdb_endpoint.txt)
 
 az cosmosdb collection create --collection-name $dbcollection --db-name $dbname --key $(cat iotdbkey.txt) --name $dbname -g $dbresourcegroup --url-connection $(cat iotdb_endpoint.txt)
+
+
+
