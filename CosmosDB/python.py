@@ -6,7 +6,7 @@ url = "{pythonmongodburl}"
 client = pymongo.MongoClient(url)
 
 db = client.iotdb.iotdbcollection
-student_record = "jsonobject"
+student_record = jsonobject
 
 db.insert(student_record)
 
