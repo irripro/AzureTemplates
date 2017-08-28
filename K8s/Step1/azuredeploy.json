@@ -1,0 +1,44 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2014-04-01-preview/deploymentTemplate.json",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"Subnetyouwant": {
+			"type": "string",
+			"metadata": {
+				"description": "Subnet you would like."
+			},
+            "defaultValue": "10.0.0.0/24"
+		}
+	},
+	"variables": {
+        "virtualNetworkName": "sshVNET",
+        "addressPrefix": "10.0.0.0/16",
+		"subnet1Name": "Subnet-1",
+		"subnet1Prefix": "[parameters('Subnetyouwant')]",
+		"vnetID": "[resourceId('Microsoft.Network/virtualNetworks', variables('virtualNetworkName'))]",
+		"subnet1Ref": "[concat(variables('vnetID'),'/subnets/',variables('subnet1Name'))]",
+        "apiVersion": "2015-06-15",
+		"location": "[resourceGroup().location]"
+	},
+	"resources": [{
+			"apiVersion": "[variables('apiVersion')]",
+			"type": "Microsoft.Network/virtualNetworks",
+			"name": "[variables('virtualNetworkName')]",
+			"location": "[variables('location')]",
+			"properties": {
+				"addressSpace": {
+					"addressPrefixes": [
+						"[variables('addressPrefix')]"
+					]
+				},
+				"subnets": [{
+						"name": "[variables('subnet1Name')]",
+						"properties": {
+							"addressPrefix": "[variables('subnet1Prefix')]"
+						}
+					}
+				]
+			}
+		}
+	]
+}

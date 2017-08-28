@@ -1,0 +1,56 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2014-04-01-preview/deploymentTemplate.json",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"SubnetCIDR": {
+			"type": "string",
+			"metadata": {
+				"description": "Subnet you would like."
+			},
+			"defaultValue": "10.0.0.0/24"
+		}
+	},
+	"variables": {
+		"apiVersion": "2017-03-01",
+		"virtualNetworkName": "K8sVNET",
+		"addressPrefix": "10.0.0.0/16",
+		"subnetPublicName": "Subnet-Public",
+		"subnetPublicPrefix": "10.0.0.0/24",
+		"subnetPrivateName1": "Subnet-Private-1",
+		"subnetPrivatePrefix1": "10.0.1.0/24",
+		"subnetPrivateName2": "Subnet-Private-2",
+		"subnetPrivatePrefix2": "10.0.2.0/24",
+		"location": "[resourceGroup().location]"
+	},
+	"resources": [{
+			"apiVersion": "[variables('apiVersion')]",
+			"type": "Microsoft.Network/virtualNetworks",
+			"name": "[variables('virtualNetworkName')]",
+			"location": "[variables('location')]",
+			"properties": {
+				"addressSpace": {
+					"addressPrefixes": [
+						"[variables('addressPrefix')]"
+					]
+				},
+				"subnets": [{
+						"name": "[variables('subnetPublicName')]",
+						"properties": {
+							"addressPrefix": "[variables('subnetPublicPrefix')]"
+						}
+					}, {
+						"name": "[variables('subnetPrivateName1')]",
+						"properties": {
+							"addressPrefix": "[variables('subnetPrivatePrefix1')]"
+						}
+					}, {
+						"name": "[variables('subnetPrivateName2')]",
+						"properties": {
+							"addressPrefix": "[variables('subnetPrivatePrefix2')]"
+						}
+					}
+				]
+			}
+		}
+	]
+}
