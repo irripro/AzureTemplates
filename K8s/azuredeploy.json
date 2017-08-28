@@ -20,6 +20,8 @@
 		"subnetPrivatePrefix1": "10.0.1.0/24",
 		"subnetPrivateName2": "Subnet-Private-2",
 		"subnetPrivatePrefix2": "10.0.2.0/24",
+		"subnetPrivateName3": "Subnet-Private-3",
+		"subnetPrivatePrefix3": "10.0.3.0/24",        
 		"location": "[resourceGroup().location]"
 	},
 	"resources": [{
@@ -47,6 +49,11 @@
 						"name": "[variables('subnetPrivateName2')]",
 						"properties": {
 							"addressPrefix": "[variables('subnetPrivatePrefix2')]"
+						}
+					}, {
+						"name": "[variables('subnetPrivateName3')]",
+						"properties": {
+							"addressPrefix": "[variables('subnetPrivatePrefix3')]"
 						}
 					}
 				]
