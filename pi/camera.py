@@ -21,7 +21,7 @@ def camera_still():
     timestamp = int(time.time())
 
     # Add a filename with a timestamp
-    filename = "./stills/img_{}.jpg".format(str(timestamp))
+    filename = "./content/img_{}.jpg".format(str(timestamp))
     camera.capture(filename)
     camera.stop_preview()
     print('File has been stored as: {}'.format(filename))
@@ -34,7 +34,7 @@ def camera_video():
 
     # Add a filename with a timestamp
     timestamp = int(time.time())
-    filename = "./videos/video_{}.h264".format(str(timestamp))
+    filename = "./content/video_{}.h264".format(str(timestamp))
     camera.start_recording(filename)
     sleep(10)
     camera.stop_recording()
@@ -53,6 +53,5 @@ def main():
         print("The way to use this is: 'python [video/still]'")
 
 if __name__== "__main__":
-    cleanup("/home/pi/camera/stills")
-    cleanup("/home/pi/camera/videos")
+    cleanup("/home/pi/camera/content")
     main()
