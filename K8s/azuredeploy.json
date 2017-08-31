@@ -28,7 +28,7 @@
 		"subnetPrivatePrefix2": "10.0.2.0/24",
 		"subnetPrivateName3": "Subnet-Private-3",
 		"subnetPrivatePrefix3": "10.0.3.0/24",
-		"location": "[resourceGroup().location]"
+		"location": "[resourceGroup().location]",
 		"MasterVM": "MasterController",
 		"MasterNicName": "MasterControllerNIC",
 		"MinionVm": "Minion",
