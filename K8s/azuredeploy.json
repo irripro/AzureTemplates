@@ -48,9 +48,9 @@
 		"sshKeyPath": "[concat('/home/',parameters('adminUserName'),'/.ssh/authorized_keys')]",
 		"vnetID": "[resourceId('Microsoft.Network/virtualNetworks', variables('virtualNetworkName'))]",
 		"subnet1Ref": "[concat(variables('vnetID'),'/subnets/',variables('subnetPublicName'))]",
-		"apiVersion": "2015-06-15",
+		"apiVersion": "2017-03-30",
 		"availabilitySetName": "ocpkubernetesAS",
-		"lbID": "[resourceId('Microsoft.Network/loadBalancers',variables('dnsnameelb'))]",
+		"lbID": "[resourceId('Microsoft.Network/loadBalancers',variables('ELBName'))]",
 		"frontEndIPConfigID": "[concat(variables('lbID'),'/frontendIPConfigurations/LoadBalancerFrontEnd')]",
 		"lbPoolID": "[concat(variables('lbID'),'/backendAddressPools/BackendPool1')]",
 		"lbProbeID": "[concat(variables('lbID'),'/probes/tcpProbe')]",
@@ -108,8 +108,7 @@
 			"location": "[resourceGroup().location]",
 			"properties": {
 				"platformFaultDomainCount": "2",
-				"platformUpdateDomainCount": "2",
-				"managed": "true"
+				"platformUpdateDomainCount": "2"
 			}
 		},{
 			"apiVersion": "[variables('apiVersion')]",
