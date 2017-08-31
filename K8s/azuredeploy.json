@@ -2,16 +2,22 @@
 	"$schema": "http://schema.management.azure.com/schemas/2014-04-01-preview/deploymentTemplate.json",
 	"contentVersion": "1.0.0.0",
 	"parameters": {
-		"SubnetCIDR": {
+		"adminUserName": {
+			"type": "string",
+			"defaultValue": "azureuser",
+			"metadata": {
+				"description": "User name for the Virtual Machine."
+			}
+		},
+		"sshKeyData": {
 			"type": "string",
 			"metadata": {
-				"description": "Subnet you would like."
+				"description": "SSH rsa public key file as a string."
 			},
-			"defaultValue": "10.0.0.0/24"
+			"defaultValue": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCsvQoaddMbc5zdqMXnBrn53eatB1hzHwk0rlpg/SUn+B6yMJRq0fvntn1/LWkhsOv2QIOkSZhnZO5rUJuoSaBZuRkXf2wUsva2Z9iaKMozzcadUXCU0y/2ekCPY+8eUZOSvTgmn2K0xT12H+rrzGK6MBgnFgDZ2npROZa4eF4SkMxcMpFbOiOEY53/OiokbwEFUXD3omrhURqJzOOWdaCy4XPjWvjEzpNagTM/uy0habgSVVa3Uj/aF8QkgixJOlgME4jBMyM4uyd/lCsgKvrFquwVbOWZUcic+lZTDVfjIUyqTkq6+avzxtWnxMNrktW7gfOA1Des53Vs4N4QL+af jenkins@jenkins"
 		}
 	},
 	"variables": {
-		"apiVersion": "2017-03-01",
 		"virtualNetworkName": "K8sVNET",
 		"addressPrefix": "10.0.0.0/16",
 		"subnetPublicName": "Subnet-Public",
@@ -21,8 +27,34 @@
 		"subnetPrivateName2": "Subnet-Private-2",
 		"subnetPrivatePrefix2": "10.0.2.0/24",
 		"subnetPrivateName3": "Subnet-Private-3",
-		"subnetPrivatePrefix3": "10.0.3.0/24",        
+		"subnetPrivatePrefix3": "10.0.3.0/24",
 		"location": "[resourceGroup().location]"
+		"MasterVM": "MasterController",
+		"MasterNicName": "MasterControllerNIC",
+		"MinionVm": "Minion",
+		"MinionNicName2": "MinionNIC",
+		"MasterPublicIPAddressNameelb": "K8sPublicIpELB",
+		"publicIPAddressTypeelb": "Static",
+		"publicIPAddresselbID": "[resourceId('Microsoft.Network/publicIPAddresses',variables('MasterPublicIPAddressNameelb'))]",
+		"dnsnameelb": "[concat(variables('uniqueDnsLabelPrefixelb'), '.', resourceGroup().location, '.cloudapp.azure.com')]",
+		"uniqueDnsLabelPrefixelb": "[concat('teamocpkubernetes', uniquestring(resourceGroup().id))]",
+		"ELBName": "K8sELB",
+		"vmSize": "Standard_DS2_v2",
+		"location": "[resourceGroup().location]",
+		"CentOSVersion": "7.2",
+		"imagePublisher": "OpenLogic",
+		"imageOffer": "CentOS",
+		"PublicNetworkSecurityGroupName": "K8sNetworkSecurityGroup",
+		"sshKeyPath": "[concat('/home/',parameters('adminUserName'),'/.ssh/authorized_keys')]",
+		"vnetID": "[resourceId('Microsoft.Network/virtualNetworks', variables('virtualNetworkName'))]",
+		"subnet1Ref": "[concat(variables('vnetID'),'/subnets/',variables('subnet1Name'))]",
+		"apiVersion": "2015-06-15",
+		"availabilitySetName": "ocpkubernetesAS",
+		"lbID": "[resourceId('Microsoft.Network/loadBalancers',variables('dnsnameelb'))]",
+		"frontEndIPConfigID": "[concat(variables('lbID'),'/frontendIPConfigurations/LoadBalancerFrontEnd')]",
+		"lbPoolID": "[concat(variables('lbID'),'/backendAddressPools/BackendPool1')]",
+		"lbProbeID": "[concat(variables('lbID'),'/probes/tcpProbe')]",
+		"LBRules": "[concat(variables('lbID'),'/loadBalancingRules/LBRule')]"
 	},
 	"resources": [{
 			"apiVersion": "[variables('apiVersion')]",
@@ -54,6 +86,132 @@
 						"name": "[variables('subnetPrivateName3')]",
 						"properties": {
 							"addressPrefix": "[variables('subnetPrivatePrefix3')]"
+						}
+					}
+				]
+			}
+		}, {
+			"apiVersion": "[variables('apiVersion')]",
+			"type": "Microsoft.Network/publicIPAddresses",
+			"name": "[variables('MasterPublicIPAddressNameelb')]",
+			"location": "[resourceGroup().location]",
+			"properties": {
+				"publicIPAllocationMethod": "[variables('publicIPAddressTypeelb')]",
+				"dnsSettings": {
+					"domainNameLabel": "[variables('uniqueDnsLabelPrefixelb')]"
+				}
+			}
+		}, {
+			"type": "Microsoft.Compute/availabilitySets",
+			"name": "[variables('availabilitySetName')]",
+			"apiVersion": "[variables('apiVersion')]",
+			"location": "[resourceGroup().location]",
+			"properties": {
+				"platformFaultDomainCount": "2",
+				"platformUpdateDomainCount": "2",
+				"managed": "true"
+			}
+		},{
+			"apiVersion": "[variables('apiVersion')]",
+			"name": "[variables('ELBName')]",
+			"type": "Microsoft.Network/loadBalancers",
+			"location": "[resourceGroup().location]",
+			"dependsOn": [
+				"[concat('Microsoft.Network/publicIPAddresses/', variables('MasterPublicIPAddressNameelb'))]"
+			],
+			"properties": {
+				"frontendIPConfigurations": [{
+						"name": "LoadBalancerFrontEnd",
+						"loadBalancingRules": {
+							"id": "[variables('LBRules')]"
+						},
+						"properties": {
+							"publicIPAddress": {
+								"id": "[variables('publicIPAddresselbID')]"
+							}
+						}
+					}
+				],
+				"backendAddressPools": [{
+						"name": "BackendPool1",
+						"loadBalancingRules": {
+							"id": "[variables('LBRules')]"
+						}
+					}
+				],
+				"loadBalancingRules": [{
+						"name": "LBRule",
+						"properties": {
+							"frontendIPConfiguration": {
+								"id": "[variables('frontEndIPConfigID')]"
+							},
+							"backendAddressPool": {
+								"id": "[variables('lbPoolID')]"
+							},
+							"protocol": "tcp",
+							"frontendPort": 8080,
+							"backendPort": 8080,
+							"enableFloatingIP": false,
+							"idleTimeoutInMinutes": 5,
+							"probe": {
+								"id": "[variables('lbProbeID')]"
+							}
+						}
+					}
+				],
+				"inboundNatRules": [{
+						"name": "VM1",
+						"properties": {
+							"frontendIPConfiguration": {
+								"id": "[variables('frontEndIPConfigID')]"
+							},
+							"protocol": "tcp",
+							"frontendPort": 8022,
+							"backendPort": 22,
+							"enableFloatingIP": false
+						}
+					}, {
+						"name": "VM2",
+						"properties": {
+							"frontendIPConfiguration": {
+								"id": "[variables('frontEndIPConfigID')]"
+							},
+							"protocol": "tcp",
+							"frontendPort": 8023,
+							"backendPort": 22,
+							"enableFloatingIP": false
+						}
+					},{
+						"name": "VM3",
+						"properties": {
+							"frontendIPConfiguration": {
+								"id": "[variables('frontEndIPConfigID')]"
+							},
+							"protocol": "tcp",
+							"frontendPort": 8024,
+							"backendPort": 22,
+							"enableFloatingIP": false
+						}
+					},{
+						"name": "VM4",
+						"properties": {
+							"frontendIPConfiguration": {
+								"id": "[variables('frontEndIPConfigID')]"
+							},
+							"protocol": "tcp",
+							"frontendPort": 8025,
+							"backendPort": 22,
+							"enableFloatingIP": false
+						}
+					}
+				],
+				"probes": [{
+						"name": "tcpProbe",
+						"properties": {
+							"protocol": "tcp",
+							"port": 80,
+							"intervalInSeconds": 5,
+							"numberOfProbes": 2
 						}
 					}
 				]
