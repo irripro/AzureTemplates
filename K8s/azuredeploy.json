@@ -244,6 +244,38 @@
 					}
 				]
 			}
+		},, {
+			"apiVersion": "2017-03-01",
+			"type": "Microsoft.Network/networkInterfaces",
+			"name": "VMNIC1",
+			"location": "[variables('location')]",
+			"dependsOn": [
+				"[concat('Microsoft.Network/loadBalancers/', variables('ELBName'))]",
+                "[concat('Microsoft.Network/networkSecurityGroups/', variables('PublicNetworkSecurityGroupName'))]"
+			],
+			"properties": {
+				"ipConfigurations": [{
+						"name": "VMipconfig1",
+						"properties": {
+							"privateIPAllocationMethod": "Dynamic",
+							"subnet": {
+								"id": "[concat(variables('vnetID'),'/subnets/',variables('subnetPublicName'))]"
+							},
+							"loadBalancerBackendAddressPools": [{
+									"id": "[concat(variables('lbID'), '/backendAddressPools/BackendPool1')]"
+								}
+							],
+							"loadBalancerInboundNatRules": [{
+									"id": "[concat(variables('lbID'),'/inboundNatRules/VM1')]"
+								}
+							]
+						}
+					}
+				],
+                "networkSecurityGroup": {
+                    "id": "[resourceId('Microsoft.Network/networkSecurityGroups', variables('PublicNetworkSecurityGroupName'))]"
+                }
+			}
 		}
 	]
 }
