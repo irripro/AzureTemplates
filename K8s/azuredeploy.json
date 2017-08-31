@@ -28,7 +28,7 @@
 		"subnetPrivatePrefix2": "10.0.2.0/24",
 		"subnetPrivateName3": "Subnet-Private-3",
 		"subnetPrivatePrefix3": "10.0.3.0/24",
-		"location": "[resourceGroup().location]"
+		"location": "[resourceGroup().location]",
 		"MasterVM": "MasterController",
 		"MasterNicName": "MasterControllerNIC",
 		"MinionVm": "Minion",
@@ -47,7 +47,7 @@
 		"PublicNetworkSecurityGroupName": "K8sNetworkSecurityGroup",
 		"sshKeyPath": "[concat('/home/',parameters('adminUserName'),'/.ssh/authorized_keys')]",
 		"vnetID": "[resourceId('Microsoft.Network/virtualNetworks', variables('virtualNetworkName'))]",
-		"subnet1Ref": "[concat(variables('vnetID'),'/subnets/',variables('subnet1Name'))]",
+		"subnet1Ref": "[concat(variables('vnetID'),'/subnets/',variables('subnetPublicName'))]",
 		"apiVersion": "2015-06-15",
 		"availabilitySetName": "ocpkubernetesAS",
 		"lbID": "[resourceId('Microsoft.Network/loadBalancers',variables('dnsnameelb'))]",
