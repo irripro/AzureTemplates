@@ -110,8 +110,8 @@
 				"platformFaultDomainCount": "2",
 				"platformUpdateDomainCount": "2"
 			}
-		},{
-			"apiVersion": "2017-08-01",
+		}, {
+			"apiVersion": "2017-03-01",
 			"name": "[variables('ELBName')]",
 			"type": "Microsoft.Network/loadBalancers",
 			"location": "[resourceGroup().location]",
@@ -121,9 +121,6 @@
 			"properties": {
 				"frontendIPConfigurations": [{
 						"name": "LoadBalancerFrontEnd",
-						"loadBalancingRules": {
-							"id": "[variables('LBRules')]"
-						},
 						"properties": {
 							"publicIPAddress": {
 								"id": "[variables('publicIPAddresselbID')]"
@@ -132,10 +129,7 @@
 					}
 				],
 				"backendAddressPools": [{
-						"name": "BackendPool1",
-						"loadBalancingRules": {
-							"id": "[variables('LBRules')]"
-						}
+						"name": "BackendPool1"
 					}
 				],
 				"loadBalancingRules": [{
@@ -180,7 +174,7 @@
 							"backendPort": 22,
 							"enableFloatingIP": false
 						}
-					},{
+					}, {
 						"name": "VM3",
 						"properties": {
 							"frontendIPConfiguration": {
@@ -191,7 +185,7 @@
 							"backendPort": 22,
 							"enableFloatingIP": false
 						}
-					},{
+					}, {
 						"name": "VM4",
 						"properties": {
 							"frontendIPConfiguration": {
