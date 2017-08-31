@@ -57,7 +57,7 @@
 		"LBRules": "[concat(variables('lbID'),'/loadBalancingRules/LBRule')]"
 	},
 	"resources": [{
-			"apiVersion": "[variables('apiVersion')]",
+			"apiVersion": "2017-08-01",
 			"type": "Microsoft.Network/virtualNetworks",
 			"name": "[variables('virtualNetworkName')]",
 			"location": "[variables('location')]",
@@ -104,14 +104,14 @@
 		}, {
 			"type": "Microsoft.Compute/availabilitySets",
 			"name": "[variables('availabilitySetName')]",
-			"apiVersion": "[variables('apiVersion')]",
+			"apiVersion": "2017-03-30",
 			"location": "[resourceGroup().location]",
 			"properties": {
 				"platformFaultDomainCount": "2",
 				"platformUpdateDomainCount": "2"
 			}
 		},{
-			"apiVersion": "[variables('apiVersion')]",
+			"apiVersion": "2017-08-01",
 			"name": "[variables('ELBName')]",
 			"type": "Microsoft.Network/loadBalancers",
 			"location": "[resourceGroup().location]",
