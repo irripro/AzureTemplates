@@ -209,7 +209,7 @@
 					}
 				]
 			}
-		},{
+		}, {
 			"apiVersion": "2017-03-01",
 			"type": "Microsoft.Network/networkSecurityGroups",
 			"name": "[variables('PublicNetworkSecurityGroupName')]",
@@ -244,14 +244,14 @@
 					}
 				]
 			}
-		},, {
+		}, {
 			"apiVersion": "2017-03-01",
 			"type": "Microsoft.Network/networkInterfaces",
 			"name": "VMNIC1",
 			"location": "[variables('location')]",
 			"dependsOn": [
 				"[concat('Microsoft.Network/loadBalancers/', variables('ELBName'))]",
-                "[concat('Microsoft.Network/networkSecurityGroups/', variables('PublicNetworkSecurityGroupName'))]"
+				"[concat('Microsoft.Network/networkSecurityGroups/', variables('PublicNetworkSecurityGroupName'))]"
 			],
 			"properties": {
 				"ipConfigurations": [{
@@ -272,9 +272,9 @@
 						}
 					}
 				],
-                "networkSecurityGroup": {
-                    "id": "[resourceId('Microsoft.Network/networkSecurityGroups', variables('PublicNetworkSecurityGroupName'))]"
-                }
+				"networkSecurityGroup": {
+					"id": "[resourceId('Microsoft.Network/networkSecurityGroups', variables('PublicNetworkSecurityGroupName'))]"
+				}
 			}
 		}
 	]
