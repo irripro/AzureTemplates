@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, request
 
 app = Flask(__name__)
 
@@ -22,6 +22,13 @@ def action(todo):
 @app.route('/post/<int:postid>')
 def post(postid):
     return "<h2>The Post ID is: %s</h2>" %postid
+
+@app.route("/bacon", methods=['GET','POST'])
+def bacon():
+    if request.method == 'POST':
+        return "You are using the Post"
+    else:
+        return "You are probably using GET"
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0',debug=True)
