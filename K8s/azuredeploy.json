@@ -49,7 +49,7 @@
 		"frontEndIPConfigID": "[concat(variables('lbID'),'/frontendIPConfigurations/LoadBalancerFrontEnd')]",
 		"lbPoolID": "[concat(variables('lbID'),'/backendAddressPools/BackendPool')]",
 		"lbProbeID": "[concat(variables('lbID'),'/probes/tcpProbe')]",
-        "nodes": 4
+        "nodes": 7
 	},
 	"resources": [{
 			"apiVersion": "2017-08-01",
@@ -194,7 +194,50 @@
 							"backendPort": 22,
 							"enableFloatingIP": false
 						}
-					}
+					},{
+						"name": "VM4",
+						"properties": {
+							"frontendIPConfiguration": {
+								"id": "[variables('frontEndIPConfigID')]"
+							},
+							"protocol": "tcp",
+							"frontendPort": 8026,
+							"backendPort": 22,
+							"enableFloatingIP": false
+						}
+					}, {
+						"name": "VM5",
+						"properties": {
+							"frontendIPConfiguration": {
+								"id": "[variables('frontEndIPConfigID')]"
+							},
+							"protocol": "tcp",
+							"frontendPort": 8027,
+							"backendPort": 22,
+							"enableFloatingIP": false
+						}
+					}, {
+						"name": "VM6",
+						"properties": {
+							"frontendIPConfiguration": {
+								"id": "[variables('frontEndIPConfigID')]"
+							},
+							"protocol": "tcp",
+							"frontendPort": 8028,
+							"backendPort": 22,
+							"enableFloatingIP": false
+						}
+					}, {
+						"name": "VM7",
+						"properties": {
+							"frontendIPConfiguration": {
+								"id": "[variables('frontEndIPConfigID')]"
+							},
+							"protocol": "tcp",
+							"frontendPort": 8029,
+							"backendPort": 22,
+							"enableFloatingIP": false
+						}
 				],
 				"probes": [{
 						"name": "tcpProbe",
