@@ -52,7 +52,8 @@
 		"frontEndIPConfigID": "[concat(variables('lbID'),'/frontendIPConfigurations/LoadBalancerFrontEnd')]",
 		"lbPoolID": "[concat(variables('lbID'),'/backendAddressPools/BackendPool')]",
 		"lbProbeID": "[concat(variables('lbID'),'/probes/tcpProbe')]",
-		"LBRules": "[concat(variables('lbID'),'/loadBalancingRules/LBRule')]"
+		"LBRules": "[concat(variables('lbID'),'/loadBalancingRules/LBRule')]",
+        "nodes": 4
 	},
 	"resources": [{
 			"apiVersion": "2017-08-01",
@@ -279,7 +280,7 @@
 			},
 			"copy": {
 				"name": "networkinterfaces",
-				"count": 4,
+				"count": "[variables('nodes')]",
 				"mode": "parallel"
 			}
 		}, {
@@ -335,7 +336,7 @@
 			},
 			"copy": {
 				"name": "virtualmachines",
-				"count": 4,
+				"count": "[variables('nodes')]",
 				"mode": "parallel"
 			}
 		}
