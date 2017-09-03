@@ -29,10 +29,8 @@
 		"subnetPrivateName3": "Subnet-Private-3",
 		"subnetPrivatePrefix3": "10.0.3.0/24",
 		"location": "[resourceGroup().location]",
-		"MasterVM": "MasterController",
-		"MasterNicName": "MasterControllerNIC",
-		"MinionVm": "Minion",
-		"MinionNicName2": "MinionNIC",
+		"VMName": "VM",
+		"NetworkInterfaceName": "VMNIC",
 		"MasterPublicIPAddressNameelb": "K8sPublicIpELB",
 		"publicIPAddressTypeelb": "Static",
 		"publicIPAddresselbID": "[resourceId('Microsoft.Network/publicIPAddresses',variables('MasterPublicIPAddressNameelb'))]",
@@ -205,7 +203,7 @@
 						"name": "tcpProbe",
 						"properties": {
 							"protocol": "tcp",
-							"port": 80,
+							"port": 8080,
 							"intervalInSeconds": 5,
 							"numberOfProbes": 2
 						}
@@ -237,7 +235,7 @@
 							"description": "Locks inbound down to nginx default port 80.",
 							"protocol": "Tcp",
 							"sourcePortRange": "*",
-							"destinationPortRange": "80",
+							"destinationPortRange": "8080",
 							"sourceAddressPrefix": "*",
 							"destinationAddressPrefix": "*",
 							"access": "Allow",
@@ -250,7 +248,7 @@
 		}, {
 			"apiVersion": "2017-03-01",
 			"type": "Microsoft.Network/networkInterfaces",
-			"name": "VMNIC1",
+			"name": "[variables('NetworkInterfaceName')]",
 			"location": "[variables('location')]",
 			"dependsOn": [
 				"[concat('Microsoft.Network/loadBalancers/', variables('ELBName'))]",
@@ -282,10 +280,10 @@
 		}, {
 			"apiVersion": "2017-03-30",
 			"type": "Microsoft.Compute/virtualMachines",
-			"name": "[variables('MasterVM')]",
+			"name": "[variables('VMName')]",
 			"location": "[variables('location')]",
 			"dependsOn": [
-				"Microsoft.Network/networkInterfaces/VMNIC1",
+				"[concat('Microsoft.Network/networkInterfaces/', variables('NetworkInterfaceName'))]",
 				"[concat('Microsoft.Compute/availabilitySets/', variables('availabilitySetName'))]"
 			],
 			"properties": {
@@ -293,7 +291,7 @@
 					"vmSize": "[variables('vmSize')]"
 				},
 				"osProfile": {
-					"computerName": "[variables('MasterVM')]",
+					"computerName": "[variables('VMName')]",
 					"adminUsername": "[parameters('adminUserName')]",
 					"linuxConfiguration": {
 						"disablePasswordAuthentication": "true",
@@ -322,7 +320,7 @@
 				},
 				"networkProfile": {
 					"networkInterfaces": [{
-							"id": "[resourceId('Microsoft.Network/networkInterfaces', 'VMNIC1')]"
+							"id": "[resourceId('Microsoft.Network/networkInterfaces', variables('NetworkInterfaceName'))]"
 						}
 					]
 				},
