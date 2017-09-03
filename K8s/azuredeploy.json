@@ -248,7 +248,7 @@
 		}, {
 			"apiVersion": "2017-03-01",
 			"type": "Microsoft.Network/networkInterfaces",
-			"name": "[concat(variables('NetworkInterfaceName'), copyIndex()]",
+			"name": "[concat(variables('NetworkInterfaceName'), copyIndex())]",
 			"location": "[variables('location')]",
 			"dependsOn": [
 				"[concat('Microsoft.Network/loadBalancers/', variables('ELBName'))]",
