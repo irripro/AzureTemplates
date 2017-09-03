@@ -319,7 +319,7 @@
 				},
 				"networkProfile": {
 					"networkInterfaces": [{
-							"id": "[resourceId('Microsoft.Network/networkInterfaces/VMNIC1')]"
+							"id": "[resourceId('Microsoft.Network/networkInterfaces', 'VMNIC1')]"
 						}
 					]
 				},
