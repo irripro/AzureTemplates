@@ -280,8 +280,7 @@
 			"copy": {
 				"name": "networkinterfaces",
 				"count": 4,
-				"mode": "parallel",
-				"batchSize": 4
+				"mode": "parallel"
 			}
 		}, {
 			"apiVersion": "2017-03-30",
@@ -337,8 +336,7 @@
 			"copy": {
 				"name": "virtualmachines",
 				"count": 4,
-				"mode": "parallel",
-				"batchSize": 4
+				"mode": "parallel"
 			}
 		}
 	]
