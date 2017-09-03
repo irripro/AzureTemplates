@@ -20,14 +20,15 @@
 	"variables": {
 		"virtualNetworkName": "K8sVNET",
 		"addressPrefix": "10.0.0.0/16",
-		"subnetPublicName": "Subnet-Public",
-		"subnetPublicPrefix": "10.0.0.0/24",
-		"subnetPrivateName1": "Subnet-Private-1",
-		"subnetPrivatePrefix1": "10.0.1.0/24",
-		"subnetPrivateName2": "Subnet-Private-2",
-		"subnetPrivatePrefix2": "10.0.2.0/24",
-		"subnetPrivateName3": "Subnet-Private-3",
-		"subnetPrivatePrefix3": "10.0.3.0/24",
+		"SubnetName": "SubnetName",
+		"subnetPrefix0": "10.0.0.0/24",
+		"subnetPrefix1": "10.0.1.0/24",
+		"subnetPrefix2": "10.0.2.0/24",
+		"subnetPrefix3": "10.0.3.0/24",
+		"subnetPrefix4": "10.0.4.0/24",
+		"subnetPrefix5": "10.0.5.0/24",
+		"subnetPrefix6": "10.0.6.0/24",
+        "subnetPrefix7": "10.0.7.0/24",
 		"location": "[resourceGroup().location]",
 		"VMName": "VM",
 		"NetworkInterfaceName": "VMNIC",
@@ -49,7 +50,7 @@
 		"frontEndIPConfigID": "[concat(variables('lbID'),'/frontendIPConfigurations/LoadBalancerFrontEnd')]",
 		"lbPoolID": "[concat(variables('lbID'),'/backendAddressPools/BackendPool')]",
 		"lbProbeID": "[concat(variables('lbID'),'/probes/tcpProbe')]",
-        "nodes": 7
+        "nodes": 6
 	},
 	"resources": [{
 			"apiVersion": "2017-08-01",
@@ -63,24 +64,44 @@
 					]
 				},
 				"subnets": [{
-						"name": "[variables('subnetPublicName')]",
+						"name": "[concat(variables('SubnetName'), '0')]",
 						"properties": {
-							"addressPrefix": "[variables('subnetPublicPrefix')]"
+							"addressPrefix": "[variables('subnetPrefix0')]"
 						}
 					}, {
-						"name": "[variables('subnetPrivateName1')]",
+						"name": "[concat(variables('SubnetName'), '1')]",
 						"properties": {
-							"addressPrefix": "[variables('subnetPrivatePrefix1')]"
+							"addressPrefix": "[variables('subnetPrefix1')]"
 						}
 					}, {
-						"name": "[variables('subnetPrivateName2')]",
+						"name": "[concat(variables('SubnetName'), '2')]",
 						"properties": {
-							"addressPrefix": "[variables('subnetPrivatePrefix2')]"
+							"addressPrefix": "[variables('subnetPrefix2')]"
 						}
 					}, {
-						"name": "[variables('subnetPrivateName3')]",
+						"name": "[concat(variables('SubnetName'), '3')]",
 						"properties": {
-							"addressPrefix": "[variables('subnetPrivatePrefix3')]"
+							"addressPrefix": "[variables('subnetPrefix3')]"
+						}
+					},{
+						"name": "[concat(variables('SubnetName'), '4')]",
+						"properties": {
+							"addressPrefix": "[variables('subnetPrefix4')]"
+						}
+					}, {
+						"name": "[concat(variables('SubnetName'), '5')]",
+						"properties": {
+							"addressPrefix": "[variables('subnetPrefix5')]"
+						}
+					}, {
+						"name": "[concat(variables('SubnetName'), '6')]",
+						"properties": {
+							"addressPrefix": "[variables('subnetPrefix6')]"
+						}
+					}, {
+						"name": "[concat(variables('SubnetName'), '7')]",
+						"properties": {
+							"addressPrefix": "[variables('subnetPrefix7')]"
 						}
 					}
 				]
@@ -300,7 +321,7 @@
 						"properties": {
 							"privateIPAllocationMethod": "Dynamic",
 							"subnet": {
-								"id": "[concat(variables('vnetID'),'/subnets/',variables('subnetPublicName'))]"
+								"id": "[concat(variables('vnetID'),'/subnets/',variables('SubnetName'), copyIndex())]"
 							},
 							"loadBalancerBackendAddressPools": [{
 									"id": "[concat(variables('lbID'), '/backendAddressPools/BackendPool')]"
