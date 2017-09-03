@@ -109,7 +109,10 @@
 			"properties": {
 				"platformFaultDomainCount": "2",
 				"platformUpdateDomainCount": "2"
-			}
+			},
+            "sku": {
+                "tier": "Aligned"
+            }
 		}, {
 			"apiVersion": "2017-03-01",
 			"name": "[variables('ELBName')]",
