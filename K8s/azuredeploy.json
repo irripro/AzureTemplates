@@ -108,9 +108,9 @@
 				"platformFaultDomainCount": "2",
 				"platformUpdateDomainCount": "2"
 			},
-            "sku": {
-                "name": "Aligned"
-            }
+			"sku": {
+				"name": "Aligned"
+			}
 		}, {
 			"apiVersion": "2017-03-01",
 			"name": "[variables('ELBName')]",
@@ -277,12 +277,12 @@
 					"id": "[resourceId('Microsoft.Network/networkSecurityGroups', variables('PublicNetworkSecurityGroupName'))]"
 				}
 			},
-            "copy": {
-                "name": "networkinterfaces",
-                "count": 4,
-                "mode": "parallel",
-                "batchSize": 4
-            }
+			"copy": {
+				"name": "networkinterfaces",
+				"count": 4,
+				"mode": "parallel",
+				"batchSize": 4
+			}
 		}, {
 			"apiVersion": "2017-03-30",
 			"type": "Microsoft.Compute/virtualMachines",
@@ -334,13 +334,12 @@
 					"id": "[resourceId('Microsoft.Compute/availabilitySets',variables('availabilitySetName'))]"
 				}
 			},
-            "copy": {
-                "name": "virtualmachines",
-                "count": 4,
-                "mode": "parallel",
-                "batchSize": 4
-            }
-            
+			"copy": {
+				"name": "virtualmachines",
+				"count": 4,
+				"mode": "parallel",
+				"batchSize": 4
+			}
 		}
 	]
 }
