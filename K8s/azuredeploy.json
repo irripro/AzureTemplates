@@ -276,6 +276,57 @@
 					"id": "[resourceId('Microsoft.Network/networkSecurityGroups', variables('PublicNetworkSecurityGroupName'))]"
 				}
 			}
+		}, {
+			"apiVersion": "2017-03-30",
+			"type": "Microsoft.Compute/virtualMachines",
+			"name": "[variables('MasterVM')]",
+			"location": "[variables('location')]",
+			"dependsOn": [
+				"Microsoft.Network/networkInterfaces/VMNIC1",
+				"[concat('Microsoft.Compute/availabilitySets/', variables('availabilitySetName'))]"
+			],
+			"properties": {
+				"hardwareProfile": {
+					"vmSize": "[variables('vmSize')]"
+				},
+				"osProfile": {
+					"computerName": "[variables('MasterVM')]",
+					"adminUsername": "[parameters('adminUserName')]",
+					"linuxConfiguration": {
+						"disablePasswordAuthentication": "true",
+						"ssh": {
+							"publicKeys": [{
+									"path": "[variables('sshKeyPath')]",
+									"keyData": "[parameters('sshKeyData')]"
+								}
+							]
+						}
+					}
+				},
+				"storageProfile": {
+					"imageReference": {
+						"publisher": "[variables('imagePublisher')]",
+						"offer": "[variables('imageOffer')]",
+						"sku": "[variables('CentOSVersion')]",
+						"version": "latest"
+					},
+					"osDisk": {
+						"createOption": "FromImage",
+						"managedDisk": {
+							"storageAccountType": "Premium_LRS"
+						}
+					}
+				},
+				"networkProfile": {
+					"networkInterfaces": [{
+							"id": "[resourceId('Microsoft.Network/networkInterfaces/VMNIC1')]"
+						}
+					]
+				},
+				"availabilitySet": {
+					"id": "[resourceId('Microsoft.Compute/availabilitySets',variables('availabilitySetName'))]"
+				}
+			}
 		}
 	]
 }
