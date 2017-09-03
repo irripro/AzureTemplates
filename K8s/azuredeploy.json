@@ -259,6 +259,7 @@
 							"backendPort": 22,
 							"enableFloatingIP": false
 						}
+                    }
 				],
 				"probes": [{
 						"name": "tcpProbe",
