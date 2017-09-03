@@ -50,7 +50,7 @@
 		"availabilitySetName": "ocpkubernetesAS",
 		"lbID": "[resourceId('Microsoft.Network/loadBalancers',variables('ELBName'))]",
 		"frontEndIPConfigID": "[concat(variables('lbID'),'/frontendIPConfigurations/LoadBalancerFrontEnd')]",
-		"lbPoolID": "[concat(variables('lbID'),'/backendAddressPools/BackendPool1')]",
+		"lbPoolID": "[concat(variables('lbID'),'/backendAddressPools/BackendPool')]",
 		"lbProbeID": "[concat(variables('lbID'),'/probes/tcpProbe')]",
 		"LBRules": "[concat(variables('lbID'),'/loadBalancingRules/LBRule')]"
 	},
@@ -130,7 +130,7 @@
 					}
 				],
 				"backendAddressPools": [{
-						"name": "BackendPool1"
+						"name": "BackendPool"
 					}
 				],
 				"loadBalancingRules": [{
@@ -154,7 +154,7 @@
 					}
 				],
 				"inboundNatRules": [{
-						"name": "VM1",
+						"name": "VM0",
 						"properties": {
 							"frontendIPConfiguration": {
 								"id": "[variables('frontEndIPConfigID')]"
@@ -165,7 +165,7 @@
 							"enableFloatingIP": false
 						}
 					}, {
-						"name": "VM2",
+						"name": "VM1",
 						"properties": {
 							"frontendIPConfiguration": {
 								"id": "[variables('frontEndIPConfigID')]"
@@ -176,7 +176,7 @@
 							"enableFloatingIP": false
 						}
 					}, {
-						"name": "VM3",
+						"name": "VM2",
 						"properties": {
 							"frontendIPConfiguration": {
 								"id": "[variables('frontEndIPConfigID')]"
@@ -187,7 +187,7 @@
 							"enableFloatingIP": false
 						}
 					}, {
-						"name": "VM4",
+						"name": "VM3",
 						"properties": {
 							"frontendIPConfiguration": {
 								"id": "[variables('frontEndIPConfigID')]"
@@ -248,7 +248,7 @@
 		}, {
 			"apiVersion": "2017-03-01",
 			"type": "Microsoft.Network/networkInterfaces",
-			"name": "[variables('NetworkInterfaceName')]",
+			"name": "[concat(variables('NetworkInterfaceName'), copyIndex()]",
 			"location": "[variables('location')]",
 			"dependsOn": [
 				"[concat('Microsoft.Network/loadBalancers/', variables('ELBName'))]",
@@ -263,11 +263,11 @@
 								"id": "[concat(variables('vnetID'),'/subnets/',variables('subnetPublicName'))]"
 							},
 							"loadBalancerBackendAddressPools": [{
-									"id": "[concat(variables('lbID'), '/backendAddressPools/BackendPool1')]"
+									"id": "[concat(variables('lbID'), '/backendAddressPools/BackendPool')]"
 								}
 							],
 							"loadBalancerInboundNatRules": [{
-									"id": "[concat(variables('lbID'),'/inboundNatRules/VM1')]"
+									"id": "[concat(variables('lbID'),'/inboundNatRules/VM' , copyIndex())]"
 								}
 							]
 						}
@@ -276,14 +276,20 @@
 				"networkSecurityGroup": {
 					"id": "[resourceId('Microsoft.Network/networkSecurityGroups', variables('PublicNetworkSecurityGroupName'))]"
 				}
-			}
+			},
+            "copy": {
+                "name": "networkinterfaces",
+                "count": 4,
+                "mode": "parallel",
+                "batchSize": 4
+            }
 		}, {
 			"apiVersion": "2017-03-30",
 			"type": "Microsoft.Compute/virtualMachines",
-			"name": "[variables('VMName')]",
+			"name": "[concat(variables('VMName'), copyIndex())]",
 			"location": "[variables('location')]",
 			"dependsOn": [
-				"[concat('Microsoft.Network/networkInterfaces/', variables('NetworkInterfaceName'))]",
+				"[concat('Microsoft.Network/networkInterfaces/', variables('NetworkInterfaceName'), copyIndex())]",
 				"[concat('Microsoft.Compute/availabilitySets/', variables('availabilitySetName'))]"
 			],
 			"properties": {
@@ -291,7 +297,7 @@
 					"vmSize": "[variables('vmSize')]"
 				},
 				"osProfile": {
-					"computerName": "[variables('VMName')]",
+					"computerName": "[concat(variables('VMName'), copyIndex())]",
 					"adminUsername": "[parameters('adminUserName')]",
 					"linuxConfiguration": {
 						"disablePasswordAuthentication": "true",
@@ -320,14 +326,21 @@
 				},
 				"networkProfile": {
 					"networkInterfaces": [{
-							"id": "[resourceId('Microsoft.Network/networkInterfaces', variables('NetworkInterfaceName'))]"
+							"id": "[resourceId('Microsoft.Network/networkInterfaces', concat(variables('NetworkInterfaceName'), copyIndex()))]"
 						}
 					]
 				},
 				"availabilitySet": {
 					"id": "[resourceId('Microsoft.Compute/availabilitySets',variables('availabilitySetName'))]"
 				}
-			}
+			},
+            "copy": {
+                "name": "virtualmachines",
+                "count": 4,
+                "mode": "parallel",
+                "batchSize": 4
+            }
+            
 		}
 	]
 }
