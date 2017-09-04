@@ -31,4 +31,5 @@ def deploy():
     with hide('everything'):
         sudo("yum upgrade -y")
         sudo("yum update -y")
-    sudo("yum  install python-pip python-dev build-essential -y")
+    sudo("""curl 'https://bootstrap.pypa.io/get-pip.py' -o '/tmp/get-pip.py'""")
+    sudo("/usr/bin/python /tmp/get-pip.py")
