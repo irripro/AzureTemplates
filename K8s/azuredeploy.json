@@ -409,15 +409,15 @@
 						"[concat('Microsoft.Compute/virtualMachines/', variables('vmName'), copyIndex())]"
 					],
 					"properties": {
-						"publisher": "Microsoft.Compute",
+						"publisher": "Microsoft.Azure.Extensions",
 						"type": "CustomScript",
-						"typeHandlerVersion": "1.4",
+						"typeHandlerVersion": "2.0",
 						"autoUpgradeMinorVersion": true,
 						"settings": {
 							"fileUris": [
 								"https://raw.githubusercontent.com/alihhussain/AzureTemplates/master/K8s/scripts/boot.sh"
 							],
-							"commandToExecute": "sh boot.sh"
+							"commandToExecute": "/bin/bash boot.sh"
 						}
 					}
 				}
