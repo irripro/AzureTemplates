@@ -25,8 +25,7 @@ elif totalnodes == 6:
 elif totalnodes == 7:
     env.hosts = [vm0,vm1,vm2,vm3,vm4,vm5,vm6]
 else:
-    sys.exit("Select the right amount of nodes")
-        
+    sys.exit("Select the right amount of nodes")    
         
 def deployall():
     env.user = 'azureuser'
