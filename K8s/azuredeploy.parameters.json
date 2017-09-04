@@ -9,7 +9,7 @@
         "value": "{ssh_key_data}"
     },
     "nodes": {
-        "value": {numberofnodes}
+        "value": "{numberofnodes}"
     }
   }
 }
