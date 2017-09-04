@@ -11,23 +11,24 @@ vm4 = "{elbpublicdns}:8026"
 vm5 = "{elbpublicdns}:8027"
 vm6 = "{elbpublicdns}:8028"
 
-totalnodes = {nodeschosen}
-    
+totalnodes = {nodeschosen}   
+if totalnodes == 2:
+    env.hosts = [vm0,vm1]
+elif totalnodes == 3:
+    env.hosts = [vm0,vm1,vm2]
+elif totalnodes == 4:
+    env.hosts = [vm0,vm1,vm2,vm3]
+elif totalnodes == 5:
+    env.hosts = [vm0,vm1,vm2,vm3,vm4]
+elif totalnodes == 6:
+    env.hosts = [vm0,vm1,vm2,vm3,vm4,vm5]
+elif totalnodes == 7:
+    env.hosts = [vm0,vm1,vm2,vm3,vm4,vm5,vm6]
+else:
+    sys.exit("Select the right amount of nodes")
+        
+        
 def deployall():
-    if totalnodes == 2:
-        env.hosts = [vm0,vm1]
-    elif totalnodes == 3:
-        env.hosts = [vm0,vm1,vm2]
-    elif totalnodes == 4:
-        env.hosts = [vm0,vm1,vm2,vm3]
-    elif totalnodes == 5:
-        env.hosts = [vm0,vm1,vm2,vm3,vm4]
-    elif totalnodes == 6:
-        env.hosts = [vm0,vm1,vm2,vm3,vm4,vm5]
-    elif totalnodes == 7:
-        env.hosts = [vm0,vm1,vm2,vm3,vm4,vm5,vm6]
-    else:
-        sys.exit("Select the right amount of nodes")
     env.user = 'azureuser'
     env.key_filename = '/var/lib/jenkins/.ssh/id_rsa'
     #env.combine_stderr = False
