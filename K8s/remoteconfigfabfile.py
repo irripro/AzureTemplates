@@ -3,7 +3,7 @@ import sys, json
 from fabric.api import *
 from pprint import pprint
 
-numberofnodes = {nodes}
+numberofnodes = {nodeschosen}
 if numberofnodes == 2:
     env.hosts = ['{elbpublicdns}:8022','{elbpublicdns}:8023']
 elif numberofnodes == 3:
