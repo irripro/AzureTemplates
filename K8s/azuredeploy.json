@@ -28,7 +28,7 @@
 		"subnetPrefix4": "10.0.4.0/24",
 		"subnetPrefix5": "10.0.5.0/24",
 		"subnetPrefix6": "10.0.6.0/24",
-        "subnetPrefix7": "10.0.7.0/24",
+		"subnetPrefix7": "10.0.7.0/24",
 		"location": "[resourceGroup().location]",
 		"VMName": "VM",
 		"NetworkInterfaceName": "VMNIC",
@@ -50,7 +50,7 @@
 		"frontEndIPConfigID": "[concat(variables('lbID'),'/frontendIPConfigurations/LoadBalancerFrontEnd')]",
 		"lbPoolID": "[concat(variables('lbID'),'/backendAddressPools/BackendPool')]",
 		"lbProbeID": "[concat(variables('lbID'),'/probes/tcpProbe')]",
-        "nodes": 4
+		"nodes": 7
 	},
 	"resources": [{
 			"apiVersion": "2017-08-01",
@@ -83,7 +83,7 @@
 						"properties": {
 							"addressPrefix": "[variables('subnetPrefix3')]"
 						}
-					},{
+					}, {
 						"name": "[concat(variables('SubnetName'), '4')]",
 						"properties": {
 							"addressPrefix": "[variables('subnetPrefix4')]"
@@ -215,7 +215,7 @@
 							"backendPort": 22,
 							"enableFloatingIP": false
 						}
-					},{
+					}, {
 						"name": "VM4",
 						"properties": {
 							"frontendIPConfiguration": {
@@ -259,7 +259,7 @@
 							"backendPort": 22,
 							"enableFloatingIP": false
 						}
-                    }
+					}
 				],
 				"probes": [{
 						"name": "tcpProbe",
