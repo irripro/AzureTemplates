@@ -19,7 +19,6 @@ elif totalnodes == 7:
 else:
     sys.exit("Select the right amount of nodes")
     
-    
 def deploy():
     env.user = 'azureuser'
     env.key_filename = '/var/lib/jenkins/.ssh/id_rsa'
@@ -42,4 +41,7 @@ def deploy():
     sudo("systemctl start docker")
     sudo("systemctl enable docker")
     sudo("usermod -aG docker %s" %env.user)
-    sudo("init 6")
+    try:
+        sudo("init 6")
+    except:
+        print("This was fine just restarted the system.")
