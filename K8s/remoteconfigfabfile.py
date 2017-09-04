@@ -31,8 +31,6 @@ def deploy():
     with hide('everything'):
         sudo("yum upgrade -y")
         sudo("yum update -y")
-        sudo("""curl 'https://bootstrap.pypa.io/get-pip.py' -o '/tmp/get-pip.py'""")
-        sudo("/usr/bin/python /tmp/get-pip.py")
     sudo("yum install -y ntp")
     sudo("systemctl enable ntpd && systemctl start ntpd")
     sudo("systemctl status ntpd")
