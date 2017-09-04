@@ -402,7 +402,7 @@
 			},
 			"resources": [{
 					"type": "Microsoft.Compute/virtualMachines/extensions",
-					"name": "[concat(variables('vmName'),'/bootinstall')]",
+					"name": "[concat(variables('vmName'),copyIndex(),'/bootinstall')]",
 					"apiVersion": "2017-03-30",
 					"location": "[resourceGroup().location]",
 					"dependsOn": [
