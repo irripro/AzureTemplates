@@ -419,11 +419,6 @@
 							],
 							"commandToExecute": "sh boot.sh"
 						}
-					},
-					"copy": {
-						"name": "virtualmachinesExtensions",
-						"count": "[variables('nodes')]",
-						"mode": "parallel"
 					}
 				}
 			]
