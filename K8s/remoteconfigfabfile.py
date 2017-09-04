@@ -28,8 +28,7 @@ def deploy():
     env.output_prefix = False
     env.colorize_errors = True
     env.linewise = True
-#    with hide('everything'):
-#        sudo("yum update -y")
-    sudo("yum upgrade -y")
-    sudo("yum update -y")
+    with hide('everything'):
+        sudo("yum upgrade -y")
+        sudo("yum update -y")
     sudo("yum  install python-pip python-dev build-essential -y")
