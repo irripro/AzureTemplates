@@ -399,29 +399,7 @@
 				"name": "virtualmachines",
 				"count": "[variables('nodes')]",
 				"mode": "parallel"
-			},
-			"resources": [{
-					"type": "Microsoft.Compute/virtualMachines/extensions",
-					"name": "[concat(variables('vmName'),copyIndex(),'/bootinstall')]",
-					"apiVersion": "2017-03-30",
-					"location": "[resourceGroup().location]",
-					"dependsOn": [
-						"[concat('Microsoft.Compute/virtualMachines/', variables('vmName'), copyIndex())]"
-					],
-					"properties": {
-						"publisher": "Microsoft.Azure.Extensions",
-						"type": "CustomScript",
-						"typeHandlerVersion": "2.0",
-						"autoUpgradeMinorVersion": true,
-						"settings": {
-							"fileUris": [
-								"https://raw.githubusercontent.com/alihhussain/AzureTemplates/master/K8s/scripts/boot.sh"
-							],
-							"commandToExecute": "/bin/bash boot.sh"
-						}
-					}
-				}
-			]
+			}
 		}
 	]
 }
