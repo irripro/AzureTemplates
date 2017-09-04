@@ -310,6 +310,19 @@
 							"priority": 124,
 							"direction": "Inbound"
 						}
+					}, {
+						"name": "VnetTraffic",
+						"properties": {
+							"description": "Allow Local Traffic over VNET",
+							"protocol": "Tcp",
+							"sourcePortRange": "*",
+							"destinationPortRange": "*",
+							"sourceAddressPrefix": "10.0.0.0/16",
+							"destinationAddressPrefix": "10.0.0.0/16",
+							"access": "Allow",
+							"priority": 125,
+							"direction": "Inbound"
+						}
 					}
 				]
 			}
