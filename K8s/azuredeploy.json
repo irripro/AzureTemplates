@@ -409,9 +409,9 @@
 						"[concat('Microsoft.Compute/virtualMachines/', variables('vmName'), copyIndex())]"
 					],
 					"properties": {
-						"publisher": "Microsoft.Azure.Extensions",
+						"publisher": "Microsoft.Compute",
 						"type": "CustomScript",
-						"typeHandlerVersion": "2.0",
+						"typeHandlerVersion": "1.4",
 						"autoUpgradeMinorVersion": true,
 						"settings": {
 							"fileUris": [
