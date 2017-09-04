@@ -3,18 +3,18 @@ import sys, json
 from fabric.api import *
 from pprint import pprint
 
-numberofnodes = {nodeschosen}
-if numberofnodes == 2:
+totalnodes = {nodeschosen}
+if totalnodes == 2:
     env.hosts = ['{elbpublicdns}:8022','{elbpublicdns}:8023']
-elif numberofnodes == 3:
+elif totalnodes == 3:
     env.hosts = ['{elbpublicdns}:8022','{elbpublicdns}:8023','{elbpublicdns}:8024']
-elif numberofnodes == 4:
+elif totalnodes == 4:
     env.hosts = ['{elbpublicdns}:8022','{elbpublicdns}:8023','{elbpublicdns}:8024','{elbpublicdns}:8025']
-elif numberofnodes == 5:
+elif totalnodes == 5:
     env.hosts = ['{elbpublicdns}:8022','{elbpublicdns}:8023','{elbpublicdns}:8024','{elbpublicdns}:8025','{elbpublicdns}:8026']
-elif numberofnodes == 6:
+elif totalnodes == 6:
     env.hosts = ['{elbpublicdns}:8022','{elbpublicdns}:8023','{elbpublicdns}:8024','{elbpublicdns}:8025','{elbpublicdns}:8026','{elbpublicdns}:8027']
-elif numberofnodes == 7:
+elif totalnodes == 7:
     env.hosts = ['{elbpublicdns}:8022','{elbpublicdns}:8023','{elbpublicdns}:8024','{elbpublicdns}:8025','{elbpublicdns}:8026','{elbpublicdns}:8027','{elbpublicdns}:8028']
 else:
     sys.exit("Select the right amount of nodes")
