@@ -1,0 +1,122 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<project>
+  <actions/>
+  <description></description>
+  <keepDependencies>false</keepDependencies>
+  <properties>
+    <jenkins.model.BuildDiscarderProperty>
+      <strategy class="hudson.tasks.LogRotator">
+        <daysToKeep>5</daysToKeep>
+        <numToKeep>20</numToKeep>
+        <artifactDaysToKeep>-1</artifactDaysToKeep>
+        <artifactNumToKeep>-1</artifactNumToKeep>
+      </strategy>
+    </jenkins.model.BuildDiscarderProperty>
+    <hudson.model.ParametersDefinitionProperty>
+      <parameterDefinitions>
+        <hudson.model.StringParameterDefinition>
+          <name>appId</name>
+          <description>Put in the tenant for the principle account</description>
+          <defaultValue>a289cbdd-4fca-4a7d-88c4-6a02892223d4</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.PasswordParameterDefinition>
+          <name>passwd</name>
+          <description>Put in the password for the principle account</description>
+          <defaultValue>{AQAAABAAAAAQpvaHij1Of+oye8md19Lb/xfNA87DwMPTG/aTulJpOuU=}</defaultValue>
+        </hudson.model.PasswordParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>tenant</name>
+          <description>Put in the tenant for the principle account</description>
+          <defaultValue>72f988bf-86f1-41af-91ab-2d7cd011db47</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.ChoiceParameterDefinition>
+          <name>region</name>
+          <description>Where do you want the vault to be.</description>
+          <choices class="java.util.Arrays$ArrayList">
+            <a class="string-array">
+              <string>eastus</string>
+              <string>westus</string>
+              <string>westcentralus</string>
+            </a>
+          </choices>
+        </hudson.model.ChoiceParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>ResourceName</name>
+          <description>Put in the resource name you want to create</description>
+          <defaultValue>ExampleGroup</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>workingdir</name>
+          <description></description>
+          <defaultValue>/tmp/workingdir</defaultValue>
+        </hudson.model.StringParameterDefinition>
+      </parameterDefinitions>
+    </hudson.model.ParametersDefinitionProperty>
+  </properties>
+  <scm class="hudson.scm.NullSCM"/>
+  <canRoam>true</canRoam>
+  <disabled>false</disabled>
+  <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
+  <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+  <triggers/>
+  <concurrentBuild>false</concurrentBuild>
+  <builders>
+    <hudson.tasks.Shell>
+      <command>#!/bin/bash
+echo &quot;This is from the ASR Job&quot;
+
+sleep 10s
+
+echo &quot;Creating the build workspace.................................................................................&quot;
+cd &quot;/tmp/$workingdir&quot;
+mkdir &quot;./ASR&quot;
+cd &quot;./ASR&quot;
+cp &quot;/tmp/$workingdir/Initial/asrpublicip.txt&quot; &quot;./asrpublicip.txt&quot;
+cp &quot;/tmp/$workingdir/Initial/asrpublic.ip&quot; &quot;./asrpublic.ip&quot;
+pwd
+
+echo &quot;______________________________________________________________________________________________________________________________________&quot;
+echo &quot;______________________________________________________________________________________________________________________________________&quot;
+echo &quot;Downloading the deployment file from github.................................................................................&quot;
+
+asrpublicip=$(sudo cat /tmp/$workingdir/Initial/asrpublic.ip)
+curl -O https://raw.githubusercontent.com/alihhussain/AzureTemplates/master/Automation%20Demo/VMCustomData/Step3/AzurePInstallAndAsrCredGet.ps1
+sed -i &quot;s#{appid}#$appId#g&quot; AzurePInstallAndAsrCredGet.ps1
+sed -i &quot;s#{tenant}#$tenant#g&quot; AzurePInstallAndAsrCredGet.ps1
+sed -i &quot;s#{public_ip}#$asrpublicip#g&quot; AzurePInstallAndAsrCredGet.ps1
+
+#Creating the location for custom configuration file
+mkdir &quot;/var/lib/jenkins/userContent/buildparameters/$workingdir&quot;
+mv &quot;/tmp/$workingdir/ASR/AzurePInstallAndAsrCredGet.ps1&quot; &quot;/var/lib/jenkins/userContent/buildparameters/$workingdir&quot;
+
+configfilelocation=&quot;http://cim-jenkins.eastus.cloudapp.azure.com:8080/userContent/buildparameters/$workingdir/AzurePInstallAndAsrCredGet.ps1&quot;
+curl -O https://raw.githubusercontent.com/alihhussain/AzureTemplates/master/Automation%20Demo/VMCustomData/Step3/customextension2.json
+sed -i &quot;s#{custom_config_file}#$configfilelocation#g&quot; customextension2.json
+
+sudo /root/bin/az vm extension set -n CustomScriptExtension --publisher Microsoft.Compute --version 1.4 --vm-name MyASRVM --resource-group $ResourceName --settings ./customextension2.json
+
+echo &quot;______________________________________________________________________________________________________________________________________&quot;
+echo &quot;______________________________________________________________________________________________________________________________________&quot;
+
+#Installing the ASR installer after downloading the files earlier
+curl -O https://raw.githubusercontent.com/alihhussain/AzureTemplates/master/Automation%20Demo/VMCustomData/Step3/AzurePInstallAndAsrCredGet1.ps1
+sed -i &quot;s#{public_ip}#$asrpublicip#g&quot; AzurePInstallAndAsrCredGet1.ps1
+mv &quot;/tmp/$workingdir/ASR/AzurePInstallAndAsrCredGet1.ps1&quot; &quot;/var/lib/jenkins/userContent/buildparameters/$workingdir&quot;
+
+configfilelocation=&quot;http://cim-jenkins.eastus.cloudapp.azure.com:8080/userContent/buildparameters/$workingdir/AzurePInstallAndAsrCredGet1.ps1&quot;
+curl -O https://raw.githubusercontent.com/alihhussain/AzureTemplates/master/Automation%20Demo/VMCustomData/Step3/customextension3.json
+sed -i &quot;s#{custom_config_file}#$configfilelocation#g&quot; customextension3.json
+
+sleep 30s
+sudo /root/bin/az vm extension set -n CustomScriptExtension --publisher Microsoft.Compute --version 1.4 --vm-name MyASRVM --resource-group $ResourceName --settings ./customextension3.json
+
+echo &quot;______________________________________________________________________________________________________________________________________&quot;
+echo &quot;______________________________________________________________________________________________________________________________________&quot;
+
+echo &quot;The Azure Resources for ASR are deployed.&quot;
+</command>
+    </hudson.tasks.Shell>
+  </builders>
+  <publishers/>
+  <buildWrappers/>
+</project>
