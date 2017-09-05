@@ -38,6 +38,8 @@ def deployall():
     with hide('everything'):
         sudo("yum upgrade -y")
         sudo("yum update -y")
+    sudo("curl 'https://github.com/stedolan/jq/releases/download/jq-1.5/jq-linux64' -o /usr/bin/jq")
+    sudo("chmod +x /usr/bin/jq")
     sudo("yum install -y ntp")
     sudo("systemctl enable ntpd && systemctl start ntpd")
     sudo("systemctl status ntpd")
