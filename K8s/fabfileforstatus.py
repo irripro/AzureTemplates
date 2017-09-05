@@ -25,4 +25,3 @@ def deployall():
     sudo("kubectl create -f dashboard-service.yaml")
     sudo("kubectl create -f skydns-rc.yaml")
     sudo("kubectl create -f skydns-svc.yaml")
-    
