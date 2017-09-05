@@ -25,7 +25,7 @@ def deployall():
     sudo("""curl 'https://raw.githubusercontent.com/alihhussain/AzureTemplates/master/K8s/etc_kubernetes_controller-manager' -o /etc/kubernetes/controller-manager""")
     sudo("systemctl start etcd")
     sudo("etcdctl mkdir /kube-centos/network")
-    sudo("""etcdctl mk /kube-centos/network/config "{ \"Network\": \"172.30.0.0/16\", \"SubnetLen\": 24, \"Backend\": { \"Type\": \"vxlan\" } }"""")
+    sudo("""etcdctl mk /kube-centos/network/config '{ \"Network\": \"172.30.0.0/16\", \"SubnetLen\": 24, \"Backend\": { \"Type\": \"vxlan\" } }'""")
     sudo("""curl 'https://raw.githubusercontent.com/alihhussain/AzureTemplates/master/K8s/etc_sysconfig_flanneld' -o /etc/sysconfig/flanneld""")
     sudo("""sed -i "s#{masterprivateip}#%s#g" /etc/sysconfig/flanneld""" %vm0PiP)
     sudo("systemctl enable kube-apiserver")
