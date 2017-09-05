@@ -4,7 +4,7 @@ from fabric.api import *
 from pprint import pprint
 
 vm0 = "{elbpublicdns}:8022"
-vm0PiP = "{MasterPriIP}"
+vm0PiP = "10.0.0.4"
 totalnodes = {nodeschosen}   
 env.hosts = [vm0]
         
