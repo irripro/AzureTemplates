@@ -27,7 +27,7 @@ fi
 cert_ip=$1
 extra_sans=${2:-}
 cert_dir=${CERT_DIR:-/srv/kubernetes}
-cert_group=${docker:-kube-cert}
+cert_group=${CERT_GROUP:-docker}
 
 mkdir -p "$cert_dir"
 
