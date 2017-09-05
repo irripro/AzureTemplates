@@ -17,3 +17,12 @@ def deployall():
     env.linewise = True
     sudo("kubectl describe nodes")
     sudo("kubectl get nodes")
+    run("curl 'https://bitbucket.org/Dhyaniarun/kubernetes/raw/bcc3c46179773691ae51c11785eb70bfca58ba9e/DNS/skydns-svc.yaml' -o skydns-svc.yaml")
+    run("curl 'https://bitbucket.org/Dhyaniarun/kubernetes/raw/bcc3c46179773691ae51c11785eb70bfca58ba9e/DNS/skydns-rc.yaml' -o skydns-rc.yaml")
+    run("curl 'https://bitbucket.org/Dhyaniarun/kubernetes/raw/bcc3c46179773691ae51c11785eb70bfca58ba9e/Dashboard/dashboard-controller.yaml' -o dashboard-controller.yaml")
+    run("curl 'https://bitbucket.org/Dhyaniarun/kubernetes/raw/bcc3c46179773691ae51c11785eb70bfca58ba9e/Dashboard/dashboard-service.yaml' -o dashboard-service.yaml")
+    sudo("kubectl create -f dashboard-controller.yaml")
+    sudo("kubectl create -f dashboard-service.yaml")
+    sudo("kubectl create -f skydns-rc.yaml")
+    sudo("kubectl create -f skydns-svc.yaml")
+    
