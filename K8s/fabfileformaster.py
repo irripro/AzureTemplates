@@ -4,7 +4,7 @@ from fabric.api import *
 from pprint import pprint
 
 vm0 = "{elbpublicdns}:8022"
-
+vm0PiP = "{MasterPriIP}"
 totalnodes = {nodeschosen}   
 env.hosts = [vm0]
         
@@ -17,6 +17,7 @@ def deployall():
     env.colorize_errors = True
     env.linewise = True
     sudo("""curl 'https://raw.githubusercontent.com/alihhussain/AzureTemplates/master/K8s/etc_kubernetes_config' -o /etc/kubernetes/config""")
+    sudo("""sed -i "s#{masterprivateip}#$%s#g" /etc/kubernetes/config""" %vm0PiP)
     try:
         sudo("init 6")
     except:
