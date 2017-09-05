@@ -38,8 +38,6 @@ def deployall():
     with hide('everything'):
         sudo("yum upgrade -y")
         sudo("yum update -y")
-    sudo("curl 'https://github.com/stedolan/jq/releases/download/jq-1.5/jq-linux64' -o /usr/bin/jq")
-    sudo("chmod +x /usr/bin/jq")
     sudo("yum install -y ntp")
     sudo("systemctl enable ntpd && systemctl start ntpd")
     sudo("systemctl status ntpd")
@@ -47,9 +45,9 @@ def deployall():
     sudo("""curl 'https://raw.githubusercontent.com/alihhussain/AzureTemplates/master/K8s/virt7-docker-common-release.repo' -o /etc/yum.repos.d/virt7-docker-common-release.repo""")
     sudo("yum update -y")
     sudo("groupadd docker")
-    sudo("yum -y install --enablerepo=virt7-docker-common-release kubernetes docker etcd")
-    sudo("systemctl enable docker")
+    sudo("yum -y install --enablerepo=virt7-docker-common-release docker kubernetes etcd flannel")
     sudo("systemctl start docker")
+    sudo("systemctl enable docker")
     sudo("usermod -aG docker %s" %env.user)
     try:
         sudo("init 6")
