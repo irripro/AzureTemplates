@@ -96,7 +96,9 @@ echo &quot;_____________________________________________________________________
 echo &quot;Downloading the parameters file from github.................................................................................&quot;
 curl -O https://raw.githubusercontent.com/alihhussain/AzureTemplates/master/K8s/azuredeploy.parameters.json
 curl -O https://raw.githubusercontent.com/alihhussain/AzureTemplates/master/K8s/azuredeploy.json
-curl -O https://raw.githubusercontent.com/alihhussain/AzureTemplates/master/K8s/remoteconfigfabfile.py
+curl -O https://raw.githubusercontent.com/alihhussain/AzureTemplates/master/K8s/fabfileforall1.py
+curl -O https://raw.githubusercontent.com/alihhussain/AzureTemplates/master/K8s/fabfileformaster1.py
+curl -O https://raw.githubusercontent.com/alihhussain/AzureTemplates/master/K8s/fabfilefornodes.py
 
 echo &quot;______________________________________________________________________________________________________________________________________&quot;
 echo &quot;______________________________________________________________________________________________________________________________________&quot;
@@ -104,7 +106,9 @@ echo &quot;_____________________________________________________________________
 keycontent=$(sudo cat /var/lib/jenkins/.ssh/authorized_keys)
 sed -i &quot;s#{ssh_key_data}#$keycontent#g&quot; azuredeploy.parameters.json
 sed -i &quot;s#{numberofnodes}#$NumberOfNodes#g&quot; azuredeploy.parameters.json
-sed -i &quot;s#{nodeschosen}#$NumberOfNodes#g&quot; remoteconfigfabfile.py
+sed -i &quot;s#{nodeschosen}#$NumberOfNodes#g&quot; fabfileforall1.py
+sed -i &quot;s#{nodeschosen}#$NumberOfNodes#g&quot; fabfileformaster1.py
+sed -i &quot;s#{nodeschosen}#$NumberOfNodes#g&quot; fabfilefornodes.py
 
 echo &quot;Creating the ResourceGroup.................................................................................&quot;
 sudo /root/bin/az group create -l ${region} -n $ResourceName
