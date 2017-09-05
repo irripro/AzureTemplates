@@ -23,8 +23,7 @@ def deployall():
     sudo("""curl 'https://raw.githubusercontent.com/alihhussain/AzureTemplates/master/K8s/etc_kubernetes_apiserver' -o /etc/kubernetes/apiserver""")
     sudo("systemctl enable etcd kube-apiserver kube-controller-manager kube-scheduler")
     sudo("systemctl start etcd kube-apiserver kube-controller-manager kube-scheduler")
-    sudo("systemctl status etcd kube-apiserver kube-controller-manager kube-scheduler | grep (running)")
-
+    sudo("systemctl status etcd kube-apiserver kube-controller-manager kube-scheduler | grep '(running)'")
     try:
         sudo("init 6")
     except:
