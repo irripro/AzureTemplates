@@ -28,14 +28,15 @@ def deployall():
     sudo("""etcdctl mk /kube-centos/network/config "{ \"Network\": \"172.30.0.0/16\", \"SubnetLen\": 24, \"Backend\": { \"Type\": \"vxlan\" } }"""")
     sudo("""curl 'https://raw.githubusercontent.com/alihhussain/AzureTemplates/master/K8s/etc_sysconfig_flanneld' -o /etc/sysconfig/flanneld""")
     sudo("""sed -i "s#{masterprivateip}#%s#g" /etc/sysconfig/flanneld""" %vm0PiP)
-    sudo("systemctl enable kube-controller-manager")
-    sudo("systemctl start kube-controller-manager")
-    sudo("systemctl enable kube-scheduler")
-    sudo("systemctl start kube-scheduler")
-    sudo("systemctl enable flanneld")
-    sudo("systemctl start flanneld")
     sudo("systemctl enable kube-apiserver")
     sudo("systemctl start kube-apiserver")
+#    sudo("systemctl enable kube-controller-manager")
+#    sudo("systemctl start kube-controller-manager")
+#    sudo("systemctl enable kube-scheduler")
+#    sudo("systemctl start kube-scheduler")
+#    sudo("systemctl enable flanneld")
+#    sudo("systemctl start flanneld")
+
     try:
         sudo("init 6")
     except:
