@@ -4,6 +4,14 @@
   <description></description>
   <keepDependencies>false</keepDependencies>
   <properties>
+    <jenkins.model.BuildDiscarderProperty>
+      <strategy class="hudson.tasks.LogRotator">
+        <daysToKeep>-1</daysToKeep>
+        <numToKeep>20</numToKeep>
+        <artifactDaysToKeep>-1</artifactDaysToKeep>
+        <artifactNumToKeep>-1</artifactNumToKeep>
+      </strategy>
+    </jenkins.model.BuildDiscarderProperty>
     <hudson.model.ParametersDefinitionProperty>
       <parameterDefinitions>
         <hudson.model.StringParameterDefinition>
@@ -59,13 +67,20 @@
   </properties>
   <definition class="org.jenkinsci.plugins.workflow.cps.CpsFlowDefinition" plugin="workflow-cps@2.29">
     <script>node() {
-    stage(&apos;Provisioning Azure Resources&apos;) {
+    stage(&apos;Deploying K8s Azure Infrastructure&apos;) {
         build job: &apos;Initial_Infrastructure_Build&apos;, parameters: [string(name: &apos;appId&apos;, value: &quot;${appID}&quot;), password(description: &apos;Put in the password for the principle account&apos;, name: &apos;passwd&apos;, value: &quot;${passwd}&quot;), string(name: &apos;tenant&apos;, value: &quot;${tenant}&quot;), string(name: &apos;ResourceName&apos;, value: &quot;${ResourceName}&quot;), string(name: &apos;region&apos;, value: &quot;${region}&quot;), string(name: &apos;NumberOfNodes&apos;, value: &quot;${NumberOfNodes}&quot;), string(name: &apos;workingdir&apos;, value: &quot;${env.BUILD_TAG}&quot;)]
         
     }
-    stage(&apos;Configuring the Deployed Resources&apos;){
+    stage(&apos;Initial K8s Installs&apos;){
         try{
-            build job: &apos;Configure_Provisioned_Infrastructure&apos;, parameters: [string(name: &apos;workingdir&apos;, value: &quot;${env.BUILD_TAG}&quot;)]
+            build job: &apos;Initial_Kubernetes_Install&apos;, parameters: [string(name: &apos;workingdir&apos;, value: &quot;${env.BUILD_TAG}&quot;)]
+        }catch(err){
+            echo &quot;I guess the deployment didn&apos;t go well.&quot;
+        }    
+    }
+    stage(&apos;K8s Master Configuration &apos;){
+        try{
+            build job: &apos;Kubernetes_Master_Install&apos;, parameters: [string(name: &apos;workingdir&apos;, value: &quot;${env.BUILD_TAG}&quot;)]
         }catch(err){
             echo &quot;I guess the deployment didn&apos;t go well.&quot;
         }    
