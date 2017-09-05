@@ -19,7 +19,8 @@ def deployall():
     sudo("""curl 'https://raw.githubusercontent.com/alihhussain/AzureTemplates/master/K8s/etc_kubernetes_config' -o /etc/kubernetes/config""")
     sudo("""sed -i "s#{masterprivateip}#%s#g" /etc/kubernetes/config""" %vm0PiP)
     sudo("""curl 'https://raw.githubusercontent.com/alihhussain/AzureTemplates/master/K8s/etc_etcd_etcd.conf' -o /etc/etcd/etcd.conf""")
-    sudo("""bash make-ca-cert.sh "%s" "IP:%s,IP:10.254.0.1,DNS:kubernetes,DNS:kubernetes.default,DNS:kubernetes.default.svc,DNS:kubernetes.default.svc.cluster.local""" %(vm0PiP,vm0PiP))
+    sudo("""curl 'https://raw.githubusercontent.com/alihhussain/AzureTemplates/master/K8s/make-ca-cert.sh' -o /tmp/make-ca-cert.sh""")
+    sudo("""/bin/bash /tmp/make-ca-cert.sh '%s' 'IP:%s,IP:10.254.0.1,DNS:kubernetes,DNS:kubernetes.default,DNS:kubernetes.default.svc,DNS:kubernetes.default.svc.cluster.local'""" %(vm0PiP,vm0PiP))
     sudo("""curl 'https://raw.githubusercontent.com/alihhussain/AzureTemplates/master/K8s/etc_kubernetes_apiserver' -o /etc/kubernetes/apiserver""")
     sudo("""curl 'https://raw.githubusercontent.com/alihhussain/AzureTemplates/master/K8s/etc_kubernetes_controller-manager' -o /etc/kubernetes/controller-manager""")
     try:
