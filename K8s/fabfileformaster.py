@@ -30,7 +30,7 @@ def deployall():
     sudo("""sed -i "s#{masterprivateip}#%s#g" /etc/sysconfig/flanneld""" %vm0PiP)
     sudo("systemctl enable kube-controller-manager")
     sudo("systemctl start kube-controller-manager")
-    sudo("systemctl start kube-scheduler")
+    sudo("systemctl enable kube-scheduler")
     sudo("systemctl start kube-scheduler")
     sudo("systemctl enable flanneld")
     sudo("systemctl start flanneld")
