@@ -41,6 +41,9 @@ def deployall():
     sudo("""curl 'https://raw.githubusercontent.com/alihhussain/AzureTemplates/master/K8s/etc_kubernetes_kubelet' -o /etc/kubernetes/kubelet""")
     sudo("""sed -i "s#{masterprivateip}#%s#g" /etc/kubernetes/kubelet""" %vm0PiP)
     sudo("""sed -i "s#{nodename}#$(hostname)#g" /etc/kubernetes/kubelet""")
+    sudo("systemctl enable kube-proxy kubelet docker")
+    sudo("systemctl start kube-proxy kubelet docker")
+    sudo("""systemctl status kube-proxy kubelet docker | grep '(running)'""")
     try:
         sudo("init 6")
     except:
