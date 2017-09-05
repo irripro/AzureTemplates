@@ -5,7 +5,6 @@ from pprint import pprint
 
 vm0 = "{elbpublicdns}:8022"
 vm0PiP = "VM0"
-totalnodes = {nodeschosen}   
 env.hosts = [vm0]
         
 def deployall():
