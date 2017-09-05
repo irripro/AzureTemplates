@@ -17,7 +17,7 @@ def deployall():
     env.colorize_errors = True
     env.linewise = True
     sudo("""curl 'https://raw.githubusercontent.com/alihhussain/AzureTemplates/master/K8s/etc_kubernetes_config' -o /etc/kubernetes/config""")
-    sudo("""sed -i "s#{masterprivateip}#$%s#g" /etc/kubernetes/config""" %vm0PiP)
+    sudo("""sed -i "s#{masterprivateip}#%s#g" /etc/kubernetes/config""" %vm0PiP)
     try:
         sudo("init 6")
     except:
