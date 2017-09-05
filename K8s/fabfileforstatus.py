@@ -6,8 +6,7 @@ from pprint import pprint
 vm0 = "{elbpublicdns}:8022"
 env.hosts = [vm0]
 vm0PiP = "VM0"
- 
-        
+
 def deployall():
     env.user = 'azureuser'
     env.key_filename = '/var/lib/jenkins/.ssh/id_rsa'
