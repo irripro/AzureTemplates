@@ -51,7 +51,7 @@ def deployall():
     sudo("systemctl enable docker")
     sudo("systemctl start docker")
     sudo("usermod -aG docker %s" %env.user)
-    sudo("""curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl -o /usr/bin/kubectl""")
+    sudo("""curl https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl -o /usr/bin/kubectl""")
     sudo("chmod +x /usr/bin/kubectl")
     run("""echo "source <(kubectl completion bash)" >> ~/.bashrc""")
     sudo("""curl 'https://raw.githubusercontent.com/alihhussain/AzureTemplates/master/K8s/kubeadm/etc_yum.repos.d_kubernetes.repo' -o /etc/yum.repos.d/kubernetes.repo""")
