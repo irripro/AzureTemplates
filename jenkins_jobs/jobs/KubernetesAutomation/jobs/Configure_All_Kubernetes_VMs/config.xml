@@ -6,7 +6,7 @@
   <properties>
     <jenkins.model.BuildDiscarderProperty>
       <strategy class="hudson.tasks.LogRotator">
-        <daysToKeep>-1</daysToKeep>
+        <daysToKeep>5</daysToKeep>
         <numToKeep>20</numToKeep>
         <artifactDaysToKeep>-1</artifactDaysToKeep>
         <artifactNumToKeep>-1</artifactNumToKeep>
@@ -39,13 +39,11 @@ sleep 20s
 
 echo &quot;______________________________________________________________________________________________________________________________________&quot;
 echo &quot;______________________________________________________________________________________________________________________________________&quot;
-echo &quot;Configuring the Master Node&quot;
-
-curl -O https://raw.githubusercontent.com/alihhussain/AzureTemplates/master/K8s/fabfileformaster.py
+echo &quot;Deploying out Kubernetes Cluster&quot;
 
 elbdns=$(sudo cat elbip.txt)
-sed -i &quot;s#{elbpublicdns}#$elbdns#g&quot; fabfileformaster.py
-fab -f fabfileformaster.py -P deployall
+sed -i &quot;s#{elbpublicdns}#$elbdns#g&quot; fabfileforall.py
+fab -f fabfileforall.py -P deployall
 </command>
     </hudson.tasks.Shell>
   </builders>

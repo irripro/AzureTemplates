@@ -41,11 +41,9 @@ echo &quot;_____________________________________________________________________
 echo &quot;______________________________________________________________________________________________________________________________________&quot;
 echo &quot;Configuring the Master Node&quot;
 
-curl -O https://raw.githubusercontent.com/alihhussain/AzureTemplates/master/K8s/fabfileformaster.py
-
 elbdns=$(sudo cat elbip.txt)
-sed -i &quot;s#{elbpublicdns}#$elbdns#g&quot; fabfileformaster.py
-fab -f fabfileformaster.py -P deployall
+sed -i &quot;s#{elbpublicdns}#$elbdns#g&quot; fabfilefornodes.py
+fab -f fabfilefornodes.py -P deployall
 </command>
     </hudson.tasks.Shell>
   </builders>

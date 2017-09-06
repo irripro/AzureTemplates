@@ -1,0 +1,148 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<project>
+  <actions/>
+  <description></description>
+  <keepDependencies>false</keepDependencies>
+  <properties>
+    <jenkins.model.BuildDiscarderProperty>
+      <strategy class="hudson.tasks.LogRotator">
+        <daysToKeep>5</daysToKeep>
+        <numToKeep>20</numToKeep>
+        <artifactDaysToKeep>-1</artifactDaysToKeep>
+        <artifactNumToKeep>-1</artifactNumToKeep>
+      </strategy>
+    </jenkins.model.BuildDiscarderProperty>
+    <hudson.model.ParametersDefinitionProperty>
+      <parameterDefinitions>
+        <hudson.model.StringParameterDefinition>
+          <name>appId</name>
+          <description>Put in the tenant for the principle account</description>
+          <defaultValue>a289cbdd-4fca-4a7d-88c4-6a02892223d4</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.PasswordParameterDefinition>
+          <name>passwd</name>
+          <description>Put in the password for the principle account</description>
+          <defaultValue>{AQAAABAAAAAQpvaHij1Of+oye8md19Lb/xfNA87DwMPTG/aTulJpOuU=}</defaultValue>
+        </hudson.model.PasswordParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>tenant</name>
+          <description>Put in the tenant for the principle account</description>
+          <defaultValue>72f988bf-86f1-41af-91ab-2d7cd011db47</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>ResourceName</name>
+          <description>Put in the resource name you want to create</description>
+          <defaultValue>KubernetesGroup</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.ChoiceParameterDefinition>
+          <name>region</name>
+          <description>Which region to deploy the Resources to.</description>
+          <choices class="java.util.Arrays$ArrayList">
+            <a class="string-array">
+              <string>eastus</string>
+              <string>westus</string>
+            </a>
+          </choices>
+        </hudson.model.ChoiceParameterDefinition>
+        <hudson.model.ChoiceParameterDefinition>
+          <name>NumberOfNodes</name>
+          <description>Number of Nodes within a Kubernetes Cluster</description>
+          <choices class="java.util.Arrays$ArrayList">
+            <a class="string-array">
+              <string>2</string>
+              <string>3</string>
+              <string>4</string>
+              <string>5</string>
+              <string>6</string>
+              <string>7</string>
+            </a>
+          </choices>
+        </hudson.model.ChoiceParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>workingdir</name>
+          <description></description>
+          <defaultValue>workingdir</defaultValue>
+        </hudson.model.StringParameterDefinition>
+      </parameterDefinitions>
+    </hudson.model.ParametersDefinitionProperty>
+  </properties>
+  <scm class="hudson.scm.NullSCM"/>
+  <canRoam>true</canRoam>
+  <disabled>false</disabled>
+  <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
+  <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+  <triggers/>
+  <concurrentBuild>false</concurrentBuild>
+  <builders>
+    <hudson.tasks.Shell>
+      <command>#!/bin/bash
+
+echo &quot;______________________________________________________________________________________________________________________________________&quot;
+echo &quot;______________________________________________________________________________________________________________________________________&quot;
+echo &quot;Logging into Azure.................................................................................&quot;
+sudo /root/bin/az login --service-principal -u $appId --password $passwd --tenant $tenant
+echo &quot;______________________________________________________________________________________________________________________________________&quot;
+echo &quot;______________________________________________________________________________________________________________________________________&quot;
+
+echo &quot;Creating the build workspace.................................................................................&quot;
+mkdir &quot;/tmp/$workingdir&quot;
+cd &quot;/tmp/$workingdir&quot;
+
+mkdir &quot;/tmp/$workingdir/kubeadm&quot;
+cd &quot;/tmp/$workingdir/kubeadm&quot;
+curl -O https://raw.githubusercontent.com/alihhussain/AzureTemplates/master/K8s/kubeadm/fabfileforall.py
+curl -O https://raw.githubusercontent.com/alihhussain/AzureTemplates/master/K8s/kubeadm/fabfilefornodes.py
+sed -i &quot;s#{nodeschosen}#$NumberOfNodes#g&quot; fabfileforall.py
+sed -i &quot;s#{nodeschosen}#$NumberOfNodes#g&quot; fabfilefornodes.py
+pwd
+
+mkdir &quot;/tmp/$workingdir/Initial&quot;
+cd &quot;/tmp/$workingdir/Initial&quot;
+pwd
+
+echo &quot;______________________________________________________________________________________________________________________________________&quot;
+echo &quot;______________________________________________________________________________________________________________________________________&quot;
+echo &quot;Downloading the parameters file from github.................................................................................&quot;
+curl -O https://raw.githubusercontent.com/alihhussain/AzureTemplates/master/K8s/azuredeploy.parameters.json
+curl -O https://raw.githubusercontent.com/alihhussain/AzureTemplates/master/K8s/azuredeploy.json
+curl -O https://raw.githubusercontent.com/alihhussain/AzureTemplates/master/K8s/fabfileforall.py
+curl -O https://raw.githubusercontent.com/alihhussain/AzureTemplates/master/K8s/fabfilefornodes.py
+
+echo &quot;______________________________________________________________________________________________________________________________________&quot;
+echo &quot;______________________________________________________________________________________________________________________________________&quot;
+
+keycontent=$(sudo cat /var/lib/jenkins/.ssh/authorized_keys)
+sed -i &quot;s#{ssh_key_data}#$keycontent#g&quot; azuredeploy.parameters.json
+sed -i &quot;s#{numberofnodes}#$NumberOfNodes#g&quot; azuredeploy.parameters.json
+sed -i &quot;s#{nodeschosen}#$NumberOfNodes#g&quot; fabfileforall.py
+sed -i &quot;s#{nodeschosen}#$NumberOfNodes#g&quot; fabfilefornodes.py
+
+echo &quot;Creating the ResourceGroup.................................................................................&quot;
+sudo /root/bin/az group create -l ${region} -n $ResourceName
+echo &quot;______________________________________________________________________________________________________________________________________&quot;
+echo &quot;______________________________________________________________________________________________________________________________________&quot;
+
+echo &quot;Creating the Deployment within the resourceGroup...................(This could take up to 10 mins)........................&quot;
+
+sudo /root/bin/az group deployment create --name ExampleDeployment --resource-group $ResourceName --template-file ./azuredeploy.json --parameters @azuredeploy.parameters.json &gt; output.json
+cat output.json
+
+echo &quot;The DNS for ELB is: ...........................................&quot;
+echo &quot;______________________________________________________________________________________________________________________________________&quot;
+echo &quot;______________________________________________________________________________________________________________________________________&quot;
+
+k8spublicipname=$(/root/bin/az group deployment show -g $ResourceName -n ExampleDeployment | jq .properties.dependencies[0].dependsOn[0].resourceName | awk -F &apos;&quot;&apos; &apos;{print $2}&apos;)
+k8spublicip=$(sudo /root/bin/az network public-ip show -n $k8spublicipname -g $ResourceName | jq .dnsSettings.fqdn | awk -F &apos;&quot;&apos; &apos;{print $2}&apos;)
+echo $k8spublicip
+echo $k8spublicip &gt; elbip.txt
+
+echo &quot;______________________________________________________________________________________________________________________________________&quot;
+echo &quot;______________________________________________________________________________________________________________________________________&quot;
+echo &quot;The Azure Resources are deployed.&quot;
+
+</command>
+    </hudson.tasks.Shell>
+  </builders>
+  <publishers/>
+  <buildWrappers/>
+</project>
