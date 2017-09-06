@@ -20,7 +20,6 @@ def deployall():
     sudo("kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml")
     sudo("kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel-rbac.yml")
     sudo("kubectl get pods --all-namespaces")
-    
     try:
         sudo("init 6")
     except:
