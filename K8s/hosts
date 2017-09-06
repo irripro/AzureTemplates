@@ -1,11 +1,11 @@
 127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4
 ::1         localhost localhost.localdomain localhost6 localhost6.localdomain6
 
-VM0 10.0.0.4
-VM1 10.0.1.4
-VM2 10.0.2.4
-VM3 10.0.3.4
-VM4 10.0.4.4
-VM5 10.0.5.4
-VM6 10.0.6.4
-VM7 10.0.7.4
+vm0 10.0.0.4
+vm1 10.0.1.4
+vm2 10.0.2.4
+vm3 10.0.3.4
+vm4 10.0.4.4
+vm5 10.0.5.4
+vm6 10.0.6.4
+vm7 10.0.7.4
