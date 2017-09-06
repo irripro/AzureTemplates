@@ -59,6 +59,7 @@ def deployall():
     sudo("setenforce 0")
     sudo("yum install -y kubelet kubeadm")
     sudo("systemctl enable kubelet && systemctl start kubelet")
+    sudo("echo '1' > /proc/sys/net/bridge/bridge-nf-call-iptables")
     try:
         sudo("init 6")
     except:
