@@ -12,7 +12,6 @@ vm6 = "{elbpublicdns}:8028"
 
 vm0PiP = "VM0"
 
-totalnodes = {nodeschosen}   
 if totalnodes == 2:
     env.hosts = [vm1]
 elif totalnodes == 3:
