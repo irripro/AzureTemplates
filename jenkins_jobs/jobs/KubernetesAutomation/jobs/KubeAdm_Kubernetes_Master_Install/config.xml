@@ -33,7 +33,7 @@
     <hudson.tasks.Shell>
       <command>#!/bin/bash
 
-cd &quot;/tmp/$workingdir/Initial&quot;
+cd &quot;/tmp/$workingdir/kubeadm&quot;
 
 sleep 20s
 
@@ -41,9 +41,9 @@ echo &quot;_____________________________________________________________________
 echo &quot;______________________________________________________________________________________________________________________________________&quot;
 echo &quot;Configuring the Master Node&quot;
 
-curl -O https://raw.githubusercontent.com/alihhussain/AzureTemplates/master/K8s/fabfileformaster.py
+curl -O https://raw.githubusercontent.com/alihhussain/AzureTemplates/master/K8s/kubeadm/fabfileformaster.py
 
-elbdns=$(sudo cat elbip.txt)
+elbdns=$(sudo cat /tmp/$workingdir/Initial/elbip.txt)
 sed -i &quot;s#{elbpublicdns}#$elbdns#g&quot; fabfileformaster.py
 fab -f fabfileformaster.py -P deployall
 </command>
