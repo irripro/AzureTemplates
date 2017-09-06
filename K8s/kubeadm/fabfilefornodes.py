@@ -37,7 +37,7 @@ def deployall():
     env.colorize_errors = True
     env.linewise = True
     sudo("hostname")
-    try:
-        sudo("init 6")
-    except:
-        print("This was fine just restarted the system.")
+#    try:
+#        sudo("init 6")
+#    except:
+#        print("This was fine just restarted the system.")
