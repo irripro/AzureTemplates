@@ -36,14 +36,7 @@ def deployall():
     env.output_prefix = False
     env.colorize_errors = True
     env.linewise = True
-    sudo("""curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl -o /usr/bin/kubectl""")
-    sudo("chmod +x /usr/bin/kubectl")
-    run("""echo "source <(kubectl completion bash)" >> ~/.bashrc""")
-    sudo("""curl 'https://raw.githubusercontent.com/alihhussain/AzureTemplates/master/K8s/kubeadm/etc_yum.repos.d_kubernetes.repo' -o /etc/yum.repos.d/kubernetes.repo""")
-    sudo("yum update -y")
-    sudo("setenforce 0")
-    sudo("yum install -y kubelet kubeadm")
-    sudo("systemctl enable kubelet && systemctl start kubelet")
+    sudo("hostname")
     try:
         sudo("init 6")
     except:
