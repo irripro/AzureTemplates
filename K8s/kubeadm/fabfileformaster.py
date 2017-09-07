@@ -15,7 +15,7 @@ def deployall():
     env.output_prefix = False
     env.colorize_errors = True
     env.linewise = True
-    sudo("yum update -y")
+    sudo("hostname")
 #    sudo("""kubeadm init > /tmp/kubeadm.first.output""")
 #    sudo("kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml")
 #    sudo("kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel-rbac.yml")
