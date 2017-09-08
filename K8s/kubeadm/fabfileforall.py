@@ -71,5 +71,5 @@ def deployallpart2():
     env.output_prefix = False
     env.colorize_errors = True
     env.linewise = True
-#    sudo("systemctl enable kubelet && systemctl start kubelet")
+    sudo("systemctl enable kubelet && systemctl start kubelet")
     run("hostname")
