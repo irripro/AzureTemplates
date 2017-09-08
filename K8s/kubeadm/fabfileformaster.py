@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 import sys, json
 from fabric.api import *
+from fabric.api import local
 from pprint import pprint
 
 vm0 = "{elbpublicdns}:8022"
