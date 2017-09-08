@@ -10,7 +10,7 @@ vm4 = "{elbpublicdns}:8026"
 vm5 = "{elbpublicdns}:8027"
 vm6 = "{elbpublicdns}:8028"
 
-vm0PiP = "VM0"
+vm0PiP = "10.0.0.4"
 totalnodes = {nodeschosen}   
 
 if totalnodes == 2:
@@ -27,7 +27,8 @@ elif totalnodes == 7:
     env.hosts = [vm1,vm2,vm3,vm4,vm5,vm6]
 else:
     sys.exit("Select the right amount of nodes")    
-        
+       
+       
 def deployall():
     env.user = 'azureuser'
     env.key_filename = '/var/lib/jenkins/.ssh/id_rsa'
@@ -36,7 +37,9 @@ def deployall():
     env.output_prefix = False
     env.colorize_errors = True
     env.linewise = True
-    sudo("hostname")
+    token=local("cat ./token.kube")
+    print("This is the token: %s " %token)
+    sudo("kubeadm join --token %s %s:6443" %(token,vm0PiP)
 #    try:
 #        sudo("init 6")
 #    except:
