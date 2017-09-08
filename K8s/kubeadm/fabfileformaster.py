@@ -24,6 +24,9 @@ def deployall():
     outputlist=output_stdout[39].split()
     token=outputlist[3]
     local("echo '%s' > ./token.kube" %token)
+    run("mkdir -p $HOME/.kube")
+    run("sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config")
+    run("sudo chown $(id -u):$(id -g) $HOME/.kube/config")
 #    sudo("kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml")
 #    sudo("kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel-rbac.yml")
 #    sudo("kubectl get pods --all-namespaces")
