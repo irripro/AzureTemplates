@@ -37,7 +37,7 @@ def deployall():
     env.output_prefix = False
     env.colorize_errors = True
     env.linewise = True
-    token=local("cat ./token.kube")
+    token=local("cat ./token.kube", capture=True)
     print("This is the token: %s " %token)
     sudo("kubeadm join --token %s %s:6443" %(token,vm0PiP)
 #    try:
