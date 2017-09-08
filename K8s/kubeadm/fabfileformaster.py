@@ -18,6 +18,11 @@ def deployall():
     sudo("hostname")
     sudo("""kubeadm init > /tmp/kubeadm.first.output""")
     sudo("cat /tmp/kubeadm.first.output")
+    output=run("cat /tmp/kubeadm.first.output")
+    output_stdout = output.stdout.split("\r\n")
+    outputlist=output_stdout[39].split()
+    token=outputlist[3]
+    local("echo '%s' > ./token.kube" %token)
 #    sudo("kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml")
 #    sudo("kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel-rbac.yml")
 #    sudo("kubectl get pods --all-namespaces")
