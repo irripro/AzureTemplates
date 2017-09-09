@@ -17,7 +17,7 @@ def deployall():
     env.colorize_errors = True
     env.linewise = True
     sudo("hostname")
-    sudo("""kubeadm init > /tmp/kubeadm.first.output""")
+    sudo("""kubeadm init --pod-network-cidr="10.244.0.0/16" > /tmp/kubeadm.first.output""")
     sudo("cat /tmp/kubeadm.first.output")
     output=run("cat /tmp/kubeadm.first.output")
     output_stdout = output.stdout.split("\r\n")
@@ -27,10 +27,10 @@ def deployall():
     run("mkdir -p $HOME/.kube")
     run("sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config")
     run("sudo chown $(id -u):$(id -g) $HOME/.kube/config")
-#    sudo("kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml")
-#    sudo("kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel-rbac.yml")
-#    sudo("kubectl get pods --all-namespaces")
-#    try:
-#        sudo("init 6")
-#    except:
-#        print("This was fine just restarted the system.")
+    sudo("kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml")
+    sudo("kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel-rbac.yml")
+    sudo("kubectl get pods --all-namespaces")
+    try:
+        sudo("init 6")
+    except:
+        print("This was fine just restarted the system.")
