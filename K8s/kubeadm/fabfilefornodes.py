@@ -39,7 +39,7 @@ def deployall():
     env.linewise = True
     token=local("cat ./token.kube", capture=True)
     print("This is the token: %s " %token)
-    sudo("kubeadm join --token %s %s:6443" %(token,vm0PiP)
+    sudo("kubeadm join --token %s %s:6443" %(token,vm0PiP))
 #    try:
 #        sudo("init 6")
 #    except:
