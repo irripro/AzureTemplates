@@ -1,0 +1,49 @@
+vi /etc/kubernetes/apiserver
+ 
+# Bind kube API server to this IP
+KUBE_API_ADDRESS="--address=0.0.0.0"
+# Port that kube api server listens to.
+KUBE_API_PORT="--port=8080"
+# Port kubelet listen on
+KUBELET_PORT="--kubelet-port=10250"
+# Address range to use for services(Work unit of Kubernetes)
+KUBE_SERVICE_ADDRESSES="--service-cluster-ip-range=10.254.0.0/16"
+# default admission control policies
+KUBE_ADMISSION_CONTROL="--admission-control=NamespaceLifecycle,NamespaceExists,LimitRanger,SecurityContextDeny,ServiceAccount,ResourceQuota"
+# Add your own!
+KUBE_API_ARGS="--client-ca-file=/srv/kubernetes/ca.crt --tls-cert-file=/srv/kubernetes/server.cert --tls-private-key-file=/srv/kubernetes/server.key"
+
+Azure Infrastrucutre and Applications Rock
+Deploy using CLI SDK Rest or PowerShell
+Help customer implement amazing solutions 
+
+iptables -t nat -A POSTROUTING -o wlan0 -j MASQUERADE
+iptables -A FORWARD -i wlan0 -o wlan1 -m state --state RELATED,ESTABLISHED -j ACCEPT
+iptables -A FORWARD -i wlan1 -o wlan0 -j ACCEPT
+
+
+
+
+curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add -
+echo "deb http://apt.kubernetes.io/ kubernetes-xenial main" > /etc/apt/sources.list.d/kubernetes.list
+apt-cache policy kubeadm
+apt-get update && apt-get install -y kubeadm=1.7.5-00
+apt-get remove docker docker-engine docker.io -y
+apt-get update
+apt install docker-engine=1.12.6-0~raspbian-jessie
+nano /etc/systemd/system/kubelet.service.d/10-kubeadm.conf
+Environment="KUBELET_NETWORK_ARGS=--network-plugin=kubenet
+systemctl daemon-reload
+systemctl restart kubelet.service
+kubeadm init --pod-network-cidr 10.244.0.0/16 --apiserver-advertise-address=192.168.42.18 --token-ttl 0 > /tmp/kubeadm.output &
+curl -sSL https://rawgit.com/coreos/flannel/v0.7.0/Documentation/kube-flannel-rbac.yml | kubectl create -f -
+curl -sSL https://rawgit.com/coreos/flannel/v0.7.0/Documentation/kube-flannel.yml | sed "s/amd64/arm/g" | kubectl create -f -
+kubeadm join --token c59632.554f927eef2b453a 192.168.42.18:6443
+kubectl get po --all-namespaces
+
+
+apt-get remove xrdp vnc4server tightvncserver
+apt-get install tightvncserver
+apt-get install xrdp
+service xrdp restart
+
