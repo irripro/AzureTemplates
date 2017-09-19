@@ -36,14 +36,17 @@ def deployall():
     env.colorize_errors = True
     env.linewise = True
     with hide('everything'):
-        sudo("yum upgrade -y")
-        sudo("yum update -y")
-    sudo("curl 'https://github.com/stedolan/jq/releases/download/jq-1.5/jq-linux64' -o /usr/bin/jq")
-    sudo("chmod +x /usr/bin/jq")
+        sudo("apt-get update -y")
+        sudo("apt-get upgrade -y")
+    sudo("apt-get install jq -y")
     sudo("yum install -y ntp")
     sudo("systemctl enable ntpd && systemctl start ntpd")
     sudo("systemctl status ntpd")
-    sudo("""curl 'https://raw.githubusercontent.com/alihhussain/AzureTemplates/master/K8s/hosts' -o /etc/hosts""")
+    sudo("apt-get install -y apt-transport-https ca-certificates")
+    sudo("apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D")
+    sudo("""bash -c "echo 'deb https://apt.dockerproject.org/repo ubuntu-xenial main' > /etc/apt/sources.list.d/docker.list"""")
+    sudo("apt-get update -y")
+    sudo("apt-get install docker-engine=1.12.6-0~ubuntu-xenial")
     sudo("""curl 'https://raw.githubusercontent.com/alihhussain/AzureTemplates/master/K8s/virt7-docker-common-release.repo' -o /etc/yum.repos.d/virt7-docker-common-release.repo""")
     sudo("yum update -y")
     sudo("groupadd docker")
