@@ -40,11 +40,3 @@ def deployall():
     token=local("cat ./token.kube", capture=True)
     print("This is the token: %s " %token)
     sudo("kubeadm join --token %s %s:6443" %(token,vm0PiP))
-    sudo("""curl 'https://raw.githubusercontent.com/alihhussain/AzureTemplates/master/K8s/kubeadm/etc_systemd_system_kubelet.service.d_10-kubeadm.conf' -o /etc/systemd/system/kubelet.service.d/10-kubeadm.conf""")
-    sudo("systemctl daemon-reload")
-    sudo("systemctl restart kubelet")
-    sudo("systemctl status kubelet -l")
-#    try:
-#        sudo("init 6")
-#    except:
-#        print("This was fine just restarted the system.")

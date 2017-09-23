@@ -16,25 +16,13 @@ def deployall():
     env.output_prefix = False
     env.colorize_errors = True
     env.linewise = True
-    sudo("hostname")
+    sudo("kubeadm init --pod-network-cidr=192.168.0.0/16 > /tmp/kubeadm.first.output")
     sudo("""kubeadm init > /tmp/kubeadm.first.output""")
+    sudo("""bash -c "echo 'export KUBECONFIG=$HOME/admin.conf' >> /home/azureuser/.profile"""")
     sudo("cat /tmp/kubeadm.first.output")
+    run("kubectl get nodes")
     output=run("cat /tmp/kubeadm.first.output")
     output_stdout = output.stdout.split("\r\n")
     outputlist=output_stdout[39].split()
     token=outputlist[3]
     local("echo '%s' > ./token.kube" %token)
-    run("mkdir -p $HOME/.kube")
-    run("sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config")
-    run("sudo chown $(id -u):$(id -g) $HOME/.kube/config")
-    sudo("""curl 'https://raw.githubusercontent.com/alihhussain/AzureTemplates/master/K8s/kubeadm/etc_systemd_system_kubelet.service.d_10-kubeadm.conf' -o /etc/systemd/system/kubelet.service.d/10-kubeadm.conf""")
-    sudo("systemctl daemon-reload")
-    sudo("systemctl restart kubelet")
-    sudo("systemctl status kubelet -l")
-#    sudo("kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml")
-#    sudo("kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel-rbac.yml")
-#    sudo("kubectl get pods --all-namespaces")
-    try:
-        sudo("init 6")
-    except:
-        print("This was fine just restarted the system.")

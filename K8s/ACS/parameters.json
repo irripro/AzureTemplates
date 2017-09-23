@@ -1,0 +1,219 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "agentCount": {
+            "value": 3
+        },
+        "agentEndpointDNSNamePrefix": {
+            "value": "myK8sClust-k8sCluster-e729c2agent"
+        },
+        "agentOffset": {
+            "value": 0
+        },
+        "agentSubnet": {
+            "value": "10.240.0.0/16"
+        },
+        "agentVMSize": {
+            "value": "Standard_D2_v2"
+        },
+        "apiServerCertificate": {
+            "value": "LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tDQpNSUlFZURDQ0EyQ2dBd0lCQWdJSWZlT1I1VUk4cExFd0RRWUpLb1pJaHZjTkFRRUxCUUF3RXpFUk1BOEdBMVVFQXd3SVlXTnphemh6DQpZMkV3SGhjTk1UY3dPVEV6TURBd01EQXdXaGNOTVRrd09URXpNREF3TURBd1dqQVVNUkl3RUFZRFZRUUREQWxoY0dselpYSjJaWEl3DQpnZ0VpTUEwR0NTcUdTSWIzRFFFQkFRVUFBNElCRHdBd2dnRUtBb0lCQVFDWXdwYzNmM3RzMkgyclhMQTc3dWdjM1lsYytLZW1IQkZJDQp5WXI3QVBnMnQwNTVMUGk2UnYwSS9Hbk1YZi9uNlZnakFicUVLVWhyZVd4VmlpcFhLQ1dYRHRiMXA2R0cyY3ZEN0x0NGdZeWlaWlFLDQpYYjhISDlpdEZ6aVoycFlxWm10Z0doc21POHYxSnNOallGcWZtVUwvRkgzZVNFUjJpK1VPTDdxa3dlaUQyRFFYRUFXWFRFOTAraElxDQpabnZUY1g2c1lUVCtrUjBON2hBR21oNmN1SUY2VkN1SUd1SnhkRDB6MEFBWTBYUHBvbmdPVU5BWVVWNEphT3hyMjFBWENVb0M4SDJJDQpOdVBQN2l5MG41di8yNnM1N05Ta0xsVW1JYkZIYk9rekxsTmZRaGZwUWJMRjZBbWpMMkJjcHVyMVRyWlh5Z3NtTVlXcjlOODNzNVNPDQphYytWQWdNQkFBR2pnZ0hOTUlJQnlUQkNCZ05WSFNNRU96QTVnQlNFb1JBMXhpZUc3YTZ1aTAvMG1idU5zN3Z3RWFFWHBCVXdFekVSDQpNQThHQTFVRUF3d0lZV056YXpoelkyR0NDRnVVUkJtOVRCWFFNQjBHQTFVZERnUVdCQlEwVnJ2alNUYU9TN3VrcDVyQ3preEROVjZ5DQp2ekFNQmdOVkhSTUJBZjhFQWpBQU1JSUJMd1lEVlIwUkJJSUJKakNDQVNLQ09tMTVTemh6UTJ4MWMzUXRhemh6UTJ4MWMzUmxjaTFsDQpOekk1WXpKdFoyMTBMbVZoYzNSMWN5NWpiRzkxWkdGd2NDNWhlblZ5WlM1amIyMkNDbXQxWW1WeWJtVjBaWE9DRW10MVltVnlibVYwDQpaWE11WkdWbVlYVnNkSUlXYTNWaVpYSnVaWFJsY3k1a1pXWmhkV3gwTG5OMlk0SWthM1ZpWlhKdVpYUmxjeTVrWldaaGRXeDBMbk4yDQpZeTVqYkhWemRHVnlMbXh2WTJGc2doWnJkV0psY201bGRHVnpMbXQxWW1VdGMzbHpkR1Z0Z2hwcmRXSmxjbTVsZEdWekxtdDFZbVV0DQpjM2x6ZEdWdExuTjJZNElvYTNWaVpYSnVaWFJsY3k1cmRXSmxMWE41YzNSbGJTNXpkbU11WTJ4MWMzUmxjaTVzYjJOaGJJY0VDdkQvDQpCWWNFQ3ZEL0JvY0VDdkQvQjRjRUN2RC9DSWNFQ3ZEL0NZY0VDdkQvRDRjRUNnQUFBVEFPQmdOVkhROEJBZjhFQkFNQ0JhQXdFd1lEDQpWUjBsQkF3d0NnWUlLd1lCQlFVSEF3RXdEUVlKS29aSWh2Y05BUUVMQlFBRGdnRUJBSEpyd1hmTFdqRkZhQUJLVlg1UnVrZnRCcFpZDQpiY3lScTUzSDJ0YnVHa3BkUUhLT09WcXlIalZvZWhra2lGYzBlUURROFJUSEtLL3E1dWpiQ0F1dzFEa3ZZai9rN1NtVWFtNXBpMVlpDQpXY1kzaDNyYVA5VlpQMjhkRVNlQU9sZEhveFdYT1hJMDhZUVVYWmtZMU9FUUh2SVpvcU1zN3c2TFZNaGtONXpnc0wxcWQ2dFNFTTFXDQpYT2V0ZTZ2MDlrQ1hGeGtVMzQzTzhqUjRpdmY1NzhERVBYcFVpcHF0dEl5ZG1vdFFGeUU1UXd3R3VBcHJJa2dqQXk4cG1oUm9nd0FpDQpLb1RmVU53c1NNZDZhRkx0ei9ZU2YvektCODFwcEhMTkUxR05PdUh6aXQ0a3ZFcnZtN1Z4R3ZweG1XYnVXL01SYnJINldJVjQ5QjNmDQpqMk5Nc1VORHN1bz0NCi0tLS0tRU5EIENFUlRJRklDQVRFLS0tLS0NCg=="
+        },
+        "apiServerPrivateKey": {
+            "value": null
+        },
+        "caCertificate": {
+            "value": "LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tDQpNSUlETURDQ0FoaWdBd0lCQWdJSVc1UkVHYjFNRmRBd0RRWUpLb1pJaHZjTkFRRUxCUUF3RXpFUk1BOEdBMVVFQXd3SVlXTnphemh6DQpZMkV3SGhjTk1UY3dPVEV6TURBd01EQXdXaGNOTVRrd09URXpNREF3TURBd1dqQVRNUkV3RHdZRFZRUUREQWhoWTNOck9ITmpZVENDDQpBU0l3RFFZSktvWklodmNOQVFFQkJRQURnZ0VQQURDQ0FRb0NnZ0VCQUlWVytYZjIzb2VVUVIwNk1WU1lnbExhVTFFV2lwSS9IUHRZDQoyVHZJdU5LQ0F5bnU0WExRYmMxbVJ3V2M5VDRGWnYzSmo5ZE5NYVg5dGhVcXpjWGx3Z1dpZzg3UEJPMnJJRHphaWh2NHkrb3RCM0VNDQpOUWJUKzk5L1lOQTUzamZpSE5kSTRuUEh5cVh5ZitLVFRRUVdhcVh0dHQ5RWFDcHp4RDhxRGp2UkVoQmtOOUw2b3h4aEdmQzVNMXpsDQpGdjJDdWpJaytib2RPb0Q3ajNjdHJTWmRKMTFqSVhGOFNpemw4dm1LZjFUZnFxSDJxcjQ0ejNHQzN4SndsTERHMW1Kb0JVV0lQMEtQDQp4VG5oM3RjYS8yQzBrbTROR3dJaTRpNmNpV09nSzdYdVlWUENiM1lzOW51V3BmMXQyZkRTWWNRb3Y0YzlsbkVtVmsrRExSU2pHQ2ZhDQpvUjhDQXdFQUFhT0JoekNCaERCQ0JnTlZIU01FT3pBNWdCU0VvUkExeGllRzdhNnVpMC8wbWJ1TnM3dndFYUVYcEJVd0V6RVJNQThHDQpBMVVFQXd3SVlXTnphemh6WTJHQ0NGdVVSQm05VEJYUU1CMEdBMVVkRGdRV0JCU0VvUkExeGllRzdhNnVpMC8wbWJ1TnM3dndFVEFQDQpCZ05WSFJNQkFmOEVCVEFEQVFIL01BNEdBMVVkRHdFQi93UUVBd0lDcERBTkJna3Foa2lHOXcwQkFRc0ZBQU9DQVFFQVk2SWhIMU5sDQpyYVFkZVgzc0NSSmdDSXlzc1Z0K010VnB5YS9yL3RRS3grT1liUXhBbXFLOXlTY1hITjVYYndiUHJJQTg1a0Z6b0lQWGNLTEhRcCtzDQpuZHJXUW9lK0o5cGZISWxPSi8zOVVNNE1EdWJmVkpHVERycVcyZXJQUUxubldGS29WWUxGQS9IVnhLWnhFcmFoaGxlYmJwVWJjTHVQDQpFWE9MendoRXo2eW1oN1NjRndpTmloWWdib3BLai9JTGEycll4Q2ZEVUtqVlRpMitjTzBtTUpaYnMzZkZSLzczTU4xR1Ezd0VoMTVXDQpVOTA1NVNEa0RMQWdYSHN5N2Noa3BqOGl6a1grUGprWlNqK0orT0dOV29JTVVHYTB4cUlaeTg4am5ESjJvd3lraTduSGlFVGcwSEVKDQplN2MxR0ZINjNxTTJ5SmJEZkVlUmtHSEtzcFZ3aUE9PQ0KLS0tLS1FTkQgQ0VSVElGSUNBVEUtLS0tLQ0K"
+        },
+        "caPrivateKey": {
+            "value": null
+        },
+        "clientCertificate": {
+            "value": "LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tDQpNSUlEUURDQ0FpaWdBd0lCQWdJSWVPRk1LSURKbVFjd0RRWUpLb1pJaHZjTkFRRUxCUUF3RXpFUk1BOEdBMVVFQXd3SVlXTnphemh6DQpZMkV3SGhjTk1UY3dPVEV6TURBd01EQXdXaGNOTVRrd09URXpNREF3TURBd1dqQVJNUTh3RFFZRFZRUUREQVpqYkdsbGJuUXdnZ0VpDQpNQTBHQ1NxR1NJYjNEUUVCQVFVQUE0SUJEd0F3Z2dFS0FvSUJBUUNPallxWTJDSnJjeXUyOTlJaCtUeTZBeGpsNnB2dTduYVdMYXlaDQp2VTZkcEpoa0ZwSUYrSHd0VWR4Q3BocUVHa2xkMlBUTGVKUWtvUXZpUGZLMHJXTEFOeEdYNUp1eDh3cG02SDlEWXNnTktLbHhxUTgwDQpLNEpIOWNFOElLTGMvQklBU1FnOTZuMXBjSkw0VXN5WGxlS1lON0p6Z3d1eTZaQ3VEeWNPZExZQW5RNDhYMDBVVnRRTEZQTS9HQU5QDQpWZlNEWk9QRmRKaEtZVUpldVdQRFZKQ0Y2MDlEajlndWZKSDRyYmpCNHNwMnFqckZxNzFLY2lLcjFkdnM3c0liTFNES0lUMlZpUmhpDQpPUEtkeTBaa3JWbUJEMDZxS3l5RWVXY3J5VG1zRTQ5WWExMXZnQ2RXOGYrMFl5dVlia1czbTFwTTJqNE9EamdhamY1blZJdWJwRHQzDQpBZ01CQUFHamdaa3dnWll3UWdZRFZSMGpCRHN3T1lBVWhLRVFOY1luaHUydXJvdFA5Sm03amJPNzhCR2hGNlFWTUJNeEVUQVBCZ05WDQpCQU1NQ0dGamMyczRjMk5oZ2doYmxFUVp2VXdWMERBZEJnTlZIUTRFRmdRVUlyclNpc3BnV0VoWUNVM2gxQmpHRWU0K0ZjUXdEQVlEDQpWUjBUQVFIL0JBSXdBREFPQmdOVkhROEJBZjhFQkFNQ0JhQXdFd1lEVlIwbEJBd3dDZ1lJS3dZQkJRVUhBd0l3RFFZSktvWklodmNODQpBUUVMQlFBRGdnRUJBQVBJL1ZmODFLc002MFR4ZXUya2pvZmFYZ1FqMDBhQ0RFcU4wTW5iL292K3hQcVA3MEhWWXRwd3NvNGFKSDcwDQpYZ3dBaWNka2czNHR6UjdNbzBXWHBRVzBOZEpSRzR1Q1VoRm5XcTdvMWZPZng5a1hsR2VWTVhNNXBhcHIvSk9HbDVWL1drL200MGt4DQpPTjFvTXNqUXBTclNackVwUy9mVStGc0o0TDRSaWZjeEtzTngzSnp0bWppRWN6ME9xd2RuKzNHZ1FOWDdXNXRtZ3NYMXlOdE1ndStyDQpnWGE3VFNhODYwdFM4UGRCRk9qaUpKbkNSaFQzSEdiS2xIRmpXdmg4T0RtTkg1UFprYWNRNGthUzUxaEJaOHlZbEcwUGl6anFSVE9RDQpmSjdvYXpFN2xZRVVjOXRDdUxnWS9xNTEzRFE1MlA2ZnJ4anFMY3crTzhYOTFXS0ZGMTQ9DQotLS0tLUVORCBDRVJUSUZJQ0FURS0tLS0tDQo="
+        },
+        "clientPrivateKey": {
+            "value": null
+        },
+        "cloudProviderBackoff": {
+            "value": "false"
+        },
+        "cloudProviderBackoffDuration": {
+            "value": "0"
+        },
+        "cloudProviderBackoffExponent": {
+            "value": "0"
+        },
+        "cloudProviderBackoffJitter": {
+            "value": "0"
+        },
+        "cloudProviderBackoffRetries": {
+            "value": "0"
+        },
+        "cloudProviderRatelimit": {
+            "value": "false"
+        },
+        "cloudProviderRatelimitBucket": {
+            "value": "0"
+        },
+        "cloudProviderRatelimitQPS": {
+            "value": "0"
+        },
+        "disablePasswordAuthentication": {
+            "value": true
+        },
+        "dockerBridgeCidr": {
+            "value": "172.17.0.1/16"
+        },
+        "dockerEngineDownloadRepo": {
+            "value": "https://aptdocker.azureedge.net/repo"
+        },
+        "enableNewStorageAccountNaming": {
+            "value": true
+        },
+        "enableVMDiagnostics": {
+            "value": false
+        },
+        "firstConsecutiveStaticIP": {
+            "value": "10.240.255.5"
+        },
+        "isValidation": {
+            "value": 0
+        },
+        "jumpboxEndpointDNSNamePrefix": {
+            "value": "UNUSED"
+        },
+        "kubeClusterCidr": {
+            "value": "10.244.0.0/16"
+        },
+        "kubeConfigCertificate": {
+            "value": "LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tDQpNSUlEUkRDQ0FpeWdBd0lCQWdJSVgxUjQ1Zlc4aVMwd0RRWUpLb1pJaHZjTkFRRUxCUUF3RXpFUk1BOEdBMVVFQXd3SVlXTnphemh6DQpZMkV3SGhjTk1UY3dPVEV6TURBd01EQXdXaGNOTVRrd09URXpNREF3TURBd1dqQVZNUk13RVFZRFZRUUREQXByZFdKbFkyOXVabWxuDQpNSUlCSWpBTkJna3Foa2lHOXcwQkFRRUZBQU9DQVE4QU1JSUJDZ0tDQVFFQXJqckI1WVB3OXlQV1l1dmNCNXh1bkZyS3ovZEFsSElPDQpEOXBldndpM0pCVE9ZYjROYTB2d1RvdUZxK01LSXFiZHJtNER1V2Q5N2YxR2lTNFNRcHRwU1hNMVNhdFIzdmJzY0lHclh6dGp2cVpYDQpGOHlSZkRCd2VlSnY2eU5ETmxMRXAzTHZmamsyV3VIUnVUeU13Z1YyejlGZnFNYS9idWxkN1U3RUg1dDJ3eFhmelZhUHlXWnlSRmlzDQpiWmt5cXZnazQ2MjBHbUlRRnNkVytIQ0x0dk91anlHKy90cUtWVlhNZWFRdTBTbGxEWmdqbExHU0hHK2JuMGNkcjBPUXRYbm9PRnFlDQpKVjVtM2l5cWZ4NUlVWHBSeHZMdXRWdlJtL09KZkhOQStVSGRvMUIrT1B3bEFPa2JvQ0ROQnIzY0JVWmhRdmVZbmhocGljTmp5enkrDQpiOFJsTlFJREFRQUJvNEdaTUlHV01FSUdBMVVkSXdRN01EbUFGSVNoRURYR0o0YnRycTZMVC9TWnU0Mnp1L0FSb1Jla0ZUQVRNUkV3DQpEd1lEVlFRRERBaGhZM05yT0hOallZSUlXNVJFR2IxTUZkQXdIUVlEVlIwT0JCWUVGTzQ4cG81SUV2R0lzMlNQbHpGZkRpM0U5REVpDQpNQXdHQTFVZEV3RUIvd1FDTUFBd0RnWURWUjBQQVFIL0JBUURBZ1dnTUJNR0ExVWRKUVFNTUFvR0NDc0dBUVVGQndNQ01BMEdDU3FHDQpTSWIzRFFFQkN3VUFBNElCQVFCYWh5ZHg4enVkMzVVbVFJZU5VTWdTZ0FVUkE2d2VENjBOOE91RUw3UGRhYndxWUcvZlRtbUtESXpIDQorc2Nzcmk1Q2NhMVZZeUJMUG9zcHBTWmZmUXBKRlk4VlE1L3o2MmRUenZ2eGhJaStpWWlRckVZV2lnNDI3emErRHhjSUxYaUtjcDFWDQp3UFovU3hVV0w2TCs5b2VPZkNCSXV1TDlMdXVKRWZDU0Rjcm0yQXFWZnFJenZIUlpzTEVHNmhRK3h3d0p4Z1R6MVovWWM1YVArS2EzDQpCTVpxRXgwd0R5K2tYUVZ4THFxUDFlZVhpdGxTZEVtVWRvTFBFSjJWYndPK0hGUDdkZWU4dWt2MmdqOXh2aFdmU2VTcDBIQ3hoRW9ODQp2aGFTajIrM0Y3ZHhQYUphVHJJSXljaWU0TmNMalZVdFZtZGxLVndETWRkSnU5K1cvMlRGMWU0Yg0KLS0tLS1FTkQgQ0VSVElGSUNBVEUtLS0tLQ0K"
+        },
+        "kubeConfigPrivateKey": {
+            "value": null
+        },
+        "kubernetesAddonManagerSpec": {
+            "value": "gcrio.azureedge.net/google_containers/kube-addon-manager-amd64:v6.4-beta.2"
+        },
+        "kubernetesAddonResizerSpec": {
+            "value": "gcrio.azureedge.net/google_containers/addon-resizer:1.7"
+        },
+        "kubernetesCtrlMgrNodeMonitorGracePeriod": {
+            "value": "40s"
+        },
+        "kubernetesCtrlMgrPodEvictionTimeout": {
+            "value": "5m0s"
+        },
+        "kubernetesCtrlMgrRouteReconciliationPeriod": {
+            "value": "10s"
+        },
+        "kubernetesDNSMasqSpec": {
+            "value": "gcrio.azureedge.net/google_containers/k8s-dns-dnsmasq-amd64:1.13.0"
+        },
+        "kubernetesDashboardSpec": {
+            "value": "gcrio.azureedge.net/google_containers/kubernetes-dashboard-amd64:v1.6.1"
+        },
+        "kubernetesExecHealthzSpec": {
+            "value": "gcrio.azureedge.net/google_containers/exechealthz-amd64:1.2"
+        },
+        "kubernetesHeapsterSpec": {
+            "value": "gcrio.azureedge.net/google_containers/heapster:v1.3.0"
+        },
+        "kubernetesHyperkubeSpec": {
+            "value": "gcrio.azureedge.net/google_containers/hyperkube-amd64:v1.6.6"
+        },
+        "kubernetesKubeDNSSpec": {
+            "value": "gcrio.azureedge.net/google_containers/k8s-dns-kube-dns-amd64:1.14.4"
+        },
+        "kubernetesNodeStatusUpdateFrequency": {
+            "value": "10s"
+        },
+        "kubernetesPodInfraContainerSpec": {
+            "value": "gcrio.azureedge.net/google_containers/pause-amd64:3.0"
+        },
+        "kubernetesTillerSpec": {
+            "value": "gcrio.azureedge.net/kubernetes-helm/tiller:v2.5.1"
+        },
+        "linuxAdminPassword": {
+            "value": null
+        },
+        "linuxAdminUsername": {
+            "value": "azureuser"
+        },
+        "linuxOffer": {
+            "value": "UbuntuServer"
+        },
+        "linuxPublisher": {
+            "value": "Canonical"
+        },
+        "linuxSku": {
+            "value": "14.04.4-LTS"
+        },
+        "linuxVersion": {
+            "value": "UNUSED"
+        },
+        "location": {
+            "value": ""
+        },
+        "masterCount": {
+            "value": 1
+        },
+        "masterEndpointDNSNamePrefix": {
+            "value": "myK8sClust-k8sCluster-e729c2mgmt"
+        },
+        "masterOffset": {
+            "value": 0
+        },
+        "masterSubnet": {
+            "value": "10.240.0.0/16"
+        },
+        "masterVMSize": {
+            "value": "Standard_D2"
+        },
+        "nameSuffix": {
+            "value": "CF75D2B"
+        },
+        "networkPolicy": {
+            "value": "none"
+        },
+        "oauthEnabled": {
+            "value": "false"
+        },
+        "postInstallScriptURI": {
+            "value": "disabled"
+        },
+        "servicePrincipalClientId": {
+            "value": null
+        },
+        "servicePrincipalClientSecret": {
+            "value": null
+        },
+        "setLinuxConfigurationForVMCreate": {
+            "value": 1
+        },
+        "sshRSAPublicKey": {
+            "value": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDC5f+VnRtzodhX0Xb1L0eydTstms4Kkz8sHdiibpTU5XFI15vWMj2jlH3zM/wpBmzsCdlPSVrRm09osoHxqraUyh7UCiOM3c9c0fSq6IixsVybzM4wVfp4NgYLE6j6xC85gc4FUcRxILszyQOjAO4K6fkKT+6aTBUo+95GsiDgVh7hrFNa7xciVg9PdqHpdcGRZOPAjrvNuLobdjUdtDjFuWrYW85acM3MnBTnEr4YSI2IS7bsjLn/uFuR3xCLgwpEsmio1jZvCBwSfdrZlaqHDijITYe1uZIsEtWHrIeMVyddPECUYJxNOJaZPqKiKct9Je+CvCaKX94vvS52+6Gx"
+        },
+        "targetEnvironment": {
+            "value": "AzurePublicCloud"
+        },
+        "vmsPerStorageAccount": {
+            "value": 5
+        },
+        "windowsAdminPassword": {
+            "value": null
+        },
+        "windowsAdminUsername": {
+            "value": "UNUSED"
+        },
+        "windowsJumpboxOffer": {
+            "value": "UNUSED"
+        },
+        "windowsJumpboxPublisher": {
+            "value": "UNUSED"
+        },
+        "windowsJumpboxSku": {
+            "value": "UNUSED"
+        }
+    }
+}
