@@ -294,6 +294,9 @@ url = <Put the connection string created in the previous section>
 db = client.<YourDBName>.<YourCollectionName> 
 ```
 
-
+Run the following command to start the flask app
+```
+python main.py
+```
 
 
