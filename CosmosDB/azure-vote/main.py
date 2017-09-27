@@ -19,7 +19,8 @@ url = "mongodb://iotdbaccount838:cOl25CnJVEonhsGShaSJZqCNYWPIR9j8mfcQLaloJwvy4oG
 client = pymongo.MongoClient(url)
 
 #CosmosDB Connection
-db = client.iotdb.iotdbcollection
+db = client.<YourDBName>.<YourCollectionName>
+#Sample db = client.iotdb.iotdbcollection
 
 # Change title to host name to demo NLB
 if app.config['SHOWHOST'] == "true":
@@ -77,4 +78,4 @@ def index():
 
 if __name__ == "__main__":
     start()
-    app.run(host='0.0.0.0',debug=True, port=5000)
+    app.run(host='0.0.0.0',debug=True, port=80)

@@ -268,3 +268,32 @@ The output will be something like:
   }
 }
 ```
+###  Put together the python connection string
+
+The connection string for mongoDB will have the following struction:
+
+* mongodb://**YourDBName**:**YourKey**@**YourDBName**.documents.azure.com:10255/?ssl=true&replicaSet=globaldb"
+
+Lets get the values we need by recalling the environment variables set:
+```
+echo $dbaccountname
+echo $cosmosdbkey
+```
+Sample connection string will be:
+```
+"mongodb://iotdbaccount***:cOl25CnJVEonhsGShaSJZqCNYWPIR9j8mfcQLaloJwvy4oG5oZVF9aenWdUchYXHuRrLf2JZqwKOk********==@iotdbaccount***.documents.azure.com:10255/?ssl=true&replicaSet=globaldb"
+```
+
+# Demo App
+Copy the entire [folder](https://github.com/alihhussain/AzureTemplates/tree/master/CosmosDB/azure-vote) in a local folder
+
+Modify the following values in the **[main.py](https://raw.githubusercontent.com/alihhussain/AzureTemplates/master/CosmosDB/azure-vote/main.py)** file
+
+```
+url = <Put the connection string created in the previous section>
+db = client.<YourDBName>.<YourCollectionName> 
+```
+
+
+
+
