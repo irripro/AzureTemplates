@@ -26,3 +26,4 @@ def deployall():
     outputlist=output_stdout[39].split()
     token=outputlist[3]
     local("echo '%s' > ./token.kube" %token)
+    run("kubectl apply -f https://docs.projectcalico.org/v2.5/getting-started/kubernetes/installation/hosted/kubeadm/1.6/calico.yaml")
