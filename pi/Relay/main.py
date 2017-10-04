@@ -22,6 +22,7 @@ def index():
         return render_template("index.html", button1=button1, button2=button2, button1value=button1value, button2value=button2value, title=title)
 
     elif request.method == 'POST':
+        print(request.form['red'])
         if request.form['red'] == "ON":
             return render_template("index.html", button1=button1, button2=button2, button1value="OFF", button2value="OFF", title=title)
         elif request.form['red'] == "OFF":
