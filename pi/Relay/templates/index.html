@@ -13,24 +13,11 @@
 <body>
     <div id="container">
         <form id="form" name="form" action="/"" method="post"><center>
-        <div id="logo">{{title1}}</div>
+        <div id="logo">{{title}}</div>
         <div id="space"></div>
         <div id="form">
-        <button name="red" value="{{button1}}" onclick="send()" class="button button1">{{button1}}</button>
-        <button name="red" value="{{button2}}" onclick="send()" class="button button2">{{button2}}</button>
-        <div id="space"></div>
-        <div id="space"></div>
-        <div id="Status"> {{message}} </div> 
-        </form>        
-        </div>
-    </div>
-    <div id="container1">
-        <form id="form" name="form" action="/"" method="post"><center>
-        <div id="logo">{{title2}}</div>
-        <div id="space"></div>
-        <div id="form">
-        <button name="yellow" value="{{button1}}" onclick="send()" class="button button1">{{button1}}</button>
-        <button name="yellow" value="{{button2}}" onclick="send()" class="button button2">{{button2}}</button>
+        <button name="red" value="Red - {{button1value}}" onclick="send()" class="button button1">{{button1}}</button>
+        <button name="yellow" value="Yellow - {{button2value}}" onclick="send()" class="button button2">{{button2}}</button>
         <div id="space"></div>
         <div id="space"></div>
         <div id="Status"> {{message}} </div> 
