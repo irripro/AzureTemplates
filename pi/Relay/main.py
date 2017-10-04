@@ -18,11 +18,14 @@ def index():
 
     elif request.method == 'POST':
         print("Button Value is %s " %request.form)
-#        if request.form['red'] == "ON":
-#            return render_template("index.html", title=title)
-#        elif request.form['red'] == "OFF":
-#            return render_template("index.html", title=title)
-#        elif request.form['yellow'] == "OFF":
+        if request.form['red'] == "ON":
+            print("RED ON.")
+        elif request.form['red'] == "OFF":
+            print("RED OFF.")
+        elif request.form['yellow'] == "ON":
+            print("YELLOW ON.")
+        elif request.form['yellow'] == "OFF":
+            print("YELLOW OFF.")
         return render_template("index.html", title=title)
 
 if __name__ == "__main__":
