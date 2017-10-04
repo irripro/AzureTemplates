@@ -27,9 +27,9 @@ def index():
         except:
             pass
         try:    
-            if response['yell'] == "ON":
+            if response['yellow'] == "ON":
                 print("YELLOW ON.")
-            elif response['yell'] == "OFF":
+            elif response['yellow'] == "OFF":
                 print("YELLOW OFF.")
         except:
             pass
