@@ -14,16 +14,16 @@ title =         app.config['TITLE']
 @app.route('/', methods=['GET', 'POST'])
 def index():
     if request.method == 'GET':
-        return render_template("index.html", button1status="OFF", button2status="OFF", title=title)
+        return render_template("index.html", title=title)
 
     elif request.method == 'POST':
         print("Button Value is %s " %request.form)
-        if request.form['red'] == "ON":
-            return render_template("index.html", title=title)
-        elif request.form['red'] == "OFF":
-            return render_template("index.html", title=title)
-        elif request.form['yellow'] == "OFF":
-            return render_template("index.html", title=title)
+#        if request.form['red'] == "ON":
+#            return render_template("index.html", title=title)
+#        elif request.form['red'] == "OFF":
+#            return render_template("index.html", title=title)
+#        elif request.form['yellow'] == "OFF":
+        return render_template("index.html", title=title)
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0',debug=True, port=5000)
