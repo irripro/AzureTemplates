@@ -19,14 +19,20 @@ def index():
 
     elif request.method == 'POST':
         response = request.form.to_dict()
-        if response['red'] == "ON":
-            print("RED ON.")
-        elif response['red'] == "OFF":
-            print("RED OFF.")
-        elif response['yell'] == "ON":
-            print("YELLOW ON.")
-        elif response['yell'] == "OFF":
-            print("YELLOW OFF.")
+        try: 
+            if response['red'] == "ON":
+                print("RED ON.")
+            elif response['red'] == "OFF":
+                print("RED OFF.")
+        except:
+            continue
+        try:    
+            if response['yell'] == "ON":
+                print("YELLOW ON.")
+            elif response['yell'] == "OFF":
+                print("YELLOW OFF.")
+        except:
+            continue
         return render_template("index.html", title=title)
 
 if __name__ == "__main__":
