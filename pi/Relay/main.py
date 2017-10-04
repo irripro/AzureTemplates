@@ -3,6 +3,7 @@ import os
 import random
 import socket
 import sys
+import pprint
 import pymongo
 
 app = Flask(__name__)
@@ -18,7 +19,7 @@ def index():
 
     elif request.method == 'POST':
         response = dict(request.form)
-        print("Button Value is %s " %type(response))
+        pprint(response)
 #        if response['red'] == "ON":
 #            print("RED ON.")
 #        elif response['red'] == "OFF":
