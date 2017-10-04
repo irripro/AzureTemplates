@@ -23,10 +23,9 @@ def index():
 
     elif request.method == 'POST':
         if request.form['red'] == "ON":
-            print(request.form['red'])
+            return render_template("index.html", button1=button1, button2=button2, button1value="OFF", button2value="OFF", title=title)
         elif request.form['red'] == "OFF":
-            print(request.form['red'])
-        return render_template("index.html", button1=button1, button2=button2, button1value="ON", button2value="OFF", title=title)
+            return render_template("index.html", button1=button1, button2=button2, button1value="ON", button2value="OFF", title=title)
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0',debug=True, port=5000)
