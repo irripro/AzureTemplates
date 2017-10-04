@@ -12,8 +12,8 @@ app.config.from_pyfile('config_file.cfg')
 button1 =       app.config['VOTE1VALUE']  
 button2 =       app.config['VOTE2VALUE']
 title =         app.config['TITLE']
-button1value = "OFF"
-button2value = "OFF"
+global button1value = "OFF"
+global button2value = "OFF"
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
