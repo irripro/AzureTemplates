@@ -19,9 +19,9 @@ def index():
     elif request.method == 'POST':
         response = dict(request.form)
         print("Button Value is %s " %response)
-        if request.form['red'] == "ON":
+        if response['red'] == "ON":
             print("RED ON.")
-        elif request.form['red'] == "OFF":
+        elif response['red'] == "OFF":
             print("RED OFF.")
         elif response['yell'] == "ON":
             print("YELLOW ON.")
