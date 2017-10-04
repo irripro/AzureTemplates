@@ -22,9 +22,9 @@ def index():
 
     elif request.method == 'POST':
         if request.form['red'] == button1:
-            return render_template("index.html", button1=button1, button2=button2, button1value=button1value, button2value=button2value title=title)
+            return render_template("index.html", button1=button1, button2=button2, button1value=button1value, button2value=button2value, title=title)
         elif request.form['yellow'] == button2:
-            return render_template("index.html", button1=button1, button2=button2, button1value=button1value, button2value=button2value title=title)
+            return render_template("index.html", button1=button1, button2=button2, button1value=button1value, button2value=button2value, title=title)
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0',debug=True, port=5000)
