@@ -6,14 +6,16 @@ import sys
 import pymongo
 
 app = Flask(__name__)
+global button1value, button2value
 
 # Load configurations
 app.config.from_pyfile('config_file.cfg')
 button1 =       app.config['VOTE1VALUE']  
 button2 =       app.config['VOTE2VALUE']
 title =         app.config['TITLE']
-global button1value = "OFF"
-global button2value = "OFF"
+
+button1value = "OFF"
+button2value = "OFF"
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
