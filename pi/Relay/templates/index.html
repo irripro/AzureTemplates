@@ -5,7 +5,7 @@
     <title>{{title}}</title>
 
     <script language="JavaScript">
-        function send(form){
+        function send(container){
         }
     </script>
 
@@ -16,9 +16,10 @@
         <div id="logo">{{title}}</div>
         <div id="space"></div>
         <div id="form">
-        <button name="red" value="{{button1status}}" onclick="send()" class="button button1">{{button1status}}</button>
-        <div id="Red Status"> Red Status is {{button1status}}</div> 
-        <button name="yellow" value="{{button2value}}" onclick="send()" class="button button2">YELLOW - {{button2value}}</button>
+        <button name="red" value="{{button1}}" onclick="send()" class="button button1">{{button1}</button>
+        <div id="Red Status"> Red Status: {{button1status}}</div> 
+        <button name="red" value="{{button2}}" onclick="send()" class="button button2">{{button2}}</button>
+        <div id="Yellow Status"> Yellow Status: {{button2status}}</div> 
         <div id="space"></div>
         <div id="space"></div>
         </form>        
