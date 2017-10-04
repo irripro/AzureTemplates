@@ -19,7 +19,7 @@ def index():
 
     elif request.method == 'POST':
         response = dict(request.form)
-        pprint(response)
+        pprint.pprint(response)
 #        if response['red'] == "ON":
 #            print("RED ON.")
 #        elif response['red'] == "OFF":
