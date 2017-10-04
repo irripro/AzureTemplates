@@ -22,9 +22,9 @@ def index():
             print("RED ON.")
         elif request.form['red'] == "OFF":
             print("RED OFF.")
-        elif request.form['yellow'] == "ON":
+        elif request.form['red'] == "ON":
             print("YELLOW ON.")
-        elif request.form['yellow'] == "OFF":
+        elif request.form['red'] == "OFF":
             print("YELLOW OFF.")
         return render_template("index.html", title=title)
 
