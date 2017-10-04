@@ -23,9 +23,9 @@ def index():
         elif request.form['red'] == "OFF":
             return render_template("index.html", button1value="ON", button2value="OFF", title=title)
         if request.form['yellow'] == "ON":
-            return render_template("index.html", button2value="OFF", title=title)
+            return render_template("index.html", button1value="ON", button2value="OFF", title=title)
         elif request.form['yellow'] == "OFF":
-            return render_template("index.html", button2value="ON", title=title)
+            return render_template("index.html", button1value="ON", button2value="ON", title=title)
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0',debug=True, port=5000)
