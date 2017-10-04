@@ -18,7 +18,7 @@ def index():
         return render_template("index.html", title=title)
 
     elif request.method == 'POST':
-        pprint.pprint(request.form)
+        print(request.form.to_dict())
 #        if response['red'] == "ON":
 #            print("RED ON.")
 #        elif response['red'] == "OFF":
