@@ -18,7 +18,7 @@ button2value = "OFF"
 @app.route('/', methods=['GET', 'POST'])
 def index():
     if request.method == 'GET':
-        return render_template("index.html", button1=button1, button2=button2, title=title)
+        return render_template("index.html", button1=button1, button2=button2, button1value=button1value, button2value=button2value, title=title)
 
     elif request.method == 'POST':
         if request.form['red'] == button1:
