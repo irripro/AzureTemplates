@@ -25,14 +25,14 @@ def index():
             elif response['red'] == "OFF":
                 print("RED OFF.")
         except:
-            
+            print()
         try:    
             if response['yell'] == "ON":
                 print("YELLOW ON.")
             elif response['yell'] == "OFF":
                 print("YELLOW OFF.")
         except:
-            
+            print()
         return render_template("index.html", title=title)
 
 if __name__ == "__main__":
