@@ -69,21 +69,21 @@ div#results {
 
 .button1 {
     background-color: white; 
-    color: black; 
+    color: #bc2f16; 
     border: 2px solid #008CBA;
 }
 
 .button1:hover {
-    background-color: #008CBA;
+    background-color: #ff0000;
     color: white;
 }
 .button2 {
     background-color: white;
-    color: black;
+    color: #afab4c;
     border: 2px solid #555555;
 }
 
 .button2:hover {
-    background-color: #555555;
+    background-color: #ffff00;
     color: white;
 }
