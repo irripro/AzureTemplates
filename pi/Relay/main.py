@@ -11,8 +11,6 @@ GPIO.setup(11, GPIO.OUT)
 GPIO.output(7,GPIO.HIGH)
 GPIO.output(11,GPIO.HIGH)
 
-global redvalue, yellowvalue
-
 cache = GenericCache()
 app = Flask(__name__)
 cache.insert("red", "OFF")
