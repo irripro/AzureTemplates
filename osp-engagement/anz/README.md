@@ -12,7 +12,15 @@ The following topics are going to be discussed:
 
 # Requirements and Considerations
 The requirement and considerations for this deployment are as follows:
-*   Java Application running on Apache Tomcat Server
-*   The OS specified is CentOS
+*   The OS specified is CentOS for Pilot and RedHat for Production
 *   Two Tier Application
-    *   Java Application running on Apache Tomcat Server
+    *   Java Application running on Apache Tomcat Server requiring 4 cores and 16gig memory
+    *   SQL Database (preferably PaaS) but IaaS also would work
+        *   Database access required to specific IPs
+* Networking Requirements
+    * Need to service customers primarily in Singapore
+    * Static IP
+    * Firewall all except specific IPs
+*   No Monitoring mechanism required
+*   Identity Management within the Application (No Active Directory Requirements)
+*   
