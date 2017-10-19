@@ -22,6 +22,8 @@ The requirement and considerations for this deployment are as follows:
     * Static IP
     * Firewall all except specific IPs
 *   No Monitoring mechanism required
+    *   On Failure Restart the OS
 *   Identity Management within the Application (No Active Directory Requirements)
-
 # Architecture
+Resources Utilized - High Level
+![Overall Resources](./src/account-overview.jpg)
