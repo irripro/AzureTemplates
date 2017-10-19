@@ -6,6 +6,8 @@ The following topics are going to be discussed:
 
 ## [Requirements & Considerations](#requirements-and-considerations)
 ## [Architecture](#architecture)
+*   [High Level Resources](#resources-utilized---high-level)
+*   [Implementation Architecture](#implementation-architecture)
 ## [Cost](#cost)
 ## [ARM Template](#arm-template)
 ## [Deployment](#deployment)
@@ -25,5 +27,6 @@ The requirement and considerations for this deployment are as follows:
     *   On Failure Restart the OS
 *   Identity Management within the Application (No Active Directory Requirements)
 # Architecture
-Resources Utilized - High Level
+## Resources Utilized - High Level
 ![Overall Resources](./src/account-overview.jpg)
+## Implementation Architecture
