@@ -5,8 +5,8 @@ This document illustrates the requested architecture of a Tomcat application bac
 The following topics are going to be discussed:
 
 ## [Requirements & Considerations](#requirements-and-considerations)
-## [Cost](#cost)
 ## [Architecture](#architecture)
+## [Cost](#cost)
 ## [ARM Template](#arm-template)
 ## [Deployment](#deployment)
 
@@ -14,7 +14,7 @@ The following topics are going to be discussed:
 The requirement and considerations for this deployment are as follows:
 *   The OS specified is CentOS for Pilot and RedHat for Production
 *   Two Tier Application
-    *   Java Application running on Apache Tomcat Server requiring 4 cores and 16gig memory
+    *   Java Application running on Apache Tomcat Server requiring a single VM (4 cores and 16gig memory)
     *   SQL Database (preferably PaaS) but IaaS also would work
         *   Database access required to specific IPs
 * Networking Requirements
@@ -23,4 +23,5 @@ The requirement and considerations for this deployment are as follows:
     * Firewall all except specific IPs
 *   No Monitoring mechanism required
 *   Identity Management within the Application (No Active Directory Requirements)
-*   
+
+# Architecture
