@@ -13,11 +13,11 @@ Let's start with the **who**? That is an easy one. What you do not want is to ha
 
 Let's move on to **how**. How do we manage containers in production? This is where container orchestrators come into the picture. The container orchestrators main job is to automate the provisioning of containerized infrastructure and provide load balancing for the services that containers are used to create. Deploying and managing orchestrators can be difficult due to the constant development around Docker as well as the orchestration application chosen. As such there are a Azure platform tools available that make life easier, but which one to choose and why? 
 
-That leads to the **what**. What are the orchestrators available? Which one to choose and why? The orchestrators discussed will be Docker Swarm, Mesosphere's DC/OS, and Kubernetes. All three are open-source projects and well supported either by the enterprises that created them and/or the open source community. The other **what** that will be discussed is: What are the Azure platform services available to facilitate the management of these orchestrators? The options are: Azure Container Service (aka ACS), Azure Container Service Engine (aka ACS-engine), Azure Kubernetes Service (aka AKS), and Azure Container Instance.
+That leads to the **what**. What are the orchestrators available? Which one to choose and why? The orchestrators discussed will be Docker Swarm, Apache Mesos, and Kubernetes. All three are open-source projects and well supported either by the enterprises that created them and/or the open source community. The other **what** that will be discussed is: What are the Azure platform services available to facilitate the management of these orchestrators? The options are: Azure Container Service (aka ACS), Azure Container Service Engine (aka ACS-engine), Azure Kubernetes Service (aka AKS), and Azure Container Instance.
 
-Lets first discuss the following orchestrators and when each should be utilized
+Lets first discuss the following orchestrators and which situation should each be utilized
 *   [Docker Swarm](#docker-swarm)
-*   [Mesosphere DC/OS](#mesosphere-dc/os)
+*   [Apache Mesos](#apache-mesos)
 *   [Kubernetes](#kubernetes)
 
 ### Docker Swarm
@@ -27,16 +27,6 @@ Docker Swarm is Docker’s native Container Orchestration Engine. Swarm is tight
 
 Kubernetes (aka K8s) was first released in June of 2014, and is written in Go. The project originated from and was open-sourced by Google, and is based on their experience running containers at a massive scale. Kubernetes has a large community behind it and has the most momentum behind it as it relates to adoption. Microsoft Azure uses Kubernetes in its managed Azure Kubernetes Service (AKS). Google uses Kubernetes for its Container as a Service (CaaS) offering, called Google Container Engine (GKE). Both Docker and CoreOS (rkt aka rocket) are supported container enginers within Kubernetes. Major features include built-in auto-scaling, load balancing, volume management, and secrets management. In addition, there is a web UI to help with managing and troubleshooting the cluster. With these features included, Kubernetes often requires less third-party software than Swarm or Mesos.
 
-###  Mesosphere DC/OS
-Apache Mesos version 1.0 was released in July of 2016, but it has roots going all the way back to 2009.
+###  Apache Mesos
+Apache Mesos version 1.0 was released in July of 2016, but it has roots going all the way back to 2009. Mesos takes a distributed approach to managing resources and can have multiple masters to keep track of cluster state which allows it to achieve high-availability. In addition, Mesosphere DC/OS, a distributed datacenter operating system, is based on Apache Mesos. Mesos can scale to tens of thousands of nodes, and is used by the likes of Twitter, Airbnb, Yelp, and eBay. Notable features available in Mesos include support for multiple types of container engines, including Docker and its own “Containerizer,” as well as a web UI, and the ability to run on multiple OSes, including Linux, OS X, and even Windows.
 
-
-Mesos is somewhat different than the first two mentioned here, in that it takes more of a distributed approach to managing datacenter and cloud resources. Mesos can have multiple masters which use Zookeeper to keep track of the cluster state amongst the masters and form a high-availability cluster.
-
-Other container management frameworks can be run on top of Mesos, including Kubernetes, Apache Aurora, Chronos, and Mesosphere Marathon. In addition, Mesosphere DC/OS, a distributed datacenter operating system, is based on Apache Mesos.
-
-This means that Mesos takes a more modular approach to how containers should be managed, allowing users to have more flexibility in the types of applications and the scale on which they can run.
-
-Mesos can scale to tens of thousands of nodes, and is used by the likes of Twitter, Airbnb, Yelp, and eBay. Apple even has its own proprietary framework based on Mesos called Jarvis, which is used to power Siri.
-
-A few of the features available in Mesos that are worth mentioning are support for multiple types of container engines, including Docker and its own “Containerizer,” as well as a web UI, and the ability to run on multiple OSes, including Linux, OS X, and even Windows.
