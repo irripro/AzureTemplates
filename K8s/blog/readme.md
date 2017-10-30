@@ -25,7 +25,7 @@ Kubernetes (aka K8s) was first released in June of 2014, and is written in Go. T
 Kubernetes has the most momentum going and as such both community and adoption is strong. The application has been proven at some scale and is evolving constantly. It is the only orchestrator that has *cloud-provider* concept natively, which allows seamless integration into public clouds such as Microsoft Azure, Amazon Web Services and Google Cloud Platform. With cloud providers making investments in services such as AKS, ACS, ACI and GKE, it is the best bet to win the war of orchestrators.
 
 Lets expand on the Services available to manage Kubernetes on Azure.
-#### Azure Kubernetes Service (aka AKS)
+### Azure Kubernetes Service (aka AKS)
 
 
 ## Rule of thumb: Picking an Orchestrator
