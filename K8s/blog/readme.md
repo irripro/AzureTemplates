@@ -18,10 +18,7 @@ That leads to the **what**. What are the orchestrators available? Which one to c
 That leads to the other **what**? That being: What are the Azure platform services available to facilitate the management of these orchestrators? The options are, Azure Container Service (aka ACS), Azure Container Service Engine (aka ACS-engine), Azure Kubernetes Service (aka AKS), and Azure Container Instance.
 
 ## Why
-Let's get the to final question as to **why**? Why should you use Kubernetes 
-
-
-### [Kubernetes](https://kubernetes.io/docs/home/)
+Let's get the to final question as to **why**? Why should you use Kubernetes.
 
 Kubernetes (aka K8s) was first released in June of 2014, and is written in Go. The project originated from and was open-sourced by Google, and is based on their experience running containers at a massive scale. Microsoft Azure uses Kubernetes in its managed Azure Kubernetes Service (AKS). Google uses Kubernetes for its Container as a Service (CaaS) offering, called Google Container Engine (GKE). Both Docker and CoreOS (rkt aka rocket) are supported container engines within Kubernetes. Major features include built-in auto-scaling, load balancing, volume management, and secrets management. In addition, there is a web UI to help with managing and troubleshooting the cluster.
 
