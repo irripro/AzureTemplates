@@ -12,7 +12,7 @@ The orchestrator being discussed here is Kubernetes, and the reason for that  is
 
 Kubernetes has the most momentum going and as such both community and adoption is strong. The application has been proven at scale and is evolving constantly. It is the only orchestrator that has *cloud-provider* concept natively, which allows seamless integration into public clouds such as Microsoft Azure, Amazon Web Services and Google Cloud Platform. With cloud providers making investments in services such as AKS, ACS-Engine, ACI and GKE, it is the best bet to win the war of orchestrators.
 
-**Lets expand on the Services available to manage Kubernetes on Azure.**
+**Let's expand on the services available to manage Kubernetes on Azure.**
 ### Azure Kubernetes Service (aka AKS)
 Recently released service in preview makes it easier to manage and operate Kubernetes environments, all without sacrificing portability. AKS features an Azure-hosted control plane, automated upgrades, self-healing, easy scaling, and a simple user experience for both developers and cluster operators. With AKS, customers get the benefit of open source Kubernetes without complexity and operational overhead. AKS is free and you only pay for the consumption resulting from agent nodes and the infrastructure associated with them.
 
