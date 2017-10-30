@@ -32,9 +32,9 @@ Recently released service in preview makes it easier to manage and operate Kuber
 Currently there is a service called Azure Container Service (ACS) which will be deprecated in favor of a managed Kubernetes service described above (AKS). However, there is still an open-source project called ACS-Engine which can be used to deploy unmanaged clusters on the Azure platform. The Azure Container Service Engine (acs-engine) generates ARM (Azure Resource Manager) templates for Docker enabled clusters on Microsoft Azure with your choice of DCOS, Kubernetes, or Swarm orchestrators. The input to acs-engine is a cluster definition file which describes the desired cluster, including orchestrator, features, and agents. 
 
 ### Azure Container Instance - Kubernetes Connector (Preview)
-An Azure Container Instance is a single container that starts in seconds and is billed by the second. ACI offer highly versatile sizing, allowing you to select the exact amount of memory separate from the exact count of vCPUs, so your application perfectly fits on the infrastructure. The Azure Container Instances Connector for Kubernetes allows Kubernetes clusters to deploy Azure Container Instances.
+An Azure Container Instance is a single container that starts in seconds and is billed by the second. ACI offer highly versatile sizing, allowing you to select the exact amount of memory separate from the exact count of vCPUs, so your application perfectly fits on the infrastructure. 
 
-This enables on-demand and nearly instantaneous container compute, orchestrated by Kubernetes, without having VM infrastructure to manage and while still leveraging the portable Kubernetes API. This will allow you to utilize both VMs and container instances simultaneously in the same Kubernetes cluster, giving you the best of both worlds.
+The Azure Container Instances Connector for Kubernetes allows Kubernetes clusters to deploy Azure Container Instances. This enables on-demand and nearly instantaneous container compute, orchestrated by Kubernetes, without having VM infrastructure to manage and while still leveraging the portable Kubernetes API. This will allow you to utilize both VMs and container instances simultaneously in the same Kubernetes cluster, giving you the best of both worlds.
 
 ## Rule of thumb: Picking an Orchestrator
 
@@ -43,18 +43,3 @@ This enables on-demand and nearly instantaneous container compute, orchestrated 
 **Kubernetes**: Cloud Native Apps requiring deployment at medium scale (tens/~~*maybe*~~ hundreds of nodes) in production.
 
 **Apache Mesos (DC/OS)**: Most flexible, making it a viable option for any kind of application and proven at a massive scale (thousands of nodes) in production.
-
-# Reference
-
-### [Docker Swarm](https://docs.docker.com/engine/swarm/)
-Docker Swarm is Docker’s native Container Orchestration Engine. Swarm is tightly integrated with the Docker API, making it well-suited for use with Docker. This can simplify managing container infrastructure, as there is no need to configure a separate orchestration engine, or relearn Docker concepts in order to use Swarm. Swarm does not support native auto-scaling or external load balancing. Scaling must be done manually or through third-party solutions. Swarm includes ingress load balancing, but external load balancing would be done through platform load balancer such as Azure Load Balancer or other third party tools. Also notable is a lack of a web interface for Swarm.
-
-Docker swarm is the natural extension of Docker engine. It has the easier learning curve in terms of deployment and management for anyone who is already working and developing on Docker API. However, it lacks a few key features within it to have it be deployed in production. As such, Docker Swarm should be deployed in situations where the operational team is lacking or when developers are looking to get up and running to test out using an orchestrator engine. 
-
-**Rule of thumb**: Use Swarm when not in production and/or deployment at scale not required.
-
-###  [Apache Mesos aka Mesosphere DC/OS](http://mesos.apache.org/documentation/latest/)
-Apache Mesos version 1.0 was released in July of 2016, but it has roots going all the way back to 2009. Mesos takes a distributed approach to managing resources and can have multiple masters to keep track of cluster state which allows it to achieve high-availability. In addition, Mesosphere DC/OS, a distributed datacenter operating system, is based on Apache Mesos. Mesos can scale to tens of thousands of nodes, and is used by the likes of Twitter, Airbnb, Yelp, and eBay. Notable features available in Mesos include support for multiple types of container engines, including Docker and its own “Containerizer,” as well as a web UI, and the ability to run on multiple OSes, including Linux, OS X, and even Windows.
-
-Is the most robust and is the proven kid on the block when it comes to orchestrators. Provides the most knobs and as such can be fine tuned to support any type of application at scale. This flexibility also makes it harder in terms of portability across platforms and a steeper learning curve for deployment and maintenance. 
-
