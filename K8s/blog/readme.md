@@ -1,8 +1,8 @@
-# Container Orchestrators: The what, why, and how from an operation's perspective
+# Container Orchestrators: The what, why, and how from an operation team's perspective
 
 
 **Disclaimer:** *This blog post assumes the reader understands the fundamental value proposition that the Docker engine provides and the need to have orchestration around the containers deployed on top of it.*
 
 The container frenzy is in full swing across the IT universe and it has likely engulfed you and your organization as well. And why should it not, it promises consistency, resiliency, and build-in elasticity within applications and the infrastructure they run on. On top of all that, containers give control of the applications, their dependencies as well as the infrastructure that they run on back to developers instead of having the operations teams having to manage it all on behalf of the development teams. 
 
-By abstracting the infrastructure binaries, containers put the onus of uptime back in the hands of the development teams. No longer is compiled code going to be handed over to operations teams to run and maintain.  
+By abstracting the infrastructure binaries, containers put the onus of uptime back in the hands of the development teams. No longer is compiled code and the dictated configurations for said code, going to be handed over to operations teams to run and maintain. Instead, development teams output a fully *vetted* Docker image which contains the application code, its dependencies as well as the required configurations. So life is good as an operations team, what is the problem! But wait, how and who manages the containers in production? That is the topic of this blog, I am going to outline the three most prominent container orchestrators around and go through which one should be chosen for which situation.   
