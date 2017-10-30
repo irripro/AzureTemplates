@@ -39,14 +39,14 @@ Lets get the to final question as to **why**? Why should you use Docker Swarm, K
 #### Docker Swarm
 Docker swarm is the natural extension of Docker engine. It has the easier learning curve in terms of deployment and management for anyone who is already working and developing on Docker API. However, it lacks a few key features within it to have it be deployed in production. As such, Docker Swarm should be deployed in situations where the operational team is lacking or when developers are looking to get up and running to test out using an orchestrator engine. 
 
-*Rule of thumb*: Use Swarm when not in production and/or deployment at scale not required.
+**Rule of thumb**: Use Swarm when not in production and/or deployment at scale not required.
 
 #### Kubernetes
 Kubernetes has the most momentum going and as such both community and adoption is strong. The application has been proven at some scale and is evolving constantly. It is the only orchestrator that has *cloud-provider* concept natively, which allows seamless integration into public clouds such as Microsoft Azure, Amazon Web Services and Google Cloud Platform. With services like AKS and GKE it is the best bet to win the war of orchestrators.
 
-*Rule of thumb*: Cloud Native Apps requiring deployment at medium scale (tens/~~*maybe*~~ hundreds of nodes) in production.
+**Rule of thumb**: Cloud Native Apps requiring deployment at medium scale (tens/~~*maybe*~~ hundreds of nodes) in production.
 
 #### Apache Mesos aka Mesosphere DC/OS
-Kubernetes has the most momentum going and as such both community and adoption is strong. The application has been proven at some scale and is evolving constantly. It is the only orchestrator that has *cloud-provider* concept natively, which allows seamless integration into public clouds such as Microsoft Azure, Amazon Web Services and Google Cloud Platform. With services like AKS and GKE it is the best bet to win the war of orchestrators.
+Is the most robust and is the proven kid on the block when it comes to orchestrators. Provides the most knobs and as such can be fine tuned to support any type of application at scale. This flexibility also makes it harder in terms of portability across platforms and a steeper learning curve for deployment and maintenance. 
 
-*Rule of thumb*: Cloud Native Apps requiring deployment at medium scale (tens/~~*maybe*~~ hundreds of nodes) in production.
+**Rule of thumb**: Most flexible to deploy any kind of application and proven at a massive scale (thousands of nodes) in production.
