@@ -39,10 +39,12 @@ The Azure Container Instances Connector for Kubernetes allows Kubernetes cluster
 ### Deploying Cluster on Azure VMs manually (Hard-way)
 The last option to deploy an orchestrator is to deploy generic Azure VMs and installing and configuring the appropriate orchestrator from scratch. This is the most cumbersome method of deployment and management but allows the most control over the deployed orchestrator. 
 
-## Rule of thumb: Picking a deployment method
+## Rules of thumb
 
 **Azure Kubernetes Service**: Use AKS when you want the Kubernetes Application managed for you. 
 
 **Azure Container Service - Engine**: Use ACS-Engine when you want an unmanaged Kubernetes deployment but do not want to worry about the deployment and configuration of the K8s application.
 
 **Azure VMs**: Deploy K8s on Azure VMs when you want full control on what is being executed to deploy the cluster.
+
+**Azure Container Instance - Kubernetes Connector**: Use this service to have your cluster burst its computing capacity for short periods of time.
