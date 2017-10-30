@@ -1,4 +1,4 @@
-# Container Orchestrators: The [Who](#who), [What](#what), [Why](#why) and [How](#how) from an operation team's perspective
+# Container Orchestrator: Kubernetes on Azure
 
 The container frenzy is in full swing across the IT universe and it has likely engulfed you and your organization as well. And why should it not, containers have fundamentally changed the way developers develop their applications, the way applications are deployed, and the way system administrators manage their environments. Containers offer a broadly accepted and open standard, enabling simple portability between platforms and between clouds. On top of all that, containers give control of the applications, their dependencies as well as the infrastructure that they run on back to developers instead of having the operations teams having to manage it all on behalf of the development teams. 
 
