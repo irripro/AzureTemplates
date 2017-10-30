@@ -39,14 +39,6 @@ The Azure Container Instances Connector for Kubernetes allows Kubernetes cluster
 ### Deploying Cluster on Azure VMs manually (Hard-way)
 The last option to deploy an orchestrator is to deploy generic Azure VMs and installing and configuring the appropriate orchestrator from scratch. This is the most cumbersome method of deployment and management but allows the most control over the deployed orchestrator. 
 
-## Rule of thumb: Picking an Orchestrator
-
-**Docker Swarm**: Use Swarm when not in production and/or deployment at scale not required.
-
-**Kubernetes**: Cloud Native Apps requiring deployment at medium scale (tens/~~*maybe*~~ hundreds of nodes) in production.
-
-**Apache Mesos (DC/OS)**: Most flexible, making it a viable option for any kind of application and proven at a massive scale (thousands of nodes) in production.
-
 ## Rule of thumb: Picking a deployment method
 
 **Azure Kubernetes Service**: Use AKS when you want the Kubernetes Application managed for you. 
