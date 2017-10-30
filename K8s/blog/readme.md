@@ -36,7 +36,18 @@ An Azure Container Instance is a single container that starts in seconds and is 
 
 The Azure Container Instances Connector for Kubernetes allows Kubernetes clusters to deploy Azure Container Instances. This enables on-demand and nearly instantaneous container compute, orchestrated by Kubernetes, without having VM infrastructure to manage and while still leveraging the portable Kubernetes API. This will allow you to utilize both VMs and container instances simultaneously in the same Kubernetes cluster, giving you the best of both worlds.
 
+### Deploying Cluster on Azure VMs manually (Hard-way)
+The last option to deploy an orchestrator is to deploy generic Azure VMs and installing and configuring the appropriate orchestrator from scratch. This is the most cumbersome method of deployment and management but allows the most control over the deployed orchestrator. 
+
 ## Rule of thumb: Picking an Orchestrator
+
+**Docker Swarm**: Use Swarm when not in production and/or deployment at scale not required.
+
+**Kubernetes**: Cloud Native Apps requiring deployment at medium scale (tens/~~*maybe*~~ hundreds of nodes) in production.
+
+**Apache Mesos (DC/OS)**: Most flexible, making it a viable option for any kind of application and proven at a massive scale (thousands of nodes) in production.
+
+## Rule of thumb: Picking a deployment method
 
 **Docker Swarm**: Use Swarm when not in production and/or deployment at scale not required.
 
