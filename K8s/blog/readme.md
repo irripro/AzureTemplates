@@ -49,7 +49,7 @@ The last option to deploy an orchestrator is to deploy generic Azure VMs and ins
 
 ## Rule of thumb: Picking a deployment method
 
-**Docker Swarm**: Use Swarm when not in production and/or deployment at scale not required.
+**AKS**: Use Swarm when not in production and/or deployment at scale not required.
 
 **Kubernetes**: Cloud Native Apps requiring deployment at medium scale (tens/~~*maybe*~~ hundreds of nodes) in production.
 
