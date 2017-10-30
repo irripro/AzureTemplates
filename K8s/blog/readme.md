@@ -18,7 +18,7 @@ Let's move on to **how**. How do we manage containers in production? This is whe
 ## What
 That leads to the **what**. What are the orchestrators available? Which one to choose and why? The orchestrators discussed will be Docker Swarm, Apache Mesos, and Kubernetes. All three are open-source projects and well supported either by the enterprises that created them and/or the open source community. The other **what** that will be discussed is: What are the Azure platform services available to facilitate the management of these orchestrators? The options are: Azure Container Service (aka ACS), Azure Container Service Engine (aka ACS-engine), Azure Kubernetes Service (aka AKS), and Azure Container Instance.
 
-Lets first discuss the following orchestrators and which situation should each be utilized
+Let's first discuss the following orchestrators and which situation should each be utilized
 *   [Docker Swarm](#docker-swarm)
 *   [Apache Mesos](#apache-mesos)
 *   [Kubernetes](#kubernetes)
