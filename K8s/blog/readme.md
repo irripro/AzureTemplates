@@ -1,4 +1,4 @@
-# Container Orchestrators: The what, why, and how from an operation team's perspective
+# Container Orchestrators: The Who, What, Why and How from an operation team's perspective
 
 
 **Disclaimer:** *This blog post assumes the reader understands the fundamental value proposition that the Docker engine provides and the need to have orchestration around the containers deployed on top of it.*
