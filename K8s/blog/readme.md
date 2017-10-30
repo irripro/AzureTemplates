@@ -2,27 +2,15 @@
 
 The container frenzy is in full swing across the IT universe and it has likely engulfed you and your organization as well. And why should it not, containers have fundamentally changed the way developers develop their applications, the way applications are deployed, and the way system administrators manage their environments. Containers offer a broadly accepted and open standard, enabling simple portability between platforms and between clouds. On top of all that, containers give control of the applications, their dependencies as well as the infrastructure that they run on back to developers instead of having the operations teams having to manage it all on behalf of the development teams. 
 
-By abstracting the infrastructure binaries, containers put the onus of uptime back in the hands of the development teams. No longer is compiled code and the dictated configurations for said code, going to be handed over to operations teams to be run and maintain. Instead, development teams output a fully *vetted* Docker image which contains the application code, its dependencies as well as the required configurations. So life is good as an operations team, what could the problem be? But wait, how and who manages the containers in production? How do you scale a container for load? How do you deploy new containers in production as part of a CI/CD pipeline? How do you manage the infrastructure below Docker engine? 
+By abstracting the infrastructure binaries, containers put the onus of uptime back in the hands of the development teams. No longer is compiled code and the dictated configurations for said code, going to be handed over to operations teams to be run and maintain. Instead, development teams output a fully *vetted* Docker image which contains the application code, its dependencies as well as the required configurations. 
 
-**These are some of the questions that this blog is going to answer.**
+The application that manage the containers is called a container orchestrator. The process of orchestration typically involves tooling that can automate all aspects of application management from initial placement, scheduling and deployment to steady-state activities such as update, deployment, update and health monitoring functions that support scaling and failover.
 
-## Who
-Let's start with the **who**? That is an easy one. What you do not want is to have the development teams worry about the scaling of containers, OS uptime, OS patching as well as scaling the infrastructure on which Docker engine is running on. Let's have the development teams worry about outputting *vetted* Docker images and have the centralized operations team manage all the docker containers and the infrastructure they run on. The operations team chooses the container orchestrator that best facilitates the needs of the development teams and their applications as well as fine tune it to run on the platform on which it is deployed on.
+The orchestrator being discussed here is Kubernetes, and the reason for that  is because it's emerging as the front runner in the orchestration space. The Azure platform has three services that make it easy to deploy and manage Kubernetes clusters. The services are, Azure Kubernetes managed Service (aka AKS), Azure Container Service Engine (aka ACS-engine), and Azure Container Instance.
 
-## How
-Let's move on to **how**. How do we manage containers in production? This is where container orchestrators come into the picture. The container orchestrators main job is to automate the provisioning of containerized infrastructure and provide load balancing for the services that containers are used to create. Deploying and managing orchestrators can be difficult due to the constant development around Docker as well as the orchestration application chosen. As such there are a number of Azure platform tools available that make life easier, but which one to choose and why? 
+**Why should you use Kubernetes?**
 
-## What
-That leads to the **what**. What are the orchestrators available? Which one to choose and why? There are three orchestrators that are generally referred to when it comes to container orchestration. They are Docker Swarm, Apache Mesos, and Kubernetes. All three are open-source projects and well supported either by the enterprises that created them and/or the open source community. But the one discussed here will be Kubernetes. The reason for that is Kubernetes is emerging as the front runner in the orchestration game and as such Microsoft Azure has three managed services around it.
-
-That leads to the other **what**? That being: What are the Azure platform services available to facilitate the management of these orchestrators? The options are, Azure Container Service (aka ACS), Azure Container Service Engine (aka ACS-engine), Azure Kubernetes Service (aka AKS), and Azure Container Instance.
-
-## Why
-Let's get the to final question as to **why**? Why should you use Kubernetes.
-
-Kubernetes (aka K8s) was first released in June of 2014, and is written in Go. The project originated from and was open-sourced by Google, and is based on their experience running containers at a massive scale. Microsoft Azure uses Kubernetes in its managed Azure Kubernetes Service (AKS). Google uses Kubernetes for its Container as a Service (CaaS) offering, called Google Container Engine (GKE). Both Docker and CoreOS (rkt aka rocket) are supported container engines within Kubernetes. Major features include built-in auto-scaling, load balancing, volume management, and secrets management. In addition, there is a web UI to help with managing and troubleshooting the cluster.
-
-Kubernetes has the most momentum going and as such both community and adoption is strong. The application has been proven at some scale and is evolving constantly. It is the only orchestrator that has *cloud-provider* concept natively, which allows seamless integration into public clouds such as Microsoft Azure, Amazon Web Services and Google Cloud Platform. With cloud providers making investments in services such as AKS, ACS-Engine, ACI and GKE, it is the best bet to win the war of orchestrators.
+Kubernetes has the most momentum going and as such both community and adoption is strong. The application has been proven at scale and is evolving constantly. It is the only orchestrator that has *cloud-provider* concept natively, which allows seamless integration into public clouds such as Microsoft Azure, Amazon Web Services and Google Cloud Platform. With cloud providers making investments in services such as AKS, ACS-Engine, ACI and GKE, it is the best bet to win the war of orchestrators.
 
 **Lets expand on the Services available to manage Kubernetes on Azure.**
 ### Azure Kubernetes Service (aka AKS)
@@ -48,3 +36,8 @@ The last option to deploy an orchestrator is to deploy generic Azure VMs and ins
 **Kubernetes on Azure VMs**: Deploy K8s on Azure VMs when you want full control on what is being executed to deploy the cluster.
 
 **Azure Container Instance - Kubernetes Connector**: Use this service to have your cluster burst its computing capacity for short periods of time.
+
+# References
+* [Case Study](https://azure.microsoft.com/en-us/resources/videos/docker-metlife/) 
+* [AKS Announcement Video](https://azure.microsoft.com/en-us/resources/videos/azure-friday-managed-kubernetes-in-azure-container-service-aks/)
+* [ACI - Kubernetes Connector](https://azure.microsoft.com/en-us/resources/videos/using-kubernetes-with-azure-container-instances/)
