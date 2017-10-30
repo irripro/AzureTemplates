@@ -45,6 +45,6 @@ The last option to deploy an orchestrator is to deploy generic Azure VMs and ins
 
 **Azure Container Service - Engine**: Use ACS-Engine when you want an unmanaged Kubernetes deployment but do not want to worry about the deployment and configuration of the K8s application.
 
-**Azure VMs**: Deploy K8s on Azure VMs when you want full control on what is being executed to deploy the cluster.
+**Kubernetes on Azure VMs**: Deploy K8s on Azure VMs when you want full control on what is being executed to deploy the cluster.
 
 **Azure Container Instance - Kubernetes Connector**: Use this service to have your cluster burst its computing capacity for short periods of time.
