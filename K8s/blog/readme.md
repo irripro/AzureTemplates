@@ -20,13 +20,13 @@ Lets first discuss the following orchestrators and which situation should each b
 *   [Apache Mesos](#apache-mesos)
 *   [Kubernetes](#kubernetes)
 
-### Docker Swarm
+### [Docker Swarm](https://docs.docker.com/engine/swarm/)
 Docker Swarm is Docker’s native Container Orchestration Engine. Swarm is tightly integrated with the Docker API, making it well-suited for use with Docker. This can simplify managing container infrastructure, as there is no need to configure a separate orchestration engine, or relearn Docker concepts in order to use Swarm. Swarm does not support native auto-scaling or external load balancing. Scaling must be done manually or through third-party solutions. Swarm includes ingress load balancing, but external load balancing would be done through platform load balancer such as Azure Load Balancer or other third party tools. Also notable is a lack of a web interface for Swarm.
 
-### Kubernetes
+### [Kubernetes](https://kubernetes.io/docs/home/)
 
-Kubernetes (aka K8s) was first released in June of 2014, and is written in Go. The project originated from and was open-sourced by Google, and is based on their experience running containers at a massive scale. Kubernetes has a large community behind it and has the most momentum behind it as it relates to adoption. Microsoft Azure uses Kubernetes in its managed Azure Kubernetes Service (AKS). Google uses Kubernetes for its Container as a Service (CaaS) offering, called Google Container Engine (GKE). Both Docker and CoreOS (rkt aka rocket) are supported container enginers within Kubernetes. Major features include built-in auto-scaling, load balancing, volume management, and secrets management. In addition, there is a web UI to help with managing and troubleshooting the cluster. With these features included, Kubernetes often requires less third-party software than Swarm or Mesos.
+Kubernetes (aka K8s) was first released in June of 2014, and is written in Go. The project originated from and was open-sourced by Google, and is based on their experience running containers at a massive scale. Kubernetes has a large community behind it and has the most momentum behind it as it relates to adoption. Microsoft Azure uses Kubernetes in its managed Azure Kubernetes Service (AKS). Google uses Kubernetes for its Container as a Service (CaaS) offering, called Google Container Engine (GKE). Both Docker and CoreOS (rkt aka rocket) are supported container engines within Kubernetes. Major features include built-in auto-scaling, load balancing, volume management, and secrets management. In addition, there is a web UI to help with managing and troubleshooting the cluster. With these features included, Kubernetes often requires less third-party software than Swarm or Mesos.
 
-###  Apache Mesos
+###  [Apache Mesos](http://mesos.apache.org/documentation/latest/)
 Apache Mesos version 1.0 was released in July of 2016, but it has roots going all the way back to 2009. Mesos takes a distributed approach to managing resources and can have multiple masters to keep track of cluster state which allows it to achieve high-availability. In addition, Mesosphere DC/OS, a distributed datacenter operating system, is based on Apache Mesos. Mesos can scale to tens of thousands of nodes, and is used by the likes of Twitter, Airbnb, Yelp, and eBay. Notable features available in Mesos include support for multiple types of container engines, including Docker and its own “Containerizer,” as well as a web UI, and the ability to run on multiple OSes, including Linux, OS X, and even Windows.
 
