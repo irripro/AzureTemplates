@@ -22,7 +22,11 @@ Let's get the to final question as to **why**? Why should you use Kubernetes.
 
 Kubernetes (aka K8s) was first released in June of 2014, and is written in Go. The project originated from and was open-sourced by Google, and is based on their experience running containers at a massive scale. Microsoft Azure uses Kubernetes in its managed Azure Kubernetes Service (AKS). Google uses Kubernetes for its Container as a Service (CaaS) offering, called Google Container Engine (GKE). Both Docker and CoreOS (rkt aka rocket) are supported container engines within Kubernetes. Major features include built-in auto-scaling, load balancing, volume management, and secrets management. In addition, there is a web UI to help with managing and troubleshooting the cluster.
 
-Kubernetes has the most momentum going and as such both community and adoption is strong. The application has been proven at some scale and is evolving constantly. It is the only orchestrator that has *cloud-provider* concept natively, which allows seamless integration into public clouds such as Microsoft Azure, Amazon Web Services and Google Cloud Platform. With cloud providers making investments in services such as AKS, ACS, and GKE, it is the best bet to win the war of orchestrators.
+Kubernetes has the most momentum going and as such both community and adoption is strong. The application has been proven at some scale and is evolving constantly. It is the only orchestrator that has *cloud-provider* concept natively, which allows seamless integration into public clouds such as Microsoft Azure, Amazon Web Services and Google Cloud Platform. With cloud providers making investments in services such as AKS, ACS, ACI and GKE, it is the best bet to win the war of orchestrators.
+
+Lets expand on the Services available to manage Kubernetes on Azure.
+#### Azure Kubernetes Service (aka AKS)
+
 
 ## Rule of thumb: Picking an Orchestrator
 
