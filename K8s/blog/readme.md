@@ -49,8 +49,8 @@ The last option to deploy an orchestrator is to deploy generic Azure VMs and ins
 
 ## Rule of thumb: Picking a deployment method
 
-**AKS**: Use Swarm when not in production and/or deployment at scale not required.
+**Azure Kubernetes Service**: Use AKS when you want the Kubernetes Application managed for you. 
 
-**Kubernetes**: Cloud Native Apps requiring deployment at medium scale (tens/~~*maybe*~~ hundreds of nodes) in production.
+**Azure Container Service - Engine**: Use ACS-Engine when you want an unmanaged Kubernetes deployment but do not want to worry about the deployment and configuration of the K8s application.
 
-**Apache Mesos (DC/OS)**: Most flexible, making it a viable option for any kind of application and proven at a massive scale (thousands of nodes) in production.
+**Azure VMs**: Deploy K8s on Azure VMs when you want full control on what is being executed to deploy the cluster.
