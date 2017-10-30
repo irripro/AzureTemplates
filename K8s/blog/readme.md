@@ -34,7 +34,7 @@ Kubernetes (aka K8s) was first released in June of 2014, and is written in Go. T
 Apache Mesos version 1.0 was released in July of 2016, but it has roots going all the way back to 2009. Mesos takes a distributed approach to managing resources and can have multiple masters to keep track of cluster state which allows it to achieve high-availability. In addition, Mesosphere DC/OS, a distributed datacenter operating system, is based on Apache Mesos. Mesos can scale to tens of thousands of nodes, and is used by the likes of Twitter, Airbnb, Yelp, and eBay. Notable features available in Mesos include support for multiple types of container engines, including Docker and its own “Containerizer,” as well as a web UI, and the ability to run on multiple OSes, including Linux, OS X, and even Windows.
 
 ## Why
-Lets get the to final question as to **why**? Why should you use Docker Swarm, Kubernetes or Apache Mesos?
+Let's get the to final question as to **why**? Why should you use Docker Swarm, Kubernetes or Apache Mesos?
 
 #### Docker Swarm
 Docker swarm is the natural extension of Docker engine. It has the easier learning curve in terms of deployment and management for anyone who is already working and developing on Docker API. However, it lacks a few key features within it to have it be deployed in production. As such, Docker Swarm should be deployed in situations where the operational team is lacking or when developers are looking to get up and running to test out using an orchestrator engine. 
