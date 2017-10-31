@@ -1,6 +1,6 @@
 # Container Orchestrator: Kubernetes on Azure
 
-The container frenzy is in full swing across the IT universe and it has likely engulfed you and your organization as well. And why should it not, containers have fundamentally changed the way developers develop their applications, the way applications are deployed, and the way system administrators manage their environments. Containers offer a broadly accepted and open standard, enabling simple portability between platforms and between clouds. On top of all that, containers give control of the applications, their dependencies as well as the infrastructure that they run on back to developers instead of having the operations teams having to manage it all on behalf of the development teams. 
+The container frenzy is in full swing across the IT universe and it has likely engulfed you and your organization as well. And why should it not? Containers have fundamentally changed the way developers develop their applications, the way applications are deployed, and the way system administrators manage their environments. Containers offer a broadly accepted and open standard, enabling simple portability between platforms and between clouds. On top of all that, containers give control of the applications, their dependencies as well as the infrastructure that they run on back to developers instead of having the operations teams having to manage it all on behalf of the development teams. 
 
 By abstracting the infrastructure binaries, containers put the onus of uptime back in the hands of the development teams. No longer is compiled code and the dictated configurations for said code, going to be handed over to operations teams to be run and maintain. Instead, development teams output a fully *vetted* Docker image which contains the application code, its dependencies as well as the required configurations. 
 
@@ -16,13 +16,14 @@ Kubernetes has the most momentum going and as such both community and adoption i
 ### Azure Kubernetes Service (aka AKS)
 Recently released service in preview makes it easier to manage and operate Kubernetes environments, all without sacrificing portability. AKS features an Azure-hosted control plane, automated upgrades, self-healing, easy scaling, and a simple user experience for both developers and cluster operators. With AKS, customers get the benefit of open source Kubernetes without complexity and operational overhead. AKS is free and you only pay for the consumption resulting from agent nodes and the infrastructure associated with them.
 
-### Azure Container Service Engine (aka ACS-Engine)
-Currently there is a service called Azure Container Service (ACS) which will be deprecated in favor of a managed Kubernetes service described above (AKS). However, there is still an open-source project called ACS-Engine which can be used to deploy unmanaged clusters on the Azure platform. The Azure Container Service Engine (acs-engine) generates ARM (Azure Resource Manager) templates for Docker enabled clusters on Microsoft Azure with your choice of DCOS, Kubernetes, or Swarm orchestrators. The input to acs-engine is a cluster definition file which describes the desired cluster, including orchestrator, features, and agents. 
-
 ### Azure Container Instance - Kubernetes Connector (Preview)
 An Azure Container Instance is a single container that starts in seconds and is billed by the second. ACI offer highly versatile sizing, allowing you to select the exact amount of memory separate from the exact count of vCPUs, so your application perfectly fits on the infrastructure. 
 
 The Azure Container Instances Connector for Kubernetes allows Kubernetes clusters to deploy Azure Container Instances. This enables on-demand and nearly instantaneous container compute, orchestrated by Kubernetes, without having VM infrastructure to manage and while still leveraging the portable Kubernetes API. This will allow you to utilize both VMs and container instances simultaneously in the same Kubernetes cluster, giving you the best of both worlds.
+
+### OTHER OPTIONS
+### Azure Container Service Engine (aka ACS-Engine)
+Currently there is a service called Azure Container Service (ACS) which will be deprecated in favor of a managed Kubernetes service described above (AKS). However, there is still an open-source project called ACS-Engine which can be used to deploy unmanaged clusters on the Azure platform. The Azure Container Service Engine (acs-engine) generates ARM (Azure Resource Manager) templates for Docker enabled clusters on Microsoft Azure with your choice of DCOS, Kubernetes, or Swarm orchestrators. The input to acs-engine is a cluster definition file which describes the desired cluster, including orchestrator, features, and agents. 
 
 ### Deploying Cluster on Azure VMs manually (Hard-way)
 The last option to deploy an orchestrator is to deploy generic Azure VMs and installing and configuring the appropriate orchestrator from scratch. This is the most cumbersome method of deployment and management but allows the most control over the deployed orchestrator. 
