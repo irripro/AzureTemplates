@@ -41,3 +41,9 @@ The last option to deploy an orchestrator is to deploy generic Azure VMs and ins
 * [Case Study](https://azure.microsoft.com/en-us/resources/videos/docker-metlife/) 
 * [AKS Announcement Video](https://azure.microsoft.com/en-us/resources/videos/azure-friday-managed-kubernetes-in-azure-container-service-aks/)
 * [ACI - Kubernetes Connector](https://azure.microsoft.com/en-us/resources/videos/using-kubernetes-with-azure-container-instances/)
+* [Jenkins Plugins for Kubernetes](https://azure.microsoft.com/en-us/resources/videos/azure-friday-jenkins-plugins-for-kubernetes/)
+* [Azure Container Registry General Availability](https://azure.microsoft.com/en-us/resources/videos/azure-container-registry-general-availability/)
+* [Use Helm with Azure Container Service and Kubernetes
+](https://azure.microsoft.com/en-us/resources/videos/use-helm-with-azure-container-service-and-kubernetes/)
+* [Azure Container Registry Geo-replication
+](https://azure.microsoft.com/en-us/resources/videos/azure-friday-azure-container-registry-geo-replication/)
