@@ -1,8 +1,9 @@
 syntax on
-filetype indent plugin on
-
-set tabstop=8
+set showmatch
+set ts=4
+set sts=4
+set sw=4
+set autoindent
+set smartindent
+set smarttab
 set expandtab
-set softtabstop=4
-set shiftwidth=4
-filetype indent on
