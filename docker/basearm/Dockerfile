@@ -1,5 +1,5 @@
 # This is a base image created out of ubuntu:latest
-FROM arm32v7/ubuntu:xenial
+FROM resin/rpi-raspbian
 
 MAINTAINER alihhussain <alihhussain@live.com>
 
