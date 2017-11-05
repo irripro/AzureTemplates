@@ -21,7 +21,6 @@ RUN apt-get install -y wget \
     libffi-dev \
     python-dev
 
-<<<<<<< HEAD
 RUN /usr/bin/python /root/install.py
 
 RUN curl -sS https://bootstrap.pypa.io/get-pip.py | /usr/bin/python
@@ -38,14 +37,3 @@ RUN sed -ri 's,#AuthorizedKeysFile,AuthorizedKeysFile,g' /etc/ssh/sshd_config
 EXPOSE 22
 CMD ["/usr/bin/supervisord"]
 RUN rm -rf /tmp/*.dep
-
-=======
-RUN pip install azure
-
-# Install Redis client
-RUN pip install redis
-
-
-RUN /usr/bin/python /root/install.py
-RUN rm -rf /tmp/*.dep
->>>>>>> 933d101f0701703e94a47032aae6135e2bc3a2fe
