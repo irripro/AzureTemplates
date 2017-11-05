@@ -237,7 +237,7 @@ def get_rc_file_path():
     default_rc_file = _get_default_rc_file()
     if not default_rc_file:
         rc_file = _default_rc_file_creation_step()
-    rc_file = rc_file or prompt_input_with_default('Enter a path to an rc file to update', default_rc_file)
+    rc_file = rc_file or default_rc_file
     if rc_file:
         rc_file_path = os.path.realpath(os.path.expanduser(rc_file))
         if os.path.isfile(rc_file_path):
@@ -260,7 +260,7 @@ def warn_other_azs_on_path(exec_dir, exec_filepath):
         print_status("You can run this installation of the CLI with '{}'.".format(exec_filepath))
 
 def handle_path_and_tab_completion(completion_file_path, exec_filepath, exec_dir):
-    ans_yes = prompt_y_n('Modify profile to update your $PATH and enable shell/tab completion now?', 'y')
+    ans_yes = True
     if ans_yes:
         rc_file_path = get_rc_file_path()
         if not rc_file_path:

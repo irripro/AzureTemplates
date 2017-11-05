@@ -1,24 +1,14 @@
-FROM resin/rpi-raspbian
+#docker run --rm -e NAME='ALI' alihhussain/env:test /usr/bin/python /root/test.py
+FROM ubuntu:xenial
 
 MAINTAINER alihhussain <alihhussain@live.com>
 
+COPY test.py /root/test.py
+
 RUN apt-get update && apt-get upgrade -y
-
-RUN apt-get install -y wget \
-    python \
-    sense-hat \
-    python-picamera \
-    build-essential \
-    libssl-dev \
-    libffi-dev \
-    python-dev
-
-RUN wget -P / https://bootstrap.pypa.io/get-pip.py
-RUN python get-pip.py
-
-RUN pip install azure
-
-# Install Redis client
-RUN pip install redis
-
-RUN rm -rf /tmp/*.dep
+RUN apt-get install -y supervisor software-properties-common vim jq wget git net-tools man
+RUN add-apt-repository ppa:jonathonf/python-3.6 -y
+RUN apt-get update
+RUN apt-get install -y build-essential python3.6 python3.6-dev python3-pip python3.6-venv
+RUN python3.6 -m pip install pip --upgrade
+RUN python3.6 -m pip install wheel
