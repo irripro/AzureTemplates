@@ -11,7 +11,7 @@ COPY id_rsa /root/.ssh/id_rsa
 COPY install.py /root/install.py
 
 RUN apt-get update && apt-get upgrade -y
-
+RUN apt-get install -y software-properties-common vim jq git net-tools man
 RUN apt-get install -y wget \
     python \
     sense-hat \
@@ -26,7 +26,6 @@ RUN /usr/bin/python /root/install.py
 RUN curl -sS https://bootstrap.pypa.io/get-pip.py | /usr/bin/python
 RUN curl -sS https://bootstrap.pypa.io/get-pip.py | /usr/bin/python3
 RUN apt-get install -y supervisor jq
-#RUN /usr/local/bin/pip install flask flask-ask
 #RUN /usr/local/bin/pip3 install flask flask-ask
 RUN apt-get install -y openssh-server
 RUN mkdir /var/run/sshd
