@@ -19,7 +19,7 @@ csp_final_token=$(curl --request POST \
 csp_autherization_token=$(echo $csp_final_token | jq .access_token | awk -F '"' '{print $2}')
 #echo $csp_autherization_token
 
-
+# As a sample lets get Customers within the CSP Tenant
 curl -X GET --header 'Accept: application/json' \
         --header "authorization: Bearer ${csptoken}" \
         'https://api.partnercenter.microsoft.com/v1.0/customers' | \
