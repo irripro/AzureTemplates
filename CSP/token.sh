@@ -1,3 +1,4 @@
+# Ensure you have jq installed. If you do not please download it (https://stedolan.github.io/jq/download/) before running this script.
 appID="<Your_CSP_AppID>"
 secret="<Your_CSP_AppID_Secret>"
 
