@@ -30,4 +30,4 @@ RUN sed -ri 's/UsePAM yes/#UsePAM yes/g' /etc/ssh/sshd_config
 RUN sed -ri 's,#AuthorizedKeysFile,AuthorizedKeysFile,g' /etc/ssh/sshd_config
 
 EXPOSE 22
-CMD ["/usr/bin/supervisord"]
+ENTRYPOINT ["/usr/bin/supervisord"]
