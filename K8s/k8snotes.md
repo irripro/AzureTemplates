@@ -36,3 +36,23 @@ To Delete a pod: ```kubectl delete pod busybox```
 
 To expose a port on a running pod: ```kubectl port-forward service <Hostport>:<ContainerPort>``` 
 + As an example: ```kubectl port-forward nginx 8008:80```
+
+Sample Config file with Label (YAML)
+```YAML
+apiVersion: v1
+kind: Pod
+metadata:
+    name: nginx
+    labels:
+        app: nginx
+spec: 
+    containers:
+    - name: nginx
+      image: nginx:1.7.9
+      ports:
+      - containerPort: 80
+```
+
+To get pods with a specific label: ```kubectl get pods -l app=nginx```
+
+To describe pods with a specific label: ```kubectl describe -l app=nginx```
