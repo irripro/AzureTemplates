@@ -56,3 +56,29 @@ spec:
 To get pods with a specific label: ```kubectl get pods -l app=nginx```
 
 To describe pods with a specific label: ```kubectl describe -l app=nginx```
+
+Sample config file for deployment (YAML)
+```YAML
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: nginx-deployment-prod
+spec:
+  replicas: 1
+  template: 
+    metadata:
+      labels:
+        app: nginx-deployment-prod
+    spec: 
+      containers:
+      - name: nginx-deployment-prod
+        image: nginx:1.7.9
+        ports:
+        - containerPort: 80
+```
+
+To deploy a deployment via config file: ```kubectl create -f nginx-deployment-prod```
+
+To get deployments: ```kubectl get deployments```
+
+To get deployments with a specific label: ```kubectl get deployments -l app=nginx-deployment-prod```
