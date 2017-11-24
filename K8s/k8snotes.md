@@ -136,3 +136,20 @@ To deploy a replication Controller: ```kubectl create -f nginx-multi.yaml```
 To get replication controller: ```kubectl get rc```
 
 To delete a replication controller ```kubectl delete rc nginx-www```
+
+Sample service config file (YAML)
+```yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-service
+spec:
+  ports:
+  - port: 8000
+    targetPort: 80
+    protocol: TCP
+  selector: 
+    app: nginx
+```
+
+To deploy a service: ```kubectl create -f nginx-service.yaml```
