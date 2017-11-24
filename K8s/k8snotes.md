@@ -86,3 +86,50 @@ To get all deployments: ```kubectl get deployments --show-all```
 To get deployments with a specific label: ```kubectl get deployments -l app=nginx-deployment-prod```
 
 To describe a specific deployment: ```kubectl describe deployments -l app=nginx-deployment-dev```
+
+Sample **update** config file for deployment(YAML)
+```YAML
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: nginx-deployment-dev
+spec:
+  replicas: 1
+  template: 
+    metadata:
+      labels:
+        app: nginx-deployment-dev
+    spec: 
+      containers:
+      - name: nginx-deployment-dev
+        image: nginx:1.8
+        ports:
+        - containerPort: 80
+```
+To apply an update to an existing deployment: ```kubectl apply -f nginx-deployment-dev-update.yaml```
+
+Sample replica-controller config file (YAML)
+```yaml
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: nginx-www
+spec:
+  replicas: 2
+  selector: 
+    app: nginx
+  template:
+    metadata:
+      name: nginx
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: nginx
+        ports:
+        - containerPort: 80
+```
+
+To deploy a replication Controller: ```kubectl create -f nginx-multi.yaml```
+
