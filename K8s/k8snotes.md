@@ -84,3 +84,5 @@ To get deployments: ```kubectl get deployments```
 To get all deployments: ```kubectl get deployments --show-all```
 
 To get deployments with a specific label: ```kubectl get deployments -l app=nginx-deployment-prod```
+
+To describe a specific deployment: ```kubectl describe deployments -l app=nginx-deployment-dev```
