@@ -153,3 +153,14 @@ spec:
 ```
 
 To deploy a service: ```kubectl create -f nginx-service.yaml```
+
+To get services: ```kubectl get svc```
+```shell
+$ kubectl get svc
+NAME            CLUSTER-IP     EXTERNAL-IP   PORT(S)    AGE
+kubernetes      10.0.0.1       <none>        443/TCP    3d
+nginx-service   10.0.138.251   <none>        8000/TCP   3m
+```
+
+To test service: ```wget -qO- 10.0.0.138.251:8000```
+
