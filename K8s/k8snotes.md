@@ -164,3 +164,5 @@ nginx-service   10.0.138.251   <none>        8000/TCP   3m
 
 To test service: ```wget -qO- 10.0.0.138.251:8000```
 
+To describe service deployed: ```kubectl describe svc nginx-service```
+
