@@ -133,3 +133,6 @@ spec:
 
 To deploy a replication Controller: ```kubectl create -f nginx-multi.yaml```
 
+To get replication controller: ```kubectl get rc```
+
+To delete a replication controller ```kubectl delete rc nginx-www```
