@@ -81,4 +81,6 @@ To deploy a deployment via config file: ```kubectl create -f nginx-deployment-pr
 
 To get deployments: ```kubectl get deployments```
 
+To get all deployments: ```kubectl get deployments --show-all```
+
 To get deployments with a specific label: ```kubectl get deployments -l app=nginx-deployment-prod```
