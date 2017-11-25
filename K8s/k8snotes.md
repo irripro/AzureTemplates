@@ -172,3 +172,9 @@ To delete a running deployment: ```kubectl delete deployment mysample```
 
 To run multiple read replicas of a pod with labels: ```kubectl run myreplicas --image=latest123/apache --replicas=2 --labels=app=myapache,version=1.0```
 
+To run a specific command on a pod: ```kubectl exec myapache hostname```
+
+To run a specific command on a specific pod: ```kubectl exec myapache -c <CID> hostname```
+
+To interactively attach to a pod (without using kubectl attach): ```kubectle exec myapache -it -- /bin/bash```
+
