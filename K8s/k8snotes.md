@@ -193,3 +193,8 @@ Run run a pod image from commandline: ```kubectl run myautoscale --image=latest1
 To apply a autoscaling policy to a deployment: ```kubectl autoscale deployment myautoscale --min=2 --max=6```
 
 To modify an existing autoscaling policy: ```kubectl scale --current-replicas=2 --replicas=4 deployment/myautoscale```
+
+Important Note:
+    *   Once a pod is instantiated on a node it will stay there until it is deleted
+        * Meaning once a pod on a host goes down. it will not be moved over to another node.
+   
