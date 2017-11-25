@@ -187,3 +187,9 @@ To show logs for the previous N time: ```kubectl logs --since=(1s/1m/1h/1d) myap
 To follow the logs on a specific pod: ```kubectl logs -f myapache```
 
 To follow logs of a spcific pod: ```kubectl -f -c CID myapache```
+
+Run run a pod image from commandline: ```kubectl run myautoscale --image=latest123/apache --port=80 --labels=app=myautoscale```
+
+To apply a autoscaling policy to a deployment: ```kubectl autoscale deployment myautoscale --min=2 --max=6```
+
+To modify an existing autoscaling policy: ```kubectl scale --current-replicas=2 --replicas=4 deployment/myautoscale```
