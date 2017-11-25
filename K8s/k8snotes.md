@@ -166,3 +166,9 @@ To test service: ```wget -qO- 10.0.0.138.251:8000```
 
 To describe service deployed: ```kubectl describe svc nginx-service```
 
+To run temp pods from command line: ```kubectl run mysample --image=latest123/apache```
+
+To delete a running deployment: ```kubectl delete deployment mysample```
+
+To run multiple read replicas of a pod with labels: ```kubectl run myreplicas --image=latest123/apache --replicas=2 --labels=app=myapache,version=1.0```
+
