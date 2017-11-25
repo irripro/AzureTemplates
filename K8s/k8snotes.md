@@ -176,5 +176,14 @@ To run a specific command on a pod: ```kubectl exec myapache hostname```
 
 To run a specific command on a specific pod: ```kubectl exec myapache -c <CID> hostname```
 
-To interactively attach to a pod (without using kubectl attach): ```kubectle exec myapache -it -- /bin/bash```
+To interactively attach to a pod (without using kubectl attach): ```kubectl exec myapache -it -- /bin/bash```
 
+To get logs from a running pod with 1 container: ```kubectl logs myapache```
+
+To tail the logs from a container: ```kubectl logs --tail=1 myapache```
+
+To show logs for the previous N time: ```kubectl logs --since=(1s/1m/1h/1d) myapache```
+
+To follow the logs on a specific pod: ```kubectl logs -f myapache```
+
+To follow logs of a spcific pod: ```kubectl -f -c CID myapache```
