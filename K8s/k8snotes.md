@@ -194,7 +194,9 @@ To apply a autoscaling policy to a deployment: ```kubectl autoscale deployment m
 
 To modify an existing autoscaling policy: ```kubectl scale --current-replicas=2 --replicas=4 deployment/myautoscale```
 
-Important Note:
-    *   Once a pod is instantiated on a node it will stay there until it is deleted
-        * Meaning once a pod on a host goes down. it will not be moved over to another node.
+Important Note:   
+*   Once a pod is instantiated on a node it will stay there until it is deleted
+    * Meaning once a pod on a host goes down. it will **not** be moved over to another node.
+    * **If the node goes down all the pods running on the node will be down and they will not come up on the other nodes**
+
    
