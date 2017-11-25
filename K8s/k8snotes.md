@@ -199,5 +199,6 @@ Important Note:
     * Meaning once a pod on a host goes down. it will **not** be moved over to another node.
     * **If the node goes down all the pods running on the node will be down and they will not come up on the other nodes**
     * **Once a node comes back up the deployed pods will come back up. Nothing will be redeployed**
-
+    * **This means its important to keep track of node health so that deployments/pods can be scaled out incase of failure to nodes**
+    
    
