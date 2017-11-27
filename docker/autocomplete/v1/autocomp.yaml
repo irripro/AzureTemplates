@@ -29,6 +29,5 @@ spec:
       port: 443
     - name: redirect
       port: 80
-
   selector:
     app: gcp-autocomplete
