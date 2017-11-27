@@ -55,4 +55,4 @@ def index():
     return render_template("city.html", form=form)
 
 if __name__ == '__main__':
-    app.run('0.0.0.0', port=5000)
+    app.run('0.0.0.0', port=80)
