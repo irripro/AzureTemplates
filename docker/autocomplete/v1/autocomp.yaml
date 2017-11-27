@@ -11,9 +11,12 @@ spec:
     spec:
       containers:
       - name: gcp-autocomplete
-        image: alihhussain/azurepublic:autocompv4
+        image: alihhussain/azurepublic:autocompv5
         ports:
         - containerPort: 443
+          name: app
+        - containerPort: 80
+          name: redirect 
 ---
 apiVersion: v1
 kind: Service
@@ -22,6 +25,10 @@ metadata:
 spec:
   type: LoadBalancer
   ports:
-  - port: 443
+    - name: app
+      port: 443
+    - name: redirect
+      port: 80
+
   selector:
     app: gcp-autocomplete
