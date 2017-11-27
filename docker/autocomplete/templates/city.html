@@ -1,21 +1,49 @@
 <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
-    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.js"></script>
+    <script type="text/javascript" src="//code.jquery.com/jquery-latest.js"></script>
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.js"></script>
 </head>
 
 {{ form.autocomp.label }}: {{ form.autocomp }}
 
 <script>
+    var data = ["Tokyo,Japak (1)",
+          "New York,USA (2)",
+          "Sao Paulo,Brazil (3)",
+          "Seoul,South Korea (4)",
+          "Mexico City,Mexico (5)",
+          "Osaka,Japan (6)",
+          "Manila,Philippines (7)",
+          "Mumbai,India (8)",
+          "Delhi,India (9)",
+          "Jakarta,Indonesia (10)",
+          "Lagos, Nigeria (11)",
+          "Kolkata,India (12)",
+          "Cairo,Egypt (13)",
+          "Los Angeles,USA (14)",
+          "Buenos Aires,Argentina (15)",
+          "Rio de Janeiro,Brazil (16)",
+          "Moscow,Russia (17)",
+          "Shanghai,China (18)",
+          "Karachi,Pakistan (19)",
+          "Paris,France (20)",
+          "Istanbul,Turkey (21)",
+          "Nagoya,Japan (22)",
+          "Beijing,China (23)",
+          "Chicago,USA (24)",
+          "London, England (25)",
+          "Shenzhen,China (26)",
+          "Essen,Germany (27)",
+          "Tehran,Iran (28)",
+          "Bogota,Colombia (29)",
+          "Lima,Peru (30)"
+    
+    ];
     $(function() {
-        $.ajax({
-            url: '{{ url_for("autocomplete") }}'
-            }).done(function (data){
-                $('#city_autocomplete').autocomplete({
-                    source: data,
-                    minLength: 1
-                });
-            });
+        $('#city_autocomplete').autocomplete({
+            source: data,
+            minLength: 1
         });
+    });
 </script>

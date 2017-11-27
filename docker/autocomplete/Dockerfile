@@ -6,7 +6,6 @@ ADD . /root/autocomplete
 
 RUN apt-get update && apt-get upgrade -y && apt-get install python -y
 
-EXPOSE 80
+EXPOSE 443
 
-#ENTRYPOINT ["/bin/bash"]
 ENTRYPOINT ["/usr/bin/python", "/root/autocomplete/app.py"]
