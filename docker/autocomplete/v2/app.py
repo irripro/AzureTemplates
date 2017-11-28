@@ -4,15 +4,19 @@
 from flask import Flask, Response, render_template, request
 import json
 from wtforms import TextField, Form
-from pprint import pprint
+import urllib2
+import ssl
 
 app = Flask(__name__)
+context = ssl._create_unverified_context()
+response = urllib2.urlopen('https://raw.githubusercontent.com/BestBuyAPIs/open-data-set/master/stores.json', context=context)
 
-stores = json.load(open('/root/autocomplete/stores.json'))
+stores = response.read()
+jstores = json.loads(stores)
 storenames = []
 
-for store in stores:
-    storenames.append(store['name'])
+for s in jstores:
+    storenames.append(s['name'])
 
 class SearchForm(Form):
     autocomp = TextField('Store Name', id='store_autocomplete')
