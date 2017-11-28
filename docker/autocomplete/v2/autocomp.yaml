@@ -11,8 +11,8 @@ spec:
     spec:
       containers:
       - name: gcp-autocomplete
-        imagePullPolicy: Always
-        image: alihhussain/azurepublic:autocompv5
+      imagePullPolicy: Always
+      image: alihhussain/azurepublic:autocompv5
         ports:
         - containerPort: 443
           name: app
