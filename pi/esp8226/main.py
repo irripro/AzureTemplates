@@ -5,6 +5,7 @@ import onewire
 import socket
 from machine import Pin
 from umqtt.simple import MQTTClient
+import utime
 
 dat = machine.Pin(5)
 ds = ds18x20.DS18X20(onewire.OneWire(dat))
@@ -17,9 +18,9 @@ def temperature():
 
 def sendmsg(server="10.0.0.160"):
     msg = str("%s:%s" %(utime.localtime(),temperature()))
-    c = MQTTClient("umqtt_client", server)
+    c = MQTTClient("umqtt_client", "10.0.0.160")
     c.connect()
-    c.publish(b"sensor/temperature", b"{}".format(temperature())
+    c.publish(b"sensor/temperature", b"{}".format(msg)
     c.disconnect()
 
 #rtc = machine.RTC()
