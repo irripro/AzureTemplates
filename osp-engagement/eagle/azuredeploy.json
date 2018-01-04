@@ -1,0 +1,191 @@
+{
+    "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "variables": {
+        "location": "[resourceGroup().location]",
+        "vmssName": "globalscape",
+        "vmSku": "Standard_D2s_v3",
+        "adminUsername": "azureuser",
+        "instanceCount": "1",
+        "image": {
+            "sku": "2016-Datacenter",
+            "publisher": "MicrosoftWindowsServer",
+            "version": "latest",
+            "offer": "WindowsServer"
+        },
+        "singlePlacementGroup": "true",
+        "adminPassword": "Greatpa$$w0rd",
+        "ipAllocationMethod": "Dynamic",
+        "pipName": "eagleglobalscape",
+        "pipLabel": "eagleglobalscape",
+        "vnetName": "[concat(variables('vmssName'), 'Vnet')]",
+        "namingInfix": "[toLower(substring(concat(variables('vmssName'), uniqueString(resourceGroup().id)), 0, 9))]",
+        "networkApiVersion": "2017-06-01",
+        "storageApiVersion": "2017-10-01",
+        "computeApiVersion": "2017-03-30",
+        "autoscaleApiVersion": "2015-04-01",
+        "loadBalancerName": "[concat(variables('vmssName'), 'lb')]"
+    },
+    "resources": [
+        {
+            "type": "Microsoft.Network/publicIPAddresses",
+            "name": "[variables('pipName')]",
+            "location": "[variables('location')]",
+            "apiVersion": "[variables('networkApiVersion')]",
+            "properties": {
+                "publicIPAllocationMethod": "[variables('ipAllocationMethod')]",
+                "dnsSettings": {
+                    "domainNameLabel": "[concat(variables('pipLabel'), uniqueString(resourceGroup().id))]"
+                }
+            }
+        },
+        {
+            "type": "Microsoft.Network/loadBalancers",
+            "name": "[variables('loadBalancerName')]",
+            "location": "[variables('location')]",
+            "apiVersion": "[variables('networkApiVersion')]",
+            "dependsOn": [
+                "[concat('Microsoft.Network/publicIPAddresses/', variables('pipName'))]"
+            ],
+            "properties": {
+                "frontendIPConfigurations": [
+                    {
+                        "name": "LoadBalancerFrontEnd",
+                        "properties": {
+                            "publicIPAddress": {
+                                "id": "[resourceId('Microsoft.Network/publicIpAddresses', variables('pipName'))]"
+                            }
+                        }
+                    }
+                ],
+                "backendAddressPools": [
+                    {
+                        "name": "bepool"
+                    }
+                ],
+                "inboundNatPools": [
+                    {
+                        "name": "natpool",
+                        "properties": {
+                            "frontendIPConfiguration": {
+                                "id": "[concat(resourceId('Microsoft.Network/loadBalancers', variables('loadBalancerName')), '/frontendIPConfigurations/loadBalancerFrontEnd')]"
+                            },
+                            "protocol": "tcp",
+                            "frontendPortRangeStart": "50000",
+                            "frontendPortRangeEnd": "50119",
+                            "backendPort": "3389"
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Microsoft.Network/virtualNetworks",
+            "name": "[variables('vnetName')]",
+            "location": "[variables('location')]",
+            "apiVersion": "[variables('networkApiVersion')]",
+            "properties": {
+                "addressSpace": {
+                    "addressPrefixes": [
+                        "10.0.0.0/16"
+                    ]
+                },
+                "subnets": [
+                    {
+                        "name": "default",
+                        "properties": {
+                            "addressPrefix": "10.0.0.0/21"
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "name": "[variables('vmssName')]",
+            "type": "Microsoft.Compute/virtualMachineScaleSets",
+            "apiVersion": "[variables('computeApiVersion')]",
+            "location": "[variables('location')]",
+            "dependsOn": [
+                "[concat('Microsoft.Network/virtualNetworks/', variables('vnetName'))]",
+                "[concat('Microsoft.Network/loadBalancers/', variables('loadBalancerName'))]"
+            ],
+            "sku": {
+                "name": "[variables('vmSku')]",
+                "tier": "Standard",
+                "capacity": "[int(variables('instanceCount'))]"
+            },
+            "properties": {
+                "overprovision": "true",
+                "upgradePolicy": {
+                    "mode": "Manual"
+                },
+                "singlePlacementGroup": "[variables('singlePlacementGroup')]",
+                "virtualMachineProfile": {
+                    "storageProfile": {
+                        "imageReference": "[variables('image')]",
+                        "osDisk": {
+                            "createOption": "FromImage",
+                            "caching": "ReadWrite"
+                        }
+                    },
+                    "osProfile": {
+                        "computerNamePrefix": "[variables('namingInfix')]",
+                        "adminUsername": "[variables('adminUsername')]",
+                        "adminPassword": "[variables('adminPassword')]"
+                    },
+                    "networkProfile": {
+                        "networkInterfaceConfigurations": [
+                            {
+                                "name": "[concat(variables('vmssName'), 'Nic')]",
+                                "properties": {
+                                    "primary": "true",
+                                    "ipConfigurations": [
+                                        {
+                                            "name": "[concat(variables('vmssName'), 'IpConfig')]",
+                                            "properties": {
+                                                "subnet": {
+                                                    "id": "[reference(variables('vnetName'), variables('networkApiVersion')).subnets[0].id]"
+                                                },
+                                                "loadBalancerBackendAddressPools": [
+                                                    {
+                                                        "id": "[reference(variables('loadBalancerName'), variables('networkApiVersion')).backendAddressPools[0].id]"
+                                                    }
+                                                ],
+                                                "loadBalancerInboundNatPools": [
+                                                    {
+                                                        "id": "[reference(variables('loadBalancerName'), variables('networkApiVersion')).inboundNatPools[0].id]"
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        ]
+                    },
+                    "extensionProfile": {
+                      "extensions": [
+                        {
+                          "name": "customScript",
+                          "properties": {
+                            "publisher": "Microsoft.Compute",
+                            "settings": {
+                              "fileUris": [
+                                "[concat(parameters('_artifactsLocation'), '/scripts/deploy.ps1')]"
+                              ]
+                            },
+                            "typeHandlerVersion": "1.8",
+                            "autoUpgradeMinorVersion": true,
+                            "protectedSettings": {
+                              "commandToExecute": "powershell -ExecutionPolicy Unrestricted -File deploy.ps1"
+                            },
+                            "type": "CustomScriptExtension"
+                          }
+                        }
+                      ]
+                    }
+                }
+            }
+        }
+    ]
+}
