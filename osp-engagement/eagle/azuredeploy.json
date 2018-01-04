@@ -71,8 +71,8 @@
                                 "id": "[concat(resourceId('Microsoft.Network/loadBalancers', variables('loadBalancerName')), '/frontendIPConfigurations/loadBalancerFrontEnd')]"
                             },
                             "protocol": "tcp",
-                            "frontendPortRangeStart": "3389",
-                            "frontendPortRangeEnd": "3390",
+                            "frontendPortRangeStart": "50000",
+                            "frontendPortRangeEnd": "55000",
                             "backendPort": "3389"
                         }
                     }
