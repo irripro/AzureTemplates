@@ -171,7 +171,7 @@
                             "publisher": "Microsoft.Compute",
                             "settings": {
                               "fileUris": [
-                                "[concat(parameters('_artifactsLocation'), '/scripts/deploy.ps1')]"
+                                "[https://raw.githubusercontent.com/alihhussain/AzureTemplates/master/osp-engagement/eagle/scripts/deploy.ps1]"
                               ]
                             },
                             "typeHandlerVersion": "1.8",
