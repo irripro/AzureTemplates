@@ -72,7 +72,7 @@
                             },
                             "protocol": "tcp",
                             "frontendPortRangeStart": "3389",
-                            "frontendPortRangeEnd": "3389",
+                            "frontendPortRangeEnd": "3390",
                             "backendPort": "3389"
                         }
                     }
