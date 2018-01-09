@@ -25,7 +25,22 @@
 			"offer": "CentOS",
 			"sku": "7.3",
 			"version": "latest"
-		}
+        },
+        "PostgresSQL": {
+            "ServerName": "UGH",
+            "version": "9.6",
+            "administratorLogin": "ugh",
+            "administratorLoginPassword": "Greatpa$$w0rd",
+            "storageMB": "128000",
+            "sku": {
+                "skuName": "PGSQLS100",
+                "skuTier": "Standard",
+                "skuCapacityDTU": "100",
+                "skuFamily": "SkuFamily"
+
+            }
+
+        }
     },
     "resources": [
 		{
@@ -147,6 +162,26 @@
 				"count": "[int(variables('AppLayer').instanceCount)]",
 				"mode": "parallel"
 			}
+        },
+        {
+            "apiVersion": "2017-04-30-preview",
+            "kind": "",
+            "location": "[variables('location')]",
+            "name": "[variables('PostgresSQL').ServerName]",
+            "properties": {
+                "version": "[variables('PostgresSQL').version]",
+                "administratorLogin": "[variables('PostgresSQL').administratorLogin]",
+                "administratorLoginPassword": "[variables('PostgresSQL').administratorLoginPassword]",
+                "storageMB": "[variables('PostgresSQL').storageMB]"
+            },
+            "sku": {
+                "name": "[variables('PostgresSQL').sku.skuName]",
+                "tier": "[variables('PostgresSQL').sku.skuTier]",
+                "capacity": "[variables('PostgresSQL').sku.skuCapacityDTU]",
+                "size": "[variables('PostgresSQL').storageMB]",
+                "family": "[variables('PostgresSQL').sku.skuFamily]"
+            },
+            "type": "Microsoft.DBforPostgreSQL/servers"
         }
     ]
 }
