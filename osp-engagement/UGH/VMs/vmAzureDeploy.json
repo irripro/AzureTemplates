@@ -27,7 +27,7 @@
 			"version": "latest"
         },
         "PostgresSQL": {
-            "ServerName": "UGH",
+            "ServerName": "ugh",
             "version": "9.6",
             "administratorLogin": "ugh",
             "administratorLoginPassword": "Greatpa$$w0rd",
