@@ -63,7 +63,7 @@
 				"publicIpAllocationMethod": "[variables('publicIpAddressType')]",
 				"idleTimeoutInMinutes": 4,
                 "dnsSettings": {
-                    "domainNameLabel": "[concat(variables('publicIpAddressName'), copyIndex())]"
+                    "domainNameLabel": "[concat(variables('publicIpAddressName'), uniqueString(resourceGroup().id), copyIndex())]"
                 }
             },
             "sku": {
