@@ -156,3 +156,25 @@ Forwarding from 127.0.0.1:8080 -> 8080
 Forwarding from [::1]:8080 -> 8080
 ```
 
+Deploy a Service on Top of Deployment to make it public
+```bash
+kubectl create -f service.yaml
+service "my-svc" created
+
+kubectl get all
+NAME                            READY     STATUS    RESTARTS   AGE
+po/my-deploy-2287124240-fw2hv   1/1       Running   0          3m
+po/my-deploy-2287124240-jnm4k   1/1       Running   0          3m
+po/my-deploy-2287124240-mq7lj   1/1       Running   0          3m
+
+NAME             CLUSTER-IP    EXTERNAL-IP     PORT(S)          AGE
+svc/kubernetes   10.0.0.1      <none>          443/TCP          11h
+svc/my-svc       10.0.166.57   13.92.224.176   8080:31786/TCP   4m
+
+NAME               DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
+deploy/my-deploy   3         3         3            3           3m
+
+NAME                      DESIRED   CURRENT   READY     AGE
+rs/my-deploy-2287124240   3         3         3         3m
+
+```
