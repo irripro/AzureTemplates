@@ -178,3 +178,107 @@ NAME                      DESIRED   CURRENT   READY     AGE
 rs/my-deploy-2287124240   3         3         3         3m
 
 ```
+
+# Deploying Clusters
+
+## ACS-Engine
+
+### Install ACS-Engine
+1. Download the ACS-Engine [Binaries](https://github.com/Azure/acs-engine/releases/tag/v0.11.0)
+
+For Linux x64
+```bash
+cd ~
+wget https://github.com/Azure/acs-engine/releases/download/v0.11.0/acs-engine-v0.11.0-linux-amd64.tar.gz
+```
+
+2. Untar the file
+
+```bash
+cd ~
+tar -xvzf acs-engine-v0.11.0-linux-amd64.tar.gz
+```
+
+3. Move the ace-engine binary to path
+
+```bash
+cd ~/acs-engine-v0.11.0-linux-amd64
+sudo mv acs-engine /usr/local/bin
+```
+4. Test ACS-Engine
+
+```bash
+acs-engine
+
+ACS-Engine deploys and manages Kubernetes, Swarm Mode, and DC/OS clusters in Azure
+
+Usage:
+  acs-engine [command]
+
+Available Commands:
+  deploy        deploy an Azure Resource Manager template
+  generate      Generate an Azure Resource Manager template
+  help          Help about any command
+  orchestrators provide info about supported orchestrators
+  scale         scale a deployed cluster
+  upgrade       upgrades an existing Kubernetes cluster
+  version       Print the version of ACS-Engine
+
+Flags:
+      --debug   enable verbose debug logs
+  -h, --help    help for acs-engine
+
+Use "acs-engine [command] --help" for more information about a command.
+```
+
+### Use ACS-Engine to create a cluster
+
+1. Get the kubernetes api model
+
+```bash
+cd ~
+wget https://raw.githubusercontent.com/Azure/acs-engine/fc56e540144aad66baf769446d1d87ebc86e0911/examples/kubernetes.json
+```
+
+2. Create cluster using ACS-Engine CLI
+
+```bash
+acs-engine deploy --subscription-id e729c299-db43-40ce-991a-7e4572a69d50 \
+    --dns-prefix livedemosogeti --location westus2 \
+    --auto-suffix --api-model kubernetes.json
+```
+
+Output
+```bash
+WARN[0001] To sign in, use a web browser to open the page https://aka.ms/devicelogin and enter the code <YourCode> to authenticate.
+WARN[0073] apimodel: missing masterProfile.dnsPrefix will use "livedemosogeti-5a5e50c9"
+WARN[0073] --resource-group was not specified. Using the DNS prefix from the apimodel as the resource group name: livedemosogeti-5a5e50c9
+WARN[0080] apimodel: ServicePrincipalProfile was missing or empty, creating application...
+WARN[0081] created application with applicationID (244bc649-3e14-437a-bcff-88e056eb21c4) and servicePrincipalObjectID (0672a270-235c-4c5b-b00f-ae6a70012f11).
+WARN[0081] apimodel: ServicePrincipalProfile was empty, assigning role to application...
+INFO[0109] Starting ARM Deployment (livedemosogeti-5a5e50c9-276076987). This will take some time...
+INFO[0468] Finished ARM Deployment (livedemosogeti-5a5e50c9-276076987).
+```
+
+Check out _output directory to get the binaries compiled
+
+```bash
+cd _output
+ls -alh
+total 244K
+drwx------ 0 ali ali  512 Jan 16 11:34 .
+drwx------ 0 ali ali  512 Jan 16 11:21 ..
+-rw------- 1 ali ali  28K Jan 16 11:22 apimodel.json
+-rw------- 1 ali ali 5.0K Jan 16 11:22 apiserver.crt
+-rw------- 1 ali ali 3.2K Jan 16 11:22 apiserver.key
+-rw------- 1 ali ali 136K Jan 16 11:22 azuredeploy.json
+-rw------- 1 ali ali  39K Jan 16 11:22 azuredeploy.parameters.json
+-rw------- 1 ali ali 3.2K Jan 16 11:21 azureuser_rsa
+-rw------- 1 ali ali 1.7K Jan 16 11:22 ca.crt
+-rw------- 1 ali ali 3.2K Jan 16 11:22 ca.key
+-rw------- 1 ali ali 1.8K Jan 16 11:22 client.crt
+-rw------- 1 ali ali 3.2K Jan 16 11:22 client.key
+drwx------ 0 ali ali  512 Jan 16 11:22 kubeconfig
+-rw------- 1 ali ali 1.8K Jan 16 11:22 kubectlClient.crt
+-rw------- 1 ali ali 3.2K Jan 16 11:22 kubectlClient.key
+```
