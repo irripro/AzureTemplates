@@ -36,7 +36,12 @@ Prerequisites:
 cd ~
 mkdir ~/.kube/
 ```
-3. Copy downloaded file inside of ```~/.kube/```
+3. Download the file and Copy downloaded file inside of ```~/.kube/```
+```bash
+cd ~/.kube/
+wget https://functionc134d59b8177.blob.core.windows.net/config/myconfig
+mv myconfig config
+```
 4. The output of ```ls -alh ~/.kube/config``` should look like 
 ```bash
 ali@MININT-alhussai:~$ ls -alh ~/.kube/config
