@@ -58,3 +58,24 @@ aks-nodepool1-23314708-1   Ready     2h        v1.7.7
 aks-nodepool1-23314708-2   Ready     2h        v1.7.7
 aks-nodepool1-23314708-3   Ready     2h        v1.7.7
 ```
+
+# Live Demo
+## Ch 02
+
+Get to the directory
+```bash
+cd /mnt/c/Users/alhussai/Documents/GitHub/AzureTemplates/docker/base_301_AKS/container-hackfest/challenges/SolutionHelperFiles/ch02
+```
+
+Deploy the pod
+```bash
+kubectl create -f pod.yaml
+pod "my-pod" created
+```
+
+Test the Pod
+```bash
+kubectl port-forward my-pod 8080:8080
+Forwarding from 127.0.0.1:8080 -> 8080
+Forwarding from [::1]:8080 -> 8080
+```
