@@ -14,4 +14,5 @@ RUN apt-key adv --keyserver packages.microsoft.com --recv-keys 52E16F86FEE04B979
 RUN apt-get install apt-transport-https
 RUN apt-get update &&  apt-get install azure-cli
 RUN apt-get install python -y
+RUN echo "Live Demo 2" > /tmp/livedemo2.txt
 ENTRYPOINT ["/bin/bash"]
