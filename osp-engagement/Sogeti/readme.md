@@ -438,4 +438,24 @@ spec:
 3. Run the following command to see the status of pods:
 ```bash
 watch kubectl get all
+Every 2.0s: kubectl get all                                                                                                                                                 Thu Jan 18 11:59:49 2018
+
+NAME                            READY     STATUS    RESTARTS   AGE
+po/my-deploy-2287124240-48pdl   1/1       Running   0          19h
+po/my-deploy-2287124240-9snh9   1/1       Running   0          19h
+po/my-deploy-2287124240-txskz   1/1       Running   0          1d
+po/omsagent-6cmjl               1/1       Running   0          1m
+po/omsagent-7wl6g               1/1       Running   0          1m
+po/omsagent-nl11n               1/1       Running   0          1m
+po/omsagent-x7z3d               1/1       Running   0          1m
+
+NAME             CLUSTER-IP    EXTERNAL-IP      PORT(S)          AGE
+svc/kubernetes   10.0.0.1      <none>           443/TCP          2d
+svc/my-svc       10.0.168.79   52.191.212.139   8080:31789/TCP   1d
+
+NAME               DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
+deploy/my-deploy   3         3         3            3           1d
+
+NAME                      DESIRED   CURRENT   READY     AGE
+rs/my-deploy-2287124240   3         3         3         1d
 ```
