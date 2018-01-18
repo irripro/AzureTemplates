@@ -435,7 +435,8 @@ spec:
          value: <KEY>
        securityContext:
 ```
-3. Run the following command to see the status of pods:
+3. Run the command to deploy the template: ```kubectl create -f omsagent.yaml```
+4. Run the following command to see the status of pods:
 ```bash
 watch kubectl get all
 Every 2.0s: kubectl get all                                                                                                                                                 Thu Jan 18 11:59:49 2018
