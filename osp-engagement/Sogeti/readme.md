@@ -363,3 +363,44 @@ kubectl port-forward --namespace default $POD_NAME 9200:9200
 ```
 5. Visit ```http://localhost:9200``` to insure the elasticsearch applicaiton is indeed running in the cluster.
 
+### Check out Helm deployment binaries
+
+Sample Chart Binaries on Git:
+* [ElasticSearch](https://github.com/kubernetes/charts/tree/master/incubator/elasticsearch)
+* [Nginx](https://github.com/kubernetes/helm/tree/master/docs/examples/nginx)
+
+Binaries on the filesystem
+1. Go to the folder inside of your home directory
+```bash
+cd ~/.helm/cache/archive/
+ls -alh
+total 24K
+drwxr-xr-x 0 ali ali  512 Jan 17 23:33 .
+drwxr-xr-x 0 ali ali  512 Jan 17 23:15 ..
+-rw-r--r-- 1 ali ali 9.0K Jan 17 23:33 elasticsearch-0.4.6.tgz
+-rw-r--r-- 1 ali ali  12K Jan 17 23:26 jenkins-0.12.0.tgz
+```
+2. untar the files
+```bash
+tar -zxvf elasticsearch-0.4.6.tgz
+cd ./elasticsearch/
+ls -alh
+total 20K
+drwxrwxrwx 0 ali ali  512 Jan 18 11:37 .
+drwxr-xr-x 0 ali ali  512 Jan 18 11:37 ..
+-rwxr-xr-x 1 ali ali  638 Dec 31  1969 Chart.yaml
+-rwxr-xr-x 1 ali ali  11K Dec 31  1969 README.md
+drwxrwxrwx 0 ali ali  512 Jan 18 11:37 templates
+-rwxr-xr-x 1 ali ali 2.2K Dec 31  1969 values.yaml
+```
+# Logging and Monitoring Cluster
+
+### Create a Log Analytics Workspace
+1. Create a workspace by following directions on [this link](https://docs.microsoft.com/en-us/azure/log-analytics/log-analytics-quick-create-workspace)
+
+### Log Analytics Workspace Setup for K8s (Following Instructions on this [link](https://github.com/Microsoft/OMS-docker/tree/master/Kubernetes))
+1. Fetch the yaml deploy file
+```bash
+wget https://raw.githubusercontent.com/Microsoft/OMS-docker/master/Kubernetes/omsagent.yaml
+```
+3. 
