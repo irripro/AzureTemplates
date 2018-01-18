@@ -397,10 +397,45 @@ drwxrwxrwx 0 ali ali  512 Jan 18 11:37 templates
 
 ### Create a Log Analytics Workspace
 1. Create a workspace by following directions on [this link](https://docs.microsoft.com/en-us/azure/log-analytics/log-analytics-quick-create-workspace)
+2. Fetch and note down the Workspace ID and Key
+```bash
+Sample:
+Workspace ID: 88361439-79ec-4690-be15-c9f50c294438
+Workspace Key: jf5qEA6SkEMmz6tcA5rc
+```
 
 ### Log Analytics Workspace Setup for K8s (Following Instructions on this [link](https://github.com/Microsoft/OMS-docker/tree/master/Kubernetes))
 1. Fetch the yaml deploy file
 ```bash
 wget https://raw.githubusercontent.com/Microsoft/OMS-docker/master/Kubernetes/omsagent.yaml
 ```
-3. 
+2. Modify the downloaded file and replace <WSID> and <KEY> values with yours
+```bash
+vim omsagent.yaml
+apiVersion: extensions/v1beta1
+kind: DaemonSet
+metadata:
+ name: omsagent
+spec:
+ template:
+  metadata:
+   labels:
+    app: omsagent
+    agentVersion: 1.4.0-12
+    dockerProviderVersion: 10.0.0-25
+  spec:
+   containers:
+     - name: omsagent
+       image: "microsoft/oms"
+       imagePullPolicy: Always
+       env:
+       - name: WSID
+         value: <WSID>
+       - name: KEY
+         value: <KEY>
+       securityContext:
+```
+3. Run the following command to see the status of pods:
+```bash
+watch kubectl get all
+```
