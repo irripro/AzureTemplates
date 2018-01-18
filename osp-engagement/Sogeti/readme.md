@@ -282,3 +282,84 @@ drwx------ 0 ali ali  512 Jan 16 11:22 kubeconfig
 -rw------- 1 ali ali 1.8K Jan 16 11:22 kubectlClient.crt
 -rw------- 1 ali ali 3.2K Jan 16 11:22 kubectlClient.key
 ```
+
+# Live Demo Second Session
+
+## Access the Dash Board
+
+1. Ensure the correct ```~/.kube/config``` file is present
+2. Run ```kubectl proxy```
+3. Navigate to the browser and run ```http://localhost:8001/ui```
+
+## To Install Helm locally
+
+1. Bring up the container by running ```docker run -it alihhussain/azurepublic:301Base```
+2. [Download](https://github.com/kubernetes/helm/archive/v2.8.0-rc.1.tar.gz) the helm binaries by running the following command ``` wget https://storage.googleapis.com/kubernetes-helm/helm-v2.8.0-rc.1-linux-amd64.tar.gz```
+3. Untar the file by running: ```tar -zxvf helm-v2.8.0-rc.1-linux-amd64.tar.gz```
+4. Move the helm binary to PATH by running: ```sudo mv ./linux-amd64/helm /usr/local/bin/helm```
+5. Check to see if helm is executable by running: 
+```bash
+helm
+The Kubernetes package manager
+
+To begin working with Helm, run the 'helm init' command:
+
+        $ helm init
+
+This will install Tiller to your running Kubernetes cluster.
+It will also set up any necessary local configuration.
+...
+```
+6. Check helm install correctly by running:
+```bash
+helm version
+Client: &version.Version{SemVer:"v2.8.0-rc.1", GitCommit:"e1027fae732034e0390f5cd231c6116e63b75aa2", GitTreeState:"clean"}
+Error: cannot connect to Tiller
+```
+The error message comes in if the kubectl config file is not installed
+
+## Install Helm on Cluster
+1. Verify kubectl config file is correct
+2. Verify tiller application is not running via: ```kubectl get pods --namespace kube-system```
+3. Install Helm Tiller by running: ```helm init```
+4. Verify Tiller application is running on the cluster by running: 
+```bash
+kubectl get pods --namespace kube-system
+AME                                    READY     STATUS    RESTARTS   AGE
+heapster-342135353-j69qx                2/2       Running   0          2d
+kube-dns-v20-1654923623-rwq3b           3/3       Running   0          2d
+kube-dns-v20-1654923623-zdwkc           3/3       Running   0          2d
+kube-proxy-54vw1                        1/1       Running   0          2d
+kube-proxy-6pf9m                        1/1       Running   0          2d
+kube-proxy-6wq07                        1/1       Running   0          2d
+kube-proxy-84xf8                        1/1       Running   0          2d
+kube-svc-redirect-71qjl                 1/1       Running   0          2d
+kube-svc-redirect-g9vqk                 1/1       Running   0          2d
+kube-svc-redirect-h3nt7                 1/1       Running   0          2d
+kube-svc-redirect-tsrrr                 1/1       Running   0          2d
+kubernetes-dashboard-1672970692-k40fl   1/1       Running   0          2d
+tiller-deploy-2114845795-kss9d          1/1       Running   0          11h
+tunnelfront-3436842133-2kt5c            1/1       Running   0          2d
+```
+
+# Deploy a sample elasticSearch Helm Chart
+
+1. Add incubator repo
+```bash
+helm repo add incubator http://storage.googleapis.com/kubernetes-charts-incubator
+```
+2. Deploy helm chart by:
+```bash
+helm install --name my-release incubator/elasticsearch
+```
+3. Follow the instructions and run the following commands
+```bash
+export POD_NAME=$(kubectl get pods --namespace default -l "app=elasticsearch,component=client,release=my-release" -o jsonpath="{.items[0].metadata.name}")
+echo "Visit http://127.0.0.1:9200 to use Elasticsearch"
+```
+4. Test if the Elasticsearch application is running by:
+```bash
+kubectl port-forward --namespace default $POD_NAME 9200:9200
+```
+5. Visit ```http://localhost:9200``` to insure the elasticsearch applicaiton is indeed running in the cluster.
+
