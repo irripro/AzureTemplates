@@ -20,7 +20,7 @@
 	"variables": {
         "location": "[resourceGroup().location]",
         "Networking_Deployment": {
-			"toDeploy": "true",
+			"toDeploy": "false",
 			"deploymentName": "[concat('Networking', '-', 'Deployment')]",
             "virtualNetworkName": "dev-azure-vnet-01",
             "addressPrefix": "10.0.0.0/16",
@@ -45,20 +45,18 @@
             "adminUsername": "c3e-user",
             "adminPublicKey": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCB4mcqibpEHBXazykZkKObRiQGuevw/KyCaCDFDIDMveHUbrrQYtf/obks/C1X8b0yBgALGfbXhGn0ikixhCLKG31Adv+JCXxiut4arXhjPsAdN4MCXppyJmtZ89CAB3MD7CDlrJLMwl8uB/igY3sGA171clqb4toUbRfdaiD/vy8BqKFSIrE/nvuRtxLZe3U2qqGpt6e0kXWO8BnxY1aslITOMXWPhh2bZwFvvBOTbwvVmeq29QepYPkgQBvg6g3N6NOteCagtJFrmfEk2iXH3NWJIo948923LSaspcqLAcqZbtH9YK+0CihMmMQwOQUDIOMbO06CtIvm/vTUC0vf",
             "virtualNetworkName": "dev-azure-vnet-01",
-            "vnetId": "[resourceId('Microsoft.Network/virtualNetworks', variables('App_Deployment').virtualNetworkName)]",		
+            "vnetId": "[resourceId('Microsoft.Network/virtualNetworks', variables('Networking_Deployment').virtualNetworkName)]",		
             "AppLayer":{
                 "networkInterfaceName": "dev-azure-nic-app-m-01",
                 "AvailabilitySetName":"dev-azure-aset-app-01",
                 "availabilitySetPlatformFaultDomainCount": "3",
                 "availabilitySetPlatformUpdateDomainCount": "5",
                 "NSG_App_Layer": "dev-azure-nsg-app",
-                "subnetRef": "[concat(variables('App_Deployment').vnetId, '/subnets/', 'dev-azure-sn-app')]",
+                "subnetRef": "[resourceId('Microsoft.Network/virtualNetworks/subnets', variables('Networking_Deployment').virtualNetworkName, variables('Networking_Deployment').SubnetName)]",
                 "virtualMachineName": "dev-azure-app-m-01",
                 "virtualMachineSize": "Standard_D2s_v3",
                 "instanceCount": "4"
             },
-            "publicIpAddressName": "dev-azure-pip-ag-01",
-            "publicIpAddressType": "Dynamic",
             "image": {
                 "publisher": "OpenLogic",
                 "offer": "CentOS",
@@ -77,6 +75,23 @@
                     "skuCapacityDTU": "100",
                     "skuFamily": "SkuFamily"
     
+                }
+            },
+            "ApplicationGateway": {
+                "applicationGatewayName": "dev-azure-ag-app-01",
+                "publicIpAddressName": "dev-azure-pip-ag-01",
+                "publicIpAddressType": "Dynamic",
+                "sku": {
+                    "name": "Standard_Medium",
+                    "tier": "Standard",
+                    "capacity": 2
+                },
+                "sslCertificates": {
+                    "name": "dev-azure-cert-ag-01",
+                    "publicCertData": "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"
+                },
+                "backendAddressPools": {
+                    "name": "dev-azure-agp-01"
                 }
             }
         }
@@ -104,7 +119,6 @@
                                 "routes": [{
                                         "name": "[variables('Networking_Deployment').routename1]",
                                         "properties": {
-                                            "provisioningState": "Succeeded",
                                             "addressPrefix": "0.0.0.0/0",
                                             "nextHopType": "VirtualAppliance",
                                             "nextHopIpAddress": "10.0.0.132"
@@ -112,19 +126,6 @@
                                     }
                                 ]
                             }
-                        }, {
-                            "comments": "This is the definition of a Route within the RouteTable",
-                            "type": "Microsoft.Network/routeTables/routes",
-                            "name": "[concat(variables('Networking_Deployment').routetable1, '/', variables('Networking_Deployment').routename1)]",
-                            "apiVersion": "2017-06-01",
-                            "properties": {
-                                "addressPrefix": "0.0.0.0/0",
-                                "nextHopType": "VirtualAppliance",
-                                "nextHopIpAddress": "10.0.0.132"
-                            },
-                            "dependsOn": [
-                                "[resourceId('Microsoft.Network/routeTables', variables('Networking_Deployment').routetable1)]"
-                            ]
                         },{
                             "comments": "This is the definition of a RouteTable specific to each Subnet",
                             "type": "Microsoft.Network/routeTables",
@@ -133,9 +134,8 @@
                             "location": "[variables('location')]",
                             "properties": {
                                 "routes": [{
-                                        "name": "[variables('Networking_Deployment').routename1]",
+                                        "name": "[variables('Networking_Deployment').routename2]",
                                         "properties": {
-                                            "provisioningState": "Succeeded",
                                             "addressPrefix": "0.0.0.0/0",
                                             "nextHopType": "VirtualAppliance",
                                             "nextHopIpAddress": "10.0.0.132"
@@ -143,19 +143,6 @@
                                     }
                                 ]
                             }
-                        }, {
-                            "comments": "This is the definition of a Route within the RouteTable",
-                            "type": "Microsoft.Network/routeTables/routes",
-                            "name": "[concat(variables('Networking_Deployment').routetable2, '/', variables('Networking_Deployment').routename2)]",
-                            "apiVersion": "2017-06-01",
-                            "properties": {
-                                "addressPrefix": "0.0.0.0/0",
-                                "nextHopType": "VirtualAppliance",
-                                "nextHopIpAddress": "10.0.0.132"
-                            },
-                            "dependsOn": [
-                                "[resourceId('Microsoft.Network/routeTables', variables('Networking_Deployment').routetable2)]"
-                            ]
                         },  {
                             "comments": "NSG for App Layer",
                             "type": "Microsoft.Network/networkSecurityGroups",
@@ -670,6 +657,233 @@
 					"contentVersion": "1.0.0.0",
 					"resources": [
                         {
+                            "apiVersion": "2017-04-30-preview",
+                            "kind": "",
+                            "location": "[variables('location')]",
+                            "name": "[variables('App_Deployment').PostgresSQL.ServerName]",
+                            "properties": {
+                                "version": "[variables('App_Deployment').PostgresSQL.version]",
+                                "administratorLogin": "[variables('App_Deployment').PostgresSQL.administratorLogin]",
+                                "administratorLoginPassword": "[variables('App_Deployment').PostgresSQL.administratorLoginPassword]",
+                                "storageMB": "[variables('App_Deployment').PostgresSQL.storageMB]"
+                            },
+                            "sku": {
+                                "name": "[variables('App_Deployment').PostgresSQL.sku.skuName]",
+                                "tier": "[variables('App_Deployment').PostgresSQL.sku.skuTier]",
+                                "capacity": "[variables('App_Deployment').PostgresSQL.sku.skuCapacityDTU]",
+                                "size": "[variables('App_Deployment').PostgresSQL.storageMB]",
+                                "family": "[variables('App_Deployment').PostgresSQL.sku.skuFamily]"
+                            },
+                            "type": "Microsoft.DBforPostgreSQL/servers"
+                        },
+                        {
+                            "comments": "This is the Public IP for Application Gateway",
+                            "name": "[concat(variables('App_Deployment').ApplicationGateway.publicIpAddressName)]",
+                            "type": "Microsoft.Network/publicIpAddresses",
+                            "apiVersion": "2017-08-01",
+                            "location": "[variables('location')]",
+                            "properties": {
+                                "publicIpAllocationMethod": "[variables('App_Deployment').ApplicationGateway.publicIpAddressType]",
+                                "idleTimeoutInMinutes": 4,
+                                "dnsSettings": {
+                                    "domainNameLabel": "[concat(variables('App_Deployment').ApplicationGateway.publicIpAddressName, uniqueString(resourceGroup().id))]"
+                                }
+                            },
+                            "sku": {
+                                "name": "Basic"
+                            }
+                        },
+                        {
+                            "name": "[variables('App_Deployment').ApplicationGateway.applicationGatewayName]",
+                            "type": "Microsoft.Network/applicationGateways",
+                            "apiVersion": "2017-10-01",
+                            "location": "[variables('location')]",
+                            "dependsOn": [
+                                "[concat('Microsoft.Network/publicIPAddresses/', variables('App_Deployment').ApplicationGateway.publicIpAddressName)]"
+                            ],
+                            "properties": {
+                                "sku": "[variables('App_Deployment').ApplicationGateway.sku]",
+                                "gatewayIPConfigurations": [
+                                    {
+                                        "name": "appGatewayIpConfig",
+                                        "properties": {
+                                            "subnet": {
+                                                "id": "[variables('App_Deployment').AppLayer.subnetRef]"
+                                            }
+                                        }
+                                    }
+                                ],
+                                "frontendIPConfigurations": [
+                                    {
+                                        "name": "appGatewayFrontendIP",
+                                        "properties": {
+                                            "PublicIPAddress": {
+                                                "id": "[resourceID('Microsoft.Network/publicIPAddresses', variables('App_Deployment').ApplicationGateway.publicIpAddressName)]"
+                                            }
+                                        }
+                                    }
+                                ],
+                                "frontendPorts": [
+                                    {
+                                        "name": "appGatewayFrontendPort80",
+                                        "properties": {
+                                            "Port": 80
+                                        }
+                                    },
+                                    {
+                                        "name": "appGatewayFrontendPort443",
+                                        "properties": {
+                                            "Port": 443
+                                        }
+                                    }
+                                ],
+                                "backendAddressPools": [
+                                    {
+                                        "name": "appGatewayBackendPool",
+                                        "properties": {
+                                            "BackendAddresses": []
+                                        }
+                                    }
+                                ],
+                                "backendHttpSettingsCollection": [
+                                    {
+                                        "name": "appGatewayBackendHttpSettings-https",
+                                        "properties": {
+                                            "Port": 8080,
+                                            "Protocol": "Http",
+                                            "CookieBasedAffinity": "Disabled",
+                                            "connectionDraining": {
+                                                "enabled": false,
+                                                "drainTimeoutInSec": 1
+                                            },
+                                            "pickHostNameFromBackendAddress": false,
+                                            "requestTimeout": 3600,
+                                            "probe": {
+                                                "id": "[concat(resourceId('Microsoft.Network/applicationGateways', variables('App_Deployment').ApplicationGateway.applicationGatewayName),'/probes/dev-azure-hp-01')]" 
+                                            }
+                                        }
+                                    },
+                                    {
+                                        "name": "appGatewayBackendHttpSettings-http",
+                                        "properties": {
+                                            "Port": 8088,
+                                            "Protocol": "Http",
+                                            "CookieBasedAffinity": "Disabled",
+                                            "connectionDraining": {
+                                                "enabled": false,
+                                                "drainTimeoutInSec": 1
+                                            },
+                                            "pickHostNameFromBackendAddress": false,
+                                            "requestTimeout": 30,
+                                            "probe": {
+                                                "id": "[concat(resourceId('Microsoft.Network/applicationGateways', variables('App_Deployment').ApplicationGateway.applicationGatewayName),'/probes/dev-azure-hp-02')]" 
+                                            }
+                                        }
+                                    }
+                                ],
+                                "probes": [
+                                    {
+                                        "name": "dev-azure-hp-01",
+                                        "properties": {
+                                            "protocol": "Http",
+                                            "host": "127.0.0.1",
+                                            "path": "/",
+                                            "interval": 6,
+                                            "timeout": 2,
+                                            "unhealthyThreshold": 2,
+                                            "pickHostNameFromBackendHttpSettings": false,
+                                            "minServers": 0,
+                                            "match": {}
+                                        }
+                                    },
+                                    {
+                                        "name": "dev-azure-hp-02",
+                                        "properties": {
+                                            "protocol": "Http",
+                                            "host": "127.0.0.1",
+                                            "path": "/health/1",
+                                            "interval": 6,
+                                            "timeout": 2,
+                                            "unhealthyThreshold": 2,
+                                            "pickHostNameFromBackendHttpSettings": false,
+                                            "minServers": 0,
+                                            "match": {}
+                                        }
+                                    }
+                                ],
+                                "httpListeners": [
+                                    {
+                                        "name": "appGatewayHttpListener",
+                                        "properties": {
+                                            "FrontendIPConfiguration": {
+                                                "Id": "[concat(resourceId('Microsoft.Network/applicationGateways', variables('App_Deployment').ApplicationGateway.applicationGatewayName),'/frontendIPConfigurations/appGatewayFrontendIP')]"
+                                            },
+                                            "FrontendPort": {
+                                                "Id": "[concat(resourceId('Microsoft.Network/applicationGateways', variables('App_Deployment').ApplicationGateway.applicationGatewayName),'/frontendPorts/appGatewayFrontendPort80')]"
+                                            },
+                                            "Protocol": "Http",
+                                            "SslCertificate": null,
+                                            "requireServerNameIndication": false
+                                        }
+                                    },
+                                    {
+                                        "name": "appGatewayHttpsListener",
+                                        "properties": {
+                                            "FrontendIPConfiguration": {
+                                                "Id": "[concat(resourceId('Microsoft.Network/applicationGateways', variables('App_Deployment').ApplicationGateway.applicationGatewayName),'/frontendIPConfigurations/appGatewayFrontendIP')]"
+                                            },
+                                            "FrontendPort": {
+                                                "Id": "[concat(resourceId('Microsoft.Network/applicationGateways', variables('App_Deployment').ApplicationGateway.applicationGatewayName),'/frontendPorts/appGatewayFrontendPort443')]"
+                                            },
+                                            "Protocol": "Http",
+                                            "SslCertificate": null,
+                                            "requireServerNameIndication": false
+                                        }
+                                    }
+                                ],
+                                "requestRoutingRules": [
+                                    {
+                                        "Name": "requestRoutingRules443",
+                                        "properties": {
+                                            "RuleType": "Basic",
+                                            "httpListener": {
+                                                "id": "[concat(resourceId('Microsoft.Network/applicationGateways', variables('App_Deployment').ApplicationGateway.applicationGatewayName),'/httpListeners/appGatewayHttpsListener')]"
+                                            },
+                                            "backendAddressPool": {
+                                                "id": "[concat(resourceId('Microsoft.Network/applicationGateways', variables('App_Deployment').ApplicationGateway.applicationGatewayName),'/backendAddressPools/appGatewayBackendPool')]"
+                                            },
+                                            "backendHttpSettings": {
+                                                "id": "[concat(resourceId('Microsoft.Network/applicationGateways', variables('App_Deployment').ApplicationGateway.applicationGatewayName),'/backendHttpSettingsCollection/appGatewayBackendHttpSettings-https')]"
+                                            }
+                                        }
+                                    },
+                                    {
+                                        "Name": "requestRoutingRules443",
+                                        "properties": {
+                                            "RuleType": "Basic",
+                                            "httpListener": {
+                                                "id": "[concat(resourceId('Microsoft.Network/applicationGateways', variables('App_Deployment').ApplicationGateway.applicationGatewayName),'/httpListeners/appGatewayHttpListener')]"
+                                            },
+                                            "backendAddressPool": {
+                                                "id": "[concat(resourceId('Microsoft.Network/applicationGateways', variables('App_Deployment').ApplicationGateway.applicationGatewayName),'/backendAddressPools/appGatewayBackendPool')]"
+                                            },
+                                            "backendHttpSettings": {
+                                                "id": "[concat(resourceId('Microsoft.Network/applicationGateways', variables('App_Deployment').ApplicationGateway.applicationGatewayName),'/backendHttpSettingsCollection/appGatewayBackendHttpSettings-http')]"
+                                            }
+                                        }
+                                    }
+                                ],
+                                "sslCertificates": [
+                                    {
+                                        "name": "[variables('App_Deployment').ApplicationGateway.sslCertificates.name]",
+                                        "properties":{
+                                            "publicCertData": "[variables('App_Deployment').ApplicationGateway.sslCertificates.publicCertData]"
+                                        }
+                                    }
+                                ]
+                            }
+                        },
+                        {
                             "name": "[variables('App_Deployment').AppLayer.AvailabilitySetName]",
                             "type": "Microsoft.Compute/availabilitySets",
                             "apiVersion": "2016-04-30-preview",
@@ -681,33 +895,12 @@
                             }
                         },
                         {
-                            "name": "[concat(variables('App_Deployment').publicIpAddressName, copyIndex())]",
-                            "type": "Microsoft.Network/publicIpAddresses",
-                            "apiVersion": "2017-08-01",
-                            "location": "[variables('location')]",
-                            "properties": {
-                                "publicIpAllocationMethod": "[variables('App_Deployment').publicIpAddressType]",
-                                "idleTimeoutInMinutes": 4,
-                                "dnsSettings": {
-                                    "domainNameLabel": "[concat(variables('App_Deployment').publicIpAddressName, uniqueString(resourceGroup().id), copyIndex())]"
-                                }
-                            },
-                            "sku": {
-                                "name": "Basic"
-                            },
-                            "copy": {
-                                "name": "publicip",
-                                "count": "[int(variables('App_Deployment').AppLayer.instanceCount)]",
-                                "mode": "parallel"
-                            }
-                        },
-                        {
                             "name": "[concat(variables('App_Deployment').AppLayer.networkInterfaceName, copyIndex())]",
                             "type": "Microsoft.Network/networkInterfaces",
                             "apiVersion": "2016-09-01",
                             "location": "[variables('location')]",
                             "dependsOn": [
-                                "[concat('Microsoft.Network/publicIpAddresses/', variables('App_Deployment').publicIpAddressName, copyIndex())]"
+                                "[resourceId('Microsoft.Network/applicationGateways', variables('App_Deployment').ApplicationGateway.applicationGatewayName)]"
                             ],
                             "properties": {
                                 "ipConfigurations": [
@@ -718,14 +911,18 @@
                                                 "id": "[variables('App_Deployment').AppLayer.subnetRef]"
                                             },
                                             "privateIPAllocationMethod": "Dynamic",
-                                            "publicIpAddress": {
-                                                "id": "[resourceId('Microsoft.Network/publicIpAddresses', concat(variables('App_Deployment').publicIpAddressName, copyIndex()))]"
-                                            }
+                                            "primary": true,
+                                            "privateIPAddressVersion": "IPv4",
+                                            "applicationGatewayBackendAddressPools": [
+                                                {
+                                                    "id": "[concat(resourceId('Microsoft.Network/applicationGateways', variables('App_Deployment').ApplicationGateway.applicationGatewayName), '/backendAddressPools/', variables('App_Deployment').ApplicationGateway.backendAddressPools.name)]"
+                                                }
+                                            ]
                                         }
                                     }
                                 ],
                                 "networkSecurityGroup": {
-                                    "id": "[resourceId('Microsoft.Network/networkSecurityGroups', variables('App_Deployment').AppLayer.NSG_App_Layer)]"
+                                    "id": "[resourceId('Microsoft.Network/networkSecurityGroups', variables('Networking_Deployment').NSG_App_Layer)]"
                                 }
                             },
                             "copy": {
@@ -787,121 +984,6 @@
                                 "name": "VMs",
                                 "count": "[int(variables('App_Deployment').AppLayer.instanceCount)]",
                                 "mode": "parallel"
-                            }
-                        },
-                        {
-                            "apiVersion": "2017-04-30-preview",
-                            "kind": "",
-                            "location": "[variables('location')]",
-                            "name": "[variables('App_Deployment').PostgresSQL.ServerName]",
-                            "properties": {
-                                "version": "[variables('App_Deployment').PostgresSQL.version]",
-                                "administratorLogin": "[variables('App_Deployment').PostgresSQL.administratorLogin]",
-                                "administratorLoginPassword": "[variables('App_Deployment').PostgresSQL.administratorLoginPassword]",
-                                "storageMB": "[variables('App_Deployment').PostgresSQL.storageMB]"
-                            },
-                            "sku": {
-                                "name": "[variables('App_Deployment').PostgresSQL.sku.skuName]",
-                                "tier": "[variables('App_Deployment').PostgresSQL.sku.skuTier]",
-                                "capacity": "[variables('App_Deployment').PostgresSQL.sku.skuCapacityDTU]",
-                                "size": "[variables('App_Deployment').PostgresSQL.storageMB]",
-                                "family": "[variables('App_Deployment').PostgresSQL.sku.skuFamily]"
-                            },
-                            "type": "Microsoft.DBforPostgreSQL/servers"
-                        },
-                        {
-                            "name": "[variables('App_Deployment').applicationGatewayName]",
-                            "type": "Microsoft.Network/applicationGateways",
-                            "apiVersion": "2017-10-01",
-                            "location": "[variables('location')]",
-                            "dependsOn": [
-                                "[concat('Microsoft.Network/publicIPAddresses/', variables('publicIpAddressName'))]"
-                            ],
-                            "properties": {
-                                "sku": {
-                                    "name": "[variables('skuSize')]",
-                                    "tier": "[variables('tier')]",
-                                    "capacity": "[variables('capacity')]"
-                                },
-                                "gatewayIPConfigurations": [
-                                    {
-                                        "name": "appGatewayIpConfig",
-                                        "properties": {
-                                            "subnet": {
-                                                "id": "[variables('subnetRef')]"
-                                            }
-                                        }
-                                    }
-                                ],
-                                "frontendIPConfigurations": [
-                                    {
-                                        "name": "appGatewayFrontendIP",
-                                        "properties": {
-                                            "PublicIPAddress": {
-                                                "id": "[variables('publicIPRef')]"
-                                            }
-                                        }
-                                    }
-                                ],
-                                "frontendPorts": [
-                                    {
-                                        "name": "appGatewayFrontendPort",
-                                        "properties": {
-                                            "Port": 80
-                                        }
-                                    }
-                                ],
-                                "backendAddressPools": [
-                                    {
-                                        "name": "appGatewayBackendPool",
-                                        "properties": {
-                                            "BackendAddresses": []
-                                        }
-                                    }
-                                ],
-                                "backendHttpSettingsCollection": [
-                                    {
-                                        "name": "appGatewayBackendHttpSettings",
-                                        "properties": {
-                                            "Port": 80,
-                                            "Protocol": "Http",
-                                            "CookieBasedAffinity": "Disabled"
-                                        }
-                                    }
-                                ],
-                                "httpListeners": [
-                                    {
-                                        "name": "appGatewayHttpListener",
-                                        "properties": {
-                                            "FrontendIPConfiguration": {
-                                                "Id": "[concat(variables('applicationGatewayID'), '/frontendIPConfigurations/appGatewayFrontendIP')]"
-                                            },
-                                            "FrontendPort": {
-                                                "Id": "[concat(variables('applicationGatewayID'), '/frontendPorts/appGatewayFrontendPort')]"
-                                            },
-                                            "Protocol": "Http",
-                                            "SslCertificate": null
-                                        }
-                                    }
-                                ],
-                                "requestRoutingRules": [
-                                    {
-                                        "Name": "rule1",
-                                        "properties": {
-                                            "RuleType": "Basic",
-                                            "httpListener": {
-                                                "id": "[concat(variables('applicationGatewayID'), '/httpListeners/appGatewayHttpListener')]"
-                                            },
-                                            "backendAddressPool": {
-                                                "id": "[concat(variables('applicationGatewayID'), '/backendAddressPools/appGatewayBackendPool')]"
-                                            },
-                                            "backendHttpSettings": {
-                                                "id": "[concat(variables('applicationGatewayID'), '/backendHttpSettingsCollection/appGatewayBackendHttpSettings')]"
-                                            }
-                                        }
-                                    }
-                                ],
-                                "sslCertificates": []
                             }
                         }
 					]
