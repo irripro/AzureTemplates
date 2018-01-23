@@ -39,7 +39,7 @@
             "NSG_DMZ_Layer": "dev-azure-nsg-dmz",
             "NSG_PUB_Layer": "dev-azure-nsg-pub"
         },
-        "App_Deployment":{
+        "App_Deployment": {
 			"toDeploy": "true",
 			"deploymentName": "[concat('App', '-', 'Deployment')]",
             "adminUsername": "c3e-user",
