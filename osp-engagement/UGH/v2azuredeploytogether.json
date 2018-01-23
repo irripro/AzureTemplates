@@ -20,7 +20,8 @@
 	"variables": {
 		"nestedTemplates": {
 			"Networking_Deployment": "[concat(parameters('_artifactsLocation'), '/Networking/v2networkingAzureDeploy.json', parameters('_artifactsLocationSasToken'))]",
-			"App_Deployment": "[concat(parameters('_artifactsLocation'), '/VMs/v2vmsazuredeploy.json', parameters('_artifactsLocationSasToken'))]"
+            "App_Deployment": "[concat(parameters('_artifactsLocation'), '/VMs/v2vmsazuredeploy.json', parameters('_artifactsLocationSasToken'))]",
+            "AppG_Deployment": "[concat(parameters('_artifactsLocation'), '/ApplicationGateway/v2agazuredeploy.json', parameters('_artifactsLocationSasToken'))]"
         },
         "location": "[resourceGroup().location]",
         "Networking_Deployment": {
@@ -146,7 +147,32 @@
                     }
 				}
 			}
-		}        
+		}, 
+        {
+            "condition": "[equals(variables('App_Deployment').toDeploy,'true')]",
+            "apiVersion": "2017-05-10",
+            "name": "[concat(variables('App_Deployment').deploymentName, '-AppG')]",
+            "type": "Microsoft.Resources/deployments",
+            "resourceGroup": "[resourceGroup().name]",
+            "dependsOn": [
+                "[concat('Microsoft.Resources/deployments', variables('App_Deployment').deploymentName)]"
+            ],
+			"properties": {
+				"mode": "Incremental",
+				"templateLink": {
+					"uri": "[variables('nestedTemplates').AppG_Deployment]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"Networking_Deployment": {
+						"value": "[variables('Networking_Deployment')]"
+                    },
+                    "App_Deployment": {
+						"value": "[variables('App_Deployment')]"
+                    }
+				}
+			}
+		}         
 	],
 	"outputs": {}
 }
