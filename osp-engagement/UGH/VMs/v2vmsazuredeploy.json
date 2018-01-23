@@ -182,7 +182,7 @@
                                 "Id": "[concat(resourceId('Microsoft.Network/applicationGateways', parameters('App_Deployment').ApplicationGateway.applicationGatewayName),'/frontendPorts/appGatewayFrontendPort80')]"
                             },
                             "Protocol": "Http",
-                            "SslCertificate": null,
+                            "sslCertificate": null,
                             "requireServerNameIndication": false
                         }
                     },
@@ -232,8 +232,7 @@
                             }
                         }
                     }
-                ],
-                "sslCertificates": {}
+                ]
             }
         },
         {
