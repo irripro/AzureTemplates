@@ -155,7 +155,7 @@
             "type": "Microsoft.Resources/deployments",
             "resourceGroup": "[resourceGroup().name]",
             "dependsOn": [
-                "[concat('Microsoft.Resources/deployments', variables('App_Deployment').deploymentName)]"
+                "[concat('Microsoft.Resources/deployments/', variables('App_Deployment').deploymentName)]"
             ],
 			"properties": {
 				"mode": "Incremental",
