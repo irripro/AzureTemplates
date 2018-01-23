@@ -90,7 +90,6 @@
             "dependsOn": [
                 "[concat('Microsoft.Network/publicIPAddresses/', parameters('App_Deployment').ApplicationGateway.publicIpAddressName)]",
                 ["NetworkInterface"]
-
             ],
             "properties": {
                 "sku": "[parameters('App_Deployment').ApplicationGateway.sku]",
