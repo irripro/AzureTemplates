@@ -59,7 +59,8 @@
             "apiVersion": "2017-10-01",
             "location": "[parameters('App_Deployment').location]",
             "dependsOn": [
-                "[concat('Microsoft.Network/publicIPAddresses/', parameters('App_Deployment').ApplicationGateway.publicIpAddressName)]"
+                "[concat('Microsoft.Network/publicIPAddresses/', parameters('App_Deployment').ApplicationGateway.publicIpAddressName)]",
+                "[resourceID('Microsoft.Network/networkInterfaces', concat(parameters('App_Deployment').AppLayer.networkInterfaceName, copyIndex()))]"
             ],
             "properties": {
                 "sku": "[parameters('App_Deployment').ApplicationGateway.sku]",
@@ -101,6 +102,11 @@
                     {
                         "name": "appGatewayBackendPool",
                         "properties": {
+                            "backendIPConfigurations": [
+                                {
+                                    "id": "[concat(resourceId('Microsoft.Network/networkInterfaces', concat(parameters('App_Deployment').AppLayer.networkInterfaceName, copyIndex())), '/ipConfigurations/ipconfig1')]"
+                                }
+                            ],
                             "BackendAddresses": []
                         }
                     }
