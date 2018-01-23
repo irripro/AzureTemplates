@@ -58,7 +58,7 @@
                 "availabilitySetPlatformFaultDomainCount": "3",
                 "availabilitySetPlatformUpdateDomainCount": "5",
                 "NSG_App_Layer": "dev-azure-nsg-app",
-                "subnetRef": "[resourceId('Microsoft.Network/virtualNetworks/subnets', variables('Networking_Deployment').virtualNetworkName, variables('Networking_Deployment').SubnetName)]",
+                "subnetRef": "[concat(resourceId('Microsoft.Network/virtualNetworks/subnets', variables('Networking_Deployment').virtualNetworkName, variables('Networking_Deployment').SubnetName),'app')]",
                 "virtualMachineName": "dev-azure-app-m-01",
                 "virtualMachineSize": "Standard_D2s_v3",
                 "instanceCount": "4"
