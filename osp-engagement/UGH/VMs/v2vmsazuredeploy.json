@@ -107,7 +107,7 @@
                                         "name": "backipconfig",
                                         "count": "[int(parameters('App_Deployment').AppLayer.instanceCount)]",
                                         "input": {
-                                            "id": "[concat('Microsoft.Network/networkInterfaces', parameters('App_Deployment').AppLayer.networkInterfaceName, copyIndex(backipconfig), '/ipConfigurations/ipconfig1')]"
+                                            "id": "[concat('Microsoft.Network/networkInterfaces', parameters('App_Deployment').AppLayer.networkInterfaceName, copyIndex('backipconfig'), '/ipConfigurations/ipconfig1')]"
                                         }
                                     }]
                                 }
