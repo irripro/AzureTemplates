@@ -25,13 +25,16 @@ There are 3 templates in this directory.
             export rgName="ugh"
             export rgLocation="eastus"
             ```
-        2. Create a resource Group
+        3. Create a resource Group
             ```bash
             az group create -l $rgLocation -n $rgName
             ```
-        3. Create a deployment to deploy the nested template
+        4. Create a deployment to deploy the nested template
             ```bash
             az group deployment create --name MasterDeployment --resource-group $rgName --template-file ./v2azuredeploytogether.json --no-wait
             ```
-
+        5. To Delete the resource group
+            ```bash
+            az group delete -n $rgName -y --no-wait
+            ```
 
