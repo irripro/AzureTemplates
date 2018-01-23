@@ -45,7 +45,7 @@
             "location": "[variables('location')]"
         },
         "App_Deployment": {
-            "toDeploy": "false",
+            "toDeploy": "true",
             "location": "[variables('location')]",
 			"deploymentName": "[concat('App', '-', 'Deployment')]",
             "adminUsername": "c3e-user",
