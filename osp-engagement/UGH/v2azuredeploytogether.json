@@ -24,7 +24,7 @@
         },
         "location": "[resourceGroup().location]",
         "Networking_Deployment": {
-			"toDeploy": "false",
+			"toDeploy": "true",
 			"deploymentName": "[concat('Networking', '-', 'Deployment')]",
             "virtualNetworkName": "dev-azure-vnet-01",
             "addressPrefix": "10.0.0.0/16",
