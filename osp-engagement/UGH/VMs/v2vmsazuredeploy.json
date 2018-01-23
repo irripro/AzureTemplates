@@ -89,7 +89,7 @@
             "location": "[parameters('App_Deployment').location]",
             "dependsOn": [
                 "[concat('Microsoft.Network/publicIPAddresses/', parameters('App_Deployment').ApplicationGateway.publicIpAddressName)]",
-                "[concat('Microsoft.Network/networkInterfaces/', parameters('App_Deployment').AppLayer.networkInterfaceName, copyIndex('NetworkInterface'))]"
+                ["NetworkInterface"]
 
             ],
             "properties": {
