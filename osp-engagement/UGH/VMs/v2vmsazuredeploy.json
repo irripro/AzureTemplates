@@ -196,9 +196,7 @@
                                 "Id": "[concat(resourceId('Microsoft.Network/applicationGateways', parameters('App_Deployment').ApplicationGateway.applicationGatewayName),'/frontendPorts/appGatewayFrontendPort443')]"
                             },
                             "Protocol": "Https",
-                            "sslCertificate": {
-                                "id": "[concat(resourceId('Microsoft.Network/applicationGateways', parameters('App_Deployment').ApplicationGateway.applicationGatewayName),'/sslCertificates/', parameters('App_Deployment').ApplicationGateway.sslCertificates.name)]"
-                            },
+                            "sslCertificate": null,
                             "requireServerNameIndication": false
                         }
                     }
@@ -235,14 +233,7 @@
                         }
                     }
                 ],
-                "sslCertificates": [
-                    {
-                        "name": "[parameters('App_Deployment').ApplicationGateway.sslCertificates.name]",
-                        "properties":{
-                            "data": "[parameters('App_Deployment').ApplicationGateway.sslCertificates.data]"
-                        }
-                    }
-                ]
+                "sslCertificates": {}
             }
         },
         {
