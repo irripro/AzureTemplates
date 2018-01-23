@@ -218,7 +218,7 @@
                         }
                     },
                     {
-                        "Name": "requestRoutingRules443",
+                        "Name": "requestRoutingRules80",
                         "properties": {
                             "RuleType": "Basic",
                             "httpListener": {
