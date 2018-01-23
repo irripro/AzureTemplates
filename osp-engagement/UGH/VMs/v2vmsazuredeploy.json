@@ -59,8 +59,7 @@
             "apiVersion": "2017-10-01",
             "location": "[parameters('App_Deployment').location]",
             "dependsOn": [
-                "[concat('Microsoft.Network/publicIPAddresses/', parameters('App_Deployment').ApplicationGateway.publicIpAddressName)]",
-                ["NetworkInterface"]
+                "[concat('Microsoft.Network/publicIPAddresses/', parameters('App_Deployment').ApplicationGateway.publicIpAddressName)]"
             ],
             "properties": {
                 "sku": "[parameters('App_Deployment').ApplicationGateway.sku]",
@@ -108,7 +107,7 @@
                                         "name": "backipconfig",
                                         "count": "[int(parameters('App_Deployment').AppLayer.instanceCount)]",
                                         "input": {
-                                            "id": "[concat(resourceId('Microsoft.Network/networkInterfaces', parameters('App_Deployment').AppLayer.networkInterfaceName), copyIndex(backipconfig), '/ipConfigurations/ipconfig1')]"
+                                            "id": "[concat('Microsoft.Network/networkInterfaces', parameters('App_Deployment').AppLayer.networkInterfaceName, copyIndex(backipconfig), '/ipConfigurations/ipconfig1')]"
                                         }
                                     }]
                                 }
