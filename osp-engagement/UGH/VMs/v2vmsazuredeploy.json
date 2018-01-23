@@ -239,7 +239,7 @@
                     {
                         "name": "[parameters('App_Deployment').ApplicationGateway.sslCertificates.name]",
                         "properties":{
-                            "publicCertData": "[parameters('App_Deployment').ApplicationGateway.sslCertificates.publicCertData]"
+                            "data": "[parameters('App_Deployment').ApplicationGateway.sslCertificates.data]"
                         }
                     }
                 ]
