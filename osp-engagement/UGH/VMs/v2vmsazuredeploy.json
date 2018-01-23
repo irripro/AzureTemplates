@@ -54,12 +54,43 @@
             }
         },
         {
+            "name": "[concat(parameters('App_Deployment').AppLayer.networkInterfaceName, copyIndex())]",
+            "type": "Microsoft.Network/networkInterfaces",
+            "apiVersion": "2016-09-01",
+            "location": "[parameters('App_Deployment').location]",
+            "properties": {
+                "ipConfigurations": [
+                    {
+                        "name": "ipconfig1",
+                        "properties": {
+                            "subnet": {
+                                "id": "[parameters('App_Deployment').AppLayer.subnetRef]"
+                            },
+                            "privateIPAllocationMethod": "Dynamic",
+                            "primary": true,
+                            "privateIPAddressVersion": "IPv4"
+                        }
+                    }
+                ],
+                "networkSecurityGroup": {
+                    "id": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('Networking_Deployment').NSG_App_Layer)]"
+                }
+            },
+            "copy": {
+                "name": "NetworkInterface",
+                "count": "[int(parameters('App_Deployment').AppLayer.instanceCount)]",
+                "mode": "parallel"
+            }
+        },
+        {
             "name": "[parameters('App_Deployment').ApplicationGateway.applicationGatewayName]",
             "type": "Microsoft.Network/applicationGateways",
             "apiVersion": "2017-10-01",
             "location": "[parameters('App_Deployment').location]",
             "dependsOn": [
-                "[concat('Microsoft.Network/publicIPAddresses/', parameters('App_Deployment').ApplicationGateway.publicIpAddressName)]"
+                "[concat('Microsoft.Network/publicIPAddresses/', parameters('App_Deployment').ApplicationGateway.publicIpAddressName)]",
+                "[concat('Microsoft.Network/networkInterfaces/', parameters('App_Deployment').AppLayer.networkInterfaceName, copyIndex('NetworkInterface'))]"
+
             ],
             "properties": {
                 "sku": "[parameters('App_Deployment').ApplicationGateway.sku]",
@@ -226,43 +257,6 @@
                 "platformFaultDomainCount": "[parameters('App_Deployment').AppLayer.availabilitySetPlatformFaultDomainCount]",
                 "platformUpdateDomainCount": "[parameters('App_Deployment').AppLayer.availabilitySetPlatformUpdateDomainCount]",
                 "managed": true
-            }
-        },
-        {
-            "name": "[concat(parameters('App_Deployment').AppLayer.networkInterfaceName, copyIndex())]",
-            "type": "Microsoft.Network/networkInterfaces",
-            "apiVersion": "2016-09-01",
-            "location": "[parameters('App_Deployment').location]",
-            "dependsOn": [
-                "[resourceId('Microsoft.Network/applicationGateways', parameters('App_Deployment').ApplicationGateway.applicationGatewayName)]"
-            ],
-            "properties": {
-                "ipConfigurations": [
-                    {
-                        "name": "ipconfig1",
-                        "properties": {
-                            "subnet": {
-                                "id": "[parameters('App_Deployment').AppLayer.subnetRef]"
-                            },
-                            "privateIPAllocationMethod": "Dynamic",
-                            "primary": true,
-                            "privateIPAddressVersion": "IPv4",
-                            "applicationGatewayBackendAddressPools": [
-                                {
-                                    "id": "[concat(resourceId('Microsoft.Network/applicationGateways', parameters('App_Deployment').ApplicationGateway.applicationGatewayName), '/backendAddressPools/appGatewayBackendPool')]"
-                                }
-                            ]
-                        }
-                    }
-                ],
-                "networkSecurityGroup": {
-                    "id": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('Networking_Deployment').NSG_App_Layer)]"
-                }
-            },
-            "copy": {
-                "name": "NetworkInterface",
-                "count": "[int(parameters('App_Deployment').AppLayer.instanceCount)]",
-                "mode": "parallel"
             }
         },
         {
