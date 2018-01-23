@@ -185,38 +185,9 @@
                             "sslCertificate": null,
                             "requireServerNameIndication": false
                         }
-                    },
-                    {
-                        "name": "appGatewayHttpsListener",
-                        "properties": {
-                            "FrontendIPConfiguration": {
-                                "Id": "[concat(resourceId('Microsoft.Network/applicationGateways', parameters('App_Deployment').ApplicationGateway.applicationGatewayName),'/frontendIPConfigurations/appGatewayFrontendIP')]"
-                            },
-                            "FrontendPort": {
-                                "Id": "[concat(resourceId('Microsoft.Network/applicationGateways', parameters('App_Deployment').ApplicationGateway.applicationGatewayName),'/frontendPorts/appGatewayFrontendPort443')]"
-                            },
-                            "Protocol": "Http",
-                            "sslCertificate": null,
-                            "requireServerNameIndication": false
-                        }
                     }
                 ],
                 "requestRoutingRules": [
-                    {
-                        "Name": "requestRoutingRules443",
-                        "properties": {
-                            "RuleType": "Basic",
-                            "httpListener": {
-                                "id": "[concat(resourceId('Microsoft.Network/applicationGateways', parameters('App_Deployment').ApplicationGateway.applicationGatewayName),'/httpListeners/appGatewayHttpsListener')]"
-                            },
-                            "backendAddressPool": {
-                                "id": "[concat(resourceId('Microsoft.Network/applicationGateways', parameters('App_Deployment').ApplicationGateway.applicationGatewayName),'/backendAddressPools/appGatewayBackendPool')]"
-                            },
-                            "backendHttpSettings": {
-                                "id": "[concat(resourceId('Microsoft.Network/applicationGateways', parameters('App_Deployment').ApplicationGateway.applicationGatewayName),'/backendHttpSettingsCollection/appGatewayBackendHttpSettings-https')]"
-                            }
-                        }
-                    },
                     {
                         "Name": "requestRoutingRules80",
                         "properties": {
