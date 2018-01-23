@@ -151,7 +151,7 @@
         {
             "condition": "[equals(variables('App_Deployment').toDeploy,'true')]",
             "apiVersion": "2017-05-10",
-            "name": "[concat(variables('App_Deployment').deploymentName, '-AppG')]",
+            "name": "[concat(variables('App_Deployment').deploymentName, 'AppG')]",
             "type": "Microsoft.Resources/deployments",
             "resourceGroup": "[resourceGroup().name]",
             "dependsOn": [
