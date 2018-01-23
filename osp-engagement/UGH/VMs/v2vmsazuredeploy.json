@@ -195,8 +195,10 @@
                             "FrontendPort": {
                                 "Id": "[concat(resourceId('Microsoft.Network/applicationGateways', parameters('App_Deployment').ApplicationGateway.applicationGatewayName),'/frontendPorts/appGatewayFrontendPort443')]"
                             },
-                            "Protocol": "Http",
-                            "SslCertificate": null,
+                            "Protocol": "Https",
+                            "sslCertificate": {
+                                "id": "[concat(resourceId('Microsoft.Network/applicationGateways', parameters('App_Deployment').ApplicationGateway.applicationGatewayName),'/sslCertificates/', parameters('App_Deployment').ApplicationGateway.sslCertificates.name)]"
+                            },
                             "requireServerNameIndication": false
                         }
                     }
