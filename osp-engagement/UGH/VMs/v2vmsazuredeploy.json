@@ -1,0 +1,351 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2014-04-01-preview/deploymentTemplate.json",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"App_Deployment": {
+			"type": "object",
+			"metadata": {
+				"description": "Set of Variables that are set in the master template and passed to this template."
+			}
+        },
+        "Networking_Deployment": {
+			"type": "object",
+			"metadata": {
+				"description": "Set of Variables that are set in the master template and passed to this template."
+			}
+		}
+	},
+	"resources": [
+        {
+            "apiVersion": "2017-04-30-preview",
+            "kind": "",
+            "location": "[parameters('App_Deployment').location]",
+            "name": "[parameters('App_Deployment').PostgresSQL.ServerName]",
+            "properties": {
+                "version": "[parameters('App_Deployment').PostgresSQL.version]",
+                "administratorLogin": "[parameters('App_Deployment').PostgresSQL.administratorLogin]",
+                "administratorLoginPassword": "[parameters('App_Deployment').PostgresSQL.administratorLoginPassword]",
+                "storageMB": "[parameters('App_Deployment').PostgresSQL.storageMB]"
+            },
+            "sku": {
+                "name": "[parameters('App_Deployment').PostgresSQL.sku.skuName]",
+                "tier": "[parameters('App_Deployment').PostgresSQL.sku.skuTier]",
+                "capacity": "[parameters('App_Deployment').PostgresSQL.sku.skuCapacityDTU]",
+                "size": "[parameters('App_Deployment').PostgresSQL.storageMB]",
+                "family": "[parameters('App_Deployment').PostgresSQL.sku.skuFamily]"
+            },
+            "type": "Microsoft.DBforPostgreSQL/servers"
+        },
+        {
+            "comments": "This is the Public IP for Application Gateway",
+            "name": "[concat(parameters('App_Deployment').ApplicationGateway.publicIpAddressName)]",
+            "type": "Microsoft.Network/publicIpAddresses",
+            "apiVersion": "2017-08-01",
+            "location": "[parameters('App_Deployment').location]",
+            "properties": {
+                "publicIpAllocationMethod": "[parameters('App_Deployment').ApplicationGateway.publicIpAddressType]",
+                "idleTimeoutInMinutes": 4,
+                "dnsSettings": {
+                    "domainNameLabel": "[concat(parameters('App_Deployment').ApplicationGateway.publicIpAddressName, uniqueString(resourceGroup().id))]"
+                }
+            },
+            "sku": {
+                "name": "Basic"
+            }
+        },
+        {
+            "name": "[parameters('App_Deployment').ApplicationGateway.applicationGatewayName]",
+            "type": "Microsoft.Network/applicationGateways",
+            "apiVersion": "2017-10-01",
+            "location": "[parameters('App_Deployment').location]",
+            "dependsOn": [
+                "[concat('Microsoft.Network/publicIPAddresses/', parameters('App_Deployment').ApplicationGateway.publicIpAddressName)]"
+            ],
+            "properties": {
+                "sku": "[parameters('App_Deployment').ApplicationGateway.sku]",
+                "gatewayIPConfigurations": [
+                    {
+                        "name": "appGatewayIpConfig",
+                        "properties": {
+                            "subnet": {
+                                "id": "[parameters('App_Deployment').AppLayer.subnetRef]"
+                            }
+                        }
+                    }
+                ],
+                "frontendIPConfigurations": [
+                    {
+                        "name": "appGatewayFrontendIP",
+                        "properties": {
+                            "PublicIPAddress": {
+                                "id": "[resourceID('Microsoft.Network/publicIPAddresses', parameters('App_Deployment').ApplicationGateway.publicIpAddressName)]"
+                            }
+                        }
+                    }
+                ],
+                "frontendPorts": [
+                    {
+                        "name": "appGatewayFrontendPort80",
+                        "properties": {
+                            "Port": 80
+                        }
+                    },
+                    {
+                        "name": "appGatewayFrontendPort443",
+                        "properties": {
+                            "Port": 443
+                        }
+                    }
+                ],
+                "backendAddressPools": [
+                    {
+                        "name": "appGatewayBackendPool",
+                        "properties": {
+                            "BackendAddresses": []
+                        }
+                    }
+                ],
+                "backendHttpSettingsCollection": [
+                    {
+                        "name": "appGatewayBackendHttpSettings-https",
+                        "properties": {
+                            "Port": 8080,
+                            "Protocol": "Http",
+                            "CookieBasedAffinity": "Disabled",
+                            "connectionDraining": {
+                                "enabled": false,
+                                "drainTimeoutInSec": 1
+                            },
+                            "pickHostNameFromBackendAddress": false,
+                            "requestTimeout": 3600,
+                            "probe": {
+                                "id": "[concat(resourceId('Microsoft.Network/applicationGateways', parameters('App_Deployment').ApplicationGateway.applicationGatewayName),'/probes/dev-azure-hp-01')]" 
+                            }
+                        }
+                    },
+                    {
+                        "name": "appGatewayBackendHttpSettings-http",
+                        "properties": {
+                            "Port": 8088,
+                            "Protocol": "Http",
+                            "CookieBasedAffinity": "Disabled",
+                            "connectionDraining": {
+                                "enabled": false,
+                                "drainTimeoutInSec": 1
+                            },
+                            "pickHostNameFromBackendAddress": false,
+                            "requestTimeout": 30,
+                            "probe": {
+                                "id": "[concat(resourceId('Microsoft.Network/applicationGateways', parameters('App_Deployment').ApplicationGateway.applicationGatewayName),'/probes/dev-azure-hp-02')]" 
+                            }
+                        }
+                    }
+                ],
+                "probes": [
+                    {
+                        "name": "dev-azure-hp-01",
+                        "properties": {
+                            "protocol": "Http",
+                            "host": "127.0.0.1",
+                            "path": "/",
+                            "interval": 6,
+                            "timeout": 2,
+                            "unhealthyThreshold": 2,
+                            "pickHostNameFromBackendHttpSettings": false,
+                            "minServers": 0,
+                            "match": {}
+                        }
+                    },
+                    {
+                        "name": "dev-azure-hp-02",
+                        "properties": {
+                            "protocol": "Http",
+                            "host": "127.0.0.1",
+                            "path": "/health/1",
+                            "interval": 6,
+                            "timeout": 2,
+                            "unhealthyThreshold": 2,
+                            "pickHostNameFromBackendHttpSettings": false,
+                            "minServers": 0,
+                            "match": {}
+                        }
+                    }
+                ],
+                "httpListeners": [
+                    {
+                        "name": "appGatewayHttpListener",
+                        "properties": {
+                            "FrontendIPConfiguration": {
+                                "Id": "[concat(resourceId('Microsoft.Network/applicationGateways', parameters('App_Deployment').ApplicationGateway.applicationGatewayName),'/frontendIPConfigurations/appGatewayFrontendIP')]"
+                            },
+                            "FrontendPort": {
+                                "Id": "[concat(resourceId('Microsoft.Network/applicationGateways', parameters('App_Deployment').ApplicationGateway.applicationGatewayName),'/frontendPorts/appGatewayFrontendPort80')]"
+                            },
+                            "Protocol": "Http",
+                            "SslCertificate": null,
+                            "requireServerNameIndication": false
+                        }
+                    },
+                    {
+                        "name": "appGatewayHttpsListener",
+                        "properties": {
+                            "FrontendIPConfiguration": {
+                                "Id": "[concat(resourceId('Microsoft.Network/applicationGateways', parameters('App_Deployment').ApplicationGateway.applicationGatewayName),'/frontendIPConfigurations/appGatewayFrontendIP')]"
+                            },
+                            "FrontendPort": {
+                                "Id": "[concat(resourceId('Microsoft.Network/applicationGateways', parameters('App_Deployment').ApplicationGateway.applicationGatewayName),'/frontendPorts/appGatewayFrontendPort443')]"
+                            },
+                            "Protocol": "Http",
+                            "SslCertificate": null,
+                            "requireServerNameIndication": false
+                        }
+                    }
+                ],
+                "requestRoutingRules": [
+                    {
+                        "Name": "requestRoutingRules443",
+                        "properties": {
+                            "RuleType": "Basic",
+                            "httpListener": {
+                                "id": "[concat(resourceId('Microsoft.Network/applicationGateways', parameters('App_Deployment').ApplicationGateway.applicationGatewayName),'/httpListeners/appGatewayHttpsListener')]"
+                            },
+                            "backendAddressPool": {
+                                "id": "[concat(resourceId('Microsoft.Network/applicationGateways', parameters('App_Deployment').ApplicationGateway.applicationGatewayName),'/backendAddressPools/appGatewayBackendPool')]"
+                            },
+                            "backendHttpSettings": {
+                                "id": "[concat(resourceId('Microsoft.Network/applicationGateways', parameters('App_Deployment').ApplicationGateway.applicationGatewayName),'/backendHttpSettingsCollection/appGatewayBackendHttpSettings-https')]"
+                            }
+                        }
+                    },
+                    {
+                        "Name": "requestRoutingRules443",
+                        "properties": {
+                            "RuleType": "Basic",
+                            "httpListener": {
+                                "id": "[concat(resourceId('Microsoft.Network/applicationGateways', parameters('App_Deployment').ApplicationGateway.applicationGatewayName),'/httpListeners/appGatewayHttpListener')]"
+                            },
+                            "backendAddressPool": {
+                                "id": "[concat(resourceId('Microsoft.Network/applicationGateways', parameters('App_Deployment').ApplicationGateway.applicationGatewayName),'/backendAddressPools/appGatewayBackendPool')]"
+                            },
+                            "backendHttpSettings": {
+                                "id": "[concat(resourceId('Microsoft.Network/applicationGateways', parameters('App_Deployment').ApplicationGateway.applicationGatewayName),'/backendHttpSettingsCollection/appGatewayBackendHttpSettings-http')]"
+                            }
+                        }
+                    }
+                ],
+                "sslCertificates": [
+                    {
+                        "name": "[parameters('App_Deployment').ApplicationGateway.sslCertificates.name]",
+                        "properties":{
+                            "publicCertData": "[parameters('App_Deployment').ApplicationGateway.sslCertificates.publicCertData]"
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "name": "[parameters('App_Deployment').AppLayer.AvailabilitySetName]",
+            "type": "Microsoft.Compute/availabilitySets",
+            "apiVersion": "2016-04-30-preview",
+            "location": "[parameters('App_Deployment').location]",
+            "properties": {
+                "platformFaultDomainCount": "[parameters('App_Deployment').AppLayer.availabilitySetPlatformFaultDomainCount]",
+                "platformUpdateDomainCount": "[parameters('App_Deployment').AppLayer.availabilitySetPlatformUpdateDomainCount]",
+                "managed": true
+            }
+        },
+        {
+            "name": "[concat(parameters('App_Deployment').AppLayer.networkInterfaceName, copyIndex())]",
+            "type": "Microsoft.Network/networkInterfaces",
+            "apiVersion": "2016-09-01",
+            "location": "[parameters('App_Deployment').location]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/applicationGateways', parameters('App_Deployment').ApplicationGateway.applicationGatewayName)]"
+            ],
+            "properties": {
+                "ipConfigurations": [
+                    {
+                        "name": "ipconfig1",
+                        "properties": {
+                            "subnet": {
+                                "id": "[parameters('App_Deployment').AppLayer.subnetRef]"
+                            },
+                            "privateIPAllocationMethod": "Dynamic",
+                            "primary": true,
+                            "privateIPAddressVersion": "IPv4",
+                            "applicationGatewayBackendAddressPools": [
+                                {
+                                    "id": "[concat(resourceId('Microsoft.Network/applicationGateways', parameters('App_Deployment').ApplicationGateway.applicationGatewayName), '/backendAddressPools/', variables('App_Deployment').ApplicationGateway.backendAddressPools.name)]"
+                                }
+                            ]
+                        }
+                    }
+                ],
+                "networkSecurityGroup": {
+                    "id": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('Networking_Deployment').NSG_App_Layer)]"
+                }
+            },
+            "copy": {
+                "name": "NetworkInterface",
+                "count": "[int(parameters('App_Deployment').AppLayer.instanceCount)]",
+                "mode": "parallel"
+            }
+        },
+        {
+            "name": "[concat(parameters('App_Deployment').AppLayer.virtualMachineName, copyIndex())]",
+            "type": "Microsoft.Compute/virtualMachines",
+            "apiVersion": "2016-04-30-preview",
+            "location": "[parameters('App_Deployment').location]",
+            "dependsOn": [
+                "[concat('Microsoft.Network/networkInterfaces/', parameters('App_Deployment').AppLayer.networkInterfaceName, copyIndex())]",
+                "[concat('Microsoft.Compute/availabilitySets/', parameters('App_Deployment').AppLayer.AvailabilitySetName)]"
+            ],
+            "properties": {
+                "osProfile": {
+                    "computerName": "[concat(parameters('App_Deployment').AppLayer.virtualMachineName, copyIndex())]",
+                    "adminUsername": "[parameters('App_Deployment').adminUsername]",
+                    "linuxConfiguration": {
+                        "disablePasswordAuthentication": "true",
+                        "ssh": {
+                            "publicKeys": [
+                                {
+                                    "path": "[concat('/home/', parameters('App_Deployment').adminUsername, '/.ssh/authorized_keys')]",
+                                    "keyData": "[parameters('App_Deployment').adminPublicKey]"
+                                }
+                            ]
+                        }
+                    }
+                },
+                "hardwareProfile": {
+                    "vmSize": "[parameters('App_Deployment').AppLayer.virtualMachineSize]"
+                },
+                "storageProfile": {
+                    "imageReference": "[parameters('App_Deployment').image]",
+                    "osDisk": {
+                        "createOption": "fromImage",
+                        "managedDisk": {
+                            "storageAccountType": "Premium_LRS"
+                        }
+                    },
+                    "dataDisks": []
+                },
+                "networkProfile": {
+                    "networkInterfaces": [
+                        {
+                            "id": "[resourceId('Microsoft.Network/networkInterfaces', concat(parameters('App_Deployment').AppLayer.networkInterfaceName, copyIndex()))]"
+                        }
+                    ]
+                },
+                "availabilitySet": {
+                    "id": "[resourceId('Microsoft.Compute/availabilitySets', parameters('App_Deployment').AppLayer.AvailabilitySetName)]"
+                }
+            },
+            "copy": {
+                "name": "VMs",
+                "count": "[int(parameters('App_Deployment').AppLayer.instanceCount)]",
+                "mode": "parallel"
+            }
+        }
+    ],
+	"outputs": {}
+}

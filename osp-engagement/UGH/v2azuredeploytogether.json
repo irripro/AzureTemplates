@@ -128,6 +128,9 @@
             "name": "[variables('App_Deployment').deploymentName]",
             "type": "Microsoft.Resources/deployments",
             "resourceGroup": "[resourceGroup().name]",
+            "dependsOn": [
+                "[resourceID('Microsoft.Resources/deployments', variables('Networking_Deployment').deploymentName)]"
+            ],
 			"properties": {
 				"mode": "Incremental",
 				"templateLink": {
@@ -136,6 +139,9 @@
 				},
 				"parameters": {
 					"Networking_Deployment": {
+						"value": "[variables('Networking_Deployment')]"
+                    },
+                    "App_Deployment": {
 						"value": "[variables('App_Deployment')]"
                     }
 				}
