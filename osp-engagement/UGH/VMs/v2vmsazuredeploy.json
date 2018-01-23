@@ -238,7 +238,7 @@
                             "privateIPAddressVersion": "IPv4",
                             "applicationGatewayBackendAddressPools": [
                                 {
-                                    "id": "[concat(resourceId('Microsoft.Network/applicationGateways', parameters('App_Deployment').ApplicationGateway.applicationGatewayName), '/backendAddressPools/appGatewayBackendPool']"
+                                    "id": "[concat(resourceId('Microsoft.Network/applicationGateways', parameters('App_Deployment').ApplicationGateway.applicationGatewayName), '/backendAddressPools/appGatewayBackendPool')]"
                                 }
                             ]
                         }
