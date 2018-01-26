@@ -8,7 +8,7 @@ Modern Approach as well as Traditional Approach
 
 ## Traditional Migration Approach
 There are three stages involved in executing a migration of a multi-tiered application deployed on virtual machines in a privately hosted data centers.
-![Traditional Approach](./src/traditional.JPG)
+![Traditional Approach](./src/traditional.jpg)
 1. [Assessment](#assessment)
 2. [Migration Planning](#migration-planning)
 3. [Executing the Migration](#execution)
