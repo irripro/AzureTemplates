@@ -8,6 +8,7 @@ Modern Approach as well as Traditional Approach
 
 ## Traditional Migration Approach
 There are three stages involved in executing a migration of a multi-tiered application deployed on virtual machines in a privately hosted data centers.
+![Traditional Approach](./src/traditional.JPG)
 1. [Assessment](#assessment)
 2. [Migration Planning](#migration-planning)
 3. [Executing the Migration](#execution)
@@ -17,7 +18,6 @@ There are three stages involved in executing a migration of a multi-tiered appli
     *   What is deployed? How many **VMs**(CPU)/**disk**(IO)/**network**(latency)/etc?
 *   Requirement Definition
     *   Define business requirements 
-
 
 ### Migration Planning
 *   Cloud-fit Analysis
@@ -37,34 +37,10 @@ There are three stages involved in executing a migration of a multi-tiered appli
     *   Optimized for cloud cost
 
 ### Execution
-*   Migration Automation
-    *   Automating execution of the migration as much as possible.
+*   Migration Automation - Automating execution of the migration as much as possible.
    
-
 ## Modern Migration Approach
 ![Migration Stages](./src/stages.jpg)
-
-Migration Stages:
-1. Assessment
-    a. Understand the environment and business needs
-    b. Plan requirements and roadmap migration
-    c. Identify cost
-2. Migration plan 
-    a. Setup Migration tool
-    b. Setup Destination platform requirements
-3. Execute the migration
-    a. Test cut-over
-    b. CutOver and back
-
-
-Assessment components:
-Inventory Analysis
-Requirement Definition
-Cloud-fit Analysis
-Dependency Mapping
-Application Mapping
-Financial Modeling
-Migration Automation
 
 # Tools
 Some first party Azure tools as well as 3rd party tools are listed below:
