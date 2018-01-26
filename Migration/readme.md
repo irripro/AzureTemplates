@@ -44,10 +44,15 @@ There are three stages involved in executing a migration of a multi-tiered appli
 
 # Tools
 Some first party Azure tools as well as 3rd party tools are listed below:
-* First party tool: [**Azure Migration Tool**](https://azure.microsoft.com/en-us/migrate/virtual-machines-migration/)
+* First party tool: 
+    * [**Azure Migration Tool**](https://azure.microsoft.com/en-us/migrate/virtual-machines-migration/)
+    * [**Azure Site Recovery**](https://docs.microsoft.com/en-us/azure/site-recovery/site-recovery-overview)
+    * [**Azure Backup**](https://docs.microsoft.com/en-us/azure/backup/backup-introduction-to-azure-backup)
+    * [**StorSimple**](https://docs.microsoft.com/en-us/azure/storsimple/)
 * 3rd party tools: 
     * [**Stratozone**](http://www.stratozone.com/migrate.aspx)
     * [**CloudEndure**](https://www.cloudendure.com/live-migration/)
 
 # Training 
-[Linux Migration Hackfest organized by Azure GBB is a great place to start learning about migrations.](https://github.com/stuartatmicrosoft/Azure-Linux-Migration-Workshop)
+* [Linux Migration Hackfest organized by Azure GBB is a great place to start learning about migrations.](https://github.com/stuartatmicrosoft/Azure-Linux-Migration-Workshop)
+* [For modern migration strategy training the container hackfest also organized by GBB is a good place to start.](https://github.com/chzbrgr71/container-hackfest)
