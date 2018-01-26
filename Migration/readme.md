@@ -2,7 +2,7 @@
 Aspects to consider when moving to applications to public cloud.
 Modern Approach as well as Traditional Approach
 * [Traditional Migration (VMs Workloads)](#traditional-migration-approach)
-* [Modern Migration (VM to Containers)](#modern-migration-approach)
+* [Modern Migration (VM to Containers with DevOps)](#modern-migration-approach)
 * [Tools](#tools)
 * [Training](#training)
 
