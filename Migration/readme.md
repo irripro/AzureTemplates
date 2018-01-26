@@ -44,7 +44,7 @@ There are three stages involved in executing a migration of a multi-tiered appli
 
 # Tools
 Some first party Azure tools as well as 3rd party tools are listed below:
-* First party tool: 
+* First party tools: 
     * [**Azure Migration Tool**](https://azure.microsoft.com/en-us/migrate/virtual-machines-migration/)
     * [**Azure Site Recovery**](https://docs.microsoft.com/en-us/azure/site-recovery/site-recovery-overview)
     * [**Azure Backup**](https://docs.microsoft.com/en-us/azure/backup/backup-introduction-to-azure-backup)
