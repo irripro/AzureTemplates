@@ -1,0 +1,50 @@
+{
+    "$schema": "http://schema.management.azure.com/schemas/2014-04-01-preview/deploymentTemplate.json",
+    "contentVersion": "1.0.0.0",
+    "resources": [
+        {
+            "comments": "This is the definition of a RouteTable specific to each Subnet",
+            "type": "Microsoft.Network/routeTables",
+            "name": "table1",
+            "apiVersion": "2017-06-01",
+            "location": "[resourceGroup().location]",
+            "properties": {}
+        },
+        {
+            "name": "deployment",
+            "type": "Microsoft.Resources/deployments",
+            "apiVersion": "2017-05-10",
+            "dependsOn": [
+                "Microsoft.Network/routeTables/table1"
+            ],
+            "properties": {
+                "mode": "Incremental",
+                "template": {
+                    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+                    "contentVersion": "1.0.0.0",
+                    "resources": [
+                        {
+                            "type": "Microsoft.Network/routeTables",
+                            "name": "table1",
+                            "apiVersion": "2017-06-01",
+                            "location": "[resourceGroup().location]",
+                            "properties": {
+                                "routes": [
+                                    {
+                                        "name": "somecrap",
+                                        "properties": {
+                                            "addressPrefix": "0.0.0.0/0",
+                                            "nextHopType": "VirtualAppliance",
+                                            "nextHopIpAddress": "10.0.0.138"
+                                        }
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                }
+            }
+        }
+    ],
+    "outputs": {}
+}
