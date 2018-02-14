@@ -9,15 +9,47 @@
 </head>
 
 <body>
+    <div>
+        <h1>Buttons Radio CheckBox</h1>
+        <form>
+            <p>What would you like Cats or Dogs?</p>
+            <label for="catradio">Cats:</label>
+            <input type="radio" name="petchoice" id="catradio" value="CAT">
+            <label for="dogradio">Dogs:</label>
+            <input type="radio" name="petchoice" id="Dogradio" value="DOG">
+            <input type="submit" value="Go!">
+        </form>
+    </div>
+    <div>
+        <form>
+            <h1>Whats your Favorite Color?</h1>
+            <select name="colorchoice" id="pickedcolor">
+                <option value="YELLOW">Yellow</option>
+                <option value="RED">Red</option>
+                <option value="BLUE">Blue</option>
+                <option value="BLACK">Black</option>
+            </select>
+            <input type="submit" value="Go!">
+        </form>
+    </div>
+
+    <div>
+        <h1>Text Area</h1>
+        <form>
+            <textarea name="paragraph" id="explain" cols="30" rows="10"></textarea>
+            <input type="submit" value="Go!">
+        </form>
+    </div>
+
     <h1>Sign In</h1>
     <div>
         <form>
             <label for="username">
-                Username: 
-                <input type="text" placeholder="Username" name="username">
+                Username:
+                <input type="text" placeholder="Username" name="username" required>
             </label>
             <label for="password">
-                Password: 
+                Password:
                 <input type="password" name="password" id="1" placeholder="Password">
             </label>
             <label for="button">
@@ -29,7 +61,7 @@
         <h1>Save Contacts</h1>
         <form>
             <label for="email">Email:</label>
-            <input type="email" name="email" id="email">
+            <input type="email" name="email" id="email" required>
             <label for="phone">Phone:</label>
             <input type="text" name="phone" id="phone">
             <label for="contacts"></label>
