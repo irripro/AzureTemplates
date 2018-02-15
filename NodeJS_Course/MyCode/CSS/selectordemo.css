@@ -1,0 +1,37 @@
+/* Elements */
+
+li {}
+
+
+/* class */
+
+
+/* id */
+
+
+/* Star */
+
+* {
+    border: 1px solid lightgrey
+}
+
+/* Descendants Selector */
+li a {
+    color: red;
+}
+
+/* Adjacent Selector */
+h4 + ul {
+    color: green;
+}
+
+/* Attribute Selector */
+a[href="http://google.com"] {
+    background-color: aquamarine;
+}
+
+/* nth of Type */
+
+ul:nth-of-type(3) {
+    background: purple;
+}

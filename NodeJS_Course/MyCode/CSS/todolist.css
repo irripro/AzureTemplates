@@ -1,0 +1,16 @@
+body{
+    background: wheat;
+}
+
+li{
+    border: 2px solid white;
+}
+
+#special{
+    color: red;
+}
+
+.completed{
+    color: green;
+    text-decoration: line-through  
+}
