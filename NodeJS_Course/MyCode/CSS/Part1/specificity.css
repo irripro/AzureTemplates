@@ -1,0 +1,19 @@
+body{
+    color: blue;
+}
+
+ul {
+    color: green;
+}
+
+li {
+    color: yellow;
+}
+
+.select {
+    color: orange;
+}
+
+#special {
+    color: pink;
+}
