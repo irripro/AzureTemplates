@@ -1,0 +1,25 @@
+html, body {
+    width: 100%;
+}
+
+table {
+    margin: 0 auto;
+}
+
+h1 {
+    text-align: center;
+}
+
+.verticals {
+    border-left: black solid 2px;
+    border-right: black solid 2px;
+    width: 100px;
+    height: 100px;
+}
+
+.horizontal {
+    border-top: black solid 2px;
+    border-bottom: black solid 2px;
+    width: 100px;
+    height: 100px;
+}
