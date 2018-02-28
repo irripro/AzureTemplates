@@ -1,0 +1,40 @@
+/* 
+border color: #bdc3c7
+date color: #3498db
+h1 color: #2c3e50
+
+font: source sans pro 
+hr styles
+*/
+body {
+    margin: 20px auto;
+    max-width: 700px;
+    width: 80%;
+    border: solid #bdc3c7 25px;
+    padding: 15px;
+    font-family: 'Source Sans Pro', sans-serif;
+}
+
+h4 {
+    color: #3498db;
+    text-transform: uppercase;
+}
+
+.first_p {
+    border-left: #bdc3c7 solid 5px;
+    padding: 5px;
+}
+
+h1 {
+    color: #2c3e50;
+}
+
+p {
+    margin: 10px 0;
+}
+
+hr {
+    margin: 0 0;
+    height: 1px;
+    background: #bdc3c7;
+}
