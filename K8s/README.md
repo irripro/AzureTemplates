@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # Random Notes and Useful Commands
 
 
@@ -225,4 +224,3 @@ These are the items you should consider before taking a cluster into production:
 *   Diaster Recovery & High Avalibility of nodes in cluster
 *   Training
     *   Increase competency across customer/partner operational and development team
->>>>>>> origin/master
