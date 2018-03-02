@@ -1,4 +1,4 @@
-# Random Notes and Useful Commands
+# Random Notes and Useful Commands!!
 
 
 Get info on Nodes Running: ```kubectl get nodes```
