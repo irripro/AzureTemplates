@@ -8,7 +8,7 @@ ID_output = str(local("""cat /proc/self/cgroup | head -n 1 | cut -d '/' -f3""", 
 
 @app.route('/')
 def hello_world():
-    return render_template("index.html", container_IP=IP_output, container_ID=ID_output)
+    return render_template("docker_index.html", container_IP=IP_output, container_ID=ID_output)
 
 if __name__ == '__main__':
     app.run(debug=True,host='0.0.0.0', port=80)
