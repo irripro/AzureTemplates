@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <style>
         h1 {
@@ -7,26 +8,43 @@
             margin: 0 auto;
             text-align: center;
         }
-
-        h2 {
+        table {
             color: black;
             margin: 0 auto;
+            margin-top: 50px;
             text-align: center;
+            font-size: 20px;
         }
         span {
             color: red;
         }
+        .info {
+            color: teal;
+        }
+
     </style>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Test Page</title>
 </head>
+
 <body>
     <div>
-        <h1>This is a Sample Page</h1>
-        <h2>The IP Address of this Container is <span>{{container_IP}}</span></h2>
-        <h2>The Container ID is <span>{{container_ID}}</span></h2>
-</div>
+        <h1>This is your container and Kubernetes Info Page</h1>
+    </div>
+    <table>
+        <tbody>
+            <tr>
+                <th>Container IP:</th>
+                <th class="info">{{container_IP}}</th>
+            </tr>
+            <tr>
+                <th>Container ID</th>
+                <th class="info">{{container_ID}}</th>
+            </tr>
+        </tbody>
+    </table>
 </body>
+
 </html>
