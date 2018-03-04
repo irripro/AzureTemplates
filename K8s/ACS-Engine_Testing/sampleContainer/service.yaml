@@ -1,0 +1,54 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: flask-info-app-service
+  labels:
+    app: flask-info-app-service
+spec:
+  ports:
+  - port: 80
+    targetPort: 80
+  type: LoadBalancer
+  selector:
+    app: flask-info-app-pod
+---
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: flask-info-app-replica
+  labels:
+    app: flask-info-app-replica
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: flask-info-app-pod
+    spec:
+      containers:
+      - name: flask-info-app-container
+        image: alihhussain/azurepublic:flask
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 80
+        env:
+        - name: MY_NODE_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: spec.nodeName
+        - name: MY_POD_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
+        - name: MY_POD_NAMESPACE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
+        - name: MY_POD_IP
+          valueFrom:
+            fieldRef:
+              fieldPath: status.podIP
+        - name: MY_POD_SERVICE_ACCOUNT
+          valueFrom:
+            fieldRef:
+              fieldPath: spec.serviceAccountName
