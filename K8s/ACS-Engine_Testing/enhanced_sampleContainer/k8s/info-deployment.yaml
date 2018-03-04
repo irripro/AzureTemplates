@@ -4,6 +4,12 @@ metadata:
   name: flask-info-app-deployment
 spec:
   replicas: 3
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  minReadySeconds: 5
   template:
     metadata:
       labels:
@@ -11,7 +17,7 @@ spec:
     spec:
       containers:
       - name: flask-info-app-container
-        image: alihhussain/azurepublic:flask
+        image: alihhussain/azurepublic:info-app-enhanced
         imagePullPolicy: Always
         ports:
         - containerPort: 80

@@ -13,7 +13,7 @@ spec:
     spec:
       containers:
       - name: flask-info-app-container
-        image: alihhussain/azurepublic:flask
+        image: alihhussain/azurepublic:info-app-enhanced
         imagePullPolicy: Always
         ports:
         - containerPort: 80

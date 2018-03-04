@@ -22,7 +22,7 @@ def hello_world():
     if 'docker' in runtime.lower():
         return render_template("docker_index.html", container_IP=IP_output, container_ID=ID_output)
     else:
-        return render_template("k8s_index.html", k8s_node_name=k8s_node_name, k8s_pod_name=k8s_pod_name, k8s_pod_namespace=k8s_pod_namespace, k8s_pod_ip=k8s_pod_ip, k8s_serviceaccount_name=k8s_serviceaccount_name)
+        return render_template("k8s_enhance_index.html", k8s_node_name=k8s_node_name, k8s_pod_name=k8s_pod_name, k8s_pod_namespace=k8s_pod_namespace, k8s_pod_ip=k8s_pod_ip, k8s_serviceaccount_name=k8s_serviceaccount_name)
 
 if __name__ == '__main__':
     app.run(debug=True,host='0.0.0.0', port=80)

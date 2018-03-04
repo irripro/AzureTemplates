@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <style>
         body {
             background-position: 100% 100%;
             background-repeat: repeat;
             background-color: #e5eff8;
-            background-image: url(./src/base-grid-alt-alt.svg);
+            background-image: url('/static/src/base-grid-alt-alt.svg');
         }
+
         h1 {
             color: blue;
             margin: 0 auto;
@@ -30,6 +32,9 @@
         .info {
             color: teal;
         }
+        .images {
+            padding-left: 15%;
+        }
     </style>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -41,10 +46,10 @@
     <div>
         <h1>This is your Kubernetes Info Page</h1>
     </div>
-    
-    <img src="./src/azure.png" alt="Azure">
-    <img src="./src/k8s.png" alt="Kubernetes">
-    
+    <div class="images">
+        <img src="/static/src/azure.png" alt="Azure">
+        <img src="/static/src/k8s.png" alt="Kubernetes">
+    </div>
     <table>
         <tbody>
             <tr>
