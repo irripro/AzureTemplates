@@ -7,21 +7,24 @@
             color: blue;
             margin: 0 auto;
             text-align: center;
+            font-size: 80px;
         }
+
         table {
             color: black;
             margin: 0 auto;
             margin-top: 50px;
             text-align: center;
-            font-size: 20px;
+            font-size: 40px;
         }
+
         span {
             color: red;
         }
+
         .info {
             color: teal;
         }
-
     </style>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -31,17 +34,29 @@
 
 <body>
     <div>
-        <h1>This is your Docker Container Info Page</h1>
+        <h1>This is your Kubernetes Info Page</h1>
     </div>
     <table>
         <tbody>
             <tr>
-                <th>Container IP:</th>
-                <th class="info">{{container_IP}}</th>
+                <th>Node Name:</th>
+                <th class="info">{{k8s_node_name}}</th>
             </tr>
             <tr>
-                <th>Container ID</th>
-                <th class="info">{{container_ID}}</th>
+                <th>Pod Name</th>
+                <th class="info">{{k8s_pod_name}}</th>
+            </tr>
+            <tr>
+                <th>Pod Namespace</th>
+                <th class="info">{{k8s_pod_namespace}}</th>
+            </tr>
+            <tr>
+                <th>Pod IP</th>
+                <th class="info">{{k8s_pod_ip}}</th>
+            </tr>
+            <tr>
+                <th>Pod Service Account</th>
+                <th class="info">{{k8s_serviceaccount_name}}</th>
             </tr>
         </tbody>
     </table>
