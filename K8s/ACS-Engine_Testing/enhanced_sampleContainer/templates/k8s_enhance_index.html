@@ -2,44 +2,12 @@
 <html lang="en">
 
 <head>
-    <style>
-        body {
-            background-position: 100% 100%;
-            background-repeat: repeat;
-            background-color: #e5eff8;
-            background-image: url('/static/src/base-grid-alt-alt.svg');
-        }
-
-        h1 {
-            color: blue;
-            margin: 0 auto;
-            text-align: center;
-            font-size: 80px;
-        }
-
-        table {
-            color: black;
-            margin: 0 auto;
-            margin-top: 50px;
-            text-align: center;
-            font-size: 40px;
-        }
-
-        span {
-            color: red;
-        }
-
-        .info {
-            color: teal;
-        }
-        .images {
-            padding-left: 15%;
-        }
-    </style>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Test Page</title>
+    <title>Kubernetes Info Page</title>
+    <link href="https://fonts.googleapis.com/css?family=Indie+Flower|Raleway:400" rel="stylesheet"> 
+    <link rel="stylesheet" href="/static/k8s_enhance.css">
 </head>
 
 <body>
@@ -47,7 +15,7 @@
         <h1>This is your Kubernetes Info Page</h1>
     </div>
     <div class="images">
-        <img src="/static/src/azure.png" alt="Azure">
+        <img id="azure" src="/static/src/azure.png" alt="Azure">
         <img src="/static/src/k8s.png" alt="Kubernetes">
     </div>
     <table>
