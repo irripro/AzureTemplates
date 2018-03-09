@@ -24,6 +24,10 @@ func newDeck() deck {
 	return cards
 }
 
+func (d deck) deal() deck{
+	
+}
+
 func (d deck) print() {
 	for i, card := range d {
 		fmt.Println(i, card)
