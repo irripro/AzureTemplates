@@ -240,3 +240,10 @@ ModelManifest.xml
 
 # FAKE - F# Make
 .fake/
+
+#Jenkins Jobs
+*lastStable
+lastSuccessful
+*build.xml
+*changelog.xml
+*log
