@@ -1,0 +1,7 @@
+Started by user [8mha:////4N2QeX7mUQ790Ve6hLO0DnEc+msw0IakXJASdK1v1c/fAAAAmR+LCAAAAAAAAP9b85aBtbiIQTGjNKU4P08vOT+vOD8nVc83PyU1x6OyILUoJzMv2y+/JJUBAhiZGBgqihhk0NSjKDWzXb3RdlLBUSYGJk8GtpzUvPSSDB8G5tKinBIGIZ+sxLJE/ZzEvHT94JKizLx0a6BxUmjGOUNodHsLgAz2EgZe/dLi1CL9rNS87My8YgDGtiJjwgAAAA==[0mJenkins
+Building in workspace /var/lib/jenkins/workspace/gitsync
+[gitsync] $ /bin/sh -xe /tmp/jenkins1002091899509668824.sh
++ cd /home/jenkins/github/AzureTemplates/
++ git pull
+Already up-to-date.
++ cp -R /var/lib/jenkins/jobs/ /home/jenkins/github/AzureTemplates/jenkins_jobs

@@ -12,7 +12,7 @@
         <artifactNumToKeep>-1</artifactNumToKeep>
       </strategy>
     </jenkins.model.BuildDiscarderProperty>
-    <com.coravy.hudson.plugins.github.GithubProjectProperty plugin="github@1.26.1">
+    <com.coravy.hudson.plugins.github.GithubProjectProperty plugin="github@1.29.0">
       <projectUrl>https://github.com/alihhussain/ops/</projectUrl>
       <displayName></displayName>
     </com.coravy.hudson.plugins.github.GithubProjectProperty>
@@ -30,17 +30,17 @@
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.Shell>
-      <command>cd /u01/AzureTemplates/
+      <command>cd /home/jenkins/github/AzureTemplates/
 git pull
-cp -R /var/lib/jenkins/jobs/ /u01/AzureTemplates/jenkins_jobs
-sudo chown jenkins:jenkins /u01/AzureTemplates/ -R
+cp -R /var/lib/jenkins/jobs/ /home/jenkins/github/AzureTemplates/jenkins_jobs
+sudo chown jenkins:jenkins /home/jenkins/github/AzureTemplates/ -R
 git add *; git commit -a -m &quot;Jenkins Update&quot;; git push origin master
 </command>
     </hudson.tasks.Shell>
   </builders>
   <publishers/>
   <buildWrappers>
-    <hudson.plugins.build__timeout.BuildTimeoutWrapper plugin="build-timeout@1.18">
+    <hudson.plugins.build__timeout.BuildTimeoutWrapper plugin="build-timeout@1.19">
       <strategy class="hudson.plugins.build_timeout.impl.AbsoluteTimeOutStrategy">
         <timeoutMinutes>3</timeoutMinutes>
       </strategy>

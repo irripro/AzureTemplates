@@ -22,7 +22,7 @@
         <hudson.model.PasswordParameterDefinition>
           <name>passwd</name>
           <description>Put in the password for the principle account</description>
-          <defaultValue>{AQAAABAAAAAQpvaHij1Of+oye8md19Lb/xfNA87DwMPTG/aTulJpOuU=}</defaultValue>
+          <defaultValue>{AQAAABAAAABA4ew/jOmoGJgJkw5YLQol+5jOODOaKlflP3WG3DF5lx89QKpMPgURHAxv9q0uDy6/o5JratBGm2WX6hAbYIFYaGA9xxhEv2JEwre5FnSBy84=}</defaultValue>
         </hudson.model.PasswordParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>tenant</name>

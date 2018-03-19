@@ -1,0 +1,7 @@
+Started by timer
+Building in workspace /var/lib/jenkins/workspace/gitsync
+[gitsync] $ /bin/sh -xe /tmp/jenkins3996226693775956067.sh
++ cd /u01/AzureTemplates/
+/tmp/jenkins3996226693775956067.sh: 2: cd: can't cd to /u01/AzureTemplates/
+Build step 'Execute shell' marked build as failure
+Finished: FAILURE

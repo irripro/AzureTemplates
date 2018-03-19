@@ -1,0 +1,79 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<project>
+  <actions/>
+  <description></description>
+  <keepDependencies>false</keepDependencies>
+  <properties>
+    <jenkins.model.BuildDiscarderProperty>
+      <strategy class="hudson.tasks.LogRotator">
+        <daysToKeep>5</daysToKeep>
+        <numToKeep>20</numToKeep>
+        <artifactDaysToKeep>-1</artifactDaysToKeep>
+        <artifactNumToKeep>-1</artifactNumToKeep>
+      </strategy>
+    </jenkins.model.BuildDiscarderProperty>
+    <hudson.model.ParametersDefinitionProperty>
+      <parameterDefinitions>
+        <hudson.model.StringParameterDefinition>
+          <name>workingdir</name>
+          <description></description>
+          <defaultValue>/tmp/workingdir</defaultValue>
+        </hudson.model.StringParameterDefinition>
+      </parameterDefinitions>
+    </hudson.model.ParametersDefinitionProperty>
+  </properties>
+  <scm class="hudson.scm.NullSCM"/>
+  <canRoam>true</canRoam>
+  <disabled>false</disabled>
+  <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
+  <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+  <triggers/>
+  <concurrentBuild>false</concurrentBuild>
+  <builders>
+    <hudson.tasks.Shell>
+      <command>#!/bin/bash
+
+cd &quot;/tmp/$workingdir/Initial&quot;
+
+sleep 20s
+echo &quot;______________________________________________________________________________________________________________________________________&quot;
+echo &quot;______________________________________________________________________________________________________________________________________&quot;
+
+echo &quot;Deploying out Apache (httpd) to the VM&quot;
+#python parseoutput.py &quot;./${workingdir}output.json&quot;
+
+#az group deployment show -g alitemp -n steptwo | jq .properties.outputs.sshCommand.value | awk -F &apos;&quot;&apos; &apos;{print $2}&apos;
+
+elbdns=$(sudo cat elbfile.txt)
+sed -i &quot;s#{elbpublicdns}#$elbdns#g&quot; remoteconfigfabfile.py
+fab -f remoteconfigfabfile.py -P deploy
+
+
+#vm1=$(sudo cat vm1file.txt)
+#vm2=$(sudo cat vm2file.txt)
+
+#fab -f remoteconfigfabfile.py -P deploy
+#fab -f remoteconfigfabfile.py -H $vm1,$vm2 -P deploy
+
+#sed -i &quot;s#{hostname1}#$vm1#g&quot; fabfile.py
+#sed -i &quot;s#{hostname2}#$vm2#g&quot; fabfile.py
+#fab -P deploy
+
+
+echo &quot;______________________________________________________________________________________________________________________________________&quot;
+echo &quot;______________________________________________________________________________________________________________________________________&quot;
+echo &quot;Deploying out Apache (httpd) to the VM1&quot;
+
+#echo &quot;______________________________________________________________________________________________________________________________________&quot;
+#echo &quot;______________________________________________________________________________________________________________________________________&quot;
+
+cd /u01/var/lib/jenkins/
+echo &quot;Deleting the build workspace.................................................................................&quot;
+#rm -fR &quot;/tmp/$workingdir&quot;
+#echo &quot;______________________________________________________________________________________________________________________________________&quot;
+</command>
+    </hudson.tasks.Shell>
+  </builders>
+  <publishers/>
+  <buildWrappers/>
+</project>

@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?><project>
+  <actions/>
+  <description/>
+  <keepDependencies>false</keepDependencies>
+  <properties>
+    <jenkins.model.BuildDiscarderProperty>
+      <strategy class="hudson.tasks.LogRotator">
+        <daysToKeep>5</daysToKeep>
+        <numToKeep>20</numToKeep>
+        <artifactDaysToKeep>-1</artifactDaysToKeep>
+        <artifactNumToKeep>-1</artifactNumToKeep>
+      </strategy>
+    </jenkins.model.BuildDiscarderProperty>
+    <hudson.model.ParametersDefinitionProperty>
+      <parameterDefinitions>
+        <hudson.model.StringParameterDefinition>
+          <name>appId</name>
+          <description>Put in the tenant for the principle account</description>
+          <defaultValue>a289cbdd-4fca-4a7d-88c4-6a02892223d4</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.PasswordParameterDefinition>
+          <name>passwd</name>
+          <description>Put in the password for the principle account</description>
+          <defaultValue>{AQAAABAAAAAQpvaHij1Of+oye8md19Lb/xfNA87DwMPTG/aTulJpOuU=}</defaultValue>
+        </hudson.model.PasswordParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>tenant</name>
+          <description>Put in the tenant for the principle account</description>
+          <defaultValue>72f988bf-86f1-41af-91ab-2d7cd011db47</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>region</name>
+          <description>Where do you want the vault to be.</description>
+          <defaultValue>westcentralus</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>ResourceName</name>
+          <description>Put in the resource name you want to create</description>
+          <defaultValue>ExampleGroup</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>workingdir</name>
+          <description/>
+          <defaultValue>/tmp/workingdir</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.ChoiceParameterDefinition>
+          <name>asranswer</name>
+          <description>Do you want to deploy ASR infrastructure?</description>
+          <choices class="java.util.Arrays$ArrayList">
+            <a class="string-array">
+              <string>false</string>
+              <string>true</string>
+            </a>
+          </choices>
+        </hudson.model.ChoiceParameterDefinition>
+      </parameterDefinitions>
+    </hudson.model.ParametersDefinitionProperty>
+  </properties>
+  <scm class="hudson.scm.NullSCM"/>
+  <canRoam>true</canRoam>
+  <disabled>false</disabled>
+  <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
+  <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+  <triggers/>
+  <concurrentBuild>false</concurrentBuild>
+  <builders>
+    <hudson.tasks.Shell>
+      <command>#!/bin/bash
+
+echo "______________________________________________________________________________________________________________________________________"
+echo "______________________________________________________________________________________________________________________________________"
+echo "Logging into Azure................................................................................."
+sudo /root/bin/az login --service-principal -u $appId --password $passwd --tenant $tenant
+echo "______________________________________________________________________________________________________________________________________"
+echo "______________________________________________________________________________________________________________________________________"
+
+echo "Creating the build workspace................................................................................."
+mkdir "/tmp/$workingdir"
+cd "/tmp/$workingdir"
+mkdir "./Initial"
+cd "./Initial"
+pwd
+
+echo "______________________________________________________________________________________________________________________________________"
+echo "______________________________________________________________________________________________________________________________________"
+echo "Downloading the parameters file from github................................................................................."
+#curl -O -u 315c4187412e9cbdf0bfa7ae13c6cc949d10a970:x-oauth-basic \
+#	https://raw.githubusercontent.com/alihhussain/ops/master/oss/VMCustomData/azuredeploy.parameters.json
+
+#curl -O -u 315c4187412e9cbdf0bfa7ae13c6cc949d10a970:x-oauth-basic \
+#	https://raw.githubusercontent.com/alihhussain/ops/master/oss/VMCustomData/azuredeploy.json
+    
+#curl -O -u 315c4187412e9cbdf0bfa7ae13c6cc949d10a970:x-oauth-basic \
+#    https://raw.githubusercontent.com/alihhussain/ops/master/oss/pythons/parseoutput.py
+
+#curl -O -u 315c4187412e9cbdf0bfa7ae13c6cc949d10a970:x-oauth-basic \
+#    https://raw.githubusercontent.com/alihhussain/ops/master/oss/pythons/remoteconfigfabfile.py
+
+curl -O https://raw.githubusercontent.com/alihhussain/AzureTemplates/master/Automation%20Demo/VMCustomData/azuredeploy1.parameters.json
+
+curl -O https://raw.githubusercontent.com/alihhussain/AzureTemplates/master/Automation%20Demo/VMCustomData/azuredeploy1.json
+
+curl -O https://raw.githubusercontent.com/alihhussain/AzureTemplates/master/Automation%20Demo/pythons/remoteconfigfabfile.py
+
+
+
+echo "______________________________________________________________________________________________________________________________________"
+echo "______________________________________________________________________________________________________________________________________"
+
+keycontent=$(sudo cat /var/lib/jenkins/.ssh/authorized_keys)
+sed -i "s#{ssh_key_data}#$keycontent#g" azuredeploy1.parameters.json
+sed -i "s#{asr_answer}#$asranswer#g" azuredeploy1.parameters.json
+
+echo "Creating the ResourceGroup................................................................................."
+sudo /root/bin/az group create -l ${region} -n $ResourceName
+echo "______________________________________________________________________________________________________________________________________"
+echo "______________________________________________________________________________________________________________________________________"
+
+echo "Creating the Deployment within the resourceGroup...................(This could take up to 10 mins)........................"
+
+sudo /root/bin/az group deployment create --name ExampleDeployment --resource-group $ResourceName --template-file ./azuredeploy1.json --parameters @azuredeploy1.parameters.json &gt; ./${workingdir}output.json
+echo "./${workingdir}output.json"
+cat "./${workingdir}output.json"
+
+echo "The DNS for ELB is: ..........................................."
+echo "______________________________________________________________________________________________________________________________________"
+echo "______________________________________________________________________________________________________________________________________"
+sudo /root/bin/az login --service-principal -u $appId --password $passwd --tenant $tenant
+/root/bin/az group deployment show -g $ResourceName -n steptwo | jq .properties.outputs.sshCommand.value | awk -F '"' '{print $2}' &gt; elbfile.txt
+cat elbfile.txt
+
+if [ $asranswer == "true" ];
+    then
+        /root/bin/az group deployment show -g $ResourceName -n stepthree | jq .properties.outputs.asrPublicIP.value | awk -F '"' '{print $2}' &gt; asrpublicip.txt
+        cat asrpublicip.txt
+        /root/bin/az group deployment show -g $ResourceName -n stepthree | jq .properties.dependencies[0].dependsOn[0].resourceName | awk -F '"' '{print $2}' &gt; asrpublic.ip
+        asrpublicipname=$(sudo cat /tmp/$workingdir/Initial/asrpublic.ip)
+        /root/bin/az network public-ip show -g $ResourceName -n $asrpublicipname | jq .ipAddress | awk -F '"' '{print $2}' &gt; asrpublic.ip
+        cat asrpublic.ip
+fi
+
+echo "______________________________________________________________________________________________________________________________________"
+echo "______________________________________________________________________________________________________________________________________"
+echo "The Azure Resources are deployed."
+</command>
+    </hudson.tasks.Shell>
+  </builders>
+  <publishers/>
+  <buildWrappers/>
+</project>

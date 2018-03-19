@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?><flow-definition plugin="workflow-job@2.10">
+  <actions/>
+  <description/>
+  <keepDependencies>false</keepDependencies>
+  <properties>
+    <jenkins.model.BuildDiscarderProperty>
+      <strategy class="hudson.tasks.LogRotator">
+        <daysToKeep>-1</daysToKeep>
+        <numToKeep>20</numToKeep>
+        <artifactDaysToKeep>-1</artifactDaysToKeep>
+        <artifactNumToKeep>-1</artifactNumToKeep>
+      </strategy>
+    </jenkins.model.BuildDiscarderProperty>
+    <hudson.model.ParametersDefinitionProperty>
+      <parameterDefinitions>
+        <hudson.model.StringParameterDefinition>
+          <name>appId</name>
+          <description>Put in the tenant for the principle account</description>
+          <defaultValue>a289cbdd-4fca-4a7d-88c4-6a02892223d4</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.PasswordParameterDefinition>
+          <name>passwd</name>
+          <description>Put in the password for the principle account</description>
+          <defaultValue>{AQAAABAAAAAQTXEKb7UE+PoY6Vkmvh2fSpt7tw06glp/+BO0Pr+xsR8=}</defaultValue>
+        </hudson.model.PasswordParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>tenant</name>
+          <description>Put in the tenant for the principle account</description>
+          <defaultValue>72f988bf-86f1-41af-91ab-2d7cd011db47</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>ResourceName</name>
+          <description>Put in the resource name you want to create</description>
+          <defaultValue>KubernetesGroup</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.ChoiceParameterDefinition>
+          <name>region</name>
+          <description>Where do you want the vault to be.</description>
+          <choices class="java.util.Arrays$ArrayList">
+            <a class="string-array">
+              <string>eastus</string>
+              <string>westus</string>
+              <string>westcentralus</string>
+            </a>
+          </choices>
+        </hudson.model.ChoiceParameterDefinition>
+        <hudson.model.ChoiceParameterDefinition>
+          <name>NumberOfNodes</name>
+          <description>Number of Nodes within a Kubernetes Cluster. Choose between 2 and 7</description>
+          <choices class="java.util.Arrays$ArrayList">
+            <a class="string-array">
+              <string>4</string>
+              <string>2</string>
+              <string>3</string>
+              <string>5</string>
+              <string>6</string>
+              <string>7</string>
+            </a>
+          </choices>
+        </hudson.model.ChoiceParameterDefinition>
+        <hudson.model.ChoiceParameterDefinition>
+          <name>Kubeadm</name>
+          <description>Do you want to use KubeAdm to deploy a cluster?</description>
+          <choices class="java.util.Arrays$ArrayList">
+            <a class="string-array">
+              <string>NO</string>
+              <string>YES</string>
+            </a>
+          </choices>
+        </hudson.model.ChoiceParameterDefinition>
+      </parameterDefinitions>
+    </hudson.model.ParametersDefinitionProperty>
+    <org.jenkinsci.plugins.workflow.job.properties.PipelineTriggersJobProperty>
+      <triggers/>
+    </org.jenkinsci.plugins.workflow.job.properties.PipelineTriggersJobProperty>
+  </properties>
+  <definition class="org.jenkinsci.plugins.workflow.cps.CpsFlowDefinition" plugin="workflow-cps@2.29">
+    <script>node() {
+    stage('Deploying K8s Azure Infrastructure') {
+        build job: 'Provision_Azure_Infrastructure_Build', parameters: [string(name: 'appId', value: "${appID}"), password(description: 'Put in the password for the principle account', name: 'passwd', value: "${passwd}"), string(name: 'tenant', value: "${tenant}"), string(name: 'ResourceName', value: "${ResourceName}"), string(name: 'region', value: "${region}"), string(name: 'NumberOfNodes', value: "${NumberOfNodes}"), string(name: 'workingdir', value: "${env.BUILD_TAG}")]
+        
+    }
+    stage('Initial K8s Installs'){
+        try{
+            if ("${Kubeadm}" == "NO") {
+                build job: 'Configure_All_Kubernetes_VMs', parameters: [string(name: 'workingdir', value: "${env.BUILD_TAG}")]
+            } else {
+                build job: 'KubeAdm_Configure_All_Kubernetes_VMs', parameters: [string(name: 'workingdir', value: "${env.BUILD_TAG}")]
+            }
+        }catch(err){
+            echo "I guess the deployment didn't go well."
+        }    
+    }
+    stage('K8s Master Configuration '){
+        try{
+            if ("${Kubeadm}" == "NO") {
+                build job: 'Kubernetes_Master_Install', parameters: [string(name: 'workingdir', value: "${env.BUILD_TAG}")]
+            } else {
+                build job: 'KubeAdm_Kubernetes_Master_Install', parameters: [string(name: 'workingdir', value: "${env.BUILD_TAG}")]
+            }
+        }catch(err){
+            echo "I guess the deployment didn't go well."
+        }    
+    }
+    stage('K8s Minion Configuration '){
+        try{
+            if ("${Kubeadm}" == "NO") {
+                build job: 'Kubernetes_Nodes_Install', parameters: [string(name: 'workingdir', value: "${env.BUILD_TAG}")]
+            } else {
+                build job: 'KubeAdm_Kubernetes_Nodes_Install', parameters: [string(name: 'workingdir', value: "${env.BUILD_TAG}")]
+            }
+        }catch(err){
+            echo "I guess the deployment didn't go well."
+        }    
+    }
+    stage('Check Status of the cluster'){
+        try{
+            build job: 'Kubernetes_Cluster_Status', parameters: [string(name: 'workingdir', value: "${env.BUILD_TAG}")]
+        }catch(err){
+            echo "I guess the deployment didn't go well."
+        }    
+    }
+    stage('Waiting to Delete Resources'){
+        try{
+            timeout(time: 120, unit: 'MINUTES') {
+                input "continue without waiting..."
+            }
+        }catch(err) {
+           echo "This was timedout automatically." 
+        }
+    }
+    stage('Clean-Up'){
+        build job: 'Delete_Azure_Resources', parameters: [string(name: 'ResourceName', value: "${ResourceName}"), string(name: 'workingdir', value: "${env.BUILD_TAG}")]
+    }
+
+}</script>
+    <sandbox>true</sandbox>
+  </definition>
+  <triggers/>
+</flow-definition>

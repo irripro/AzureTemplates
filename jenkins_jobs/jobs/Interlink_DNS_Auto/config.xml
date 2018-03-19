@@ -12,7 +12,7 @@
         <artifactNumToKeep>-1</artifactNumToKeep>
       </strategy>
     </jenkins.model.BuildDiscarderProperty>
-    <com.coravy.hudson.plugins.github.GithubProjectProperty plugin="github@1.26.1">
+    <com.coravy.hudson.plugins.github.GithubProjectProperty plugin="github@1.29.0">
       <projectUrl>https://github.com/alihhussain/ops/</projectUrl>
       <displayName></displayName>
     </com.coravy.hudson.plugins.github.GithubProjectProperty>
@@ -31,7 +31,7 @@
         <hudson.model.PasswordParameterDefinition>
           <name>passwd</name>
           <description>Put in the password for the principle account</description>
-          <defaultValue>{AQAAABAAAAAQnx9xRDFhNlzUew2ykBaBypZb/Ixx9O1P5CjoiAxtUYw=}</defaultValue>
+          <defaultValue>{AQAAABAAAABAVh1k3RT2u6kDwy2xiJ8eRlYALmiNQkdJ4DvGxW9tS+fVl77MdTZ0r+DssPA5nmxuvPcjxoR/jXuKDgKvabMlQg0f0usmnc1apELQgFkNpDg=}</defaultValue>
         </hudson.model.PasswordParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>subscription_id</name>
@@ -71,11 +71,5 @@ python /u01/ops/oss/scripts/interlink/dnsauto.py $ClientID $tenant $subscription
     </hudson.tasks.Shell>
   </builders>
   <publishers/>
-  <buildWrappers>
-    <com.michelin.cio.hudson.plugins.maskpasswords.MaskPasswordsBuildWrapper>
-      <varMaskRegexes>
-        <varMaskRegex regex="(&quot;\\p+&quot;)"/>
-      </varMaskRegexes>
-    </com.michelin.cio.hudson.plugins.maskpasswords.MaskPasswordsBuildWrapper>
-  </buildWrappers>
+  <buildWrappers/>
 </project>
