@@ -28,3 +28,79 @@ Fast-forward
  README.md | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 + cp -R /var/lib/jenkins/jobs/ /home/jenkins/github/AzureTemplates/jenkins_jobs
++ sudo chown jenkins:jenkins /home/jenkins/github/AzureTemplates/ -R
++ git add Automation Demo CSP CosmosDB Go Jenkins K8s Labs Migration NodeJS_Course README.md Scaleset Scripts docker jenkins_jobs osp-engagement pi selenium tty2gif.py
++ git commit -a -m Jenkins Update
+[master d193c6c] Jenkins Update
+ Committer: Ubuntu <jenkins@jenkinsV2.32fviqca1hiudj5ehbkkrn5qre.bx.internal.cloudapp.net>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly. Run the
+following command and follow the instructions in your editor to edit
+your configuration file:
+
+    git config --global --edit
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 54 files changed, 508 insertions(+)
+ create mode 100644 jenkins_jobs/jobs/ASR_Infrastructure_Build/builds/legacyIds
+ create mode 100644 jenkins_jobs/jobs/Build_Web_App_Pipeline/builds/legacyIds
+ create mode 100644 jenkins_jobs/jobs/Configure_All_Kubernetes_VMs/builds/legacyIds
+ create mode 100644 jenkins_jobs/jobs/Configure_Provisioned_Infrastructure/builds/legacyIds
+ create mode 100644 jenkins_jobs/jobs/Delay/builds/legacyIds
+ create mode 100644 jenkins_jobs/jobs/Delete_Azure_Resources/builds/legacyIds
+ create mode 100644 jenkins_jobs/jobs/Delete_Resources/builds/legacyIds
+ create mode 100644 jenkins_jobs/jobs/Deploy Initial VMs/builds/legacyIds
+ create mode 100644 jenkins_jobs/jobs/Deploy_OMS/builds/legacyIds
+ create mode 100644 jenkins_jobs/jobs/GitHub Syncs/config.xml
+ create mode 100644 jenkins_jobs/jobs/GitHub Syncs/jobs/GitSync_AzureTemplates/builds/13/build.xml
+ create mode 100644 jenkins_jobs/jobs/GitHub Syncs/jobs/GitSync_AzureTemplates/builds/13/changelog.xml
+ create mode 100644 jenkins_jobs/jobs/GitHub Syncs/jobs/GitSync_AzureTemplates/builds/13/log
+ create mode 100644 jenkins_jobs/jobs/GitHub Syncs/jobs/GitSync_AzureTemplates/builds/14/build.xml
+ create mode 100644 jenkins_jobs/jobs/GitHub Syncs/jobs/GitSync_AzureTemplates/builds/14/changelog.xml
+ create mode 100644 jenkins_jobs/jobs/GitHub Syncs/jobs/GitSync_AzureTemplates/builds/14/log
+ create mode 100644 jenkins_jobs/jobs/GitHub Syncs/jobs/GitSync_AzureTemplates/builds/15/build.xml
+ create mode 100644 jenkins_jobs/jobs/GitHub Syncs/jobs/GitSync_AzureTemplates/builds/15/changelog.xml
+ create mode 100644 jenkins_jobs/jobs/GitHub Syncs/jobs/GitSync_AzureTemplates/builds/15/log
+ create mode 100644 jenkins_jobs/jobs/GitHub Syncs/jobs/GitSync_AzureTemplates/builds/16/changelog.xml
+ create mode 100644 jenkins_jobs/jobs/GitHub Syncs/jobs/GitSync_AzureTemplates/builds/16/log
+ create mode 120000 jenkins_jobs/jobs/GitHub Syncs/jobs/GitSync_AzureTemplates/builds/lastFailedBuild
+ create mode 120000 jenkins_jobs/jobs/GitHub Syncs/jobs/GitSync_AzureTemplates/builds/lastStableBuild
+ create mode 120000 jenkins_jobs/jobs/GitHub Syncs/jobs/GitSync_AzureTemplates/builds/lastSuccessfulBuild
+ create mode 120000 jenkins_jobs/jobs/GitHub Syncs/jobs/GitSync_AzureTemplates/builds/lastUnstableBuild
+ create mode 120000 jenkins_jobs/jobs/GitHub Syncs/jobs/GitSync_AzureTemplates/builds/lastUnsuccessfulBuild
+ create mode 100644 jenkins_jobs/jobs/GitHub Syncs/jobs/GitSync_AzureTemplates/builds/legacyIds
+ create mode 100644 jenkins_jobs/jobs/GitHub Syncs/jobs/GitSync_AzureTemplates/config.xml
+ create mode 120000 jenkins_jobs/jobs/GitHub Syncs/jobs/GitSync_AzureTemplates/lastStable
+ create mode 120000 jenkins_jobs/jobs/GitHub Syncs/jobs/GitSync_AzureTemplates/lastSuccessful
+ create mode 100644 jenkins_jobs/jobs/GitHub Syncs/jobs/GitSync_AzureTemplates/nextBuildNumber
+ create mode 100644 jenkins_jobs/jobs/GitHub Syncs/jobs/GitSync_P20_ARM/builds/1/build.xml
+ create mode 100644 jenkins_jobs/jobs/GitHub Syncs/jobs/GitSync_P20_ARM/builds/1/changelog.xml
+ create mode 100644 jenkins_jobs/jobs/GitHub Syncs/jobs/GitSync_P20_ARM/builds/1/log
+ create mode 120000 jenkins_jobs/jobs/GitHub Syncs/jobs/GitSync_P20_ARM/builds/lastFailedBuild
+ create mode 120000 jenkins_jobs/jobs/GitHub Syncs/jobs/GitSync_P20_ARM/builds/lastStableBuild
+ create mode 120000 jenkins_jobs/jobs/GitHub Syncs/jobs/GitSync_P20_ARM/builds/lastSuccessfulBuild
+ create mode 120000 jenkins_jobs/jobs/GitHub Syncs/jobs/GitSync_P20_ARM/builds/lastUnstableBuild
+ create mode 120000 jenkins_jobs/jobs/GitHub Syncs/jobs/GitSync_P20_ARM/builds/lastUnsuccessfulBuild
+ create mode 100644 jenkins_jobs/jobs/GitHub Syncs/jobs/GitSync_P20_ARM/builds/legacyIds
+ create mode 100644 jenkins_jobs/jobs/GitHub Syncs/jobs/GitSync_P20_ARM/config.xml
+ create mode 120000 jenkins_jobs/jobs/GitHub Syncs/jobs/GitSync_P20_ARM/lastStable
+ create mode 120000 jenkins_jobs/jobs/GitHub Syncs/jobs/GitSync_P20_ARM/lastSuccessful
+ create mode 100644 jenkins_jobs/jobs/GitHub Syncs/jobs/GitSync_P20_ARM/nextBuildNumber
+ create mode 100644 jenkins_jobs/jobs/Initial_Infrastructure_Build/builds/legacyIds
+ create mode 100644 jenkins_jobs/jobs/Interlink_DNS_Auto/builds/legacyIds
+ create mode 100644 jenkins_jobs/jobs/KubeAdm_Configure_All_Kubernetes_VMs/builds/legacyIds
+ create mode 100644 jenkins_jobs/jobs/KubeAdm_Kubernetes_Master_Install/builds/legacyIds
+ create mode 100644 jenkins_jobs/jobs/KubeAdm_Kubernetes_Nodes_Install/builds/legacyIds
+ create mode 100644 jenkins_jobs/jobs/Kubernetes_Cluster_Status/builds/legacyIds
+ create mode 100644 jenkins_jobs/jobs/Kubernetes_Master_Install/builds/legacyIds
+ create mode 100644 jenkins_jobs/jobs/Kubernetes_Nodes_Install/builds/legacyIds
+ create mode 100644 jenkins_jobs/jobs/Pipeline_Build_Kubernetes_Cluster/builds/legacyIds
+ create mode 100644 jenkins_jobs/jobs/Test_Pipe_Line/builds/legacyIds
++ git push origin master
+To git@github.com:alihhussain/AzureTemplates.git
+   765450d..d193c6c  master -> master
+Finished: SUCCESS
