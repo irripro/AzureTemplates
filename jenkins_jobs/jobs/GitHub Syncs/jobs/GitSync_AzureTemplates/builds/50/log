@@ -18,3 +18,28 @@ Commit message: "Jenkins Update"
 + git pull
 Already up-to-date.
 + cp -R /var/lib/jenkins/jobs/ /home/jenkins/github/AzureTemplates/jenkins_jobs
++ sudo chown jenkins:jenkins /home/jenkins/github/AzureTemplates/ -R
++ git add Automation Demo CSP CosmosDB Go Jenkins K8s Labs Migration NodeJS_Course README.md Scaleset Scripts docker jenkins_jobs osp-engagement pi selenium tty2gif.py
++ git commit -a -m Jenkins Update
+[master 0a1e29d] Jenkins Update
+ Committer: Ubuntu <jenkins@jenkinsV2.32fviqca1hiudj5ehbkkrn5qre.bx.internal.cloudapp.net>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly. Run the
+following command and follow the instructions in your editor to edit
+your configuration file:
+
+    git config --global --edit
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 7 files changed, 131 insertions(+), 3 deletions(-)
+ create mode 100644 jenkins_jobs/jobs/GitHub Syncs/jobs/GitSync_AzureTemplates/builds/49/build.xml
+ create mode 100644 jenkins_jobs/jobs/GitHub Syncs/jobs/GitSync_AzureTemplates/builds/50/changelog.xml
+ create mode 100644 jenkins_jobs/jobs/GitHub Syncs/jobs/GitSync_AzureTemplates/builds/50/log
++ git push origin master
+To git@github.com:alihhussain/AzureTemplates.git
+   2f92a2f..0a1e29d  master -> master
+Finished: SUCCESS
