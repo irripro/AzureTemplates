@@ -1,0 +1,17 @@
+commit f802dbf3bf37186e36e9a591c0fc5fcb4091b728
+tree d0eda92c5b7c039f5e230e8316f86829e0478944
+parent dcf386ad7464b3fa25ac0661c823678fbe821a99
+author Ubuntu <jenkins@jenkinsV2.32fviqca1hiudj5ehbkkrn5qre.bx.internal.cloudapp.net> 2018-03-19 18:12:58 +0000
+committer Ubuntu <jenkins@jenkinsV2.32fviqca1hiudj5ehbkkrn5qre.bx.internal.cloudapp.net> 2018-03-19 18:12:58 +0000
+
+    Jenkins Update
+
+
+
+:000000 100644 0000000000000000000000000000000000000000 586ef000c126f0f699270f964d7a9f41857f934e A	jenkins_jobs/jobs/GitHub Syncs/jobs/GitSync_AzureTemplates/builds/30/build.xml
+:100644 100644 c19687425c90aa140b6419e3fd61b7f6625a388c 2e9a3cb242a9eb28977c3f17a0e28625344ecb1b M	jenkins_jobs/jobs/GitHub Syncs/jobs/GitSync_AzureTemplates/builds/30/log
+:000000 100644 0000000000000000000000000000000000000000 964c6d9d158c9aa77e994605ae771711e46ff991 A	jenkins_jobs/jobs/GitHub Syncs/jobs/GitSync_AzureTemplates/builds/31/changelog.xml
+:000000 100644 0000000000000000000000000000000000000000 9217efc2d6db8957dfbcfea427217d0f4929ff66 A	jenkins_jobs/jobs/GitHub Syncs/jobs/GitSync_AzureTemplates/builds/31/log
+:120000 120000 d99e90eb9675f72290ba32fbf844c1cb45c72718 8580e7b684b14da5d9f84ab4eaf2f5139d508cbe M	jenkins_jobs/jobs/GitHub Syncs/jobs/GitSync_AzureTemplates/builds/lastStableBuild
+:120000 120000 d99e90eb9675f72290ba32fbf844c1cb45c72718 8580e7b684b14da5d9f84ab4eaf2f5139d508cbe M	jenkins_jobs/jobs/GitHub Syncs/jobs/GitSync_AzureTemplates/builds/lastSuccessfulBuild
+:100644 100644 e85087affded170efcbc6f9672a6fc671d839ed0 f5c89552bd3e62bfce023a230e90d141f7a46b2f M	jenkins_jobs/jobs/GitHub Syncs/jobs/GitSync_AzureTemplates/nextBuildNumber
