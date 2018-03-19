@@ -1,0 +1,20 @@
+Started by GitHub push by alihhussain
+Building in workspace /var/lib/jenkins/workspace/GitHub Syncs/GitSync_AzureTemplates
+ > git rev-parse --is-inside-work-tree # timeout=10
+Fetching changes from the remote Git repository
+ > git config remote.origin.url https://github.com/alihhussain/AzureTemplates # timeout=10
+Fetching upstream changes from https://github.com/alihhussain/AzureTemplates
+ > git --version # timeout=10
+ > git fetch --tags --progress https://github.com/alihhussain/AzureTemplates +refs/heads/*:refs/remotes/origin/*
+ > git rev-parse refs/remotes/origin/master^{commit} # timeout=10
+ > git rev-parse refs/remotes/origin/origin/master^{commit} # timeout=10
+Checking out Revision 2ace4355a513d8eeb55d8562cd2f8703a60b4278 (refs/remotes/origin/master)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f 2ace4355a513d8eeb55d8562cd2f8703a60b4278
+Commit message: "Jenkins Update"
+ > git rev-list --no-walk 509c5005ee52fe8306d5c55e58b382d358b82874 # timeout=10
+[GitSync_AzureTemplates] $ /bin/sh -xe /tmp/jenkins9175914282326635397.sh
++ cd /home/jenkins/github/AzureTemplates/
++ git pull
+Already up-to-date.
++ cp -R /var/lib/jenkins/jobs/ /home/jenkins/github/AzureTemplates/jenkins_jobs
