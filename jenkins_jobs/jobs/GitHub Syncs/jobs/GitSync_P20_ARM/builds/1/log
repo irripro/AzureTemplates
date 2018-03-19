@@ -1,0 +1,30 @@
+Started by GitHub push by alihhussain
+Building in workspace /var/lib/jenkins/workspace/GitHub Syncs/GitSync_P20_ARM
+Cloning the remote Git repository
+Cloning repository https://github.com/alihhussain/AzureTemplates
+ > git init /var/lib/jenkins/workspace/GitHub Syncs/GitSync_P20_ARM # timeout=10
+Fetching upstream changes from https://github.com/alihhussain/AzureTemplates
+ > git --version # timeout=10
+ > git fetch --tags --progress https://github.com/alihhussain/AzureTemplates +refs/heads/*:refs/remotes/origin/*
+ > git config remote.origin.url https://github.com/alihhussain/AzureTemplates # timeout=10
+ > git config --add remote.origin.fetch +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git config remote.origin.url https://github.com/alihhussain/AzureTemplates # timeout=10
+Fetching upstream changes from https://github.com/alihhussain/AzureTemplates
+ > git fetch --tags --progress https://github.com/alihhussain/AzureTemplates +refs/heads/*:refs/remotes/origin/*
+ > git rev-parse refs/remotes/origin/master^{commit} # timeout=10
+ > git rev-parse refs/remotes/origin/origin/master^{commit} # timeout=10
+Checking out Revision f3bcc0f1d0263e85f7c58f45f0df7d183540c3a0 (refs/remotes/origin/master)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f f3bcc0f1d0263e85f7c58f45f0df7d183540c3a0
+Commit message: "Update README.md"
+First time build. Skipping changelog.
+[GitSync_P20_ARM] $ /bin/sh -xe /tmp/jenkins3093161605482392158.sh
++ cd /home/jenkins/github/training-events/
++ git pull
+From github.com:albertwo1978/training-events
+   997c22e..e02d9c5  master     -> origin/master
+Updating 997c22e..e02d9c5
+Fast-forward
+ p20-arm/docs/P20 Agenda.docx | Bin 16785 -> 16845 bytes
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+Finished: SUCCESS

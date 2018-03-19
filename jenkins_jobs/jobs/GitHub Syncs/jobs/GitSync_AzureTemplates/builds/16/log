@@ -1,0 +1,30 @@
+Started by GitHub push by alihhussain
+Building in workspace /var/lib/jenkins/workspace/GitHub Syncs/GitSync_AzureTemplates
+Cloning the remote Git repository
+Cloning repository https://github.com/alihhussain/AzureTemplates
+ > git init /var/lib/jenkins/workspace/GitHub Syncs/GitSync_AzureTemplates # timeout=10
+Fetching upstream changes from https://github.com/alihhussain/AzureTemplates
+ > git --version # timeout=10
+ > git fetch --tags --progress https://github.com/alihhussain/AzureTemplates +refs/heads/*:refs/remotes/origin/*
+ > git config remote.origin.url https://github.com/alihhussain/AzureTemplates # timeout=10
+ > git config --add remote.origin.fetch +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git config remote.origin.url https://github.com/alihhussain/AzureTemplates # timeout=10
+Fetching upstream changes from https://github.com/alihhussain/AzureTemplates
+ > git fetch --tags --progress https://github.com/alihhussain/AzureTemplates +refs/heads/*:refs/remotes/origin/*
+ > git rev-parse refs/remotes/origin/master^{commit} # timeout=10
+ > git rev-parse refs/remotes/origin/origin/master^{commit} # timeout=10
+Checking out Revision 765450dfc5f10bc10cba1c1ad9cace977cfd5f3a (refs/remotes/origin/master)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f 765450dfc5f10bc10cba1c1ad9cace977cfd5f3a
+Commit message: "Update README.md"
+First time build. Skipping changelog.
+[GitSync_AzureTemplates] $ /bin/sh -xe /tmp/jenkins35433516462472387.sh
++ cd /home/jenkins/github/AzureTemplates/
++ git pull
+From github.com:alihhussain/AzureTemplates
+   79839e7..765450d  master     -> origin/master
+Updating 79839e7..765450d
+Fast-forward
+ README.md | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
++ cp -R /var/lib/jenkins/jobs/ /home/jenkins/github/AzureTemplates/jenkins_jobs

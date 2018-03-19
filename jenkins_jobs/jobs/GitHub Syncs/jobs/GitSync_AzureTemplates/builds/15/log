@@ -1,0 +1,132 @@
+Started by user [8mha:////4N2QeX7mUQ790Ve6hLO0DnEc+msw0IakXJASdK1v1c/fAAAAmR+LCAAAAAAAAP9b85aBtbiIQTGjNKU4P08vOT+vOD8nVc83PyU1x6OyILUoJzMv2y+/JJUBAhiZGBgqihhk0NSjKDWzXb3RdlLBUSYGJk8GtpzUvPSSDB8G5tKinBIGIZ+sxLJE/ZzEvHT94JKizLx0a6BxUmjGOUNodHsLgAz2EgZe/dLi1CL9rNS87My8YgDGtiJjwgAAAA==[0mJenkins
+Building in workspace /var/lib/jenkins/workspace/gitsync
+[gitsync] $ /bin/sh -xe /tmp/jenkins1002091899509668824.sh
++ cd /home/jenkins/github/AzureTemplates/
++ git pull
+Already up-to-date.
++ cp -R /var/lib/jenkins/jobs/ /home/jenkins/github/AzureTemplates/jenkins_jobs
++ sudo chown jenkins:jenkins /home/jenkins/github/AzureTemplates/ -R
++ git add Automation Demo CSP CosmosDB Go Jenkins K8s Labs Migration NodeJS_Course README.md Scaleset Scripts docker jenkins_jobs osp-engagement pi selenium tty2gif.py
++ git commit -a -m Jenkins Update
+[master 79839e7] Jenkins Update
+ Committer: Ubuntu <jenkins@jenkinsV2.32fviqca1hiudj5ehbkkrn5qre.bx.internal.cloudapp.net>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly. Run the
+following command and follow the instructions in your editor to edit
+your configuration file:
+
+    git config --global --edit
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 118 files changed, 2184 insertions(+), 77 deletions(-)
+ create mode 100644 jenkins_jobs/jobs/ARM_Demo/config.xml
+ create mode 120000 jenkins_jobs/jobs/ASR_Infrastructure_Build/builds/lastFailedBuild
+ create mode 120000 jenkins_jobs/jobs/ASR_Infrastructure_Build/builds/lastSuccessfulBuild
+ create mode 100644 jenkins_jobs/jobs/ASR_Infrastructure_Build/config.xml
+ create mode 100644 jenkins_jobs/jobs/ASR_Infrastructure_Build/nextBuildNumber
+ create mode 120000 jenkins_jobs/jobs/Build_Web_App_Pipeline/builds/lastFailedBuild
+ create mode 120000 jenkins_jobs/jobs/Build_Web_App_Pipeline/builds/lastStableBuild
+ create mode 120000 jenkins_jobs/jobs/Build_Web_App_Pipeline/builds/lastSuccessfulBuild
+ create mode 120000 jenkins_jobs/jobs/Build_Web_App_Pipeline/builds/lastUnstableBuild
+ create mode 120000 jenkins_jobs/jobs/Build_Web_App_Pipeline/builds/lastUnsuccessfulBuild
+ create mode 100644 jenkins_jobs/jobs/Build_Web_App_Pipeline/config.xml
+ create mode 100644 jenkins_jobs/jobs/Build_Web_App_Pipeline/nextBuildNumber
+ create mode 120000 jenkins_jobs/jobs/Configure_All_Kubernetes_VMs/builds/lastFailedBuild
+ create mode 120000 jenkins_jobs/jobs/Configure_All_Kubernetes_VMs/builds/lastSuccessfulBuild
+ create mode 100644 jenkins_jobs/jobs/Configure_All_Kubernetes_VMs/config.xml
+ create mode 100644 jenkins_jobs/jobs/Configure_All_Kubernetes_VMs/nextBuildNumber
+ create mode 120000 jenkins_jobs/jobs/Configure_Provisioned_Infrastructure/builds/lastFailedBuild
+ create mode 120000 jenkins_jobs/jobs/Configure_Provisioned_Infrastructure/builds/lastSuccessfulBuild
+ create mode 100644 jenkins_jobs/jobs/Configure_Provisioned_Infrastructure/config.xml
+ create mode 100644 jenkins_jobs/jobs/Configure_Provisioned_Infrastructure/nextBuildNumber
+ create mode 120000 jenkins_jobs/jobs/Delay/builds/lastFailedBuild
+ create mode 120000 jenkins_jobs/jobs/Delay/builds/lastStableBuild
+ create mode 120000 jenkins_jobs/jobs/Delay/builds/lastSuccessfulBuild
+ create mode 120000 jenkins_jobs/jobs/Delay/builds/lastUnstableBuild
+ create mode 120000 jenkins_jobs/jobs/Delay/builds/lastUnsuccessfulBuild
+ create mode 120000 jenkins_jobs/jobs/Delete_Azure_Resources/builds/lastFailedBuild
+ create mode 120000 jenkins_jobs/jobs/Delete_Azure_Resources/builds/lastSuccessfulBuild
+ create mode 100644 jenkins_jobs/jobs/Delete_Azure_Resources/config.xml
+ create mode 100644 jenkins_jobs/jobs/Delete_Azure_Resources/nextBuildNumber
+ create mode 120000 jenkins_jobs/jobs/Delete_Resources/builds/lastFailedBuild
+ create mode 120000 jenkins_jobs/jobs/Delete_Resources/builds/lastSuccessfulBuild
+ create mode 120000 jenkins_jobs/jobs/Deploy Initial VMs/builds/lastFailedBuild
+ create mode 120000 jenkins_jobs/jobs/Deploy Initial VMs/builds/lastSuccessfulBuild
+ create mode 120000 jenkins_jobs/jobs/Deploy_OMS/builds/lastFailedBuild
+ create mode 120000 jenkins_jobs/jobs/Deploy_OMS/builds/lastSuccessfulBuild
+ create mode 120000 jenkins_jobs/jobs/Initial_Infrastructure_Build/builds/lastFailedBuild
+ create mode 120000 jenkins_jobs/jobs/Initial_Infrastructure_Build/builds/lastSuccessfulBuild
+ create mode 100644 jenkins_jobs/jobs/Initial_Infrastructure_Build/config.xml
+ create mode 100644 jenkins_jobs/jobs/Initial_Infrastructure_Build/nextBuildNumber
+ create mode 120000 jenkins_jobs/jobs/Interlink_DNS_Auto/builds/lastFailedBuild
+ create mode 120000 jenkins_jobs/jobs/Interlink_DNS_Auto/builds/lastStableBuild
+ create mode 120000 jenkins_jobs/jobs/Interlink_DNS_Auto/builds/lastSuccessfulBuild
+ create mode 120000 jenkins_jobs/jobs/Interlink_DNS_Auto/builds/lastUnstableBuild
+ create mode 120000 jenkins_jobs/jobs/Interlink_DNS_Auto/builds/lastUnsuccessfulBuild
+ create mode 120000 jenkins_jobs/jobs/KubeAdm_Configure_All_Kubernetes_VMs/builds/lastFailedBuild
+ create mode 120000 jenkins_jobs/jobs/KubeAdm_Configure_All_Kubernetes_VMs/builds/lastSuccessfulBuild
+ create mode 100644 jenkins_jobs/jobs/KubeAdm_Configure_All_Kubernetes_VMs/config.xml
+ create mode 100644 jenkins_jobs/jobs/KubeAdm_Configure_All_Kubernetes_VMs/nextBuildNumber
+ create mode 120000 jenkins_jobs/jobs/KubeAdm_Kubernetes_Master_Install/builds/lastFailedBuild
+ create mode 120000 jenkins_jobs/jobs/KubeAdm_Kubernetes_Master_Install/builds/lastStableBuild
+ create mode 120000 jenkins_jobs/jobs/KubeAdm_Kubernetes_Master_Install/builds/lastSuccessfulBuild
+ create mode 120000 jenkins_jobs/jobs/KubeAdm_Kubernetes_Master_Install/builds/lastUnstableBuild
+ create mode 120000 jenkins_jobs/jobs/KubeAdm_Kubernetes_Master_Install/builds/lastUnsuccessfulBuild
+ create mode 100644 jenkins_jobs/jobs/KubeAdm_Kubernetes_Master_Install/config.xml
+ create mode 100644 jenkins_jobs/jobs/KubeAdm_Kubernetes_Master_Install/nextBuildNumber
+ create mode 120000 jenkins_jobs/jobs/KubeAdm_Kubernetes_Nodes_Install/builds/lastFailedBuild
+ create mode 120000 jenkins_jobs/jobs/KubeAdm_Kubernetes_Nodes_Install/builds/lastSuccessfulBuild
+ create mode 100644 jenkins_jobs/jobs/KubeAdm_Kubernetes_Nodes_Install/config.xml
+ create mode 100644 jenkins_jobs/jobs/KubeAdm_Kubernetes_Nodes_Install/nextBuildNumber
+ create mode 100644 jenkins_jobs/jobs/KubernetesAutomation/Configure_All_Kubernetes_VMs/config.xml
+ create mode 100644 jenkins_jobs/jobs/KubernetesAutomation/Delete_Azure_Resources/config.xml
+ create mode 100644 jenkins_jobs/jobs/KubernetesAutomation/KubeAdm_Configure_All_Kubernetes_VMs/config.xml
+ create mode 100644 jenkins_jobs/jobs/KubernetesAutomation/KubeAdm_Kubernetes_Master_Install/config.xml
+ create mode 100644 jenkins_jobs/jobs/KubernetesAutomation/KubeAdm_Kubernetes_Nodes_Install/config.xml
+ create mode 100644 jenkins_jobs/jobs/KubernetesAutomation/Kubernetes_Cluster_Status/config.xml
+ create mode 100644 jenkins_jobs/jobs/KubernetesAutomation/Kubernetes_Master_Install/config.xml
+ create mode 100644 jenkins_jobs/jobs/KubernetesAutomation/Kubernetes_Nodes_Install/config.xml
+ create mode 100644 jenkins_jobs/jobs/KubernetesAutomation/Pipeline_Build_Kubernetes_Cluster/config.xml
+ create mode 120000 jenkins_jobs/jobs/Kubernetes_Cluster_Status/builds/lastFailedBuild
+ create mode 120000 jenkins_jobs/jobs/Kubernetes_Cluster_Status/builds/lastSuccessfulBuild
+ create mode 100644 jenkins_jobs/jobs/Kubernetes_Cluster_Status/config.xml
+ create mode 100644 jenkins_jobs/jobs/Kubernetes_Cluster_Status/nextBuildNumber
+ create mode 120000 jenkins_jobs/jobs/Kubernetes_Master_Install/builds/lastFailedBuild
+ create mode 120000 jenkins_jobs/jobs/Kubernetes_Master_Install/builds/lastSuccessfulBuild
+ create mode 100644 jenkins_jobs/jobs/Kubernetes_Master_Install/config.xml
+ create mode 100644 jenkins_jobs/jobs/Kubernetes_Master_Install/nextBuildNumber
+ create mode 120000 jenkins_jobs/jobs/Kubernetes_Nodes_Install/builds/lastFailedBuild
+ create mode 120000 jenkins_jobs/jobs/Kubernetes_Nodes_Install/builds/lastSuccessfulBuild
+ create mode 100644 jenkins_jobs/jobs/Kubernetes_Nodes_Install/config.xml
+ create mode 100644 jenkins_jobs/jobs/Kubernetes_Nodes_Install/nextBuildNumber
+ create mode 120000 jenkins_jobs/jobs/Pipeline_Build_Kubernetes_Cluster/builds/lastFailedBuild
+ create mode 120000 jenkins_jobs/jobs/Pipeline_Build_Kubernetes_Cluster/builds/lastSuccessfulBuild
+ create mode 100644 jenkins_jobs/jobs/Pipeline_Build_Kubernetes_Cluster/config.xml
+ create mode 100644 jenkins_jobs/jobs/Pipeline_Build_Kubernetes_Cluster/nextBuildNumber
+ create mode 120000 jenkins_jobs/jobs/Test_Pipe_Line/builds/lastFailedBuild
+ create mode 120000 jenkins_jobs/jobs/Test_Pipe_Line/builds/lastSuccessfulBuild
+ create mode 100644 jenkins_jobs/jobs/WebApp/ASR_Infrastructure_Build/config.xml
+ create mode 100644 jenkins_jobs/jobs/WebApp/Build_Web_App_Pipeline/config.xml
+ create mode 100644 jenkins_jobs/jobs/WebApp/Configure_Provisioned_Infrastructure/config.xml
+ create mode 100644 jenkins_jobs/jobs/WebApp/Initial_Infrastructure_Build/config.xml
+ create mode 100644 jenkins_jobs/jobs/gitsync/builds/13/build.xml
+ create mode 100644 jenkins_jobs/jobs/gitsync/builds/13/changelog.xml
+ create mode 100644 jenkins_jobs/jobs/gitsync/builds/13/log
+ create mode 100644 jenkins_jobs/jobs/gitsync/builds/14/build.xml
+ create mode 100644 jenkins_jobs/jobs/gitsync/builds/14/changelog.xml
+ create mode 100644 jenkins_jobs/jobs/gitsync/builds/14/log
+ create mode 100644 jenkins_jobs/jobs/gitsync/builds/15/changelog.xml
+ create mode 100644 jenkins_jobs/jobs/gitsync/builds/15/log
+ create mode 120000 jenkins_jobs/jobs/gitsync/builds/lastFailedBuild
+ create mode 120000 jenkins_jobs/jobs/gitsync/builds/lastStableBuild
+ create mode 120000 jenkins_jobs/jobs/gitsync/builds/lastSuccessfulBuild
+ create mode 120000 jenkins_jobs/jobs/gitsync/builds/lastUnstableBuild
+ create mode 120000 jenkins_jobs/jobs/gitsync/builds/lastUnsuccessfulBuild
++ git push origin master
+To git@github.com:alihhussain/AzureTemplates.git
+   a949e2f..79839e7  master -> master
+Finished: SUCCESS
