@@ -35,6 +35,8 @@ There are 3 templates in this directory.
             ```
             Or run it all at once
             ```bash
+            export rgName="test" && \
+            export rgLocation="eastus" && \
             az group create -l $rgLocation -n $rgName && \
             az group deployment create --name MasterDeployment --resource-group $rgName --template-file ./test.json
             ```
