@@ -33,6 +33,11 @@ There are 3 templates in this directory.
             ```bash
             az group deployment create --name MasterDeployment --resource-group $rgName --template-file ./v2azuredeploytogether.json --no-wait
             ```
+            Or run it all at once
+            ```bash
+            az group create -l $rgLocation -n $rgName && \
+            az group deployment create --name MasterDeployment --resource-group $rgName --template-file ./test.json
+            ```
         5. To Delete the resource group
             ```bash
             az group delete -n $rgName -y --no-wait
