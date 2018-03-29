@@ -8,3 +8,11 @@
 </a>
 
 This template deploys a Nginx web server on a Ubuntu Virtual Machine. This template also deploys a Storage Account, Virtual Network, Public IP addresses and a Network Interface.
+
+```bash
+cd /var/lib/cloud/instances
+vim user-data.txt
+cat /var/log/cloud-init.log | grep config-scripts-user
+cat /var/log/boot.log
+
+```
