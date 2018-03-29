@@ -1,0 +1,153 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {},
+    "variables": {},
+    "resources": [
+        {
+            "type": "Microsoft.Network/virtualNetworks",
+            "name": "centos74VNET",
+            "apiVersion": "2018-01-01",
+            "location": "eastus",
+            "tags": {},
+            "properties": {
+                "addressSpace": {
+                    "addressPrefixes": [
+                        "10.0.0.0/16"
+                    ]
+                },
+                "subnets": [
+                    {
+                        "name": "centos74Subnet",
+                        "properties": {
+                            "addressPrefix": "10.0.0.0/24"
+                        }
+                    }
+                ]
+            },
+            "dependsOn": []
+        },
+        {
+            "type": "Microsoft.Network/networkSecurityGroups",
+            "name": "centos74NSG",
+            "apiVersion": "2018-01-01",
+            "location": "eastus",
+            "tags": {},
+            "properties": {
+                "securityRules": [
+                    {
+                        "name": "default-allow-ssh",
+                        "properties": {
+                            "protocol": "Tcp",
+                            "sourcePortRange": "*",
+                            "destinationPortRange": "22",
+                            "sourceAddressPrefix": "*",
+                            "destinationAddressPrefix": "*",
+                            "access": "Allow",
+                            "priority": 1000,
+                            "direction": "Inbound"
+                        }
+                    }
+                ]
+            },
+            "dependsOn": []
+        },
+        {
+            "type": "Microsoft.Network/publicIPAddresses",
+            "name": "centos74PublicIP",
+            "apiVersion": "2018-01-01",
+            "location": "eastus",
+            "tags": {},
+            "properties": {
+                "publicIPAllocationMethod": "dynamic"
+            },
+            "dependsOn": []
+        },
+        {
+            "type": "Microsoft.Network/networkInterfaces",
+            "name": "centos74VMNic",
+            "apiVersion": "2018-01-01",
+            "location": "eastus",
+            "tags": {},
+            "properties": {
+                "ipConfigurations": [
+                    {
+                        "name": "ipconfigcentos74",
+                        "properties": {
+                            "privateIPAllocationMethod": "Dynamic",
+                            "subnet": {
+                                "id": "/subscriptions/e729c299-db43-40ce-991a-7e4572a69d50/resourceGroups/myResourceGroup2/providers/Microsoft.Network/virtualNetworks/centos74VNET/subnets/centos74Subnet"
+                            },
+                            "publicIPAddress": {
+                                "id": "/subscriptions/e729c299-db43-40ce-991a-7e4572a69d50/resourceGroups/myResourceGroup2/providers/Microsoft.Network/publicIPAddresses/centos74PublicIP"
+                            }
+                        }
+                    }
+                ],
+                "networkSecurityGroup": {
+                    "id": "/subscriptions/e729c299-db43-40ce-991a-7e4572a69d50/resourceGroups/myResourceGroup2/providers/Microsoft.Network/networkSecurityGroups/centos74NSG"
+                }
+            },
+            "dependsOn": [
+                "Microsoft.Network/virtualNetworks/centos74VNET",
+                "Microsoft.Network/networkSecurityGroups/centos74NSG",
+                "Microsoft.Network/publicIpAddresses/centos74PublicIP"
+            ]
+        },
+        {
+            "type": "Microsoft.Compute/virtualMachines",
+            "name": "centos74",
+            "apiVersion": "2017-12-01",
+            "location": "eastus",
+            "tags": {},
+            "properties": {
+                "hardwareProfile": {
+                    "vmSize": "Standard_DS1_v2"
+                },
+                "networkProfile": {
+                    "networkInterfaces": [
+                        {
+                            "id": "/subscriptions/e729c299-db43-40ce-991a-7e4572a69d50/resourceGroups/myResourceGroup2/providers/Microsoft.Network/networkInterfaces/centos74VMNic"
+                        }
+                    ]
+                },
+                "storageProfile": {
+                    "osDisk": {
+                        "createOption": "fromImage",
+                        "name": null,
+                        "caching": "ReadWrite",
+                        "managedDisk": {
+                            "storageAccountType": null
+                        }
+                    },
+                    "imageReference": {
+                        "publisher": "OpenLogic",
+                        "offer": "CentOS",
+                        "sku": "7-CI",
+                        "version": "latest"
+                    }
+                },
+                "osProfile": {
+                    "computerName": "centos74",
+                    "adminUsername": "jenkins",
+                    "customData": "I2Nsb3VkLWNvbmZpZwpyZXBvX3VwZGF0ZTogdHJ1ZQpyZXBvX3VwZ3JhZGU6IGFsbAoKcnVuY21kOgogLSBycG0gLS1pbXBvcnQgaHR0cHM6Ly9wYWNrYWdlcy5taWNyb3NvZnQuY29tL2tleXMvbWljcm9zb2Z0LmFzYwogLSBbIHNoIC1jICdlY2hvIC1lICJbYXp1cmUtY2xpXVxubmFtZT1BenVyZSBDTElcbmJhc2V1cmw9aHR0cHM6Ly9wYWNrYWdlcy5taWNyb3NvZnQuY29tL3l1bXJlcG9zL2F6dXJlLWNsaVxuZW5hYmxlZD0xXG5ncGdjaGVjaz0xXG5ncGdrZXk9aHR0cHM6Ly9wYWNrYWdlcy5taWNyb3NvZnQuY29tL2tleXMvbWljcm9zb2Z0LmFzYyIgPiAvZXRjL3l1bS5yZXBvcy5kL2F6dXJlLWNsaS5yZXBvJyBdCiAtIHl1bSBpbnN0YWxsIGF6dXJlLWNsaSAteQ==",
+                    "linuxConfiguration": {
+                        "disablePasswordAuthentication": true,
+                        "ssh": {
+                            "publicKeys": [
+                                {
+                                    "keyData": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCsvQoaddMbc5zdqMXnBrn53eatB1hzHwk0rlpg/SUn+B6yMJRq0fvntn1/LWkhsOv2QIOkSZhnZO5rUJuoSaBZuRkXf2wUsva2Z9iaKMozzcadUXCU0y/2ekCPY+8eUZOSvTgmn2K0xT12H+rrzGK6MBgnFgDZ2npROZa4eF4SkMxcMpFbOiOEY53/OiokbwEFUXD3omrhURqJzOOWdaCy4XPjWvjEzpNagTM/uy0habgSVVa3Uj/aF8QkgixJOlgME4jBMyM4uyd/lCsgKvrFquwVbOWZUcic+lZTDVfjIUyqTkq6+avzxtWnxMNrktW7gfOA1Des53Vs4N4QL+af jenkins@jenkins",
+                                    "path": "/home/jenkins/.ssh/authorized_keys"
+                                }
+                            ]
+                        }
+                    }
+                }
+            },
+            "dependsOn": [
+                "Microsoft.Network/networkInterfaces/centos74VMNic"
+            ]
+        }
+    ],
+    "outputs": {}
+}
