@@ -283,6 +283,12 @@ drwx------ 0 ali ali  512 Jan 16 11:22 kubeconfig
 -rw------- 1 ali ali 3.2K Jan 16 11:22 kubectlClient.key
 ```
 
+To Access the cluster using config environment variable
+```bash
+export  KUBECONFIG=YourPathTo_outputFolder/myconfig
+kubectl get nodes
+```
+
 # Live Demo Second Session
 
 ## Access the Dash Board
