@@ -9,9 +9,9 @@ To get the container up and running:
 
 1. [Install Docker](https://docs.docker.com/engine/installation/)
 2. Pull Image
-    * Run: ```docker pull alihhussain/azurepublic:301Base```
+    * Run: ```docker pull alihhussain/azurepublic:clusterbase10th```
 3. Run the image
-    * Run: ```docker run -it alihhussain/azurepublic:301Base```
+    * Run: ```docker run -it alihhussain/azurepublic:clusterbase10th```
 4. Check Kubernetes Status
     * Run: ```kubectl get nodes```
 ```bash
