@@ -62,6 +62,13 @@ aks-nodepool1-23314708-3   Ready     2h        v1.7.7
 # Live Demo
 ## Ch 02
 
+To Access the cluster using config environment variable
+```bash
+export  KUBECONFIG=YourPathTo_outputFolder/myconfig
+kubectl get nodes
+```
+
+
 ### Pod
 Get to the directory
 ```bash
