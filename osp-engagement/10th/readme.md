@@ -244,7 +244,7 @@ wget https://raw.githubusercontent.com/Azure/acs-engine/fc56e540144aad66baf76944
 
 ```bash
 acs-engine deploy --subscription-id e729c299-db43-40ce-991a-7e4572a69d50 \
-    --dns-prefix livedemosogeti --location westus2 \
+    --dns-prefix livedemo11th --location westus2 \
     --auto-suffix --api-model kubernetes.json
 ```
 
