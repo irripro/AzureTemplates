@@ -64,7 +64,8 @@ aks-nodepool1-23314708-3   Ready     2h        v1.7.7
 
 To Access the cluster using config environment variable
 ```bash
-export  KUBECONFIG=YourPathTo_outputFolder/myconfig
+wget https://raw.githubusercontent.com/alihhussain/AzureTemplates/master/docker/base_301_AKS/myconfig
+export  KUBECONFIG=./myconfig
 kubectl get nodes
 ```
 
