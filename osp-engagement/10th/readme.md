@@ -338,7 +338,16 @@ docker tag alihhussain/azurepublic:info-app-enhanced 10thmag.azurecr.io/azurepub
 docker push 10thmag.azurecr.io/azurepublic:info-app-enhanced
 
 # Fetch the config file
-wget -O my-private-reg-pod.yaml https://k8s.io/docs/tasks/configure-pod-container/private-reg-pod.yaml
+wget -O my-private-reg-pod.yaml https://raw.githubusercontent.com/alihhussain/AzureTemplates/master/osp-engagement/10th/my-private-reg-pod.yaml
+
+# Set Kubeconfig Again If required
+export KUBECONFIG=/mnt/c/Users/alhussai/Documents/GitHub/AzureTemplates/docker/base_301_AKS/myconfig
+
+#Deploy the container to Cluster
+kubectl create -f my-private-reg-pod.yaml
+
+# Port Forward to see the container
+kubectl port-forward private-reg 8080:80
 ```
 
 
