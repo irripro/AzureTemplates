@@ -332,6 +332,17 @@ kubectl get secret regcred --output="jsonpath={.data.\.dockercfg}" | base64 -d
 
 ```
 
+## Docker push to private
+```bash
+docker tag alihhussain/azurepublic:info-app-enhanced 10thmag.azurecr.io/azurepublic:info-app-enhanced
+docker push 10thmag.azurecr.io/azurepublic:info-app-enhanced
+
+# Fetch the config file
+wget -O my-private-reg-pod.yaml https://k8s.io/docs/tasks/configure-pod-container/private-reg-pod.yaml
+```
+
+
+
 ## Access the Dash Board
 
 1. Ensure the correct ```~/.kube/config``` file is present
