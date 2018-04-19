@@ -299,6 +299,39 @@ kubectl get nodes
 
 # Live Demo Second Session
 
+## ACR (Azure Container Registry) with Kubernetes
+```bash
+kubectl create secret docker-registry regcred --docker-server=<your-registry-server> --docker-username=<your-name> --docker-password=<your-pword> --docker-email=<your-email>
+```
+
+```bash
+export passwd="<Password_from_Container_registry>"
+export server="10thmag.azurecr.io"
+export usr="10thmag"
+export email="alhussai@microsoft.com"
+
+kubectl create secret docker-registry regcred --docker-server=$server --docker-username=$usr --docker-password=$passwd --docker-email=$email
+
+# Verify secret is there
+> $ kubectl get secret regcred --output=yaml
+apiVersion: v1
+data:
+  .dockercfg: <...>
+kind: Secret
+metadata:
+  creationTimestamp: 2018-04-19T17:40:09Z
+  name: regcred
+  namespace: default
+  resourceVersion: "116754"
+  selfLink: /api/v1/namespaces/default/secrets/regcred
+  uid: <...>
+type: kubernetes.io/dockercfg
+
+# To Verify Human Readable
+kubectl get secret regcred --output="jsonpath={.data.\.dockercfg}" | base64 -d
+
+```
+
 ## Access the Dash Board
 
 1. Ensure the correct ```~/.kube/config``` file is present
