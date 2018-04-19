@@ -349,7 +349,19 @@ kubectl create -f my-private-reg-pod.yaml
 # Port Forward to see the container
 kubectl port-forward private-reg 8080:80
 ```
+## SSH into the Master
 
+```bash
+# Fetch the private Key
+wget https://raw.githubusercontent.com/alihhussain/azure-cloud-init/master/apache/apacheSshKeys/id_rsa
+
+# Change Permissions on the downloaded private key
+
+chmod 600 ./id_rsa
+
+# Log into the box
+ssh -i ./id_rsa azureuser@livedemo10th-5ad78190.westus2.cloudapp.azure.com
+```
 
 
 ## Access the Dash Board
