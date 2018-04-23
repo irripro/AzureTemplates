@@ -1,5 +1,6 @@
 FROM ubuntu:latest
 MAINTAINER Ali Hussain "alhussai@microsoft.com"
+EXPOSE 80
 RUN apt-get update -y
 RUN apt-get install -y python-pip python-dev build-essential
 RUN pip install --upgrade pip
