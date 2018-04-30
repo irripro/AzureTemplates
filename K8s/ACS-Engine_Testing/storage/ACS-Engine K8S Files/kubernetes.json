@@ -39,8 +39,7 @@
         },
         "servicePrincipalProfile": {
             "clientId": "",
-            "secret": "",
-            "objectId": ""
+            "secret": ""
         }
     }
 }
