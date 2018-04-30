@@ -5,7 +5,6 @@
             "orchestratorType": "Kubernetes",
             "orchestratorRelease": "1.10",
             "kubernetesConfig": {
-                "enableEncryptionWithExternalKms": true,
                 "addons": [
                     {
                         "name": "rescheduler",
