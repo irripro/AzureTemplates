@@ -5,36 +5,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Kubernetes Info Page</title>
-    <link rel="stylesheet" href="/static/k8s.css">
+    <title>Storage Page</title>
 </head>
 
 <body>
     <div>
-        <h1>This is your Kubernetes Info Page</h1>
+        <h1>Storage Testing</h1>
     </div>
     <table>
         <tbody>
             <tr>
-                <th>Node Name:</th>
-                <th class="info">{{k8s_node_name}}</th>
+                <th>Storage Key:</th>
+                <th class="key">{{k8s_key}}</th>
             </tr>
-            <tr>
-                <th>Pod Name</th>
-                <th class="info">{{k8s_pod_name}}</th>
-            </tr>
-            <tr>
-                <th>Pod Namespace</th>
-                <th class="info">{{k8s_pod_namespace}}</th>
-            </tr>
-            <tr>
-                <th>Pod IP</th>
-                <th class="info">{{k8s_pod_ip}}</th>
-            </tr>
-            <tr>
-                <th>Pod Service Account</th>
-                <th class="info">{{k8s_serviceaccount_name}}</th>
-            </tr>
+
         </tbody>
     </table>
 </body>
