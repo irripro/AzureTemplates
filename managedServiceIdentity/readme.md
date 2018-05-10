@@ -33,7 +33,7 @@ When a User Identity is created a ***service principal*** is created in the back
 * ```clientId``` 
 * ```name```
 * ```tenantId``` 
-* **```principalId```** - Note this value is not created when you simply create a Service Principal
+* <a name="principalid"></a>**```principalId```** - Note this value is not created when you simply create a Service Principal
 
 
 Also note there is no ```secret``` value present when creating a User MSI, while it is present when creating a service principal.
@@ -148,12 +148,11 @@ A custom role can always be [created](https://docs.microsoft.com/en-us/cli/azure
 The one chosen for this example is of type ```owner```.
 
 #### Assign role to User MSI (intern to the Service Principal)
-
+Retrive the value of principalID from the [output of User Identity creation command.](#principalid)
 ```bash
 export principalID=""
 export roleType="owner"
 export storageAccountID=""
 az role assignment create --assignee-object-id $principalID --role $roleType \
     --scope $storageAccountID
-
 ```
