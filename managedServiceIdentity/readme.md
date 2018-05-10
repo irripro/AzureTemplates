@@ -14,6 +14,7 @@ export rg="testingMSI"
 az identity create -g $rg -n $nameMSI
 ```
 Sample Output
+<a name="principalid"></a>
 ```json
 {
   "clientId": "94eee889-12d1-47b2-870c-f5cd4ff3e1e8",
@@ -33,7 +34,7 @@ When a User Identity is created a ***service principal*** is created in the back
 * ```clientId``` 
 * ```name```
 * ```tenantId``` 
-* <a name="principalid"></a>**```principalId```** - Note this value is not created when you simply create a Service Principal
+* **```principalId```** - Note this value is not created when you simply create a Service Principal
 
 
 Also note there is no ```secret``` value present when creating a User MSI, while it is present when creating a service principal.
