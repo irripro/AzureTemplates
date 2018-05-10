@@ -166,5 +166,23 @@ az role assignment create --assignee-object-id $principalID --role $roleType \
 To Validate the role was assigned to the Service Principal lets [re-run](#findrole) the following command.
 ```bash
 export servicePrincipalID="70682c4c-c8f5-4759-9b93-6315fef6c6f9"
-az role assignment list --assign $servicePrincipalID
+az role assignment list --all | grep -B 10 -A 5 $servicePrincipalID
+
+#Output
+{
+    "id": "/subscriptions/e729c299-db43-40ce-991a-7e4572a69d50/resourceGroups/testingMSI/providers/Microsoft.Storage/storageAccounts/ocptesting123/providers/Microsoft.Authorization/roleAssignments/4633382d-788d-4c67-8c8e-dbd2c6a65e57",
+    "name": "4633382d-788d-4c67-8c8e-dbd2c6a65e57",
+    "properties": {
+      "additionalProperties": {
+        "createdBy": "d291c899-5297-4604-aa71-a6683b02397b",
+        "createdOn": "2018-05-10T19:19:02.5469177Z",
+        "updatedBy": "d291c899-5297-4604-aa71-a6683b02397b",
+        "updatedOn": "2018-05-10T19:19:02.5469177Z"
+      },
+      "principalId": "70682c4c-c8f5-4759-9b93-6315fef6c6f9",
+      "principalName": "94eee889-12d1-47b2-870c-f5cd4ff3e1e8",
+      "roleDefinitionId": "/subscriptions/e729c299-db43-40ce-991a-7e4572a69d50/providers/Microsoft.Authorization/roleDefinitions/8e3af657-a8ff-443c-a75c-2fe8c4bcb635",
+      "roleDefinitionName": "Owner",
+      "scope": "/subscriptions/e729c299-db43-40ce-991a-7e4572a69d50/resourceGroups/testingMSI/providers/Microsoft.Storage/storageAccounts/ocptesting123"
+    },
 ```
