@@ -52,9 +52,10 @@ AppId                                 DisplayName    ObjectId                   
 
 ```
 By default the ***Service principal*** does **not** have any roles assigned to it. <br> You can view the roles assigned to the service principal:
+<a name="findrole"></a>
 ```bash
 export servicePrincipalID="94eee889-12d1-47b2-870c-f5cd4ff3e1e8"
-$ az role assignment list --assign $servicePrincipalID
+az role assignment list --assign $servicePrincipalID
 []
 ```
 
@@ -78,6 +79,7 @@ az vm create --resource-group $rg \
 ```
 
 #### Lets Create a Storage Account
+<a name="storage"></a>
 ```bash
 export storageName="ocptesting123"
 export rg="testingMSI"
@@ -149,11 +151,20 @@ A custom role can always be [created](https://docs.microsoft.com/en-us/cli/azure
 The one chosen for this example is of type ```owner```.
 
 #### Assign role to User MSI (intern to the Service Principal)
-Retrive the value of principalID from the [output of User Identity creation command.](#principalid)
+Required Values:
+* Retrive the value of principalID from the [output of User Identity creation command.](#principalid)
+* Scope - The scope used in this example is that of the [storage account which was created earlier.](#storage) Storage ID will be used to define the scope.
+
 ```bash
-export principalID=""
+export principalID="70682c4c-c8f5-4759-9b93-6315fef6c6f9"
 export roleType="owner"
-export storageAccountID=""
+storageAccountID="/subscriptions/e729c299-db43-40ce-991a-7e4572a69d50/resourceGroups/testingMSI/providers/Microsoft.Storage/storageAccounts/ocptesting123"
 az role assignment create --assignee-object-id $principalID --role $roleType \
     --scope $storageAccountID
+```
+
+To Validate the role was assigned to the Service Principal lets [re-run](#findrole) the following command.
+```bash
+export servicePrincipalID="70682c4c-c8f5-4759-9b93-6315fef6c6f9"
+az role assignment list --assign $servicePrincipalID
 ```
