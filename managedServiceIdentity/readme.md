@@ -1,4 +1,4 @@
-# Managed Service Identity (MSI Azure)
+# Managed Service Identity (MSI Azure) - User Assigned Identity
 
 ## Create a Resource Group
 ```bash
@@ -6,7 +6,7 @@ export rg="testingMSI"
 export location="eastus"
 az group create -l $location -n $rg
 ```
-## Create a new User Identity
+## Create a new User Assigned Identity
 
 ```bash
 export nameMSI="ocpMSI"
@@ -30,17 +30,17 @@ Sample Output
 }
 ```
 
-When a User Identity is created a ***service principal*** is created in the background within the Azure Active directory and the following information is of note:
+When a User assigned Identity is created, a ***service principal*** is also created in the background within the Azure Active directory and the following information is of note:
 * ```clientId``` 
 * ```name```
 * ```tenantId``` 
 * **```principalId```** - Note this value is not created when you simply create a Service Principal
 
 
-Also note there is no ```secret``` value present when creating a User MSI, while it is present when creating a service principal.
+Also note there is no ```secret``` value present when creating a User assigned identity, while it is present when creating a service principal.
 <br><br><br>
 
-To view the details of the ***Service Principal***:
+To view the details of the ***Service Principal*** (*Created in the background when user assigned identity was created*):
 ```bash
 export servicePrincipalID="94eee889-12d1-47b2-870c-f5cd4ff3e1e8"
 az ad sp show --id $servicePrincipalID -o table
@@ -59,12 +59,12 @@ az role assignment list --assign $servicePrincipalID
 []
 ```
 
-***By Default the User Identity (MSI) created does not have any permissions because there is no role associated to the Service Principal that had been created.***
+***By Default the User assigned identity created does not have any permissions because there is no role associated to the Service Principal that had been created.***
 <br><br>
 To prove this lets go ahead and create a **VM** along with a **Storage Account** and try to access the storage account from within the VM.
 <br><br>
 
-#### Lets Create a VM and give it the User MSI (Managed Service Identity) that was just created.
+#### Lets Create a VM and give it the User assigned identity (Managed Service Identity) that was just created.
 ```bash
 export rg="testingMSI"
 export vmName="vmWithMSI"
@@ -98,7 +98,7 @@ az storage account create --name $storageName --resource-group $rg \
     --kind StorageV2
 ```
 
-The Value of note from the output is:
+The ***value*** of note from the output is:
 
 **Storage Account ID**: ```/subscriptions/e729c299-db43-40ce-991a-7e4572a69d50/resourceGroups/testingMSI/providers/Microsoft.Storage/storageAccounts/ocptesting123```
 
@@ -150,9 +150,10 @@ A custom role can always be [created](https://docs.microsoft.com/en-us/cli/azure
 <br><br>
 The one chosen for this example is of type ```owner```.
 
-#### Assign role to User MSI (intern to the Service Principal)
-Required Values:
-* Retrive the value of principalID from the [output of User Identity creation command.](#principalid)
+#### Assign a role to User assigned identity 
+In the backtground your assigning the role to the Service Principal that was created when the user assigned identity was created.<br>
+<br>**Required Values**:
+* Retrive the value of principalID from the [output of User Assigned Identity creation command.](#principalid)
 * Scope - The scope used in this example is that of the [storage account which was created earlier.](#storage) Storage ID will be used to define the scope.
 
 ```bash
@@ -163,7 +164,7 @@ az role assignment create --assignee-object-id $principalID --role $roleType \
     --scope $storageAccountID
 ```
 
-To Validate the role was assigned to the Service Principal lets [re-run](#findrole) the following command.
+To validate the role was assigned to the Service Principal, lets [re-run](#findrole) the following command.
 ```bash
 export servicePrincipalID="70682c4c-c8f5-4759-9b93-6315fef6c6f9"
 az role assignment list --all | grep -B 10 -A 5 $servicePrincipalID
@@ -187,14 +188,14 @@ az role assignment list --all | grep -B 10 -A 5 $servicePrincipalID
     },
 ```
 
-## Validate the User Identity has access to the storage account
+## Validate the User Assigned Identity has access to the storage account
 #### Log Into the VM
 ```bash
 export vmPIP="<Your VM Public IP Address>"
 ssh azureuser@$vmPIP
 ```
 
-#### Get an access token using the VM's identity (From within the VM)
+#### Get an access token using the VM's user assigned identity (From within the VM)
 Obtain the token
 ```bash
 token=$(curl 'http://169.254.169.254/metadata/identity/oauth2/token?api-version=2018-02-01&resource=https%3A%2F%2Fmanagement.azure.com%2F' -H Metadata:true | jq .access_token | awk -F '"' '{print $2}')
