@@ -58,7 +58,9 @@ az role assignment list --assign $servicePrincipalID
 ```
 
 ***By Default the User Identity (MSI) created does not have any permissions because there is no role associated to the Service Principal that had been created.***
-
+<br><br>
+To prove this lets go ahead and create a **VM** along with a **Storage Account** and try to access the storage account from within the VM.
+<br><br>
 Lets Create a VM and give it the User MSI (Managed Service Identity) that was just created.
 ```bash
 export rg="testingMSI"
