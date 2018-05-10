@@ -51,9 +51,25 @@ AppId                                 DisplayName    ObjectId                   
 94eee889-12d1-47b2-870c-f5cd4ff3e1e8  ocpMSI         70682c4c-c8f5-4759-9b93-6315fef6c6f9  ServicePrincipal
 
 ```
-By default the Service principal does not have any roles assigned to it. <br> You can view the roles assigned to the service principal
+By default the ***Service principal*** does **not** have any roles assigned to it. <br> You can view the roles assigned to the service principal:
 ```bash
 export servicePrincipalID="94eee889-12d1-47b2-870c-f5cd4ff3e1e8"
 az role assignment list --assign $servicePrincipalID
+```
+
+***By Default the User Identity (MSI) created does not have any permissions because there is no role associated to the Service Principal that had been created.***
+
+Lets Create a VM and give it the User MSI (Managed Service Identity) that was just created.
+```bash
+export rg="testingMSI"
+export vmName="vmWithMSI"
+export image="UbuntuLTS"
+export userName="azureuser"
+export msiID="/subscriptions/e729c299-db43-40ce-991a-7e4572a69d50/resourcegroups/testingMSI/providers/Microsoft.ManagedIdentity/userAssignedIdentities/ocpMSI"
+export uniqDNS="ocptestingMSI"
+az vm create --resource-group $rg \
+    --name $vmName --image $image \
+    --admin-username $userName --admin-password "Great.Password" \
+    --assign-identity $msiID
 ```
 
