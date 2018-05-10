@@ -186,3 +186,41 @@ az role assignment list --all | grep -B 10 -A 5 $servicePrincipalID
       "scope": "/subscriptions/e729c299-db43-40ce-991a-7e4572a69d50/resourceGroups/testingMSI/providers/Microsoft.Storage/storageAccounts/ocptesting123"
     },
 ```
+
+## Validate the User Identity has access to the storage account
+#### Log Into the VM
+```bash
+export vmPIP="<Your VM Public IP Address>"
+ssh azureuser@$vmPIP
+```
+
+#### Get an access token using the VM's identity (From within the VM)
+Obtain the token
+```bash
+token=$(curl 'http://169.254.169.254/metadata/identity/oauth2/token?api-version=2018-02-01&resource=https%3A%2F%2Fmanagement.azure.com%2F' -H Metadata:true | jq .access_token | awk -F '"' '{print $2}')
+
+# Display the token
+echo $token
+```
+
+#### Use the token to access the Storage Account Key
+```bash
+export storageAccountID="/subscriptions/e729c299-db43-40ce-991a-7e4572a69d50/resourceGroups/testingMSI/providers/Microsoft.Storage/storageAccounts/ocptesting123"
+curl https://management.azure.com$storageAccountID/listKeys?api-version=2016-12-01 --request POST -d "" -H "Authorization: Bearer $token" | jq
+# Output
+{
+  "keys": [
+    {
+      "keyName": "key1",
+      "value": "<Key Value 1>",
+      "permissions": "FULL"
+    },
+    {
+      "keyName": "key2",
+      "value": "<Key Value 2>",
+      "permissions": "FULL"
+    }
+  ]
+}
+```
+This time the response returns the storage key values, which can be utilized to access the storage account.
