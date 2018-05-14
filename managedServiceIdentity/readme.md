@@ -137,7 +137,7 @@ curl https://management.azure.com$storageAccountID/listKeys?api-version=2016-12-
 
 **The output above validates the VM identity does not have any permissions to access the storage account.**
 
-## Next lets decide on a role and assign it to the User MSI.
+## Next lets decide on a role and assign it to the User MSI. (Unless you have installed the Azure CLI on the newly created VM, the below needs to be performed in your original shell / session.)
 
 
 #### Create/Choose a role for assignment
