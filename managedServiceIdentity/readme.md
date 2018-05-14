@@ -144,7 +144,7 @@ curl https://management.azure.com$storageAccountID/listKeys?api-version=2016-12-
 ```bash
 az role definition list -o table
 ```
-This will output all the buildin roles that are available to be assigned.
+This will output all the built-in roles that are available to be assigned.
 <br>
 A custom role can always be [created](https://docs.microsoft.com/en-us/cli/azure/role/definition?view=azure-cli-latest#az-role-definition-create).
 <br><br>
