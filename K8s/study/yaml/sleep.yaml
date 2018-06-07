@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sleep-deploy
+  labels:
+    app: sleep
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: sleep
+  template:
+    metadata:
+      labels:
+        app: sleep
+        cluster: training
+        running: afterLabels
+    spec:
+      containers:
+      - name: alpine
+        image: alpine:3.2
+        command: 
+          -  /bin/sh
+          -  "-c"
+          - "sleep 60"
+    restartPolicy: Always
