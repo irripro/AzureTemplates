@@ -184,6 +184,14 @@ az vm create \
 
 ### 10. Configure Node
 ```bash
+# To get to the Node - SSH into the Master and from there ssh into the node
+
+## ssh into the master
+ssh azureuser@myk8s.eastus.cloudapp.azure.com
+
+## From inside of the master  ssh into the Node
+ssh azureuser@mynodevm
+
 # On the Node
 sudo su
 # Install Docker
