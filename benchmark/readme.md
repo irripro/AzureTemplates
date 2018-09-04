@@ -25,7 +25,7 @@ psql --host=<YourDB>.us-east-1.rds.amazonaws.com --port=5432 --username=<YourNam
 /usr/lib/postgresql/9.6/bin/pgbench --host=<YourDB>.us-east-1.rds.amazonaws.com --port=5432 --username=<YourName> -c 10 -j 2 -t 10000 example
 ```
 
-### AWS Default (db.t2.large)
+### AWS Default (db.t2.large 2vCPU 8Gib 20gig)
 ```bash
 starting vacuum...end.
 transaction type: <builtin: TPC-B (sort of)>
@@ -69,7 +69,7 @@ wal_keep_segments                   1
 work_mem                            51200
 ```
 
-### Azure Default
+### Azure Default (CPU Optimized 2vCPU ?GiB 24gig)
 ```bash
 starting vacuum...end.
 transaction type: <builtin: TPC-B (sort of)>
