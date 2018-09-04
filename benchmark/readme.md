@@ -68,3 +68,18 @@ maintenance_work_mem                131072
 wal_keep_segments                   1
 work_mem                            51200
 ```
+
+### Azure Default
+```bash
+starting vacuum...end.
+transaction type: <builtin: TPC-B (sort of)>
+scaling factor: 50
+query mode: simple
+number of clients: 10
+number of threads: 2
+number of transactions per client: 10000
+number of transactions actually processed: 100000/100000
+latency average = 79.483 ms
+tps = 125.813101 (including connections establishing)
+tps = 125.911444 (excluding connections establishing)
+```
