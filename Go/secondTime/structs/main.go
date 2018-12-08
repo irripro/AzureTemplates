@@ -29,8 +29,8 @@ func main() {
 	alex.print()
 }
 
-func (p person) updateName(newName string) {
-	p.firstName = newName
+func (p *person) updateName(newName string) {
+	(*p).firstName = newName
 }
 
 func (p person) print() {
