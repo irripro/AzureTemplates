@@ -1,0 +1,1 @@
+{"Modules":[{"Source":"./myghost","Key":"1.myghost;./myghost","Version":"","Dir":".terraform/modules/20506d3092631b1029e6ceea62fabaad","Root":""},{"Source":"./ghost","Key":"1.ghost;./ghost","Version":"","Dir":".terraform/modules/b55944c485f9a92afc7cb0fb20df9016","Root":""}]}
