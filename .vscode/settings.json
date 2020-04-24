@@ -8,5 +8,7 @@
     "go.gopath": "/Users/alhussai/go",
     "go.goroot": "/usr/local/opt/go/libexec",
     "go.autocompleteUnimportedPackages": true,
-    "go.gotoSymbol.includeImports": true
+    "go.gotoSymbol.includeImports": true,
+    "code-runner.clearPreviousOutput": true,
+    "code-runner.fileDirectoryAsCwd": true
 }
